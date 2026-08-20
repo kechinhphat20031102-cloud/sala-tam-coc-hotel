@@ -2136,3 +2136,26 @@ img {
     padding: 12px 12px;
   }
 }
+
+/* ==========================================================================
+   EZCLOUD BOOKING ENGINE - INTEGRATION STYLES
+   ========================================================================== */
+
+.ezcloud-booking-wrap {
+  width: 100%;
+  padding: 10px 0 4px;
+}
+
+.ezcloud-form-target {
+  width: 100%;
+}
+
+#ezcloud-availability {
+  background: var(--light-bg);
+  border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+}
+
+#room-list {
+  width: 100%;
+  min-height: 120px;
+}
