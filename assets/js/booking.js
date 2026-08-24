@@ -31,24 +31,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Bảng tên hạng phòng
   const roomNames = {
-    'superior-double':   'Superior Double City View',
-    'superior-triple':   'Superior Triple City View',
-    'deluxe-double':     'Deluxe Double Room Balcony',
-    'deluxe-family':     'Deluxe Family Room Balcony',
-    'luxury-double':     'Luxury Double with Balcony & Bath tub',
-    'luxury-twin':       'Luxury Twin with Balcony & Bath tub',
-    'family-connecting': 'Family Connecting Room (2 Phòng)'
+    'superior-double':   'Superior Double City View – 28m²',
+    'superior-triple':   'Superior Triple City View – 30m²',
+    'deluxe-double':     'Deluxe Double Balcony – 28m²',
+    'deluxe-twin':       'Deluxe Twin Balcony – 35m²',
+    'luxury-double':     'Luxury Double with Balcony & Bath tub – 28m²',
+    'luxury-twin':       'Luxury Twin with Balcony & Bath tub – 35m²',
+    'deluxe-family':     'Deluxe Family Balcony – 35m²',
+    'family-connecting': 'Family Connecting room 1 – 55m²',
+    'family-connecting-2': 'Family Connecting room 2 – 60m²'
   };
 
-  // Giá phòng tham khảo (VNĐ/đêm) – chỉ dùng để hiển thị ước tính
+  // Giá phòng tham khảo (VNĐ/đêm)
   const roomRates = {
-    'superior-double':   850000,
-    'superior-triple':   1150000,
-    'deluxe-double':     1250000,
-    'deluxe-family':     1750000,
-    'luxury-double':     1650000,
-    'luxury-twin':       1650000,
-    'family-connecting': 2450000
+    'superior-double':   1100000,
+    'superior-triple':   1500000,
+    'deluxe-double':     1300000,
+    'deluxe-twin':       1500000,
+    'luxury-double':     1700000,
+    'luxury-twin':       1700000,
+    'deluxe-family':     2000000,
+    'family-connecting': 2500000,
+    'family-connecting-2': 2700000
   };
 
   // ==========================================
@@ -88,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = 'auto';
   };
 
-  // Lắng nghe nút "Liên Hệ Đặt Phòng"
+  // Lắng nghe nút "Booking Inquiries"
   openBookingBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -129,27 +133,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!priceBox) return;
 
     if (!cinVal || !coutVal) {
-      priceBox.innerHTML = '<i class="fa-regular fa-clock"></i> Vui lòng chọn ngày dự kiến';
+      priceBox.innerHTML = '<i class="fa-regular fa-clock"></i> Estimated for 1 night • Reference price: 1,250,000 VND (includes buffet breakfast)';
       return;
     }
 
     const cin  = new Date(cinVal);
     const cout = new Date(coutVal);
     if (cout <= cin) {
-      priceBox.innerHTML = '<span style="color:#ff6b6b"><i class="fa-solid fa-triangle-exclamation"></i> Ngày trả phòng phải sau ngày nhận phòng</span>';
+      priceBox.innerHTML = '<span style="color:#ff6b6b"><i class="fa-solid fa-triangle-exclamation"></i> Check-out date must be after check-in date</span>';
       return;
     }
 
     const nights  = Math.ceil(Math.abs(cout - cin) / 86400000);
-    const rate    = roomRates[roomKey] || 0;
+    const rate    = roomRates[roomKey] || 1250000;
     const total   = nights * rate;
-    const fmtTotal = total > 0
-      ? new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(total)
-      : null;
+    const fmtTotal = new Intl.NumberFormat('en-US').format(total);
 
-    priceBox.innerHTML = fmtTotal
-      ? `Dự kiến <strong>${nights} đêm</strong> • Tham khảo: <strong style="color:#D4AF37">${fmtTotal}</strong> (đã bao gồm buffet sáng)`
-      : `Dự kiến <strong>${nights} đêm</strong> • Lễ tân sẽ báo giá chi tiết qua Zalo`;
+    priceBox.innerHTML = `Estimated for <strong>${nights} night(s)</strong> • Reference price: <strong style="color:#D4AF37">${fmtTotal} VND</strong> (includes buffet breakfast)`;
   }
 
   ['modal-room-type', 'modal-checkin', 'modal-checkout'].forEach(id => {
@@ -251,5 +251,64 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     modalBookingForm.reset();
+  });
+
+  // ==========================================
+  // SUBMIT FORM TRANG LIÊN HỆ (contact.html)
+  // ==========================================
+  const contactForm = document.getElementById('contactForm');
+  contactForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+
+    const name    = document.getElementById('contact-name')?.value.trim();
+    const phone   = document.getElementById('contact-phone')?.value.trim();
+    const email   = document.getElementById('contact-email')?.value.trim();
+    const message = document.getElementById('contact-message')?.value.trim();
+
+    if (!name || !phone || !email || !message) {
+      alert('Vui lòng nhập đầy đủ thông tin liên hệ!');
+      return;
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang gửi...';
+    }
+
+    const templateParams = {
+      customer_name:  name,
+      customer_phone: phone,
+      customer_email: email,
+      special_note:   message,
+      booking_time:   new Date().toLocaleString('vi-VN'),
+
+      // Fallbacks
+      name:    name,
+      email:   email,
+      phone:   phone,
+      time:    new Date().toLocaleString('vi-VN'),
+      message: `• Lời nhắn từ trang Contact:\n• Họ tên: ${name}\n• SĐT: ${phone}\n• Email: ${email}\n• Nội dung: ${message}`
+    };
+
+    if (typeof emailjs !== 'undefined' && EMAIL_CONFIG.EMAILJS_SERVICE_ID && EMAIL_CONFIG.EMAILJS_TEMPLATE_HOTEL) {
+      try {
+        await emailjs.send(EMAIL_CONFIG.EMAILJS_SERVICE_ID, EMAIL_CONFIG.EMAILJS_TEMPLATE_HOTEL, templateParams);
+      } catch (err) {
+        console.warn('EmailJS error:', err);
+      }
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnHtml;
+    }
+
+    alert(`✅ CẢM ƠN BẠN!\n\nYêu cầu liên hệ của ${name} đã được gửi tới Sala Tam Cốc Hotel & Spa. Chúng tôi sẽ phản hồi lại bạn sớm nhất!`);
+    if (confirm('Bạn có muốn nhắn tin Zalo trực tiếp cho Lễ tân ngay bây giờ không?')) {
+      window.open('https://zalo.me/0942060533', '_blank');
+    }
+    contactForm.reset();
   });
 });

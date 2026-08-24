@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard – Sala Tam Coc Hotel & Spa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    body {
+      background-color: #0d0e10;
+      color: #e0e0e0;
+      font-family: var(--font-sans);
+      min-height: 100vh;
+    }
+    /* LOGIN GATE */
+    .login-gate-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: radial-gradient(circle at center, rgba(197,168,128,0.08) 0%, rgba(18,19,21,0.98) 100%);
+    }
+    .login-card {
+      background: #18191c;
+      border: 1px solid rgba(197, 168, 128, 0.3);
+      border-radius: 12px;
+      padding: 40px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      text-align: center;
+    }
+    .login-logo {
+      margin-bottom: 20px;
+    }
+    .login-title {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      color: var(--primary-gold);
+      margin-bottom: 8px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--primary-gold-light);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      background: #222428;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      color: #ffffff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+    .form-control:focus {
+      border-color: var(--primary-gold);
+      box-shadow: 0 0 10px rgba(197,168,128,0.25);
+    }
+    .login-error {
+      color: #ef5350;
+      font-size: 0.85rem;
+      margin-top: 10px;
+      display: none;
+    }
+    /* ADMIN DASHBOARD UI */
+    .admin-dashboard-wrap {
+      display: none;
+      padding-bottom: 60px;
+    }
+    .admin-header {
+      background: #18191c;
+      border-bottom: 1px solid rgba(197,168,128,0.25);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .admin-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .admin-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .admin-tabs-nav {
+      display: flex;
+      gap: 10px;
+      margin: 30px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 10px;
+      overflow-x: auto;
+    }
+    .admin-tab-btn {
+      padding: 10px 20px;
+      background: #1e2024;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      color: #e0e0e0;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      transition: all 0.3s ease;
+    }
+    .admin-tab-btn.active, .admin-tab-btn:hover {
+      background: var(--primary-gold);
+      color: #121315;
+      border-color: var(--primary-gold);
+      font-weight: 600;
+    }
+    .admin-tab-content {
+      display: none;
+    }
+    .admin-tab-content.active {
+      display: block;
+    }
+    .admin-card {
+      background: #18191c;
+      border: 1px solid rgba(197, 168, 128, 0.2);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .admin-card-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--primary-gold);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    textarea.form-control {
+      min-height: 80px;
+      resize: vertical;
+    }
+    .shortcut-tip {
+      background: rgba(197,168,128,0.1);
+      border-left: 3px solid var(--primary-gold);
+      padding: 12px 18px;
+      border-radius: 4px;
+      font-size: 0.88rem;
+      margin-bottom: 25px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= LOGIN GATE ================= -->
+  <div class="login-gate-wrap" id="loginGate">
+    <div class="login-card">
+      <div class="login-logo">
+        <svg class="logo-emblem" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 54px; margin: 0 auto 10px auto;">
+          <path d="M50 78 L46 22 L50 14 L54 22 Z" fill="#D4AF37" />
+          <path d="M50 78 L37 28 L43 20 L47 26 Z" fill="#C5A880" />
+          <path d="M50 78 L53 26 L57 20 L63 28 Z" fill="#C5A880" />
+          <path d="M50 78 L26 38 L34 30 L38 37 Z" fill="#D4AF37" />
+          <path d="M50 78 L62 37 L66 30 L74 38 Z" fill="#D4AF37" />
+        </svg>
+        <div class="login-title">SALA TAM COC HOTEL</div>
+        <p style="font-size: 0.8rem; color: #a0a0a0; letter-spacing: 2px;">ADMIN CONTROL PANEL</p>
+      </div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="adminPassword"><i class="fa-solid fa-lock"></i> Mật khẩu truy cập:</label>
+          <input type="password" id="adminPassword" class="form-control" placeholder="Nhập mật khẩu..." required autofocus>
+          <div class="login-error" id="loginError"><i class="fa-solid fa-triangle-exclamation"></i> Mật khẩu không chính xác! Vui lòng thử lại.</div>
+        </div>
+        <button type="submit" class="btn btn-gold" style="width: 100%;"><i class="fa-solid fa-right-to-bracket"></i> Đăng Nhập Admin</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MAIN ADMIN DASHBOARD ================= -->
+  <div class="admin-dashboard-wrap" id="adminDashboard">
+    
+    <!-- HEADER -->
+    <header class="admin-header">
+      <div class="container">
+        <a href="index.html" class="logo-brand" style="margin-right: 0;">
+          <svg class="logo-emblem" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 38px;">
+            <path d="M50 78 L46 22 L50 14 L54 22 Z" fill="#D4AF37" />
+            <path d="M50 78 L37 28 L43 20 L47 26 Z" fill="#C5A880" />
+            <path d="M50 78 L53 26 L57 20 L63 28 Z" fill="#C5A880" />
+          </svg>
+          <div class="logo-text-wrap">
+            <div class="logo-line-top">
+              <span class="logo-title" style="font-size: 1.4rem;">SALA</span>
+              <span class="logo-tamcoc-white" style="font-size: 0.7rem;">TAM COC</span>
+            </div>
+            <span class="logo-subtitle" style="font-size: 0.6rem;">ADMIN PANEL</span>
+          </div>
+        </a>
+
+        <div class="admin-actions">
+          <button class="btn btn-gold btn-sm" id="saveAllBtn"><i class="fa-solid fa-floppy-disk"></i> Lưu Thay Đổi</button>
+          <button class="btn btn-outline-gold btn-sm" id="exportJsonBtn"><i class="fa-solid fa-download"></i> Xuất File JSON</button>
+          <button class="btn btn-outline-white btn-sm" id="importJsonBtn"><i class="fa-solid fa-file-import"></i> Nhập File JSON</button>
+          <input type="file" id="importFileInput" accept=".json" style="display: none;">
+          <button class="btn btn-outline-white btn-sm" id="resetDefaultsBtn" style="color: #ff8a80; border-color: #ff8a80;"><i class="fa-solid fa-rotate-left"></i> Reset Mặc Định</button>
+          <a href="index.html" class="btn btn-outline-white btn-sm"><i class="fa-solid fa-globe"></i> Xem Trang Web</a>
+          <button class="btn btn-outline-white btn-sm" id="logoutBtn" style="color: #ccc;"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng Xuất</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      
+      <div class="shortcut-tip" style="margin-top: 25px;">
+        <i class="fa-solid fa-circle-info" style="color: var(--primary-gold);"></i> <strong>Mẹo Quản Trị:</strong> Mọi thay đổi bạn bấm <strong>"Lưu Thay Đổi"</strong> sẽ cập nhật ngay lập tức lên website. Bạn cũng có thể xuất file <code>sala-data.json</code> để sao lưu hoặc khôi phục lại bất kỳ lúc nào.
+      </div>
+
+      <!-- TABS NAVIGATION -->
+      <div class="admin-tabs-nav">
+        <button class="admin-tab-btn active" data-tab="tab-rooms"><i class="fa-solid fa-bed"></i> Quản Lý Phòng & Giá</button>
+        <button class="admin-tab-btn" data-tab="tab-tours"><i class="fa-solid fa-route"></i> Tour & Bảng Giá Xe</button>
+        <button class="admin-tab-btn" data-tab="tab-info"><i class="fa-solid fa-hotel"></i> Thông Tin Khách Sạn & Hotline</button>
+        <button class="admin-tab-btn" data-tab="tab-backup"><i class="fa-solid fa-database"></i> Sao Lưu & Phục Hồi</button>
+      </div>
+
+      <!-- ================= TAB 1: ROOMS ================= -->
+      <div class="admin-tab-content active" id="tab-rooms">
+        <h3 style="margin-bottom: 20px; font-family: var(--font-serif); color: var(--primary-gold);"><i class="fa-solid fa-sliders"></i> Danh Sách 9 Hạng Phòng & Bảng Giá</h3>
+
+        <!-- Superior Double -->
+        <div class="admin-card">
+          <div class="admin-card-title">
+            <span>1. Superior Double City View – 28m²</span>
+            <span class="badge-gold">Key: superior-double</span>
+          </div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Giá Phòng (VND / Đêm):</label>
+              <input type="text" id="room_price_superior-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Anh:</label>
+              <input type="text" id="room_nameEn_superior-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Việt:</label>
+              <input type="text" id="room_nameVi_superior-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Diện Tích (m²):</label>
+              <input type="text" id="room_size_superior-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Số Lượng Khách:</label>
+              <input type="text" id="room_guests_superior-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Loại Giường:</label>
+              <input type="text" id="room_beds_superior-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Hướng Nhìn (View):</label>
+              <input type="text" id="room_view_superior-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
+              <input type="text" id="room_cover_superior-double" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
+            <textarea id="room_photos_superior-double" class="form-control" style="min-height: 80px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Anh:</label>
+            <textarea id="room_descEn_superior-double" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Việt:</label>
+            <textarea id="room_descVi_superior-double" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <!-- Superior Triple -->
+        <div class="admin-card">
+          <div class="admin-card-title">
+            <span>2. Superior Triple City View – 30m²</span>
+            <span class="badge-gold">Key: superior-triple</span>
+          </div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Giá Phòng (VND / Đêm):</label>
+              <input type="text" id="room_price_superior-triple" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Anh:</label>
+              <input type="text" id="room_nameEn_superior-triple" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Việt:</label>
+              <input type="text" id="room_nameVi_superior-triple" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Diện Tích (m²):</label>
+              <input type="text" id="room_size_superior-triple" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Số Lượng Khách:</label>
+              <input type="text" id="room_guests_superior-triple" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Loại Giường:</label>
+              <input type="text" id="room_beds_superior-triple" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Hướng Nhìn (View):</label>
+              <input type="text" id="room_view_superior-triple" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
+              <input type="text" id="room_cover_superior-triple" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
+            <textarea id="room_photos_superior-triple" class="form-control" style="min-height: 80px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Anh:</label>
+            <textarea id="room_descEn_superior-triple" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Việt:</label>
+            <textarea id="room_descVi_superior-triple" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <!-- Deluxe Double -->
+        <div class="admin-card">
+          <div class="admin-card-title">
+            <span>3. Deluxe Double Balcony – 28m²</span>
+            <span class="badge-gold">Key: deluxe-double</span>
+          </div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Giá Phòng (VND / Đêm):</label>
+              <input type="text" id="room_price_deluxe-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Anh:</label>
+              <input type="text" id="room_nameEn_deluxe-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Việt:</label>
+              <input type="text" id="room_nameVi_deluxe-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Diện Tích (m²):</label>
+              <input type="text" id="room_size_deluxe-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Số Lượng Khách:</label>
+              <input type="text" id="room_guests_deluxe-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Loại Giường:</label>
+              <input type="text" id="room_beds_deluxe-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Hướng Nhìn (View):</label>
+              <input type="text" id="room_view_deluxe-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
+              <input type="text" id="room_cover_deluxe-double" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
+            <textarea id="room_photos_deluxe-double" class="form-control" style="min-height: 80px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Anh:</label>
+            <textarea id="room_descEn_deluxe-double" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Việt:</label>
+            <textarea id="room_descVi_deluxe-double" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <!-- Deluxe Twin -->
+        <div class="admin-card">
+          <div class="admin-card-title">
+            <span>4. Deluxe Twin Balcony – 35m²</span>
+            <span class="badge-gold">Key: deluxe-twin</span>
+          </div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Giá Phòng (VND / Đêm):</label>
+              <input type="text" id="room_price_deluxe-twin" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Anh:</label>
+              <input type="text" id="room_nameEn_deluxe-twin" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Việt:</label>
+              <input type="text" id="room_nameVi_deluxe-twin" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Diện Tích (m²):</label>
+              <input type="text" id="room_size_deluxe-twin" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Số Lượng Khách:</label>
+              <input type="text" id="room_guests_deluxe-twin" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Loại Giường:</label>
+              <input type="text" id="room_beds_deluxe-twin" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Hướng Nhìn (View):</label>
+              <input type="text" id="room_view_deluxe-twin" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
+              <input type="text" id="room_cover_deluxe-twin" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
+            <textarea id="room_photos_deluxe-twin" class="form-control" style="min-height: 80px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Anh:</label>
+            <textarea id="room_descEn_deluxe-twin" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Việt:</label>
+            <textarea id="room_descVi_deluxe-twin" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <!-- Luxury Double -->
+        <div class="admin-card">
+          <div class="admin-card-title">
+            <span>5. Luxury Double with Balcony & Bath tub – 28m²</span>
+            <span class="badge-gold">Key: luxury-double</span>
+          </div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Giá Phòng (VND / Đêm):</label>
+              <input type="text" id="room_price_luxury-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Anh:</label>
+              <input type="text" id="room_nameEn_luxury-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Việt:</label>
+              <input type="text" id="room_nameVi_luxury-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Diện Tích (m²):</label>
+              <input type="text" id="room_size_luxury-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Số Lượng Khách:</label>
+              <input type="text" id="room_guests_luxury-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Loại Giường:</label>
+              <input type="text" id="room_beds_luxury-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Hướng Nhìn (View):</label>
+              <input type="text" id="room_view_luxury-double" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
+              <input type="text" id="room_cover_luxury-double" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
+            <textarea id="room_photos_luxury-double" class="form-control" style="min-height: 80px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Anh:</label>
+            <textarea id="room_descEn_luxury-double" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Việt:</label>
+            <textarea id="room_descVi_luxury-double" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <!-- Luxury Twin -->
+        <div class="admin-card">
+          <div class="admin-card-title">
+            <span>6. Luxury Twin with Balcony & Bath tub – 35m²</span>
+            <span class="badge-gold">Key: luxury-twin</span>
+          </div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Giá Phòng (VND / Đêm):</label>
+              <input type="text" id="room_price_luxury-twin" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Anh:</label>
+              <input type="text" id="room_nameEn_luxury-twin" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Việt:</label>
+              <input type="text" id="room_nameVi_luxury-twin" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Diện Tích (m²):</label>
+              <input type="text" id="room_size_luxury-twin" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Số Lượng Khách:</label>
+              <input type="text" id="room_guests_luxury-twin" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Loại Giường:</label>
+              <input type="text" id="room_beds_luxury-twin" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Hướng Nhìn (View):</label>
+              <input type="text" id="room_view_luxury-twin" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
+              <input type="text" id="room_cover_luxury-twin" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
+            <textarea id="room_photos_luxury-twin" class="form-control" style="min-height: 80px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Anh:</label>
+            <textarea id="room_descEn_luxury-twin" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Việt:</label>
+            <textarea id="room_descVi_luxury-twin" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <!-- Deluxe Family -->
+        <div class="admin-card">
+          <div class="admin-card-title">
+            <span>7. Deluxe Family Balcony – 35m²</span>
+            <span class="badge-gold">Key: deluxe-family</span>
+          </div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Giá Phòng (VND / Đêm):</label>
+              <input type="text" id="room_price_deluxe-family" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Anh:</label>
+              <input type="text" id="room_nameEn_deluxe-family" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Việt:</label>
+              <input type="text" id="room_nameVi_deluxe-family" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Diện Tích (m²):</label>
+              <input type="text" id="room_size_deluxe-family" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Số Lượng Khách:</label>
+              <input type="text" id="room_guests_deluxe-family" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Loại Giường:</label>
+              <input type="text" id="room_beds_deluxe-family" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Hướng Nhìn (View):</label>
+              <input type="text" id="room_view_deluxe-family" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
+              <input type="text" id="room_cover_deluxe-family" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
+            <textarea id="room_photos_deluxe-family" class="form-control" style="min-height: 80px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Anh:</label>
+            <textarea id="room_descEn_deluxe-family" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Việt:</label>
+            <textarea id="room_descVi_deluxe-family" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <!-- Family Connecting 1 -->
+        <div class="admin-card">
+          <div class="admin-card-title">
+            <span>8. Family Connecting Room 1 (No Balcony) – 55m²</span>
+            <span class="badge-gold">Key: family-connecting</span>
+          </div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Giá Phòng (VND / Đêm):</label>
+              <input type="text" id="room_price_family-connecting" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Anh:</label>
+              <input type="text" id="room_nameEn_family-connecting" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Việt:</label>
+              <input type="text" id="room_nameVi_family-connecting" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Diện Tích (m²):</label>
+              <input type="text" id="room_size_family-connecting" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Số Lượng Khách:</label>
+              <input type="text" id="room_guests_family-connecting" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Loại Giường:</label>
+              <input type="text" id="room_beds_family-connecting" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Hướng Nhìn (View):</label>
+              <input type="text" id="room_view_family-connecting" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
+              <input type="text" id="room_cover_family-connecting" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
+            <textarea id="room_photos_family-connecting" class="form-control" style="min-height: 80px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Anh:</label>
+            <textarea id="room_descEn_family-connecting" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Việt:</label>
+            <textarea id="room_descVi_family-connecting" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <!-- Family Connecting 2 -->
+        <div class="admin-card">
+          <div class="admin-card-title">
+            <span>9. Family Connecting Room 2 (With Balcony) – 55m²</span>
+            <span class="badge-gold">Key: family-connecting-2</span>
+          </div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Giá Phòng (VND / Đêm):</label>
+              <input type="text" id="room_price_family-connecting-2" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Anh:</label>
+              <input type="text" id="room_nameEn_family-connecting-2" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên Tiếng Việt:</label>
+              <input type="text" id="room_nameVi_family-connecting-2" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Diện Tích (m²):</label>
+              <input type="text" id="room_size_family-connecting-2" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Số Lượng Khách:</label>
+              <input type="text" id="room_guests_family-connecting-2" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Loại Giường:</label>
+              <input type="text" id="room_beds_family-connecting-2" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Hướng Nhìn (View):</label>
+              <input type="text" id="room_view_family-connecting-2" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
+              <input type="text" id="room_cover_family-connecting-2" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
+            <textarea id="room_photos_family-connecting-2" class="form-control" style="min-height: 80px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Anh:</label>
+            <textarea id="room_descEn_family-connecting-2" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Tiếng Việt:</label>
+            <textarea id="room_descVi_family-connecting-2" class="form-control"></textarea>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= TAB 2: TOURS & TRANSFERS ================= -->
+      <div class="admin-tab-content" id="tab-tours">
+        <h3 style="margin-bottom: 20px; font-family: var(--font-serif); color: var(--primary-gold);"><i class="fa-solid fa-map-location-dot"></i> Quản Lý Tour Du Lịch 1 Ngày & Bảng Giá Xe</h3>
+
+        <!-- Tour 1 -->
+        <div class="admin-card">
+          <div class="admin-card-title">Tour 1: Hoa Lư - Bái Đính - Tràng An - Hang Múa</div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Tên Tour:</label>
+              <input type="text" id="tour1_title" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Giá Tour ($ / Khách):</label>
+              <input type="text" id="tour1_price" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Chi Tiết Tour 1:</label>
+            <textarea id="tour1_desc" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <!-- Tour 2 -->
+        <div class="admin-card">
+          <div class="admin-card-title">Tour 2: Hoa Lư - Tràng An - Hang Múa - Chùa Bích Động</div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Tên Tour:</label>
+              <input type="text" id="tour2_title" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Giá Tour ($ / Khách):</label>
+              <input type="text" id="tour2_price" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Chi Tiết Tour 2:</label>
+            <textarea id="tour2_desc" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <!-- Tour 3 -->
+        <div class="admin-card">
+          <div class="admin-card-title">Tour 3: Bái Đính - Tràng An - Hang Múa</div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Tên Tour:</label>
+              <input type="text" id="tour3_title" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Giá Tour ($ / Khách):</label>
+              <input type="text" id="tour3_price" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Chi Tiết Tour 3:</label>
+            <textarea id="tour3_desc" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <!-- Tour 4 -->
+        <div class="admin-card">
+          <div class="admin-card-title">Tour 4: Vườn Quốc Gia Cúc Phương 1 Ngày</div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Tên Tour:</label>
+              <input type="text" id="tour4_title" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Giá Tour ($ / Khách):</label>
+              <input type="text" id="tour4_price" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Chi Tiết Tour 4:</label>
+            <textarea id="tour4_desc" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <!-- Tour 5 -->
+        <div class="admin-card">
+          <div class="admin-card-title">Tour 5: Vườn Quốc Gia Cúc Phương & Đầm Vân Long</div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Tên Tour:</label>
+              <input type="text" id="tour5_title" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Giá Tour ($ / Khách):</label>
+              <input type="text" id="tour5_price" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Chi Tiết Tour 5:</label>
+            <textarea id="tour5_desc" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <!-- Tour 6 -->
+        <div class="admin-card">
+          <div class="admin-card-title">Tour 6: Khám Phá Miền Quê Ninh Bình (Xe Máy / Jeep / Xe Đạp)</div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Tên Tour:</label>
+              <input type="text" id="tour6_title" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Giá Tour ($ / Khách):</label>
+              <input type="text" id="tour6_price" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Chi Tiết Tour 6:</label>
+            <textarea id="tour6_desc" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <!-- Tour 7 -->
+        <div class="admin-card">
+          <div class="admin-card-title">Tour 7: Chùa Bích Động - Đền Thái Vi - Vườn Chim Thung Nham</div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Tên Tour:</label>
+              <input type="text" id="tour7_title" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Giá Tour ($ / Khách):</label>
+              <input type="text" id="tour7_price" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Mô Tả Chi Tiết Tour 7:</label>
+            <textarea id="tour7_desc" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <!-- Limousine Transfer -->
+        <div class="admin-card">
+          <div class="admin-card-title">Xe Đưa Đón Hà Nội ⇆ Ninh Bình VIP Limousine</div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Giá Vé 1 Chiều (One-way):</label>
+              <input type="text" id="limo_oneway" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Giá Vé Khứ Hồi (Round-trip):</label>
+              <input type="text" id="limo_roundtrip" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Lịch Chạy & Đón Trả Khách:</label>
+            <input type="text" id="limo_schedule" class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB 3: HOTEL INFO ================= -->
+      <div class="admin-tab-content" id="tab-info">
+        <h3 style="margin-bottom: 20px; font-family: var(--font-serif); color: var(--primary-gold);"><i class="fa-solid fa-phone-volume"></i> Hotline Liên Hệ & Giới Thiệu Khách Sạn</h3>
+
+        <div class="admin-card">
+          <div class="admin-card-title">Thông Tin Hotline & Email</div>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Hotline 1 (Tiếng Việt & English):</label>
+              <input type="text" id="info_hotline1" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Hotline 2 (Hỗ Trợ Đặt Phòng):</label>
+              <input type="text" id="info_hotline2" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Hotline 3 (Français):</label>
+              <input type="text" id="info_hotline3" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Số WhatsApp / Zalo Chat:</label>
+              <input type="text" id="info_whatsapp" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Email Liên Hệ:</label>
+              <input type="email" id="info_email" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Địa Chỉ Khách Sạn:</label>
+              <input type="text" id="info_address" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-title">Hero Banner Headings</div>
+          <div class="form-group">
+            <label>Dòng Chữ Nhỏ Hero (Hero Subtitle):</label>
+            <input type="text" id="info_hero_sub" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Dòng Mô Tả Hero (Hero Description):</label>
+            <textarea id="info_hero_desc" class="form-control"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB 4: BACKUP & DATA ================= -->
+      <div class="admin-tab-content" id="tab-backup">
+        <h3 style="margin-bottom: 20px; font-family: var(--font-serif); color: var(--primary-gold);"><i class="fa-solid fa-floppy-disk"></i> Sao Lưu & Phục Hồi Cấu Hình</h3>
+
+        <div class="admin-card">
+          <div class="admin-card-title">1. Xuất Dữ Liệu Thành File JSON</div>
+          <p style="margin-bottom: 15px; font-size: 0.9rem;">Sau khi chỉnh sửa giá phòng hoặc nội dung, bạn có thể tải về file <code>sala-data.json</code> để sao lưu an toàn.</p>
+          <button class="btn btn-gold" onclick="document.getElementById('exportJsonBtn').click()"><i class="fa-solid fa-download"></i> Tải File Cấu Hình .JSON</button>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-title">2. Nhập Dữ Liệu Từ File JSON</div>
+          <p style="margin-bottom: 15px; font-size: 0.9rem;">Nếu chuyển sang máy tính mới hoặc muốn khôi phục bản lưu trước đó, hãy tải file <code>sala-data.json</code> lên.</p>
+          <button class="btn btn-outline-gold" onclick="document.getElementById('importJsonBtn').click()"><i class="fa-solid fa-file-import"></i> Chọn File .JSON Để Tải Lên</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="assets/js/admin-data.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
