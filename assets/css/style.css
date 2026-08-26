@@ -2081,14 +2081,14 @@ img {
 }
 
 .spa-table th {
-  padding: 14px 20px;
+  padding: 16px 20px;
   text-align: left;
-  color: #D4AF37;
+  color: #f5cf68;
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.92rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
   white-space: nowrap;
 }
 
@@ -2097,9 +2097,9 @@ img {
 }
 
 .spa-table td {
-  padding: 16px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  color: #ccc;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
   vertical-align: middle;
 }
 
@@ -2108,7 +2108,7 @@ img {
 }
 
 .spa-table tbody tr:hover {
-  background: rgba(212, 175, 55, 0.05);
+  background: rgba(212, 175, 55, 0.08);
 }
 
 .spa-table tbody tr:last-child td {
@@ -2117,23 +2117,23 @@ img {
 
 .spa-name {
   display: block;
-  font-weight: 600;
-  color: #ede0c8;
-  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 1.1rem;
 }
 
 .spa-vi {
   display: block;
-  color: #888;
-  font-size: 0.78rem;
+  color: #cccccc;
+  font-size: 0.88rem;
   font-style: italic;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 .spa-price {
-  color: #D4AF37;
-  font-weight: 700;
-  font-size: 0.95rem;
+  color: #f5cf68;
+  font-weight: 800;
+  font-size: 1.15rem;
   white-space: nowrap;
 }
 
@@ -2181,16 +2181,16 @@ img {
 
 .spa-pkg-name {
   font-family: 'Georgia', serif;
-  font-size: 1.05rem;
-  color: #ede0c8;
+  font-size: 1.25rem;
+  color: #ffffff;
   margin: 0;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.4;
 }
 
 .spa-pkg-vi {
-  color: #888;
-  font-size: 0.8rem;
+  color: #cccccc;
+  font-size: 0.88rem;
   font-style: italic;
   margin: 0;
 }
