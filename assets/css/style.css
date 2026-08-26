@@ -274,7 +274,7 @@ img {
 
 .badge-gold {
   display: inline-block;
-  padding: 4px 12px;
+  padding: 6px 14px;
   background-color: var(--primary-gold);
   color: #121315;
   font-size: 0.75rem;
@@ -282,6 +282,8 @@ img {
   text-transform: uppercase;
   letter-spacing: 1px;
   border-radius: var(--radius-sm);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* ==========================================================================
