@@ -10,8 +10,8 @@ window.ROOMS_DETAILS_DATA = {
     nameVi: "Phòng Superior Double City View – 28m²",
     size: "28 m²",
     guests: "02 Guests",
-    beds: "1 King Bed (1.8m x 2.0m)",
-    price: "1,100,000",
+    beds: "01 King Bed<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.85rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m)</span>",
+    price: "1,300,000",
     view: "City & Street View Window",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4807.jpg",
@@ -21,7 +21,7 @@ window.ROOMS_DETAILS_DATA = {
       "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4832.jpg",
       "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4430.jpg"
     ],
-    descEn: "Cozy and bright room featuring large city-view windows, comfortable 1 King bed, refined wooden furnishings, and complete upscale amenities for a relaxing stay in Tam Coc.",
+    descEn: "Cozy and bright room featuring large city & street view windows, comfortable 1 King bed, refined wooden furnishings, and complete upscale amenities for a relaxing stay in Tam Coc.",
     descVi: "Phòng Superior Double sở hữu thiết kế trang nhã, ấm cúng với cửa sổ lớn đón ánh sáng tự nhiên hướng phố. Trang bị giường đôi King êm ái cùng hệ thống tiện nghi đầy đủ cho kỳ nghỉ trọn vẹn."
   },
   "superior-triple": {
@@ -31,9 +31,9 @@ window.ROOMS_DETAILS_DATA = {
     nameVi: "Phòng Superior Triple City View – 30m²",
     size: "30 m²",
     guests: "03 Guests",
-    beds: "3 Single Beds (or 1 King + 1 Single)",
-    price: "1,500,000",
-    view: "City & Mountain View Window",
+    beds: "3 Single Beds<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.82rem; color:#111; white-space:nowrap;'>(or 1 King + 1 Single)</span>",
+    price: "1,800,000",
+    view: "City & Street View Window",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Superior Triple city view/ANT_4672.jpg",
       "Ảnh Sala Tam Coc Hotel & Spa/Superior Triple city view/ANT_4622.jpg",
@@ -42,19 +42,19 @@ window.ROOMS_DETAILS_DATA = {
       "Ảnh Sala Tam Coc Hotel & Spa/Superior Triple city view/ANT_4693.jpg",
       "Ảnh Sala Tam Coc Hotel & Spa/Superior Triple city view/ANT_4430.jpg"
     ],
-    descEn: "Spacious room designed for 3 guests with 3 Single beds (or 1 King + 1 Single), offering street and mountain views with peaceful ambient lighting.",
-    descVi: "Lựa chọn hoàn hảo cho nhóm bạn hoặc gia đình 3 người. Căn phòng được bố trí 3 giường đơn cao cấp, không gian rộng rãi và thoáng mát hướng phố và núi."
+    descEn: "Spacious room designed for 3 guests with 3 Single beds (or 1 King + 1 Single), offering street view & balcony.",
+    descVi: "Lựa chọn hoàn hảo cho nhóm bạn hoặc gia đình 3 người. Căn phòng được bố trí 3 giường đơn cao cấp, không gian rộng rãi và thoáng mát hướng phố."
   },
   "deluxe-double": {
     key: "deluxe-double",
     name: "Deluxe Double Balcony",
     nameEn: "Deluxe Double Balcony – 28m²",
-    nameVi: "Phòng Deluxe Double Ban Công View Núi – 28m²",
+    nameVi: "Phòng Deluxe Double Ban Công View Phố/Núi – 28m²",
     size: "28 m²",
     guests: "02 Guests",
-    beds: "1 King Bed (1.8m x 2.0m)",
-    price: "1,300,000",
-    view: "Private Mountain View Balcony",
+    beds: "01 King Bed<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.85rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m)</span>",
+    price: "1,500,000",
+    view: "Private City/Mountain View Balcony",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Double room balcony/ANT_4561.jpg",
       "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Double room balcony/ANT_4576.jpg",
@@ -65,19 +65,19 @@ window.ROOMS_DETAILS_DATA = {
       "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Double room balcony/ANT_4530.jpg",
       "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Double room balcony/đồ nhà tắm.jpg"
     ],
-    descEn: "Private open balcony overlooking Tam Coc limestone hills, refined wooden interior, high-end bedding, and quiet atmosphere ideal for couples.",
-    descVi: "Sở hữu ban công riêng ngắm trọn cảnh non nước Tam Cốc hữu tình. Phòng trang bị nội thất gỗ ấm áp, giường King êm ái cùng đầy đủ tiện nghi tiêu chuẩn nghỉ dưỡng cao cấp."
+    descEn: "Private open balcony overlooking city view/Tam Coc limestone hills, refined wooden interior, high-end bedding, and quiet atmosphere.",
+    descVi: "Sở hữu ban công riêng ngắm trọn cảnh phố xá & non nước Tam Cốc hữu tình. Phòng trang bị nội thất gỗ ấm áp, giường King êm ái cùng đầy đủ tiện nghi tiêu chuẩn nghỉ dưỡng cao cấp."
   },
   "deluxe-twin": {
     key: "deluxe-twin",
     name: "Deluxe Twin Balcony",
     nameEn: "Deluxe Twin Balcony – 35m²",
-    nameVi: "Phòng Deluxe Twin Ban Công View Núi – 35m²",
+    nameVi: "Phòng Deluxe Twin Ban Công View Phố – 35m²",
     size: "35 m²",
     guests: "02 – 04 Guests",
-    beds: "2 King Beds",
-    price: "1,500,000",
-    view: "Scenic Mountain & Garden Balcony",
+    beds: "2 King Beds<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.85rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m)</span>",
+    price: "1,600,000",
+    view: "Private City/Street View Balcony",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4411.jpg",
       "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4359.jpg",
@@ -89,8 +89,8 @@ window.ROOMS_DETAILS_DATA = {
       "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/tủ quần áo.jpg",
       "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/đồ nhà tắm.jpg"
     ],
-    descEn: "Spacious 35m² twin room with 2 King Beds, private balcony bathed in natural sunlight, and breathtaking mountain views.",
-    descVi: "Phòng Twin 35m² rộng rãi trang bị 2 giường King lớn, ban công riêng đón trọn ánh nắng tự nhiên và không khí trong lành của vùng núi Tam Cốc."
+    descEn: "Spacious 35m² twin room with 2 King Beds, private balcony bathed in natural sunlight, and breathtaking city/street views.",
+    descVi: "Phòng Twin 35m² rộng rãi trang bị 2 giường King lớn, ban công riêng đón trọn ánh nắng tự nhiên và không khí trong lành của Tam Cốc."
   },
   "luxury-double": {
     key: "luxury-double",
@@ -99,9 +99,9 @@ window.ROOMS_DETAILS_DATA = {
     nameVi: "Phòng Luxury Double Ban Công & Bồn Tắm – 28m²",
     size: "28 m²",
     guests: "02 Guests",
-    beds: "1 King Bed + Freestanding Bathtub",
-    price: "1,700,000",
-    view: "Panoramic Mountain Balcony & Glass Bathtub",
+    beds: "01 King Bed<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.81rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m) + Bathtub</span>",
+    price: "1,650,000",
+    view: "City/Mountain View Balcony & Bathtub",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Luxury Double with Balcony & Bath tub/ANT_4542.jpg",
       "Ảnh Sala Tam Coc Hotel & Spa/Luxury Double with Balcony & Bath tub/ANT_4550.jpg",
@@ -112,8 +112,8 @@ window.ROOMS_DETAILS_DATA = {
       "Ảnh Sala Tam Coc Hotel & Spa/Luxury Double with Balcony & Bath tub/ANT_4659.jpg",
       "Ảnh Sala Tam Coc Hotel & Spa/Luxury Double with Balcony & Bath tub/ANT_4832.jpg"
     ],
-    descEn: "Our most requested luxury room featuring a romantic glass-wall deep soaking tub, private balcony with mountain view, and plush King bed.",
-    descVi: "Hạng phòng sang trọng được yêu thích nhất với bồn tắm nằm thư giãn view kính trong suốt tinh tế, ban công riêng ngắm toàn cảnh núi non Tam Cốc."
+    descEn: "Our most requested luxury room featuring a romantic glass-wall deep soaking tub, private balcony with city/mountain view.",
+    descVi: "Hạng phòng sang trọng được yêu thích nhất với bồn tắm nằm thư giãn view kính trong suốt tinh tế, ban công riêng ngắm toàn cảnh thành phố & núi non Tam Cốc."
   },
   "luxury-twin": {
     key: "luxury-twin",
@@ -122,9 +122,9 @@ window.ROOMS_DETAILS_DATA = {
     nameVi: "Phòng Luxury Twin Ban Công & Bồn Tắm – 35m²",
     size: "35 m²",
     guests: "02 – 04 Guests",
-    beds: "1 King Bed + Bathtub",
-    price: "1,700,000",
-    view: "Mountain View Balcony & Soaking Bathtub",
+    beds: "01 King Bed<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.81rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m) + Bathtub</span>",
+    price: "1,750,000",
+    view: "City/Mountain View Balcony & Bathtub",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4359.jpg",
       "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4379.jpg",
@@ -137,19 +137,19 @@ window.ROOMS_DETAILS_DATA = {
       "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4832.jpg",
       "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4393.jpg"
     ],
-    descEn: "Luxurious 35m² room with high-end bedding, relaxing freestanding bathtub with view, and private mountain balcony.",
-    descVi: "Mang đến trải nghiệm nghỉ dưỡng tiện nghi đỉnh cao với không gian 35m² rộng rãi, bồn tắm nằm hiện đại view thoáng mát và ban công ngắm núi tuyệt đẹp."
+    descEn: "Our most requested luxury room featuring a romantic glass-wall deep soaking tub, private balcony with city/mountain view.",
+    descVi: "Mang đến trải nghiệm nghỉ dưỡng tiện nghi đỉnh cao với không gian 35m² rộng rãi, bồn tắm nằm hiện đại view thoáng mát và ban công ngắm thành phố/núi tuyệt đẹp."
   },
   "deluxe-family": {
     key: "deluxe-family",
     name: "Deluxe Family Balcony",
     nameEn: "Deluxe Family Balcony – 35m²",
-    nameVi: "Phòng Deluxe Family Ban Công View Núi – 35m²",
+    nameVi: "Phòng Deluxe Family Ban Công View Phố – 35m²",
     size: "35 m²",
     guests: "04 Guests",
-    beds: "2 King Beds",
-    price: "2,000,000",
-    view: "Scenic Mountain & Countryside Balcony",
+    beds: "2 King Beds<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.85rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m)</span>",
+    price: "2,100,000",
+    view: "Private City/Street View Balcony",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4359.jpg",
       "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4379.jpg",
@@ -161,8 +161,8 @@ window.ROOMS_DETAILS_DATA = {
       "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/tủ quần áo.jpg",
       "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/đồ nhà tắm.jpg"
     ],
-    descEn: "Ideal for families of 4, featuring 2 King Beds, airy mountain balcony, and ample living space for quality family bonding.",
-    descVi: "Được thiết kế dành riêng cho gia đình 4 người với 2 giường King lớn êm ái, ban công rộng rãi đón gió trong lành và tầm nhìn tuyệt đẹp ra núi."
+    descEn: "Ideal for families of 4, featuring 2 King Beds, airy city/street balcony, and ample living space for quality family bonding.",
+    descVi: "Được thiết kế dành riêng cho gia đình 4 người với 2 giường King lớn êm ái, ban công rộng rãi đón gió trong lành và tầm nhìn tuyệt đẹp ra đường phố Tam Cốc."
   },
   "family-connecting": {
     key: "family-connecting",
@@ -171,9 +171,9 @@ window.ROOMS_DETAILS_DATA = {
     nameVi: "Phòng Gia Đình Nối Liền 1 – 55m² (2 Phòng Ngủ)",
     size: "55 m²",
     guests: "04 – 06 Guests",
-    beds: "2 Interconnected Bedrooms (2 King Beds)",
-    price: "2,500,000",
-    view: "Double Mountain View Balcony",
+    beds: "2 Interconnected Bedrooms<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.82rem; color:#111; white-space:nowrap;'>(2 King Beds)</span>",
+    price: "2,600,000",
+    view: "Private City/Street View Balcony",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4606.jpg",
       "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4502 phòng thông.jpg",
@@ -194,9 +194,9 @@ window.ROOMS_DETAILS_DATA = {
     nameVi: "Phòng Gia Đình Nối Liền 2 – 60m² (2 Phòng Ngủ Thượng Hạng)",
     size: "60 m²",
     guests: "05 – 07 Guests",
-    beds: "2 Interconnected Bedrooms (2 King Beds + 1 Single Bed)",
-    price: "2,700,000",
-    view: "Panoramic Mountain View Balcony",
+    beds: "2 Interconnected Bedrooms<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.80rem; color:#111; white-space:nowrap;'>(2 King Beds + 1 Single Bed)</span>",
+    price: "2,750,000",
+    view: "Private City/Street View Balcony",
     cover: "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4502.jpg",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4502.jpg",
@@ -214,24 +214,6 @@ window.ROOMS_DETAILS_DATA = {
     descVi: "Căn hộ gia đình thượng hạng 60m² với 2 phòng ngủ thông nhau (2 giường King + 1 giường đơn) và 2 phòng tắm riêng biệt, thích hợp gia đình đông người đến 7 khách."
   }
 };
-
-// Auto-sync custom data from localStorage if available
-(function syncSalaData() {
-  try {
-    if (typeof window.getSalaData === 'function') {
-      const data = window.getSalaData();
-      if (data && data.rooms) {
-        Object.keys(data.rooms).forEach(key => {
-          if (window.ROOMS_DETAILS_DATA[key]) {
-            Object.assign(window.ROOMS_DETAILS_DATA[key], data.rooms[key]);
-          }
-        });
-      }
-    }
-  } catch(e) {
-    console.error("Error syncing sala custom data:", e);
-  }
-})();
 
 /**
  * ROOM POPUP MODAL CONTROLLER
@@ -269,11 +251,11 @@ document.addEventListener('DOMContentLoaded', () => {
           const descP = roomContainer.querySelector('.room-desc');
           if (descP) descP.textContent = (currentLang === 'vi' ? data.descVi : data.descEn) || descP.textContent;
 
-          const metaSpans = roomContainer.querySelectorAll('.room-meta span');
-          if (metaSpans.length >= 3) {
-            if (data.size) metaSpans[0].innerHTML = `<i class="fa-solid fa-maximize"></i> ${data.size}`;
-            if (data.guests) metaSpans[1].innerHTML = `<i class="fa-solid fa-user-group"></i> ${data.guests}`;
-            if (data.beds) metaSpans[2].innerHTML = `<i class="fa-solid fa-bed"></i> ${data.beds}`;
+          // Update bed info in row 2 span
+          const bedSpan = roomContainer.querySelector('.room-meta-row2 span');
+          if (bedSpan && data.beds) {
+            const cleanBedStr = data.beds.replace(/<br\s*[\/]?>/gi, ' ').replace(/<[^>]*>/g, '');
+            bedSpan.innerHTML = `<i class="fa-solid fa-bed"></i> ${cleanBedStr}`;
           }
         }
 
@@ -292,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (metaValues.length >= 4) {
             if (data.size) metaValues[0].textContent = data.size;
             if (data.guests) metaValues[1].textContent = data.guests;
-            if (data.beds) metaValues[2].textContent = data.beds;
+            if (data.beds) metaValues[2].innerHTML = data.beds;
             if (data.price) metaValues[3].textContent = (currentLang === 'vi' ? `Từ ${data.price} VNĐ / đêm` : `From ${data.price} VND / night`);
           }
         }
@@ -361,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="room-spec-box">
             <i class="fa-solid fa-bed"></i>
             <div class="room-spec-label">${currentLang === 'vi' ? 'Loại giường' : 'Bed Layout'}</div>
-            <div class="room-spec-val">${room.beds}</div>
+            <div class="room-spec-val" style="font-weight: 700;">${room.beds}</div>
           </div>
           <div class="room-spec-box">
             <i class="fa-solid fa-mountain-sun"></i>
@@ -379,9 +361,9 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
 
         <div class="room-amenities-pills">
-          <div class="room-amenity-pill"><i class="fa-solid fa-utensils"></i> ${currentLang === 'vi' ? 'Buffet sáng quốc tế miễn phí' : 'Free Daily Breakfast Buffet'}</div>
+          <div class="room-amenity-pill"><i class="fa-solid fa-utensils"></i> ${currentLang === 'vi' ? 'Buffet sáng miễn phí (07:00 - 09:30)' : 'Complimentary Daily Buffet Breakfast (07:00 - 09:30)'}</div>
           <div class="room-amenity-pill"><i class="fa-solid fa-wifi"></i> ${currentLang === 'vi' ? 'Wi-Fi cáp quang tốc độ cao' : 'Free High-Speed Wi-Fi'}</div>
-          <div class="room-amenity-pill"><i class="fa-solid fa-tv"></i> ${currentLang === 'vi' ? 'Smart TV truyền hình cáp / Netflix' : 'Smart TV (Cable & Netflix)'}</div>
+          <div class="room-amenity-pill"><i class="fa-solid fa-tv"></i> Smart TV</div>
           <div class="room-amenity-pill"><i class="fa-solid fa-snowflake"></i> ${currentLang === 'vi' ? 'Điều hòa 2 chiều độc lập' : 'Air Conditioning & Heating'}</div>
           <div class="room-amenity-pill"><i class="fa-solid fa-bath"></i> ${currentLang === 'vi' ? 'Vòi sen nóng lạnh & Bồn tắm (tùy phòng)' : 'Hot Rain Shower & Bathtub'}</div>
           <div class="room-amenity-pill"><i class="fa-solid fa-vault"></i> ${currentLang === 'vi' ? 'Két sắt điện tử an toàn' : 'In-room Safety Box'}</div>
@@ -396,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <i class="fa-solid fa-paper-plane"></i> ${currentLang === 'vi' ? 'Đặt Phòng Hạng Này' : 'Booking Inquiries'}
           </button>
           <a href="tel:0942060533" class="btn btn-outline-gold btn-lg">
-            <i class="fa-solid fa-phone"></i> Hotline +84 9 42 06 05 33
+            <i class="fa-solid fa-phone"></i> Reservation: 0942 060 533
           </a>
           <a href="https://wa.me/84942060533" target="_blank" class="btn btn-outline-white btn-lg" style="background: #25d366; color: #fff; border: none;">
             <i class="fa-brands fa-whatsapp"></i> WhatsApp / Zalo

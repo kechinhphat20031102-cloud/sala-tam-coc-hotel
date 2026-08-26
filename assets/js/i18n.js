@@ -37,8 +37,8 @@ const translations = {
     "hero_title_2": "ROOFTOP INFINITY POOL",
     "hero_desc_2": "Immerse yourself in refreshing crystal water while taking in breathtaking sunsets over Tam Coc valley.",
     "hero_sub_3": "Flavors Of Ancient Capital",
-    "hero_title_3": "AUTHENTIC DINING & BUFFET",
-    "hero_desc_3": "Savor daily fresh international breakfast buffet and traditional Ninh Binh goat delicacies.",
+    "hero_title_3": "AUTHENTIC DINING & BUFFET BREAKFAST",
+    "hero_desc_3": "Savor daily fresh international & local buffet breakfast and traditional Ninh Binh goat delicacies.",
     "hero_sub_4": "Warm Vietnamese Hospitality",
     "hero_title_4": "ELEGANT ROOMS & SUITES",
     "hero_desc_4": "Modern amenities, scenic balconies, luxury soaking tubs, and heartfelt boutique service.",
@@ -61,7 +61,7 @@ const translations = {
     "about_desc_1": "Located in the heart of Tam Coc, just steps from the famous Tam Coc Boat Wharf, <strong>Sala Tam Coc Hotel & Spa</strong> is a charming boutique hotel where the timeless beauty of Ninh Binh meets contemporary comfort and thoughtful hospitality.",
     "about_desc_2": "Our elegantly designed rooms feature private balconies with refreshing mountain or city views, offering a peaceful retreat after a day of exploring. At Sala Tam Coc Hotel & Spa, every detail is thoughtfully designed to provide a warm, comfortable, and memorable stay — making it the perfect choice for discovering the natural beauty and cultural heritage of Ninh Binh.",
     "feat_pool": "Rooftop Infinity Swimming Pool with Mountain View",
-    "feat_dining": "Restaurant & Daily Complimentary Buffet Breakfast",
+    "feat_dining": "Restaurant & Daily Buffet Breakfast",
     "feat_spa": "Lotus Spa Herbal Baths & Relaxing Body Therapy",
     "feat_tours": "Private Tour Bookings & VIP Limousine Transfer",
 
@@ -90,11 +90,12 @@ const translations = {
     "dining_title": "Sala Restaurant & Daily Buffet Breakfast",
     "dining_desc": "Sala Restaurant delivers an exquisite gastronomic journey showcasing famous Ninh Binh mountain goat specialties, crispy rice crackers, hill chicken, and a fresh daily buffet breakfast.",
     "serving_hours": "Serving Hours:",
-    "hours_val": "06:00 - 22:30 Daily",
+    "hours_val": "07:00 - 20:30 Daily",
     "capacity": "Capacity:",
     "capacity_val": "Up to 120 Guests",
-    "buffet_time": "Breakfast Buffet:",
-    "buffet_val": "06:30 - 09:30 Daily",
+    "buffet_time": "Buffet Breakfast:",
+    "buffet_val": "07:00 - 09:30 Daily",
+    "table_res": "Reservation:",
 
     // Spa Section
     "spa_sub": "Mind & Body Harmony",
@@ -211,7 +212,7 @@ const translations = {
     "label_children": "Children",
     "label_note": "Special Requests (airport pickup, dietary, anniversary...)",
     "est_total": "Estimated Total:",
-    "est_price_ref": "Estimated for 1 night • Reference price: 1,250,000 VND (includes buffet breakfast)",
+    "est_price_ref": "Estimated for 1 night • Reference price: 1,300,000 VND (includes buffet breakfast)",
     "btn_confirm_booking": "Submit Booking Request",
     "btn_cancel": "Cancel"
   },
@@ -247,7 +248,7 @@ const translations = {
     "hero_title_2": "ROOFTOP INFINITY POOL",
     "hero_desc_2": "Đắm mình trong làn nước xanh mát và ngắm hoàng hôn buông xuống thung lũng Tam Cốc.",
     "hero_sub_3": "Mỹ Vị Đậm Chất Cố Đô",
-    "hero_title_3": "AUTHENTIC DINING & BUFFET",
+    "hero_title_3": "AUTHENTIC DINING & BUFFET BREAKFAST",
     "hero_desc_3": "Thưởng thức tiệc buffet sáng tươi ngon mỗi ngày và đặc sản dê núi Ninh Bình danh tiếng.",
     "hero_sub_4": "Sự Đón Tiếp Nồng Hậu",
     "hero_title_4": "ELEGANT ROOMS & SUITES",
@@ -269,7 +270,7 @@ const translations = {
     "about_desc_1": "Tọa lạc ngay trung tâm Tam Cốc, cách bến thuyền Tam Cốc chỉ vài bước chân, <strong>Sala Tam Cốc Hotel & Spa</strong> là điểm dừng chân boutique lý tưởng kết hợp hoàn hảo giữa vẻ đẹp thơ mộng của Ninh Bình và tiện nghi hiện đại.",
     "about_desc_2": "Mỗi phòng nghỉ đều sở hữu ban công thoáng đãng view núi non hoặc phố xá. Tại Sala Tam Cốc, từng chi tiết nhỏ đều được chăm chút tỉ mỉ nhằm đem lại trải nghiệm thư thái và ấn tượng nhất cho kỳ nghỉ của quý khách.",
     "feat_pool": "Hồ Bơi Vô Cực Sân Thượng View Núi Non",
-    "feat_dining": "Nhà Hàng & Buffet Sáng Miễn Phí Mỗi Ngày",
+    "feat_dining": "Nhà Hàng & Buffet Sáng Mỗi Ngày",
     "feat_spa": "Lotus Spa & Ngâm Chân Thảo Dược Cổ Truyền",
     "feat_tours": "Tư Vấn Tour Bản Địa & Xe Limousine VIP Đón Tiễn",
 
@@ -393,7 +394,7 @@ const translations = {
     "label_children": "Trẻ Em",
     "label_note": "Yêu Cầu Đặc Biệt (đón sân bay, ăn chay, kỷ niệm ngày cưới...)",
     "est_total": "Tổng Giá Tạm Tính:",
-    "est_price_ref": "Tạm tính cho 1 đêm • Giá tham khảo: 1.250.000 VNĐ (đã bao gồm ăn sáng buffet)",
+    "est_price_ref": "Tạm tính cho 1 đêm • Giá tham khảo: 1.300.000 VNĐ (đã bao gồm ăn sáng buffet)",
     "btn_confirm_booking": "Gửi Yêu Cầu Đặt Phòng",
     "btn_cancel": "Hủy Bỏ"
   }
