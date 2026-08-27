@@ -37,7 +37,6 @@
           <div class="lang-dropdown">
             <a href="#" data-lang="en" class="active"><span class="lang-flag">🇬🇧</span> GB English</a>
             <a href="#" data-lang="vi"><span class="lang-flag">🇻🇳</span> Tiếng Việt</a>
-            <a href="#" data-lang="ru"><span class="lang-flag">🇷🇺</span> Русский</a>
             <a href="#" data-lang="fr"><span class="lang-flag">🇫🇷</span> Français</a>
           </div>
         </div>
@@ -90,6 +89,28 @@
         </div>
         <div class="nav-item"><a href="gallery.html" class="nav-link" data-i18n="nav_gallery">Photo Gallery</a></div>
         <div class="nav-item"><a href="#" class="nav-link nav-book-now" data-open-booking="true" data-i18n="nav_contact">Book Now</a></div>
+
+        <div class="mobile-drawer-extra">
+          <div class="mobile-drawer-lang">
+            <span class="mobile-drawer-title"><i class="fa-solid fa-globe"></i> <span data-i18n="select_language">Language</span></span>
+            <div class="mobile-lang-pills">
+              <button class="mobile-lang-pill active" data-lang="en"><span class="lang-flag">🇬🇧</span> English</button>
+              <button class="mobile-lang-pill" data-lang="vi"><span class="lang-flag">🇻🇳</span> Tiếng Việt</button>
+              <button class="mobile-lang-pill" data-lang="fr"><span class="lang-flag">🇫🇷</span> Français</button>
+            </div>
+          </div>
+
+          <div class="mobile-drawer-ta">
+            <span class="mobile-drawer-title"><i class="fa-brands fa-tripadvisor" style="color: #00af87;"></i> <span data-i18n="ta_reviews">TripAdvisor</span></span>
+            <a href="https://www.tripadvisor.com.sg/Hotel_Review-g303945-d34432325-Reviews-Sala_Tam_Coc_Hotel_Spa-Ninh_Binh_Ninh_Binh_Province.html" target="_blank" rel="noopener noreferrer" class="mobile-ta-badge" title="Recommended on TripAdvisor">
+              <i class="fa-brands fa-tripadvisor ta-icon"></i>
+              <div class="ta-text-group">
+                <span class="ta-sub">RECOMMENDED ON</span>
+                <span class="ta-title">Tripadvisor</span>
+              </div>
+            </a>
+          </div>
+        </div>
       </nav>
 
       <div class="nav-cta">
@@ -181,7 +202,7 @@
         <div class="about-images">
           <img src="Ảnh Sala Tam Coc Hotel & Spa/Bể Bơi Sân Thượng + Tòa Nhà/DJI_20260423182822_0260_D_ANTS.jpg" alt="Sala Tam Coc Hotel & Spa Sunset Overview" class="about-img-main">
           <div class="about-experience-badge">
-            <span class="num" style="font-size: 1.1rem;">A New</span>
+            <span class="num" style="font-size: 1.1rem;">A NEW</span>
             <span class="text">Boutique Hotel</span>
           </div>
         </div>
@@ -211,7 +232,7 @@
       <div class="section-title-wrap">
         <span class="section-subtitle" data-i18n="rooms_sub">ACCOMMODATION</span>
         <h2 class="section-title" data-i18n="rooms_title">Rooms & Suites Collection</h2>
-        <p data-i18n="rooms_desc">All rooms feature Free Wi-Fi, Smart TV, Air Conditioning, Hot Rain Shower, Tea & Coffee Set, Bottled Mineral Water, Umbrella, In-room Safety Box, Slippers, Soft Bathrobes.</p>
+        <p data-i18n="rooms_desc" style="max-width: 820px; margin: 0 auto; text-align: center;">All rooms feature Free Wi-Fi, Smart TV, Air Conditioning, Hot Rain Shower, Tea & Coffee Set,<br>Bottled Mineral Water, Umbrella, In-room Safety Box, Slippers, Soft Bathrobes.</p>
       </div>
 
       <div class="rooms-filter">
@@ -240,7 +261,7 @@
                 <span><i class="fa-solid fa-bed"></i> 01 King Bed (1.8m x 2.0m)</span>
               </div>
             </div>
-            <p class="room-desc">Cozy and bright with large city-view windows, comfortable 1 King bed, and complete upscale amenities.</p>
+            <p class="room-desc" data-i18n="room1_desc">Cozy and bright with large city-view windows, comfortable 1 King bed, and complete upscale amenities.</p>
             <div class="room-amenities">
               <i class="fa-solid fa-wifi" title="Free Wi-Fi"></i>
               <i class="fa-solid fa-tv" title="Smart TV"></i>
@@ -250,7 +271,7 @@
             </div>
             <div class="room-footer">
               <button class="btn btn-outline-gold btn-sm" data-open-room-detail="superior-double" data-i18n="btn_view_details"><i class="fa-solid fa-eye"></i> View Details</button>
-              <button class="btn btn-gold btn-sm" data-open-booking="superior-double">Booking Inquiries</button>
+              <button class="btn btn-gold btn-sm" data-open-booking="superior-double" data-i18n="qb_submit">Booking Inquiries</button>
             </div>
           </div>
         </div>
@@ -272,7 +293,7 @@
                 <span><i class="fa-solid fa-bed"></i> 3 Single Beds (or 1 King + 1 Single)</span>
               </div>
             </div>
-            <p class="room-desc">Spacious room designed for 3 guests with 3 Single beds, offering street and mountain view.</p>
+            <p class="room-desc" data-i18n="room2_desc">Spacious room designed for 3 guests with 3 Single beds, offering street and mountain view.</p>
             <div class="room-amenities">
               <i class="fa-solid fa-wifi" title="Free Wi-Fi"></i>
               <i class="fa-solid fa-tv" title="Smart TV"></i>
@@ -282,7 +303,7 @@
             </div>
             <div class="room-footer">
               <button class="btn btn-outline-gold btn-sm" data-open-room-detail="superior-triple" data-i18n="btn_view_details"><i class="fa-solid fa-eye"></i> View Details</button>
-              <button class="btn btn-gold btn-sm" data-open-booking="superior-triple">Booking Inquiries</button>
+              <button class="btn btn-gold btn-sm" data-open-booking="superior-triple" data-i18n="qb_submit">Booking Inquiries</button>
             </div>
           </div>
         </div>
@@ -304,7 +325,7 @@
                 <span><i class="fa-solid fa-bed"></i> 01 King Bed (1.8m x 2.0m)</span>
               </div>
             </div>
-            <p class="room-desc">Private open balcony overlooking Tam Coc limestone hills, refined wooden interior, and quiet ambiance.</p>
+            <p class="room-desc" data-i18n="room3_desc">Private open balcony overlooking Tam Coc limestone hills, refined wooden interior, and quiet ambiance.</p>
             <div class="room-amenities">
               <i class="fa-solid fa-mountain" title="Mountain View Balcony"></i>
               <i class="fa-solid fa-wifi" title="Free Wi-Fi"></i>
@@ -314,7 +335,7 @@
             </div>
             <div class="room-footer">
               <button class="btn btn-outline-gold btn-sm" data-open-room-detail="deluxe-double" data-i18n="btn_view_details"><i class="fa-solid fa-eye"></i> View Details</button>
-              <button class="btn btn-gold btn-sm" data-open-booking="deluxe-double">Booking Inquiries</button>
+              <button class="btn btn-gold btn-sm" data-open-booking="deluxe-double" data-i18n="qb_submit">Booking Inquiries</button>
             </div>
           </div>
         </div>
@@ -336,7 +357,7 @@
                 <span><i class="fa-solid fa-bed"></i> 2 King Beds (1.8m x 2.0m)</span>
               </div>
             </div>
-            <p class="room-desc">Spacious twin room with 2 King Beds, private balcony bathed in sunlight, and scenic mountain views.</p>
+            <p class="room-desc" data-i18n="room4_desc">Spacious twin room with 2 King Beds, private balcony bathed in sunlight, and scenic mountain views.</p>
             <div class="room-amenities">
               <i class="fa-solid fa-mountain" title="Mountain View Balcony"></i>
               <i class="fa-solid fa-wifi" title="Free Wi-Fi"></i>
@@ -345,7 +366,7 @@
             </div>
             <div class="room-footer">
               <button class="btn btn-outline-gold btn-sm" data-open-room-detail="deluxe-twin" data-i18n="btn_view_details"><i class="fa-solid fa-eye"></i> View Details</button>
-              <button class="btn btn-gold btn-sm" data-open-booking="deluxe-twin">Booking Inquiries</button>
+              <button class="btn btn-gold btn-sm" data-open-booking="deluxe-twin" data-i18n="qb_submit">Booking Inquiries</button>
             </div>
           </div>
         </div>
@@ -367,7 +388,7 @@
                 <span><i class="fa-solid fa-bed"></i> 01 King Bed (1.8m x 2.0m) + Bathtub</span>
               </div>
             </div>
-            <p class="room-desc">Our signature luxury room with a panoramic glass soaking tub, private balcony, and 1 King bed.</p>
+            <p class="room-desc" data-i18n="room5_desc">Our signature luxury room with a panoramic glass soaking tub, private balcony, and 1 King bed.</p>
             <div class="room-amenities">
               <i class="fa-solid fa-bath" title="Glass Bathtub"></i>
               <i class="fa-solid fa-mountain" title="Private Balcony"></i>
@@ -377,7 +398,7 @@
             </div>
             <div class="room-footer">
               <button class="btn btn-outline-gold btn-sm" data-open-room-detail="luxury-double" data-i18n="btn_view_details"><i class="fa-solid fa-eye"></i> View Details</button>
-              <button class="btn btn-gold btn-sm" data-open-booking="luxury-double">Booking Inquiries</button>
+              <button class="btn btn-gold btn-sm" data-open-booking="luxury-double" data-i18n="qb_submit">Booking Inquiries</button>
             </div>
           </div>
         </div>
@@ -399,7 +420,7 @@
                 <span><i class="fa-solid fa-bed"></i> 01 King Bed (1.8m x 2.0m) + Bathtub</span>
               </div>
             </div>
-            <p class="room-desc">Luxurious room with 1 King bed, relaxing freestanding bathtub, and scenic mountain balcony.</p>
+            <p class="room-desc" data-i18n="room6_desc">Luxurious room with 1 King bed, relaxing freestanding bathtub, and scenic mountain balcony.</p>
             <div class="room-amenities">
               <i class="fa-solid fa-bath" title="Luxury Soaking Tub"></i>
               <i class="fa-solid fa-mountain" title="Scenic Balcony"></i>
@@ -409,7 +430,7 @@
             </div>
             <div class="room-footer">
               <button class="btn btn-outline-gold btn-sm" data-open-room-detail="luxury-twin" data-i18n="btn_view_details"><i class="fa-solid fa-eye"></i> View Details</button>
-              <button class="btn btn-gold btn-sm" data-open-booking="luxury-twin">Booking Inquiries</button>
+              <button class="btn btn-gold btn-sm" data-open-booking="luxury-twin" data-i18n="qb_submit">Booking Inquiries</button>
             </div>
           </div>
         </div>
@@ -431,7 +452,7 @@
                 <span><i class="fa-solid fa-bed"></i> 2 King Beds (1.8m x 2.0m)</span>
               </div>
             </div>
-            <p class="room-desc">Ideal for families of 4, featuring 2 King Beds, airy mountain balcony, and ample living space.</p>
+            <p class="room-desc" data-i18n="room7_desc">Ideal for families of 4, featuring 2 King Beds, airy mountain balcony, and ample living space.</p>
             <div class="room-amenities">
               <i class="fa-solid fa-people-roof" title="Family Suite"></i>
               <i class="fa-solid fa-mountain" title="Scenic Balcony"></i>
@@ -441,7 +462,7 @@
             </div>
             <div class="room-footer">
               <button class="btn btn-outline-gold btn-sm" data-open-room-detail="deluxe-family" data-i18n="btn_view_details"><i class="fa-solid fa-eye"></i> View Details</button>
-              <button class="btn btn-gold btn-sm" data-open-booking="deluxe-family">Booking Inquiries</button>
+              <button class="btn btn-gold btn-sm" data-open-booking="deluxe-family" data-i18n="qb_submit">Booking Inquiries</button>
             </div>
           </div>
         </div>
@@ -463,7 +484,7 @@
                 <span><i class="fa-solid fa-bed"></i> 2 Interconnected Bedrooms (2 King Beds)</span>
               </div>
             </div>
-            <p class="room-desc">Two interconnected bedrooms with 2 King beds and 2 private bathrooms, ensuring privacy and closeness for big families.</p>
+            <p class="room-desc" data-i18n="room8_desc">Two interconnected bedrooms with 2 King beds and 2 private bathrooms, ensuring privacy and closeness for big families.</p>
             <div class="room-amenities">
               <i class="fa-solid fa-door-open" title="Connecting Door"></i>
               <i class="fa-solid fa-bath" title="2 Private Bathrooms"></i>
@@ -473,7 +494,7 @@
             </div>
             <div class="room-footer">
               <button class="btn btn-outline-gold btn-sm" data-open-room-detail="family-connecting" data-i18n="btn_view_details"><i class="fa-solid fa-eye"></i> View Details</button>
-              <button class="btn btn-gold btn-sm" data-open-booking="family-connecting">Booking Inquiries</button>
+              <button class="btn btn-gold btn-sm" data-open-booking="family-connecting" data-i18n="qb_submit">Booking Inquiries</button>
             </div>
           </div>
         </div>
@@ -495,7 +516,7 @@
                 <span><i class="fa-solid fa-bed"></i> 2 Interconnected Bedrooms (2 King Beds + 1 Single Bed)</span>
               </div>
             </div>
-            <p class="room-desc">Spacious 60m² suite with 2 King Beds + 1 Single Bed and 2 private bathrooms for up to 7 guests.</p>
+            <p class="room-desc" data-i18n="room9_desc">Spacious 60m² suite with 2 King Beds + 1 Single Bed and 2 private bathrooms for up to 7 guests.</p>
             <div class="room-amenities">
               <i class="fa-solid fa-door-open" title="Connecting Door"></i>
               <i class="fa-solid fa-bath" title="2 Private Bathrooms"></i>
@@ -505,7 +526,7 @@
             </div>
             <div class="room-footer">
               <button class="btn btn-outline-gold btn-sm" data-open-room-detail="family-connecting-2" data-i18n="btn_view_details"><i class="fa-solid fa-eye"></i> View Details</button>
-              <button class="btn btn-gold btn-sm" data-open-booking="family-connecting-2">Booking Inquiries</button>
+              <button class="btn btn-gold btn-sm" data-open-booking="family-connecting-2" data-i18n="qb_submit">Booking Inquiries</button>
             </div>
           </div>
         </div>
@@ -539,7 +560,7 @@
               <li><i class="fa-solid fa-check"></i> <span data-i18n="offer1_f3">Unlimited rooftop infinity pool access</span></li>
               <li><i class="fa-solid fa-check"></i> <span data-i18n="offer1_f4">Daily breakfast buffet & welcome drink</span></li>
             </ul>
-            <button class="btn btn-gold" data-open-booking="deluxe-double"><i class="fa-solid fa-paper-plane"></i> Booking Inquiries</button>
+            <button class="btn btn-gold" data-open-booking="deluxe-double"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="qb_submit">Booking Inquiries</span></button>
           </div>
         </div>
 
@@ -558,7 +579,7 @@
               <li><i class="fa-solid fa-check"></i> <span data-i18n="offer2_f3">Private guided sightseeing tour</span></li>
               <li><i class="fa-solid fa-check"></i> <span data-i18n="offer2_f4">Special local dining experience at Sala Restaurant</span></li>
             </ul>
-            <button class="btn btn-gold" data-open-booking="luxury-double"><i class="fa-solid fa-paper-plane"></i> Booking Inquiries</button>
+            <button class="btn btn-gold" data-open-booking="luxury-double"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="qb_submit">Booking Inquiries</span></button>
           </div>
         </div>
 
@@ -577,7 +598,7 @@
               <li><i class="fa-solid fa-check"></i> <span data-i18n="offer3_f3">20% discount on dining & Lotus Spa therapy</span></li>
               <li><i class="fa-solid fa-check"></i> <span data-i18n="offer3_f4">Complimentary tandem bicycles for village tours</span></li>
             </ul>
-            <button class="btn btn-gold" data-open-booking="family-connecting"><i class="fa-solid fa-paper-plane"></i> Booking Inquiries</button>
+            <button class="btn btn-gold" data-open-booking="family-connecting"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="qb_submit">Booking Inquiries</span></button>
           </div>
         </div>
       </div>
@@ -759,16 +780,16 @@
     <div class="container">
       <div class="section-title-wrap">
         <span class="section-subtitle" data-i18n="nav_gallery">Photo Gallery</span>
-        <h2 class="section-title">Hotel Moments & Spaces</h2>
-        <p>Explore real photos of our rooms, rooftop pool, restaurant, and surrounding landscapes.</p>
+        <h2 class="section-title" data-i18n="gallery_sec_title">Hotel Moments & Spaces</h2>
+        <p data-i18n="gallery_sec_desc">Explore real photos of our rooms, rooftop pool, restaurant, and surrounding landscapes.</p>
       </div>
 
       <div class="gallery-filter">
-        <button class="active" data-filter="all">All Photos</button>
-        <button data-filter="rooms">Rooms & Suites</button>
-        <button data-filter="pool">Pool & Exterior</button>
-        <button data-filter="dining">Restaurant & Buffet</button>
-        <button data-filter="lobby">Lobby & Reception</button>
+        <button class="active" data-filter="all" data-i18n="gal_all">All Photos</button>
+        <button data-filter="rooms" data-i18n="gal_rooms">Rooms & Suites</button>
+        <button data-filter="pool" data-i18n="gal_pool">Pool & Exterior</button>
+        <button data-filter="dining" data-i18n="gal_dining">Restaurant & Buffet</button>
+        <button data-filter="lobby" data-i18n="gal_lobby">Lobby & Reception</button>
       </div>
 
       <div class="gallery-grid">
@@ -987,10 +1008,16 @@
           </div>
 
           <div class="info-box">
-            <div class="info-box-icon"><i class="fa-solid fa-phone"></i></div>
+            <div class="info-box-icon"><i class="fa-solid fa-headset"></i></div>
             <div class="info-box-content">
-              <h4>24/7 Hotline Support & Booking:</h4>
-              <p><a href="tel:0942060533" class="text-gold">+84 9 42 06 05 33</a> / <a href="tel:0986969898" class="text-gold">+84 9 86 96 98 98</a> / <a href="tel:0337408484" class="text-gold">+84 3 37 40 84 84 (Français)</a></p>
+              <h4>24/7 Reception Hotline:</h4>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; margin-top: 6px;">
+                <a href="tel:0942060533" class="text-gold" style="white-space: nowrap; font-weight: 700; font-size: 1rem;"><i class="fa-solid fa-phone" style="font-size: 0.8rem; margin-right: 4px;"></i>+84 9 42 06 05 33</a>
+                <span style="color: rgba(197, 168, 128, 0.4);">•</span>
+                <a href="tel:0986969898" class="text-gold" style="white-space: nowrap; font-weight: 700; font-size: 1rem;"><i class="fa-solid fa-phone" style="font-size: 0.8rem; margin-right: 4px;"></i>+84 9 86 96 98 98</a>
+                <span style="color: rgba(197, 168, 128, 0.4);">•</span>
+                <a href="tel:0337408484" class="text-gold" style="white-space: nowrap; font-weight: 700; font-size: 1rem;"><i class="fa-solid fa-phone" style="font-size: 0.8rem; margin-right: 4px;"></i>+84 3 37 40 84 84 <span style="font-weight: 500; font-size: 0.8rem; opacity: 0.9;">(Français)</span></a>
+              </div>
             </div>
           </div>
 

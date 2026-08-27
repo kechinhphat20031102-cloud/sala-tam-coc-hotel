@@ -31,7 +31,6 @@
           <div class="lang-dropdown">
             <a href="#" data-lang="en" class="active"><span class="lang-flag">🇬🇧</span> GB English</a>
             <a href="#" data-lang="vi"><span class="lang-flag">🇻🇳</span> Tiếng Việt</a>
-            <a href="#" data-lang="ru"><span class="lang-flag">🇷🇺</span> Русский</a>
             <a href="#" data-lang="fr"><span class="lang-flag">🇫🇷</span> Français</a>
           </div>
         </div>
@@ -84,6 +83,28 @@
         </div>
         <div class="nav-item"><a href="gallery.html" class="nav-link" data-i18n="nav_gallery">Photo Gallery</a></div>
         <div class="nav-item"><a href="#" class="nav-link nav-book-now" data-open-booking="true" data-i18n="nav_contact">Book Now</a></div>
+
+        <div class="mobile-drawer-extra">
+          <div class="mobile-drawer-lang">
+            <span class="mobile-drawer-title"><i class="fa-solid fa-globe"></i> <span data-i18n="select_language">Language</span></span>
+            <div class="mobile-lang-pills">
+              <button class="mobile-lang-pill active" data-lang="en"><span class="lang-flag">🇬🇧</span> English</button>
+              <button class="mobile-lang-pill" data-lang="vi"><span class="lang-flag">🇻🇳</span> Tiếng Việt</button>
+              <button class="mobile-lang-pill" data-lang="fr"><span class="lang-flag">🇫🇷</span> Français</button>
+            </div>
+          </div>
+
+          <div class="mobile-drawer-ta">
+            <span class="mobile-drawer-title"><i class="fa-brands fa-tripadvisor" style="color: #00af87;"></i> <span data-i18n="ta_reviews">TripAdvisor</span></span>
+            <a href="https://www.tripadvisor.com.sg/Hotel_Review-g303945-d34432325-Reviews-Sala_Tam_Coc_Hotel_Spa-Ninh_Binh_Ninh_Binh_Province.html" target="_blank" rel="noopener noreferrer" class="mobile-ta-badge" title="Recommended on TripAdvisor">
+              <i class="fa-brands fa-tripadvisor ta-icon"></i>
+              <div class="ta-text-group">
+                <span class="ta-sub">RECOMMENDED ON</span>
+                <span class="ta-title">Tripadvisor</span>
+              </div>
+            </a>
+          </div>
+        </div>
       </nav>
 
       <div class="nav-cta">
@@ -112,7 +133,7 @@
     <div class="container hero-content" style="padding-top: 60px;">
       <span class="hero-subtitle" data-i18n="rooms_sub">ACCOMMODATION</span>
       <h1 class="hero-title" data-i18n="rooms_title">Rooms & Suites Collection</h1>
-      <p class="hero-desc" data-i18n="rooms_desc">All rooms feature Free Wi-Fi, Smart TV, Air Conditioning, Hot Rain Shower, Tea & Coffee Set, Bottled Mineral Water, Umbrella, In-room Safety Box, Slippers, Soft Bathrobes.</p>
+      <p class="hero-desc" data-i18n="rooms_desc" style="max-width: 820px; margin: 0 auto; text-align: center;">All rooms feature Free Wi-Fi, Smart TV, Air Conditioning, Hot Rain Shower, Tea & Coffee Set,<br>Bottled Mineral Water, Umbrella, In-room Safety Box, Slippers, Soft Bathrobes.</p>
     </div>
   </section>
 
@@ -128,30 +149,30 @@
         <div class="dining-info">
           <span class="section-subtitle">City View Comfort</span>
           <h2 class="section-title text-left">Superior Double City View – 28m²</h2>
-          <p>Cozy and bright with large city-view windows, comfortable 1 King bed, and complete upscale amenities.</p>
+          <p data-i18n="room1_desc">Cozy and bright with large city-view windows, comfortable 1 King bed, and complete upscale amenities.</p>
 
           <div class="dining-meta-grid">
             <div class="dining-meta-item">
-              <span class="label">Room Size:</span>
+              <span class="label" data-i18n="label_room_size">Room Size:</span>
               <span class="value">28 m²</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Max Guests:</span>
+              <span class="label" data-i18n="label_max_guests">Max Guests:</span>
               <span class="value">02 Guests</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Bed Type:</span>
+              <span class="label" data-i18n="label_bed_type">Bed Type:</span>
               <span class="value">1 King Bed</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Reference Price:</span>
-              <span class="value" style="color: var(--primary-gold-dark);">From 1,300,000 VND / night</span>
+              <span class="label" data-i18n="label_ref_price">Reference Price:</span>
+              <span class="value" style="color: var(--primary-gold-dark);"><span data-i18n="price_from">From</span> 1,300,000 VND <span data-i18n="per_night">/ night</span></span>
             </div>
           </div>
 
           <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-            <button class="btn btn-outline-gold" data-open-room-detail="superior-double"><i class="fa-solid fa-images"></i> View Room Photos & Details</button>
-            <button class="btn btn-gold" data-open-booking="superior-double"><i class="fa-solid fa-paper-plane"></i> Booking Inquiries</button>
+            <button class="btn btn-outline-gold" data-open-room-detail="superior-double"><i class="fa-solid fa-images"></i> <span data-i18n="btn_view_photos">View Room Photos & Details</span></button>
+            <button class="btn btn-gold" data-open-booking="superior-double"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="qb_submit">Booking Inquiries</span></button>
           </div>
         </div>
       </div>
@@ -161,30 +182,30 @@
         <div class="dining-info">
           <span class="section-subtitle">Triple Occupancy</span>
           <h2 class="section-title text-left">Superior Triple City View – 30m²</h2>
-          <p>Spacious room designed for 3 guests with 3 Single beds, offering street and mountain view.</p>
+          <p data-i18n="room2_desc">Spacious room designed for 3 guests with 3 Single beds, offering street and mountain view.</p>
 
           <div class="dining-meta-grid">
             <div class="dining-meta-item">
-              <span class="label">Room Size:</span>
+              <span class="label" data-i18n="label_room_size">Room Size:</span>
               <span class="value">30 m²</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Max Guests:</span>
+              <span class="label" data-i18n="label_max_guests">Max Guests:</span>
               <span class="value">03 Guests</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Bed Type:</span>
+              <span class="label" data-i18n="label_bed_type">Bed Type:</span>
               <span class="value">3 Single Beds</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Reference Price:</span>
-              <span class="value" style="color: var(--primary-gold-dark);">From 1,800,000 VND / night</span>
+              <span class="label" data-i18n="label_ref_price">Reference Price:</span>
+              <span class="value" style="color: var(--primary-gold-dark);"><span data-i18n="price_from">From</span> 1,800,000 VND <span data-i18n="per_night">/ night</span></span>
             </div>
           </div>
 
           <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-            <button class="btn btn-outline-gold" data-open-room-detail="superior-triple"><i class="fa-solid fa-images"></i> View Room Photos & Details</button>
-            <button class="btn btn-gold" data-open-booking="superior-triple"><i class="fa-solid fa-paper-plane"></i> Booking Inquiries</button>
+            <button class="btn btn-outline-gold" data-open-room-detail="superior-triple"><i class="fa-solid fa-images"></i> <span data-i18n="btn_view_photos">View Room Photos & Details</span></button>
+            <button class="btn btn-gold" data-open-booking="superior-triple"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="qb_submit">Booking Inquiries</span></button>
           </div>
         </div>
         <div class="dining-img-wrap">
@@ -200,30 +221,30 @@
         <div class="dining-info">
           <span class="section-subtitle">Private Balcony View</span>
           <h2 class="section-title text-left">Deluxe Double Balcony – 28m²</h2>
-          <p>Private open balcony overlooking Tam Coc limestone hills, refined wooden interior, and quiet ambiance.</p>
+          <p data-i18n="room3_desc">Private open balcony overlooking Tam Coc limestone hills, refined wooden interior, and quiet ambiance.</p>
 
           <div class="dining-meta-grid">
             <div class="dining-meta-item">
-              <span class="label">Room Size:</span>
+              <span class="label" data-i18n="label_room_size">Room Size:</span>
               <span class="value">28 m²</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Max Guests:</span>
+              <span class="label" data-i18n="label_max_guests">Max Guests:</span>
               <span class="value">02 Guests</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Bed Type:</span>
+              <span class="label" data-i18n="label_bed_type">Bed Type:</span>
               <span class="value">1 King Bed</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Reference Price:</span>
-              <span class="value" style="color: var(--primary-gold-dark);">From 1,500,000 VND / night</span>
+              <span class="label" data-i18n="label_ref_price">Reference Price:</span>
+              <span class="value" style="color: var(--primary-gold-dark);"><span data-i18n="price_from">From</span> 1,500,000 VND <span data-i18n="per_night">/ night</span></span>
             </div>
           </div>
 
           <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-            <button class="btn btn-outline-gold" data-open-room-detail="deluxe-double"><i class="fa-solid fa-images"></i> View Room Photos & Details</button>
-            <button class="btn btn-gold" data-open-booking="deluxe-double"><i class="fa-solid fa-paper-plane"></i> Booking Inquiries</button>
+            <button class="btn btn-outline-gold" data-open-room-detail="deluxe-double"><i class="fa-solid fa-images"></i> <span data-i18n="btn_view_photos">View Room Photos & Details</span></button>
+            <button class="btn btn-gold" data-open-booking="deluxe-double"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="qb_submit">Booking Inquiries</span></button>
           </div>
         </div>
       </div>
@@ -233,30 +254,30 @@
         <div class="dining-info">
           <span class="section-subtitle">Spacious Twin Room</span>
           <h2 class="section-title text-left">Deluxe Twin Balcony – 35m²</h2>
-          <p>Spacious twin room with 2 King Beds, private balcony bathed in sunlight, and scenic mountain views.</p>
+          <p data-i18n="room4_desc">Spacious twin room with 2 King Beds, private balcony bathed in sunlight, and scenic mountain views.</p>
 
           <div class="dining-meta-grid">
             <div class="dining-meta-item">
-              <span class="label">Room Size:</span>
+              <span class="label" data-i18n="label_room_size">Room Size:</span>
               <span class="value">35 m²</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Max Guests:</span>
+              <span class="label" data-i18n="label_max_guests">Max Guests:</span>
               <span class="value">02 – 04 Guests</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Bed Type:</span>
+              <span class="label" data-i18n="label_bed_type">Bed Type:</span>
               <span class="value">2 King Beds</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Reference Price:</span>
-              <span class="value" style="color: var(--primary-gold-dark);">From 1,600,000 VND / night</span>
+              <span class="label" data-i18n="label_ref_price">Reference Price:</span>
+              <span class="value" style="color: var(--primary-gold-dark);"><span data-i18n="price_from">From</span> 1,600,000 VND <span data-i18n="per_night">/ night</span></span>
             </div>
           </div>
 
           <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-            <button class="btn btn-outline-gold" data-open-room-detail="deluxe-twin"><i class="fa-solid fa-images"></i> View Room Photos & Details</button>
-            <button class="btn btn-gold" data-open-booking="deluxe-twin"><i class="fa-solid fa-paper-plane"></i> Booking Inquiries</button>
+            <button class="btn btn-outline-gold" data-open-room-detail="deluxe-twin"><i class="fa-solid fa-images"></i> <span data-i18n="btn_view_photos">View Room Photos & Details</span></button>
+            <button class="btn btn-gold" data-open-booking="deluxe-twin"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="qb_submit">Booking Inquiries</span></button>
           </div>
         </div>
         <div class="dining-img-wrap">
@@ -272,30 +293,30 @@
         <div class="dining-info">
           <span class="section-subtitle">Luxury Soaking Tub</span>
           <h2 class="section-title text-left">Luxury Double with Balcony & Bath tub – 28m²</h2>
-          <p>Our signature luxury room with a panoramic glass soaking tub, private balcony, and 1 King bed.</p>
+          <p data-i18n="room5_desc">Our signature luxury room with a panoramic glass soaking tub, private balcony, and 1 King bed.</p>
 
           <div class="dining-meta-grid">
             <div class="dining-meta-item">
-              <span class="label">Room Size:</span>
+              <span class="label" data-i18n="label_room_size">Room Size:</span>
               <span class="value">28 m²</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Max Guests:</span>
+              <span class="label" data-i18n="label_max_guests">Max Guests:</span>
               <span class="value">02 Guests</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Bed Type:</span>
+              <span class="label" data-i18n="label_bed_type">Bed Type:</span>
               <span class="value">1 King Bed + Bathtub</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Reference Price:</span>
-              <span class="value" style="color: var(--primary-gold-dark);">From 1,650,000 VND / night</span>
+              <span class="label" data-i18n="label_ref_price">Reference Price:</span>
+              <span class="value" style="color: var(--primary-gold-dark);"><span data-i18n="price_from">From</span> 1,650,000 VND <span data-i18n="per_night">/ night</span></span>
             </div>
           </div>
 
           <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-            <button class="btn btn-outline-gold" data-open-room-detail="luxury-double"><i class="fa-solid fa-images"></i> View Room Photos & Details</button>
-            <button class="btn btn-gold" data-open-booking="luxury-double"><i class="fa-solid fa-paper-plane"></i> Booking Inquiries</button>
+            <button class="btn btn-outline-gold" data-open-room-detail="luxury-double"><i class="fa-solid fa-images"></i> <span data-i18n="btn_view_photos">View Room Photos & Details</span></button>
+            <button class="btn btn-gold" data-open-booking="luxury-double"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="qb_submit">Booking Inquiries</span></button>
           </div>
         </div>
       </div>
@@ -305,30 +326,30 @@
         <div class="dining-info">
           <span class="section-subtitle">Luxury Twin & Bathtub</span>
           <h2 class="section-title text-left">Luxury Twin with Balcony & Bath tub – 35m²</h2>
-          <p>Luxurious room with 1 King bed, relaxing freestanding bathtub, and scenic mountain balcony.</p>
+          <p data-i18n="room6_desc">Luxurious room with 1 King bed, relaxing freestanding bathtub, and scenic mountain balcony.</p>
 
           <div class="dining-meta-grid">
             <div class="dining-meta-item">
-              <span class="label">Room Size:</span>
+              <span class="label" data-i18n="label_room_size">Room Size:</span>
               <span class="value">35 m²</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Max Guests:</span>
+              <span class="label" data-i18n="label_max_guests">Max Guests:</span>
               <span class="value">02 – 04 Guests</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Bed Type:</span>
+              <span class="label" data-i18n="label_bed_type">Bed Type:</span>
               <span class="value">1 King Bed + Bathtub</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Reference Price:</span>
-              <span class="value" style="color: var(--primary-gold-dark);">From 1,750,000 VND / night</span>
+              <span class="label" data-i18n="label_ref_price">Reference Price:</span>
+              <span class="value" style="color: var(--primary-gold-dark);"><span data-i18n="price_from">From</span> 1,750,000 VND <span data-i18n="per_night">/ night</span></span>
             </div>
           </div>
 
           <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-            <button class="btn btn-outline-gold" data-open-room-detail="luxury-twin"><i class="fa-solid fa-images"></i> View Room Photos & Details</button>
-            <button class="btn btn-gold" data-open-booking="luxury-twin"><i class="fa-solid fa-paper-plane"></i> Booking Inquiries</button>
+            <button class="btn btn-outline-gold" data-open-room-detail="luxury-twin"><i class="fa-solid fa-images"></i> <span data-i18n="btn_view_photos">View Room Photos & Details</span></button>
+            <button class="btn btn-gold" data-open-booking="luxury-twin"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="qb_submit">Booking Inquiries</span></button>
           </div>
         </div>
         <div class="dining-img-wrap">
@@ -344,30 +365,30 @@
         <div class="dining-info">
           <span class="section-subtitle">Family Comfort Suite</span>
           <h2 class="section-title text-left">Deluxe Family Balcony – 35m²</h2>
-          <p>Ideal for families of 4, featuring 2 King Beds, airy mountain balcony, and ample living space.</p>
+          <p data-i18n="room7_desc">Ideal for families of 4, featuring 2 King Beds, airy mountain balcony, and ample living space.</p>
 
           <div class="dining-meta-grid">
             <div class="dining-meta-item">
-              <span class="label">Room Size:</span>
+              <span class="label" data-i18n="label_room_size">Room Size:</span>
               <span class="value">35 m²</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Max Guests:</span>
+              <span class="label" data-i18n="label_max_guests">Max Guests:</span>
               <span class="value">04 Guests</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Bed Type:</span>
+              <span class="label" data-i18n="label_bed_type">Bed Type:</span>
               <span class="value">2 King Beds</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Reference Price:</span>
-              <span class="value" style="color: var(--primary-gold-dark);">From 2,100,000 VND / night</span>
+              <span class="label" data-i18n="label_ref_price">Reference Price:</span>
+              <span class="value" style="color: var(--primary-gold-dark);"><span data-i18n="price_from">From</span> 2,100,000 VND <span data-i18n="per_night">/ night</span></span>
             </div>
           </div>
 
           <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-            <button class="btn btn-outline-gold" data-open-room-detail="deluxe-family"><i class="fa-solid fa-images"></i> View Room Photos & Details</button>
-            <button class="btn btn-gold" data-open-booking="deluxe-family"><i class="fa-solid fa-paper-plane"></i> Booking Inquiries</button>
+            <button class="btn btn-outline-gold" data-open-room-detail="deluxe-family"><i class="fa-solid fa-images"></i> <span data-i18n="btn_view_photos">View Room Photos & Details</span></button>
+            <button class="btn btn-gold" data-open-booking="deluxe-family"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="qb_submit">Booking Inquiries</span></button>
           </div>
         </div>
       </div>
@@ -377,30 +398,30 @@
         <div class="dining-info">
           <span class="section-subtitle">Interconnected Family Suite</span>
           <h2 class="section-title text-left">Family Connecting room 1 – 55m²</h2>
-          <p>Two interconnected bedrooms with 2 King beds and 2 private bathrooms, ensuring privacy and closeness for big families.</p>
+          <p data-i18n="room8_desc">Two interconnected bedrooms with 2 King beds and 2 private bathrooms, ensuring privacy and closeness for big families.</p>
 
           <div class="dining-meta-grid">
             <div class="dining-meta-item">
-              <span class="label">Room Size:</span>
+              <span class="label" data-i18n="label_room_size">Room Size:</span>
               <span class="value">55 m²</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Max Guests:</span>
+              <span class="label" data-i18n="label_max_guests">Max Guests:</span>
               <span class="value">04 – 06 Guests</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Bed Type:</span>
+              <span class="label" data-i18n="label_bed_type">Bed Type:</span>
               <span class="value">2 King Beds</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Reference Price:</span>
-              <span class="value" style="color: var(--primary-gold-dark);">From 2,600,000 VND / night</span>
+              <span class="label" data-i18n="label_ref_price">Reference Price:</span>
+              <span class="value" style="color: var(--primary-gold-dark);"><span data-i18n="price_from">From</span> 2,600,000 VND <span data-i18n="per_night">/ night</span></span>
             </div>
           </div>
 
           <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-            <button class="btn btn-outline-gold" data-open-room-detail="family-connecting"><i class="fa-solid fa-images"></i> View Room Photos & Details</button>
-            <button class="btn btn-gold" data-open-booking="family-connecting"><i class="fa-solid fa-paper-plane"></i> Booking Inquiries</button>
+            <button class="btn btn-outline-gold" data-open-room-detail="family-connecting"><i class="fa-solid fa-images"></i> <span data-i18n="btn_view_photos">View Room Photos & Details</span></button>
+            <button class="btn btn-gold" data-open-booking="family-connecting"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="qb_submit">Booking Inquiries</span></button>
           </div>
         </div>
         <div class="dining-img-wrap">
@@ -416,30 +437,30 @@
         <div class="dining-info">
           <span class="section-subtitle">Grand Family Suite</span>
           <h2 class="section-title text-left">Family Connecting room 2 – 60m²</h2>
-          <p>Spacious 60m² suite with 2 King Beds + 1 Single Bed and 2 private bathrooms for up to 7 guests.</p>
+          <p data-i18n="room9_desc">Spacious 60m² suite with 2 King Beds + 1 Single Bed and 2 private bathrooms for up to 7 guests.</p>
 
           <div class="dining-meta-grid">
             <div class="dining-meta-item">
-              <span class="label">Room Size:</span>
+              <span class="label" data-i18n="label_room_size">Room Size:</span>
               <span class="value">60 m²</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Max Guests:</span>
+              <span class="label" data-i18n="label_max_guests">Max Guests:</span>
               <span class="value">05 – 07 Guests</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Bed Type:</span>
+              <span class="label" data-i18n="label_bed_type">Bed Type:</span>
               <span class="value">2 King Beds + 1 Single Bed</span>
             </div>
             <div class="dining-meta-item">
-              <span class="label">Reference Price:</span>
-              <span class="value" style="color: var(--primary-gold-dark);">From 2,750,000 VND / night</span>
+              <span class="label" data-i18n="label_ref_price">Reference Price:</span>
+              <span class="value" style="color: var(--primary-gold-dark);"><span data-i18n="price_from">From</span> 2,750,000 VND <span data-i18n="per_night">/ night</span></span>
             </div>
           </div>
 
           <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-            <button class="btn btn-outline-gold" data-open-room-detail="family-connecting-2"><i class="fa-solid fa-images"></i> View Room Photos & Details</button>
-            <button class="btn btn-gold" data-open-booking="family-connecting-2"><i class="fa-solid fa-paper-plane"></i> Booking Inquiries</button>
+            <button class="btn btn-outline-gold" data-open-room-detail="family-connecting-2"><i class="fa-solid fa-images"></i> <span data-i18n="btn_view_photos">View Room Photos & Details</span></button>
+            <button class="btn btn-gold" data-open-booking="family-connecting-2"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="qb_submit">Booking Inquiries</span></button>
           </div>
         </div>
       </div>
@@ -473,7 +494,15 @@
             <li><i class="fa-solid fa-clock"></i> <strong>Check-in Time:</strong> From 14:00</li>
             <li><i class="fa-solid fa-clock"></i> <strong>Check-out Time:</strong> Before 12:00 noon</li>
             <li><i class="fa-solid fa-bell-concierge"></i> Early check-in & late check-out subject to availability</li>
-            <li><i class="fa-solid fa-phone"></i> 24/7 Reception Hotline: <strong>+84 9 42 06 05 33 / +84 9 86 96 98 98 / +84 3 37 40 84 84 (Français)</strong></li>
+            <li><i class="fa-solid fa-phone"></i> <strong>24/7 Reception Hotline:</strong> 
+              <span style="display: inline-flex; flex-wrap: wrap; gap: 4px 10px; align-items: center;">
+                <a href="tel:0942060533" style="white-space: nowrap; color: var(--primary-gold-dark); font-weight: 700;">+84 9 42 06 05 33</a>
+                <span style="opacity: 0.5;">•</span>
+                <a href="tel:0986969898" style="white-space: nowrap; color: var(--primary-gold-dark); font-weight: 700;">+84 9 86 96 98 98</a>
+                <span style="opacity: 0.5;">•</span>
+                <a href="tel:0337408484" style="white-space: nowrap; color: var(--primary-gold-dark); font-weight: 700;">+84 3 37 40 84 84 (Français)</a>
+              </span>
+            </li>
           </ul>
         </div>
       </div>

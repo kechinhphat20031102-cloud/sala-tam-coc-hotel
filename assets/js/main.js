@@ -185,19 +185,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const currentLang = localStorage.getItem('sala_lang') || 'en';
     const isVi = currentLang === 'vi';
+    const isFr = currentLang === 'fr';
 
-    const displayTitle = isVi ? (tour.titleVi || tour.title) : (tour.titleEn || tour.title);
-    const displayDuration = isVi ? (tour.durationVi || tour.duration) : (tour.durationEn || tour.duration);
+    const displayTitle = isVi ? (tour.titleVi || tour.title) : (isFr ? (tour.titleFr || tour.titleEn || tour.title) : (tour.titleEn || tour.title));
+    const displayDuration = isVi ? (tour.durationVi || tour.duration) : (isFr ? (tour.durationFr || tour.durationEn || tour.duration) : (tour.durationEn || tour.duration));
     
-    const itineraryList = isVi ? (tour.itineraryVi || tour.itinerary) : (tour.itineraryEn || tour.itinerary);
-    const inclusionsList = isVi ? (tour.inclusionsVi || tour.inclusions) : (tour.inclusionsEn || tour.inclusions);
-    const childrenList = isVi ? (tour.childrenPolicyVi || tour.childrenPolicy) : (tour.childrenPolicyEn || tour.childrenPolicy);
+    const itineraryList = isVi ? (tour.itineraryVi || tour.itinerary) : (isFr ? (tour.itineraryFr || tour.itineraryEn || tour.itinerary) : (tour.itineraryEn || tour.itinerary));
+    const inclusionsList = isVi ? (tour.inclusionsVi || tour.inclusions) : (isFr ? (tour.inclusionsFr || tour.inclusionsEn || tour.inclusions) : (tour.inclusionsEn || tour.inclusions));
+    const childrenList = isVi ? (tour.childrenPolicyVi || tour.childrenPolicy) : (isFr ? (tour.childrenPolicyFr || tour.childrenPolicyEn || tour.childrenPolicy) : (tour.childrenPolicyEn || tour.childrenPolicy));
 
-    const titleItinerary = isVi ? 'Lịch Trình Chi Tiết' : 'Detailed Itinerary';
-    const titleInclusions = isVi ? 'Dịch Vụ Bao Gồm' : 'Inclusions';
-    const titleChildPolicy = isVi ? 'Chính Sách Trẻ Em' : 'Child Policy';
-    const btnBookText = isVi ? 'Đặt Tour: 0942 060 533' : 'Book Tour: +84 942 060 533';
-    const btnConsultText = isVi ? 'Tư Vấn Zalo / WhatsApp' : 'WhatsApp / Zalo Consultation';
+    const titleItinerary = isVi ? 'Lịch Trình Chi Tiết' : (isFr ? 'Itinéraire Détaillé' : 'Detailed Itinerary');
+    const titleInclusions = isVi ? 'Dịch Vụ Bao Gồm' : (isFr ? 'Services Inclus' : 'Inclusions');
+    const titleChildPolicy = isVi ? 'Chính Sách Trẻ Em' : (isFr ? 'Politique Enfants' : 'Child Policy');
+    const btnBookText = isVi ? 'Đặt Tour: 0942 060 533' : (isFr ? 'Réserver le Tour : +84 3 37 40 84 84' : 'Book Tour: +84 942 060 533');
+    const btnConsultText = isVi ? 'Tư Vấn Zalo / WhatsApp' : (isFr ? 'Consultation WhatsApp / Zalo' : 'WhatsApp / Zalo Consultation');
 
     let itineraryHTML = (itineraryList || []).map(item => `
       <li class="tour-timeline-item">
@@ -240,8 +241,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ` : ''}
 
         <div class="tour-modal-actions">
-          <a href="tel:0942060533" class="btn btn-gold btn-lg"><i class="fa-solid fa-phone"></i> ${btnBookText}</a>
-          <a href="https://zalo.me/0942060533" target="_blank" class="btn btn-outline-gold btn-lg"><i class="fa-solid fa-comment-dots"></i> ${btnConsultText}</a>
+          <a href="tel:${isFr ? '0337408484' : '0942060533'}" class="btn btn-gold btn-lg"><i class="fa-solid fa-phone"></i> ${btnBookText}</a>
+          <a href="https://wa.me/${isFr ? '84337408484' : '84942060533'}" target="_blank" class="btn btn-outline-gold btn-lg"><i class="fa-solid fa-comment-dots"></i> ${btnConsultText}</a>
         </div>
       </div>
     `;

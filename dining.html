@@ -31,7 +31,6 @@
           <div class="lang-dropdown">
             <a href="#" data-lang="en" class="active"><span class="lang-flag">🇬🇧</span> GB English</a>
             <a href="#" data-lang="vi"><span class="lang-flag">🇻🇳</span> Tiếng Việt</a>
-            <a href="#" data-lang="ru"><span class="lang-flag">🇷🇺</span> Русский</a>
             <a href="#" data-lang="fr"><span class="lang-flag">🇫🇷</span> Français</a>
           </div>
         </div>
@@ -86,6 +85,28 @@
         </div>
         <div class="nav-item"><a href="gallery.html" class="nav-link" data-i18n="nav_gallery">Photo Gallery</a></div>
         <div class="nav-item"><a href="index.html#quick-booking" class="nav-link nav-book-now" data-i18n="nav_contact">Book Now</a></div>
+
+        <div class="mobile-drawer-extra">
+          <div class="mobile-drawer-lang">
+            <span class="mobile-drawer-title"><i class="fa-solid fa-globe"></i> <span data-i18n="select_language">Language</span></span>
+            <div class="mobile-lang-pills">
+              <button class="mobile-lang-pill active" data-lang="en"><span class="lang-flag">🇬🇧</span> English</button>
+              <button class="mobile-lang-pill" data-lang="vi"><span class="lang-flag">🇻🇳</span> Tiếng Việt</button>
+              <button class="mobile-lang-pill" data-lang="fr"><span class="lang-flag">🇫🇷</span> Français</button>
+            </div>
+          </div>
+
+          <div class="mobile-drawer-ta">
+            <span class="mobile-drawer-title"><i class="fa-brands fa-tripadvisor" style="color: #00af87;"></i> <span data-i18n="ta_reviews">TripAdvisor</span></span>
+            <a href="https://www.tripadvisor.com.sg/Hotel_Review-g303945-d34432325-Reviews-Sala_Tam_Coc_Hotel_Spa-Ninh_Binh_Ninh_Binh_Province.html" target="_blank" rel="noopener noreferrer" class="mobile-ta-badge" title="Recommended on TripAdvisor">
+              <i class="fa-brands fa-tripadvisor ta-icon"></i>
+              <div class="ta-text-group">
+                <span class="ta-sub">RECOMMENDED ON</span>
+                <span class="ta-title">Tripadvisor</span>
+              </div>
+            </a>
+          </div>
+        </div>
       </nav>
 
       <div class="nav-cta">
@@ -111,7 +132,7 @@
     <div class="hero-overlay"></div>
     <div class="container hero-content" style="padding-bottom: 40px;">
       <span class="hero-subtitle" data-i18n="dining_sub">Culinary Heritage</span>
-      <h1 class="hero-title hero-title-nowrap" data-i18n="dining_title">Sala Restaurant & Daily Buffet Breakfast</h1>
+      <h1 class="hero-title" data-i18n="dining_title">Sala Restaurant & Daily Buffet Breakfast</h1>
       <p class="hero-desc" data-i18n="dining_desc">Sala Restaurant delivers an exquisite gastronomic journey showcasing famous Ninh Binh mountain goat specialties, crispy rice crackers, hill chicken, and a fresh daily international buffet.</p>
     </div>
   </section>
@@ -120,9 +141,9 @@
   <section class="section">
     <div class="container">
       <div class="section-title-wrap">
-        <span class="section-subtitle">Gastronomy Showcase</span>
-        <h2 class="section-title">Buffet Breakfast & Sala Restaurant</h2>
-        <p>Every dish at Sala Tam Coc is crafted from the freshest local ingredients, honoring the culinary soul of the ancient capital.</p>
+        <span class="section-subtitle" data-i18n="dining_sec_sub">Gastronomy Showcase</span>
+        <h2 class="section-title" data-i18n="dining_sec_title">Buffet Breakfast & Sala Restaurant</h2>
+        <p data-i18n="dining_sec_desc">Every dish at Sala Tam Coc is crafted from the freshest local ingredients, honoring the culinary soul of the ancient capital.</p>
       </div>
 
       <div class="rooms-grid">
@@ -132,8 +153,8 @@
             <img src="Ảnh Sala Tam Coc Hotel & Spa/Buffet Sáng + Nhà Hàng và Sảnh Lễ Tân/ANT_4705.jpg" alt="Buffet Breakfast Spread" class="room-thumb">
           </div>
           <div class="room-body">
-            <h3 class="room-title">International & Local Buffet Breakfast</h3>
-            <p class="room-desc">Over 30 hot and cold items daily, from fresh pastries, seasonal tropical fruits to traditional noodle soups (Pho, Bun).</p>
+            <h3 class="room-title" data-i18n="dish1_title">International & Local Buffet Breakfast</h3>
+            <p class="room-desc" data-i18n="dish1_desc">Over 30 hot and cold items daily, from fresh pastries, seasonal tropical fruits to traditional noodle soups (Pho, Bun).</p>
           </div>
         </div>
 
@@ -143,8 +164,8 @@
             <img src="Ảnh Sala Tam Coc Hotel & Spa/Buffet Sáng + Nhà Hàng và Sảnh Lễ Tân/ANT_4707.jpg" alt="Pastries and Fresh Fruits" class="room-thumb">
           </div>
           <div class="room-body">
-            <h3 class="room-title">Artisan Pastries & Fresh Fruits</h3>
-            <p class="room-desc">Crispy golden croissants, European baked goods, fresh juices, and organic local fruits hand-picked every morning.</p>
+            <h3 class="room-title" data-i18n="dish2_title">Artisan Pastries & Fresh Fruits</h3>
+            <p class="room-desc" data-i18n="dish2_desc">Crispy golden croissants, European baked goods, fresh juices, and organic local fruits hand-picked every morning.</p>
           </div>
         </div>
 
@@ -154,8 +175,8 @@
             <img src="Ảnh Sala Tam Coc Hotel & Spa/Buffet Sáng + Nhà Hàng và Sảnh Lễ Tân/ANT_4798.jpg" alt="Local Ninh Binh Specialties" class="room-thumb">
           </div>
           <div class="room-body">
-            <h3 class="room-title">Ninh Binh Heritage Flavors</h3>
-            <p class="room-desc">Made-to-order delicacies featuring famous mountain goat meat, crispy scorched rice with savory sauce, and free-range hill chicken.</p>
+            <h3 class="room-title" data-i18n="dish3_title">Ninh Binh Heritage Flavors</h3>
+            <p class="room-desc" data-i18n="dish3_desc">Made-to-order delicacies featuring famous mountain goat meat, crispy scorched rice with savory sauce, and free-range hill chicken.</p>
           </div>
         </div>
       </div>
@@ -167,15 +188,15 @@
     <div class="container">
       <div class="about-grid">
         <div>
-          <span class="section-subtitle">Inviting Ambiance</span>
-          <h2 class="section-title text-left">Scenic Dining Space & Mountain View Lounge</h2>
-          <p>Situated in an airy open space overlooking Tam Coc karst topography, Sala Restaurant & Bar is the perfect venue for memorable meals with family and friends.</p>
+          <span class="section-subtitle" data-i18n="dining_amb_sub">Inviting Ambiance</span>
+          <h2 class="section-title text-left" data-i18n="dining_amb_title">Scenic Dining Space & Mountain View Lounge</h2>
+          <p data-i18n="dining_amb_desc">Situated in an airy open space overlooking Tam Coc karst topography, Sala Restaurant & Bar is the perfect venue for memorable meals with family and friends.</p>
           <ul class="offer-highlights">
-            <li><i class="fa-solid fa-check"></i> Capacity up to 120 guests, ideal for family reunions, tour groups & celebrations</li>
-            <li><i class="fa-solid fa-check"></i> Complimentary daily buffet breakfast for 100% of hotel residents (07:00 - 09:30)</li>
-            <li><i class="fa-solid fa-check"></i> Beverage selection: Vietnamese drip coffee, fresh juices, fine wines & tropical cocktails</li>
+            <li><i class="fa-solid fa-check"></i> <span data-i18n="dining_hl1">Capacity up to 120 guests, ideal for family reunions, tour groups & celebrations</span></li>
+            <li><i class="fa-solid fa-check"></i> <span data-i18n="dining_hl2">Complimentary daily buffet breakfast for 100% of hotel residents (07:00 - 09:30)</span></li>
+            <li><i class="fa-solid fa-check"></i> <span data-i18n="dining_hl3">Beverage selection: Vietnamese drip coffee, fresh juices, fine wines & tropical cocktails</span></li>
           </ul>
-          <a href="tel:0942060533" class="btn btn-gold" style="margin-top: 15px;"><i class="fa-solid fa-phone"></i> Reservation: 0942 060 533</a>
+          <a href="tel:0942060533" class="btn btn-gold" style="margin-top: 15px;"><i class="fa-solid fa-phone"></i> <span data-i18n="btn_res_hotline">Reservation: 0942 060 533</span></a>
         </div>
 
         <div>

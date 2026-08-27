@@ -132,15 +132,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const priceBox    = document.getElementById('estimated-price-display');
     if (!priceBox) return;
 
+    const currentLang = localStorage.getItem('sala_lang') || 'en';
+
     if (!cinVal || !coutVal) {
-      priceBox.innerHTML = '<i class="fa-regular fa-clock"></i> Estimated for 1 night • Reference price: 1,250,000 VND (includes buffet breakfast)';
+      if (currentLang === 'vi') {
+        priceBox.innerHTML = '<i class="fa-regular fa-clock"></i> Ước tính cho 1 đêm • Giá tham khảo: 1.250.000 VNĐ (bao gồm buffet sáng)';
+      } else if (currentLang === 'fr') {
+        priceBox.innerHTML = '<i class="fa-regular fa-clock"></i> Estimé pour 1 nuit • Prix de référence : 1 250 000 VND (petit-déjeuner inclus)';
+      } else {
+        priceBox.innerHTML = '<i class="fa-regular fa-clock"></i> Estimated for 1 night • Reference price: 1,250,000 VND (includes buffet breakfast)';
+      }
       return;
     }
 
     const cin  = new Date(cinVal);
     const cout = new Date(coutVal);
     if (cout <= cin) {
-      priceBox.innerHTML = '<span style="color:#ff6b6b"><i class="fa-solid fa-triangle-exclamation"></i> Check-out date must be after check-in date</span>';
+      const errMsg = currentLang === 'vi' ? 'Ngày trả phòng phải sau ngày nhận phòng' : (currentLang === 'fr' ? 'La date de départ doit être postérieure à la date d\'arrivée' : 'Check-out date must be after check-in date');
+      priceBox.innerHTML = `<span style="color:#ff6b6b"><i class="fa-solid fa-triangle-exclamation"></i> ${errMsg}</span>`;
       return;
     }
 
@@ -149,7 +158,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const total   = nights * rate;
     const fmtTotal = new Intl.NumberFormat('en-US').format(total);
 
-    priceBox.innerHTML = `Estimated for <strong>${nights} night(s)</strong> • Reference price: <strong style="color:#D4AF37">${fmtTotal} VND</strong> (includes buffet breakfast)`;
+    if (currentLang === 'vi') {
+      priceBox.innerHTML = `Ước tính cho <strong>${nights} đêm</strong> • Giá tham khảo: <strong style="color:#D4AF37">${fmtTotal} VNĐ</strong> (bao gồm buffet sáng)`;
+    } else if (currentLang === 'fr') {
+      priceBox.innerHTML = `Estimé pour <strong>${nights} nuit(s)</strong> • Prix de référence : <strong style="color:#D4AF37">${fmtTotal} VND</strong> (petit-déjeuner inclus)`;
+    } else {
+      priceBox.innerHTML = `Estimated for <strong>${nights} night(s)</strong> • Reference price: <strong style="color:#D4AF37">${fmtTotal} VND</strong> (includes buffet breakfast)`;
+    }
   }
 
   ['modal-room-type', 'modal-checkin', 'modal-checkout'].forEach(id => {

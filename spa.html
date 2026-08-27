@@ -31,7 +31,6 @@
           <div class="lang-dropdown">
             <a href="#" data-lang="en" class="active"><span class="lang-flag">🇬🇧</span> GB English</a>
             <a href="#" data-lang="vi"><span class="lang-flag">🇻🇳</span> Tiếng Việt</a>
-            <a href="#" data-lang="ru"><span class="lang-flag">🇷🇺</span> Русский</a>
             <a href="#" data-lang="fr"><span class="lang-flag">🇫🇷</span> Français</a>
           </div>
         </div>
@@ -84,6 +83,28 @@
         </div>
         <div class="nav-item"><a href="gallery.html" class="nav-link" data-i18n="nav_gallery">Photo Gallery</a></div>
         <div class="nav-item"><a href="index.html#quick-booking" class="nav-link nav-book-now" data-i18n="nav_contact">Book Now</a></div>
+
+        <div class="mobile-drawer-extra">
+          <div class="mobile-drawer-lang">
+            <span class="mobile-drawer-title"><i class="fa-solid fa-globe"></i> <span data-i18n="select_language">Language</span></span>
+            <div class="mobile-lang-pills">
+              <button class="mobile-lang-pill active" data-lang="en"><span class="lang-flag">🇬🇧</span> English</button>
+              <button class="mobile-lang-pill" data-lang="vi"><span class="lang-flag">🇻🇳</span> Tiếng Việt</button>
+              <button class="mobile-lang-pill" data-lang="fr"><span class="lang-flag">🇫🇷</span> Français</button>
+            </div>
+          </div>
+
+          <div class="mobile-drawer-ta">
+            <span class="mobile-drawer-title"><i class="fa-brands fa-tripadvisor" style="color: #00af87;"></i> <span data-i18n="ta_reviews">TripAdvisor</span></span>
+            <a href="https://www.tripadvisor.com.sg/Hotel_Review-g303945-d34432325-Reviews-Sala_Tam_Coc_Hotel_Spa-Ninh_Binh_Ninh_Binh_Province.html" target="_blank" rel="noopener noreferrer" class="mobile-ta-badge" title="Recommended on TripAdvisor">
+              <i class="fa-brands fa-tripadvisor ta-icon"></i>
+              <div class="ta-text-group">
+                <span class="ta-sub">RECOMMENDED ON</span>
+                <span class="ta-title">Tripadvisor</span>
+              </div>
+            </a>
+          </div>
+        </div>
       </nav>
 
       <div class="nav-cta">
@@ -120,9 +141,9 @@
 
       <!-- Section Header -->
       <div class="section-title-wrap" style="margin-bottom: 50px;">
-        <span class="section-subtitle" style="color: var(--primary-gold); font-size: 1.1rem; letter-spacing: 3px; font-weight: 700; text-transform: uppercase;">Wellness Treatments & Pricing</span>
-        <h2 class="section-title" style="color: #ffffff; font-size: 3.2rem; font-weight: 700; margin-bottom: 20px; text-shadow: 0 4px 15px rgba(0,0,0,0.8);">Sala Lotus Spa Menu</h2>
-        <p style="max-width: 900px; margin: 0 auto; text-align: center; color: #ffffff; font-size: 1.25rem; line-height: 1.6; font-weight: 500; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">Conducted by certified therapists using natural lotus extracts and medicinal herbs<br>restoring vitality, body and soul.</p>
+        <span class="section-subtitle" data-i18n="spa_menu_sub" style="color: var(--primary-gold); font-size: 1.1rem; letter-spacing: 3px; font-weight: 700; text-transform: uppercase;">Wellness Treatments & Pricing</span>
+        <h2 class="section-title" data-i18n="spa_menu_title" style="color: #ffffff; font-size: 3.2rem; font-weight: 700; margin-bottom: 20px; text-shadow: 0 4px 15px rgba(0,0,0,0.8);">Sala Lotus Spa Menu</h2>
+        <p data-i18n="spa_menu_desc" style="max-width: 900px; margin: 0 auto; text-align: center; color: #ffffff; font-size: 1.25rem; line-height: 1.6; font-weight: 500; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">Conducted by certified therapists using natural lotus extracts and medicinal herbs<br>restoring vitality, body and soul.</p>
       </div>
 
       <!-- ===== MASSAGE ===== -->
@@ -144,8 +165,7 @@
             <tbody>
               <tr>
                 <td>
-                  <span class="spa-name">Body Massage</span>
-                  <span class="spa-vi">Masa toàn thân</span>
+                  <span class="spa-name" data-i18n="spat_body">Body Massage</span>
                 </td>
                 <td>—</td>
                 <td><span class="spa-price">400,000₫</span></td>
@@ -153,8 +173,7 @@
               </tr>
               <tr>
                 <td>
-                  <span class="spa-name">Foot Massage</span>
-                  <span class="spa-vi">Masa chân</span>
+                  <span class="spa-name" data-i18n="spat_foot">Foot Massage</span>
                 </td>
                 <td><span class="spa-price">300,000₫</span></td>
                 <td><span class="spa-price">400,000₫</span></td>
@@ -162,8 +181,7 @@
               </tr>
               <tr>
                 <td>
-                  <span class="spa-name">Upper Body Massage</span>
-                  <span class="spa-vi">Masa nửa thân trên</span>
+                  <span class="spa-name" data-i18n="spat_upper">Upper Body Massage</span>
                 </td>
                 <td><span class="spa-price">300,000₫</span></td>
                 <td><span class="spa-price">400,000₫</span></td>
@@ -171,8 +189,7 @@
               </tr>
               <tr>
                 <td>
-                  <span class="spa-name">Facial Massage</span>
-                  <span class="spa-vi">Masa mặt</span>
+                  <span class="spa-name" data-i18n="spat_facial">Facial Massage</span>
                 </td>
                 <td><span class="spa-price">300,000₫</span></td>
                 <td><span class="spa-price">400,000₫</span></td>
@@ -187,38 +204,25 @@
       <div class="spa-category" style="margin-bottom: 60px;">
         <div class="spa-cat-header">
           <span class="spa-icon">👑</span>
-          <h3 class="spa-cat-title">Luxury Packages</h3>
+          <h3 class="spa-cat-title" data-i18n="spa_cat_packages">Luxury Packages</h3>
         </div>
         <div class="spa-cards-grid">
           <div class="spa-pkg-card">
             <div class="spa-pkg-badge">VIP 1</div>
-            <h4 class="spa-pkg-name">Sauna or Steam Room</h4>
-            <p class="spa-pkg-vi">Xông hơi và tắm hơi</p>
-            <ul class="spa-pkg-includes">
-              <li><i class="fa-solid fa-check"></i> 30 minutes session</li>
-              <li><i class="fa-solid fa-check"></i> Choice of dry sauna or steam</li>
-            </ul>
+            <h4 class="spa-pkg-name" data-i18n="spap_vip1_title">Sauna or Steam Room</h4>
+            <p class="spa-pkg-vi" data-i18n="spap_vip1_sub">Choice of dry sauna or steam (30 min)</p>
             <div class="spa-pkg-price">250,000₫ <span>/ 30 min</span></div>
           </div>
           <div class="spa-pkg-card spa-pkg-featured">
             <div class="spa-pkg-badge">VIP 2</div>
-            <h4 class="spa-pkg-name">Sauna + Full Body Massage</h4>
-            <p class="spa-pkg-vi">Xông hơi 30' và masa toàn thân 60'</p>
-            <ul class="spa-pkg-includes">
-              <li><i class="fa-solid fa-check"></i> Sauna 30 minutes</li>
-              <li><i class="fa-solid fa-check"></i> Full Body Massage 60 minutes</li>
-            </ul>
+            <h4 class="spa-pkg-name" data-i18n="spap_vip2_title">Sauna + Full Body Massage</h4>
+            <p class="spa-pkg-vi" data-i18n="spap_vip2_sub">Sauna 30 min + Full Body Massage 60 min</p>
             <div class="spa-pkg-price">600,000₫ <span>/ 90 min</span></div>
           </div>
           <div class="spa-pkg-card">
             <div class="spa-pkg-badge">VIP 3</div>
-            <h4 class="spa-pkg-name">Sauna + Body Scrub + Massage</h4>
-            <p class="spa-pkg-vi">Xông hơi 30', tẩy da chết body 30', masa body 60'</p>
-            <ul class="spa-pkg-includes">
-              <li><i class="fa-solid fa-check"></i> Sauna 30 minutes</li>
-              <li><i class="fa-solid fa-check"></i> Body Scrub 30 minutes</li>
-              <li><i class="fa-solid fa-check"></i> Body Massage 60 minutes</li>
-            </ul>
+            <h4 class="spa-pkg-name" data-i18n="spap_vip3_title">Sauna + Body Scrub + Massage</h4>
+            <p class="spa-pkg-vi" data-i18n="spap_vip3_sub">Sauna 30m + Body Scrub 30m + Body Massage 60m</p>
             <div class="spa-pkg-price">800,000₫ <span>/ combo</span></div>
           </div>
         </div>
@@ -230,14 +234,14 @@
         <!-- Hair Washing -->
         <div class="spa-beauty-card">
           <div class="spa-beauty-icon"><i class="fa-solid fa-shower"></i></div>
-          <h4 class="spa-beauty-title">Hair Washing</h4>
+          <h4 class="spa-beauty-title" data-i18n="spab_hair_title">Hair Care & Shampoo</h4>
           <div class="spa-beauty-items">
             <div class="spa-beauty-row">
-              <span>Normal Shampoo <em>(Gội đầu thường)</em></span>
+              <span data-i18n="spab_shampoo_norm">Normal Shampoo</span>
               <span class="spa-price">200,000₫</span>
             </div>
             <div class="spa-beauty-row">
-              <span>Shampoo & Neck Shoulder Massage 45' <em>(Gội đầu & masa cổ vai gáy)</em></span>
+              <span data-i18n="spab_shampoo_neck">Shampoo & Neck Shoulder Massage (45 min)</span>
               <span class="spa-price">400,000₫</span>
             </div>
           </div>
@@ -246,10 +250,10 @@
         <!-- Nail -->
         <div class="spa-beauty-card">
           <div class="spa-beauty-icon"><i class="fa-solid fa-hand-sparkles"></i></div>
-          <h4 class="spa-beauty-title">Nail</h4>
+          <h4 class="spa-beauty-title" data-i18n="spab_nail_title">Nail Care</h4>
           <div class="spa-beauty-items">
             <div class="spa-beauty-row">
-              <span>Nail Services <em>(Làm móng)</em></span>
+              <span data-i18n="spab_nail_service">Professional Nail Services</span>
               <span class="spa-price">300,000₫</span>
             </div>
           </div>
@@ -258,10 +262,10 @@
         <!-- Waxing -->
         <div class="spa-beauty-card">
           <div class="spa-beauty-icon"><i class="fa-solid fa-feather-pointed"></i></div>
-          <h4 class="spa-beauty-title">Waxing</h4>
+          <h4 class="spa-beauty-title" data-i18n="spab_wax_title">Waxing Services</h4>
           <div class="spa-beauty-items">
             <div class="spa-beauty-row">
-              <span>Waxing Services <em>(Triệt lông)</em></span>
+              <span data-i18n="spab_wax_service">Body & Face Waxing</span>
               <span class="spa-price">200,000 – 600,000₫</span>
             </div>
           </div>
@@ -270,14 +274,14 @@
         <!-- Eyelash -->
         <div class="spa-beauty-card">
           <div class="spa-beauty-icon"><i class="fa-solid fa-eye"></i></div>
-          <h4 class="spa-beauty-title">Eyelash</h4>
+          <h4 class="spa-beauty-title" data-i18n="spab_eye_title">Eyelash Care</h4>
           <div class="spa-beauty-items">
             <div class="spa-beauty-row">
-              <span>Eyelash Extensions <em>(Nối mi)</em></span>
+              <span data-i18n="spab_eye_ext">Eyelash Extensions</span>
               <span class="spa-price">450,000 – 850,000₫</span>
             </div>
             <div class="spa-beauty-row">
-              <span>Curling Eyelashes <em>(Uốn mi)</em></span>
+              <span data-i18n="spab_eye_curl">Curling Eyelashes</span>
               <span class="spa-price">400,000₫</span>
             </div>
           </div>

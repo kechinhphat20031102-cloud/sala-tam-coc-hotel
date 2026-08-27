@@ -3,7 +3,7 @@
    Brand Colors: Gold/Bronze (#C5A880, #B89358), Dark Wood/Charcoal (#1B1B1B, #121212), Pearl White (#FCFBF7)
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 :root {
   --primary-gold: #c5a880;
@@ -25,9 +25,9 @@
   --text-light: #ffffff;
   --text-light-muted: #c2c5c9;
   
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-serif: 'Lora', 'Times New Roman', serif;
   --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  
+
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.15);
@@ -37,6 +37,11 @@
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 16px;
+}
+
+*, ::before, ::after {
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "lnum" 1, "pnum" 1;
 }
 
 * {
@@ -301,21 +306,22 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   gap: 15px;
 }
 
 .topbar-info {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 16px;
   flex-wrap: wrap;
+  font-size: 0.78rem;
 }
 
 .topbar-info a, .topbar-info span {
   display: flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
 }
 
 .topbar-info a:hover {
@@ -330,6 +336,8 @@ img {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .topbar-book-btn {
@@ -703,7 +711,7 @@ img {
 }
 
 @media (max-width: 768px) {
-  .ta-text-group {
+  .nav-tripadvisor-badge .ta-text-group {
     display: none;
   }
   .nav-tripadvisor-badge {
@@ -1208,20 +1216,60 @@ img {
 .offer-highlights {
   margin: 15px 0 20px 0;
   padding-left: 0;
+  list-style: none;
 }
 
 .offer-highlights li {
-  font-size: 0.85rem;
-  color: var(--text-light-muted);
-  margin-bottom: 6px;
+  font-size: 0.92rem;
+  color: #2c2c2c;
+  margin-bottom: 8px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
+  line-height: 1.5;
 }
 
 .offer-highlights li i {
+  color: var(--primary-gold-dark);
+  font-size: 0.9rem;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.offer-highlights li strong {
+  color: #111111;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.offer-highlights li span {
+  color: #2b2b2b;
+  font-weight: 450;
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+}
+
+/* Dark background section overrides */
+.section-dark .offer-highlights li,
+.offer-card .offer-highlights li {
+  color: #f0f0f0;
+}
+
+.section-dark .offer-highlights li strong,
+.offer-card .offer-highlights li strong {
   color: var(--primary-gold);
-  font-size: 0.8rem;
+}
+
+.section-dark .offer-highlights li span,
+.offer-card .offer-highlights li span {
+  color: #e2e8f0;
+}
+
+.section-dark .offer-highlights li i,
+.offer-card .offer-highlights li i {
+  color: var(--primary-gold);
 }
 
 /* ==========================================================================
@@ -1931,20 +1979,33 @@ img {
    RESPONSIVE MEDIA QUERIES
    ========================================================================== */
 @media (max-width: 992px) {
+  .header-main .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .topbar {
+    display: none !important;
+  }
+
+  .nav-cta .nav-tripadvisor-badge {
+    display: none !important;
+  }
+
   .nav-menu {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 300px;
+    width: 310px;
     height: 100vh;
     background: var(--dark-bg);
     flex-direction: column;
     align-items: flex-start;
-    padding: 80px 30px;
+    padding: 70px 25px 40px;
     box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
     transition: var(--transition);
     z-index: 1000;
-    gap: 15px;
+    gap: 12px;
     overflow-y: auto;
   }
   
@@ -1989,21 +2050,146 @@ img {
   }
 }
 
-@media (max-width: 768px) {
-  .topbar {
-    display: none;
+.mobile-drawer-extra {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .mobile-drawer-extra {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(197, 168, 128, 0.25);
   }
-  
+
+  .mobile-drawer-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--primary-gold);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+  }
+
+  .mobile-lang-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .mobile-lang-pill {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(197, 168, 128, 0.25);
+    color: #e0e0e0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    width: 100%;
+  }
+
+  .mobile-lang-pill:hover,
+  .mobile-lang-pill.active {
+    background: var(--primary-gold);
+    color: #111111;
+    border-color: var(--primary-gold);
+    font-weight: 700;
+  }
+
+  .mobile-ta-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 175, 135, 0.18);
+    border: 1px solid #00af87;
+    padding: 12px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #ffffff;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .mobile-ta-badge .ta-icon {
+    font-size: 1.8rem;
+    color: #00af87;
+    flex-shrink: 0;
+  }
+
+  .mobile-ta-badge .ta-text-group {
+    display: flex !important;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+
+  .mobile-ta-badge .ta-sub {
+    font-size: 0.68rem;
+    letter-spacing: 1px;
+    color: #b0b0b0;
+    display: block;
+    font-weight: 500;
+  }
+
+  .mobile-ta-badge .ta-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #ffffff;
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
   .section {
-    padding: 60px 0;
+    padding: 45px 0;
+  }
+
+  .hero-title {
+    font-size: clamp(1.6rem, 6.5vw, 2.4rem);
+    line-height: 1.25;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+  }
+
+  .hero-desc {
+    font-size: 0.98rem;
+    line-height: 1.5;
   }
   
   .booking-bar {
     grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 20px 16px;
+  }
+
+  .booking-item {
+    border-right: none;
+    border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+    padding-bottom: 10px;
+  }
+
+  .booking-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
   }
   
   .footer-grid {
     grid-template-columns: 1fr;
+    gap: 30px;
   }
   
   .about-images {
@@ -2015,8 +2201,54 @@ img {
     display: none;
   }
   
+  .modal-backdrop {
+    padding: 12px;
+  }
+
+  .modal-card {
+    padding: 24px 16px;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+
   .booking-form-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0.95rem;
+  }
+
+  .dining-banner {
+    grid-template-columns: 1fr;
+    border-radius: 12px;
+  }
+
+  .dining-img-wrap {
+    max-height: 250px;
+  }
+
+  .dining-info {
+    padding: 22px 16px;
+  }
+
+  .room-footer,
+  .tour-modal-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .room-footer .btn,
+  .tour-modal-actions .btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
