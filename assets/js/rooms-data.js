@@ -289,7 +289,9 @@ document.addEventListener('DOMContentLoaded', function() {
   applyCustomDataToDOM();
 
   window.openRoomDetailModal = function(roomKey) {
-    if (!window.ROOMS_DETAILS_DATA || !window.ROOMS_DETAILS_DATA[roomKey] || !roomModal || !roomModalBody) return;
+    const roomModalEl = document.getElementById('roomDetailModal');
+    const roomModalBodyEl = document.getElementById('roomModalBody');
+    if (!window.ROOMS_DETAILS_DATA || !window.ROOMS_DETAILS_DATA[roomKey] || !roomModalEl || !roomModalBodyEl) return;
     const room = window.ROOMS_DETAILS_DATA[roomKey];
     activePhotosArray = room.photos || [];
     activePhotoIndex = 0;
@@ -377,7 +379,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <img src="${photoSrc}" alt="${room.name} Photo ${idx + 1}" class="room-gallery-thumb ${idx === 0 ? 'active' : ''}" data-photo-idx="${idx}">
     `).join('');
 
-    roomModalBody.innerHTML = `
+    roomModalBodyEl.innerHTML = `
       <div class="room-modal-header">
         <div class="room-modal-main-img-wrap">
           <img id="roomMainImg" src="${activePhotosArray[0]}" alt="${room.name}" class="room-modal-main-img">
@@ -500,32 +502,38 @@ document.addEventListener('DOMContentLoaded', function() {
       window.openBookingModal(roomKey);
     });
 
-    roomModal.style.display = 'flex';
+    const roomModalEl = document.getElementById('roomDetailModal');
+    if (roomModalEl) {
+      roomModalEl.style.display = 'flex';
+      roomModalEl.classList.add('active');
+    }
     document.body.style.overflow = 'hidden';
   };
 
   window.closeRoomDetailModal = function() {
-    if (roomModal) {
-      roomModal.style.display = 'none';
-      document.body.style.overflow = '';
+    const roomModalEl = document.getElementById('roomDetailModal');
+    if (roomModalEl) {
+      roomModalEl.style.display = 'none';
+      roomModalEl.classList.remove('active');
     }
+    document.body.style.overflow = '';
   };
 
-  if (roomModalClose) {
-    roomModalClose.addEventListener('click', window.closeRoomDetailModal);
-  }
-
-  if (roomModal) {
-    roomModal.addEventListener('click', (e) => {
-      if (e.target === roomModal) {
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('#roomModalClose')) {
+      window.closeRoomDetailModal();
+    } else {
+      const roomModalEl = document.getElementById('roomDetailModal');
+      if (e.target === roomModalEl) {
         window.closeRoomDetailModal();
       }
-    });
-  }
+    }
+  });
 
   // Keyboard Navigation
   document.addEventListener('keydown', (e) => {
-    if (roomModal && roomModal.style.display === 'flex') {
+    const roomModalEl = document.getElementById('roomDetailModal');
+    if (roomModalEl && (roomModalEl.classList.contains('active') || roomModalEl.style.display === 'flex')) {
       if (e.key === 'Escape') {
         window.closeRoomDetailModal();
       } else if (e.key === 'ArrowLeft') {
