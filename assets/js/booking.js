@@ -42,17 +42,17 @@ document.addEventListener('DOMContentLoaded', () => {
     'family-connecting-2': 'Family Connecting room 2 – 60m²'
   };
 
-  // Giá phòng tham khảo (VNĐ/đêm)
+  // Giá phòng tham khảo (VNĐ/đêm) đồng bộ 100% với danh sách phòng bên ngoài
   const roomRates = {
-    'superior-double':   1100000,
-    'superior-triple':   1500000,
-    'deluxe-double':     1300000,
-    'deluxe-twin':       1500000,
-    'luxury-double':     1700000,
-    'luxury-twin':       1700000,
-    'deluxe-family':     2000000,
-    'family-connecting': 2500000,
-    'family-connecting-2': 2700000
+    'superior-double':   1300000,
+    'superior-triple':   1800000,
+    'deluxe-double':     1500000,
+    'deluxe-twin':       1600000,
+    'luxury-double':     1650000,
+    'luxury-twin':       1750000,
+    'deluxe-family':     2100000,
+    'family-connecting': 2600000,
+    'family-connecting-2': 2750000
   };
 
   // ==========================================
@@ -133,14 +133,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!priceBox) return;
 
     const currentLang = localStorage.getItem('sala_lang') || 'en';
+    const rate        = roomRates[roomKey] || 1300000;
+    const fmtRate     = new Intl.NumberFormat('en-US').format(rate);
 
     if (!cinVal || !coutVal) {
       if (currentLang === 'vi') {
-        priceBox.innerHTML = '<i class="fa-regular fa-clock"></i> Ước tính cho 1 đêm • Giá tham khảo: 1.250.000 VNĐ (bao gồm buffet sáng)';
+        priceBox.innerHTML = `<i class="fa-regular fa-clock"></i> Ước tính cho 1 đêm • Giá tham khảo: <strong style="color:#D4AF37">${fmtRate} VNĐ</strong> (bao gồm buffet sáng)`;
       } else if (currentLang === 'fr') {
-        priceBox.innerHTML = '<i class="fa-regular fa-clock"></i> Estimé pour 1 nuit • Prix de référence : 1 250 000 VND (petit-déjeuner inclus)';
+        priceBox.innerHTML = `<i class="fa-regular fa-clock"></i> Estimé pour 1 nuit • Prix de référence : <strong style="color:#D4AF37">${fmtRate} VND</strong> (petit-déjeuner inclus)`;
       } else {
-        priceBox.innerHTML = '<i class="fa-regular fa-clock"></i> Estimated for 1 night • Reference price: 1,250,000 VND (includes buffet breakfast)';
+        priceBox.innerHTML = `<i class="fa-regular fa-clock"></i> Estimated for 1 night • Reference price: <strong style="color:#D4AF37">${fmtRate} VND</strong> (includes buffet breakfast)`;
       }
       return;
     }
@@ -154,7 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const nights  = Math.ceil(Math.abs(cout - cin) / 86400000);
-    const rate    = roomRates[roomKey] || 1250000;
     const total   = nights * rate;
     const fmtTotal = new Intl.NumberFormat('en-US').format(total);
 

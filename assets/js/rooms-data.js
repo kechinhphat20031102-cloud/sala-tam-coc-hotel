@@ -253,45 +253,30 @@ window.ROOMS_DETAILS_DATA = {
 };
 
 /**
- * ROOM POPUP MODAL CONTROLLER
+ * ROOM POPUP MODAL CONTROLLER (IIFE INSTANT BINDING)
  */
-document.addEventListener('DOMContentLoaded', function() {
-  const roomModal = document.getElementById('roomDetailModal');
-  const roomModalClose = document.getElementById('roomModalClose');
-  const roomModalBody = document.getElementById('roomModalBody');
-
+(function() {
   let activePhotoIndex = 0;
   let activePhotosArray = [];
 
-  function applyCustomDataToDOM() {
-    document.addEventListener('click', (e) => {
-      const roomBtn = e.target.closest('[data-open-room-detail]');
-      if (roomBtn) {
-        e.preventDefault();
-        const roomKey = roomBtn.getAttribute('data-open-room-detail');
-        if (roomKey && window.openRoomDetailModal) {
-          window.openRoomDetailModal(roomKey);
-        }
-        return;
-      }
-
-      const bookingBtn = e.target.closest('[data-open-booking]');
-      if (bookingBtn) {
-        e.preventDefault();
-        const roomKey = bookingBtn.getAttribute('data-open-booking');
-        if (window.openBookingModal) {
-          window.openBookingModal(roomKey);
-        }
-      }
-    });
-  }
-
-  applyCustomDataToDOM();
+  window.closeRoomDetailModal = function() {
+    const roomModalEl = document.getElementById('roomDetailModal');
+    if (roomModalEl) {
+      roomModalEl.style.display = 'none';
+      roomModalEl.classList.remove('active');
+    }
+    document.body.style.overflow = '';
+  };
 
   window.openRoomDetailModal = function(roomKey) {
     const roomModalEl = document.getElementById('roomDetailModal');
     const roomModalBodyEl = document.getElementById('roomModalBody');
-    if (!window.ROOMS_DETAILS_DATA || !window.ROOMS_DETAILS_DATA[roomKey] || !roomModalEl || !roomModalBodyEl) return;
+
+    if (!window.ROOMS_DETAILS_DATA || !window.ROOMS_DETAILS_DATA[roomKey] || !roomModalEl || !roomModalBodyEl) {
+      console.warn('Modal target or room data missing for key:', roomKey);
+      return;
+    }
+
     const room = window.ROOMS_DETAILS_DATA[roomKey];
     activePhotosArray = room.photos || [];
     activePhotoIndex = 0;
@@ -472,7 +457,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const photoCounter = document.getElementById('roomPhotoCounter');
     const prevBtn = document.getElementById('roomPrevPhotoBtn');
     const nextBtn = document.getElementById('roomNextPhotoBtn');
-    const thumbs = roomModalBody.querySelectorAll('.room-gallery-thumb');
+    const thumbs = roomModalBodyEl.querySelectorAll('.room-gallery-thumb');
 
     const updatePhoto = (index) => {
       activePhotoIndex = (index + activePhotosArray.length) % activePhotosArray.length;
@@ -502,24 +487,33 @@ document.addEventListener('DOMContentLoaded', function() {
       window.openBookingModal(roomKey);
     });
 
-    const roomModalEl = document.getElementById('roomDetailModal');
-    if (roomModalEl) {
-      roomModalEl.style.display = 'flex';
-      roomModalEl.classList.add('active');
-    }
+    roomModalEl.style.display = 'flex';
+    roomModalEl.classList.add('active');
     document.body.style.overflow = 'hidden';
   };
 
-  window.closeRoomDetailModal = function() {
-    const roomModalEl = document.getElementById('roomDetailModal');
-    if (roomModalEl) {
-      roomModalEl.style.display = 'none';
-      roomModalEl.classList.remove('active');
+  // Global document click delegation
+  document.addEventListener('click', function(e) {
+    const roomBtn = e.target.closest('[data-open-room-detail]');
+    if (roomBtn) {
+      e.preventDefault();
+      const roomKey = roomBtn.getAttribute('data-open-room-detail');
+      if (roomKey && window.openRoomDetailModal) {
+        window.openRoomDetailModal(roomKey);
+      }
+      return;
     }
-    document.body.style.overflow = '';
-  };
 
-  document.addEventListener('click', (e) => {
+    const bookingBtn = e.target.closest('[data-open-booking]');
+    if (bookingBtn) {
+      e.preventDefault();
+      const roomKey = bookingBtn.getAttribute('data-open-booking');
+      if (window.openBookingModal) {
+        window.openBookingModal(roomKey);
+      }
+      return;
+    }
+
     if (e.target.closest('#roomModalClose')) {
       window.closeRoomDetailModal();
     } else {
@@ -531,7 +525,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Keyboard Navigation
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', function(e) {
     const roomModalEl = document.getElementById('roomDetailModal');
     if (roomModalEl && (roomModalEl.classList.contains('active') || roomModalEl.style.display === 'flex')) {
       if (e.key === 'Escape') {
@@ -545,4 +539,5 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   });
-});
+
+})();
