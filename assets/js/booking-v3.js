@@ -61,14 +61,20 @@ document.addEventListener('DOMContentLoaded', () => {
   window.openBookingModal = (roomKey = '', checkin = '', checkout = '', guests = '2') => {
     if (!bookingModal) return;
 
-    // Tự động đóng menu mobile nếu đang mở để tránh đè giao diện
-    const navMenu = document.querySelector('.nav-menu');
-    if (navMenu && navMenu.classList.contains('open')) {
-      navMenu.classList.remove('open');
-      const icon = document.querySelector('.mobile-toggle i');
-      if (icon) {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
+    // Tự động đóng menu mobile nếu đang mở
+    if (window.closeNavMenu) {
+      window.closeNavMenu();
+    } else {
+      // Fallback: đóng trực tiếp bằng inline style
+      const navMenu = document.querySelector('.nav-menu');
+      if (navMenu) {
+        navMenu.style.setProperty('display', 'none', 'important');
+        navMenu.style.setProperty('visibility', 'hidden', 'important');
+        navMenu.style.setProperty('opacity', '0', 'important');
+        navMenu.style.setProperty('pointer-events', 'none', 'important');
+        navMenu.classList.remove('open');
+        const icon = document.querySelector('.mobile-toggle i');
+        if (icon) { icon.classList.remove('fa-times'); icon.classList.add('fa-bars'); }
       }
     }
 
