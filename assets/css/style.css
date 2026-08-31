@@ -2035,6 +2035,9 @@ img {
 
   .nav-menu {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
     position: fixed;
     top: 0;
     right: 0;
@@ -2054,6 +2057,9 @@ img {
   
   .nav-menu.open {
     display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
   
   .mobile-toggle {
