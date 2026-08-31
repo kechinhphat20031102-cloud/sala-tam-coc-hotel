@@ -916,12 +916,18 @@ img {
   grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)) 190px;
   gap: 18px;
   align-items: flex-end;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .booking-field {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .booking-field label {
@@ -938,7 +944,10 @@ img {
 
 .booking-field input,
 .booking-field select {
-  width: 100%;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
   background-color: var(--dark-card);
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #ffffff;
@@ -948,6 +957,25 @@ img {
   font-size: 0.88rem;
   outline: none;
   transition: var(--transition);
+}
+
+.booking-field input[type="date"],
+input[type="date"] {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  display: block;
+}
+
+.booking-field input[type="date"]::-webkit-date-and-time-value,
+input[type="date"]::-webkit-date-and-time-value {
+  text-align: left;
+  display: block;
+  width: 100%;
 }
 
 .booking-field input:focus,
@@ -2238,6 +2266,9 @@ img {
     grid-template-columns: 1fr;
     gap: 12px;
     padding: 20px 16px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
   }
 
   .booking-item {
@@ -2907,6 +2938,78 @@ img {
 /* ==========================================================================
    ROOM DETAILS POPUP MODAL STYLES
    ========================================================================== */
+.room-detail-modal-card,
+.tour-detail-modal-card {
+  position: relative;
+}
+
+/* Floating Back Button & Close Button for Modals */
+.modal-back-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 9999 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(18, 19, 21, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #ffffff;
+  border: 1.5px solid rgba(197, 168, 128, 0.6);
+  border-radius: 30px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  transition: all 0.25s ease;
+}
+
+.modal-back-btn:hover,
+.modal-back-btn:active {
+  background: var(--primary-gold);
+  color: #121315;
+  border-color: var(--primary-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.7);
+}
+
+.room-detail-modal-card .modal-close,
+.tour-detail-modal-card .modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 9999 !important;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(18, 19, 21, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #ffffff;
+  border: 1.5px solid rgba(197, 168, 128, 0.6);
+  font-size: 1.5rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  transition: all 0.25s ease;
+}
+
+.room-detail-modal-card .modal-close:hover,
+.room-detail-modal-card .modal-close:active,
+.tour-detail-modal-card .modal-close:hover,
+.tour-detail-modal-card .modal-close:active {
+  background: var(--primary-gold);
+  color: #121315;
+  border-color: var(--primary-gold);
+  transform: rotate(90deg) scale(1.08);
+}
+
 .room-detail-modal-card {
   max-width: 880px;
   width: 94%;

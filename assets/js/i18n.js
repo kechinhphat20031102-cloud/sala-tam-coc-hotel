@@ -31,6 +31,7 @@ const translations = {
     "btn_view_itinerary": "View Detailed Itinerary",
     "btn_details": "Details",
     "btn_view_photos": "View Room Photos & Details",
+    "btn_back": "Back",
 
     // Hero Slider
     "hero_sub_1": "WELCOME TO",
@@ -340,6 +341,7 @@ const translations = {
     "btn_view_itinerary": "Xem Lịch Trình Chi Tiết",
     "btn_details": "Chi Tiết",
     "btn_view_photos": "Xem Ảnh & Chi Tiết Phòng",
+    "btn_back": "Quay lại",
 
     "hero_sub_1": "WELCOME TO",
     "hero_title_1": "SALA TAM COC HOTEL & SPA",
@@ -645,6 +647,7 @@ const translations = {
     "btn_view_itinerary": "Voir Itinéraire Détaillé",
     "btn_details": "Détails",
     "btn_view_photos": "Photos & Détails de la Chambre",
+    "btn_back": "Retour",
 
     "hero_sub_1": "BIENVENUE À",
     "hero_title_1": "SALA TAM COC HOTEL & SPA",

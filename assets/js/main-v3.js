@@ -285,19 +285,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  tourModalClose?.addEventListener('click', () => {
+  const closeTourModal = () => {
     if (tourDetailModal) {
       tourDetailModal.style.display = 'none';
       tourDetailModal.classList.remove('active');
       currentOpenTourKey = null;
     }
-  });
+  };
+
+  tourModalClose?.addEventListener('click', closeTourModal);
+  document.getElementById('tourModalBack')?.addEventListener('click', closeTourModal);
 
   tourDetailModal?.addEventListener('click', (e) => {
-    if (e.target === tourDetailModal) {
-      tourDetailModal.style.display = 'none';
-      tourDetailModal.classList.remove('active');
-      currentOpenTourKey = null;
+    if (e.target === tourDetailModal || e.target.closest('#tourModalClose') || e.target.closest('#tourModalBack') || e.target.closest('.modal-back-btn')) {
+      closeTourModal();
     }
   });
 

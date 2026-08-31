@@ -514,7 +514,7 @@ window.ROOMS_DETAILS_DATA = {
       return;
     }
 
-    if (e.target.closest('#roomModalClose')) {
+    if (e.target.closest('#roomModalClose') || e.target.closest('#roomModalBack') || e.target.closest('.modal-back-btn')) {
       window.closeRoomDetailModal();
     } else {
       const roomModalEl = document.getElementById('roomDetailModal');
