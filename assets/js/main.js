@@ -26,26 +26,45 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileToggle = document.querySelector('.mobile-toggle');
   const navMenu = document.querySelector('.nav-menu');
 
+  // Helper: open the nav drawer
+  function openNavMenu() {
+    if (!navMenu) return;
+    navMenu.style.setProperty('display', 'flex', 'important');
+    navMenu.style.setProperty('visibility', 'visible', 'important');
+    navMenu.style.setProperty('opacity', '1', 'important');
+    navMenu.style.setProperty('pointer-events', 'auto', 'important');
+    navMenu.classList.add('open');
+    const icon = mobileToggle?.querySelector('i');
+    if (icon) { icon.classList.remove('fa-bars'); icon.classList.add('fa-times'); }
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Helper: close the nav drawer
+  function closeNavMenu() {
+    if (!navMenu) return;
+    navMenu.style.setProperty('display', 'none', 'important');
+    navMenu.style.setProperty('visibility', 'hidden', 'important');
+    navMenu.style.setProperty('opacity', '0', 'important');
+    navMenu.style.setProperty('pointer-events', 'none', 'important');
+    navMenu.classList.remove('open');
+    const icon = mobileToggle?.querySelector('i');
+    if (icon) { icon.classList.remove('fa-times'); icon.classList.add('fa-bars'); }
+    document.body.style.overflow = '';
+  }
+
   mobileToggle?.addEventListener('click', () => {
     // Nếu đang mở booking modal thì đóng booking modal lại trước
-    if (window.closeBookingModal) {
-      window.closeBookingModal();
-    }
+    if (window.closeBookingModal) window.closeBookingModal();
 
-    navMenu?.classList.toggle('open');
-    const icon = mobileToggle.querySelector('i');
-    if (icon) {
-      if (navMenu?.classList.contains('open')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
-        document.body.style.overflow = 'hidden';
-      } else {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-        document.body.style.overflow = '';
-      }
+    if (navMenu?.classList.contains('open')) {
+      closeNavMenu();
+    } else {
+      openNavMenu();
     }
   });
+
+  // Expose globally so booking.js can close the nav
+  window.closeNavMenu = closeNavMenu;
 
   // Mobile Dropdown & Link Click Support
   const navDropdownToggles = document.querySelectorAll('.nav-item');
@@ -55,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const topLink = item.querySelector('.nav-link');
       topLink?.addEventListener('click', (e) => {
         if (window.innerWidth <= 992) {
-          // If clicking link with dropdown on mobile, toggle dropdown view
           e.preventDefault();
           item.classList.toggle('dropdown-open');
         }
@@ -67,16 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('.nav-menu a');
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
-      // If it's a dropdown toggle link on mobile, don't close immediately
       if (window.innerWidth <= 992 && link.nextElementSibling && link.nextElementSibling.classList.contains('nav-dropdown')) {
         return;
       }
-      navMenu?.classList.remove('open');
-      const icon = mobileToggle?.querySelector('i');
-      if (icon) {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-      }
+      closeNavMenu();
     });
   });
 
