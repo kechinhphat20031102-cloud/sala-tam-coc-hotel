@@ -2034,13 +2034,10 @@ img {
   }
 
   .nav-menu {
+    display: none !important;
     position: fixed;
     top: 0;
     right: 0;
-    transform: translateX(100%);
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
     width: 310px;
     max-width: 85vw;
     height: 100vh;
@@ -2049,7 +2046,6 @@ img {
     align-items: flex-start;
     padding: 70px 25px 40px;
     box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease, visibility 0.35s ease;
     z-index: 9999;
     gap: 12px;
     overflow-y: auto;
@@ -2057,10 +2053,7 @@ img {
   }
   
   .nav-menu.open {
-    transform: translateX(0);
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
+    display: flex !important;
   }
   
   .mobile-toggle {
