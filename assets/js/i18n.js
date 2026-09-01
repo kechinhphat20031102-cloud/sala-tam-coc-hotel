@@ -276,7 +276,7 @@ const translations = {
     "limo_desc": "Premium 9-11 seat VIP Limousine service with door-to-door pickup from Hanoi / Noi Bai Airport directly to Sala Tam Coc Hotel. Luxury leather massage seats, high-speed Wi-Fi, USB charging ports.",
     "limo_feat1": "Reclining leather massage seats, USB chargers, bottled water & high-speed Wi-Fi",
     "limo_feat2": "Travel time: 1.5 hours via modern expressway",
-    "limo_feat3": "Shared seat: 200,000₫ - 250,000₫ / seat | Private charter: Available on request",
+    "limo_feat3": "Shared seat: 250,000₫ - 450,000₫ / seat | Private charter: Available on request",
     "btn_book_limo": "Book Limousine: 0942 060 533",
     "btn_zalo_support": "Zalo / WhatsApp Support",
 
@@ -582,7 +582,7 @@ const translations = {
     "limo_desc": "Dịch vụ xe Limousine VIP 9-11 chỗ đưa đón tận nơi từ Hà Nội / Sân bay Nội Bài về thẳng Khách sạn Sala Tam Cốc. Ghế da massage cao cấp, Wi-Fi tốc độ cao, cổng sạc USB.",
     "limo_feat1": "Ghế da massage thư giãn, sạc USB, nước uống & Wi-Fi tốc độ cao",
     "limo_feat2": "Thời gian di chuyển: 1.5 giờ qua đường cao tốc hiện đại",
-    "limo_feat3": "Vé ghép: 200,000₫ - 250,000₫ / ghế | Xe riêng: Hỗ trợ theo yêu cầu",
+    "limo_feat3": "Vé ghép: 250,000₫ - 450,000₫ / ghế | Xe riêng: Hỗ trợ theo yêu cầu",
     "btn_book_limo": "Đặt Xe Limousine: 0942 060 533",
     "btn_zalo_support": "Hỗ Trợ Qua Zalo",
 
@@ -888,7 +888,7 @@ const translations = {
     "limo_desc": "Service Limousine VIP 9-11 sièges avec prise en charge à Hanoï / Aéroport de Noi Bai jusqu'à l'hôtel Sala Tam Coc. Sièges massants en cuir, Wi-Fi haut débit, prises USB.",
     "limo_feat1": "Sièges massants inclinables en cuir, chargeurs USB & Wi-Fi haut débit",
     "limo_feat2": "Temps de trajet : 1h30 via l'autoroute moderne",
-    "limo_feat3": "Siège partagé : 200,000₫ - 250,000₫ / siège | Véhicule privé sur demande",
+    "limo_feat3": "Siège partagé : 250,000₫ - 450,000₫ / siège | Véhicule privé sur demande",
     "btn_book_limo": "Réserver Limousine : +84 3 37 40 84 84",
     "btn_zalo_support": "Assistance WhatsApp / Zalo",
 
