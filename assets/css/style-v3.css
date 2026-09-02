@@ -830,7 +830,10 @@ img {
 }
 
 .hero-title-single-line {
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 1200px) {
@@ -839,14 +842,8 @@ img {
   }
 }
 
-@media (max-width: 576px) {
-  .hero-title-single-line {
-    white-space: normal;
-  }
-}
-
 .section-title-nowrap {
-  white-space: nowrap;
+  white-space: normal;
 }
 
 @media (max-width: 992px) {
@@ -1814,7 +1811,8 @@ input[type="date"]::-webkit-date-and-time-value {
 
 .footer-col h4 {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
+  font-size: clamp(1.05rem, 1.2vw, 1.25rem);
+  white-space: nowrap;
   color: #ffffff;
   margin-bottom: 22px;
   position: relative;
