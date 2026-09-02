@@ -12,6 +12,7 @@ window.ROOMS_DETAILS_DATA = {
     nameFr: "Chambre Superior Double City View – 28m²",
     size: "28 m²",
     guests: "02 Guests",
+    guestsVi: "02 Khách",
     guestsFr: "02 Personnes",
     beds: "01 King Bed<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.85rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m)</span>",
     price: "1,300,000",
@@ -37,6 +38,7 @@ window.ROOMS_DETAILS_DATA = {
     nameFr: "Chambre Superior Triple City View – 30m²",
     size: "30 m²",
     guests: "03 Guests",
+    guestsVi: "03 Khách",
     guestsFr: "03 Personnes",
     beds: "3 Single Beds<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.82rem; color:#111; white-space:nowrap;'>(or 1 King + 1 Single)</span>",
     price: "1,800,000",
@@ -62,6 +64,7 @@ window.ROOMS_DETAILS_DATA = {
     nameFr: "Chambre Deluxe Double Balcon View Ville/Montagne – 28m²",
     size: "28 m²",
     guests: "02 Guests",
+    guestsVi: "02 Khách",
     guestsFr: "02 Personnes",
     beds: "01 King Bed<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.85rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m)</span>",
     price: "1,500,000",
@@ -89,6 +92,7 @@ window.ROOMS_DETAILS_DATA = {
     nameFr: "Chambre Deluxe Twin Balcon – 35m²",
     size: "35 m²",
     guests: "02 – 04 Guests",
+    guestsVi: "02 – 04 Khách",
     guestsFr: "02 – 04 Personnes",
     beds: "2 King Beds<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.85rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m)</span>",
     price: "1,600,000",
@@ -117,6 +121,7 @@ window.ROOMS_DETAILS_DATA = {
     nameFr: "Chambre Luxury Double Balcon & Baignoire – 28m²",
     size: "28 m²",
     guests: "02 Guests",
+    guestsVi: "02 Khách",
     guestsFr: "02 Personnes",
     beds: "01 King Bed<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.81rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m) + Bathtub</span>",
     price: "1,650,000",
@@ -144,6 +149,7 @@ window.ROOMS_DETAILS_DATA = {
     nameFr: "Chambre Luxury Twin Balcon & Baignoire – 35m²",
     size: "35 m²",
     guests: "02 – 04 Guests",
+    guestsVi: "02 – 04 Khách",
     guestsFr: "02 – 04 Personnes",
     beds: "01 King Bed<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.81rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m) + Bathtub</span>",
     price: "1,750,000",
@@ -173,6 +179,7 @@ window.ROOMS_DETAILS_DATA = {
     nameFr: "Suite Deluxe Familiale Balcon – 35m²",
     size: "35 m²",
     guests: "04 Guests",
+    guestsVi: "04 Khách",
     guestsFr: "04 Personnes",
     beds: "2 King Beds<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.85rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m)</span>",
     price: "2,100,000",
@@ -201,6 +208,7 @@ window.ROOMS_DETAILS_DATA = {
     nameFr: "Suite Familiale Communicante 1 – 55m²",
     size: "55 m²",
     guests: "04 – 06 Guests",
+    guestsVi: "04 – 06 Khách",
     guestsFr: "04 – 06 Personnes",
     beds: "2 Interconnected Bedrooms<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.82rem; color:#111; white-space:nowrap;'>(2 King Beds)</span>",
     price: "2,600,000",
@@ -228,6 +236,7 @@ window.ROOMS_DETAILS_DATA = {
     nameFr: "Suite Familiale Communicante 2 – 60m²",
     size: "60 m²",
     guests: "05 – 07 Guests",
+    guestsVi: "05 – 07 Khách",
     guestsFr: "05 – 07 Personnes",
     beds: "2 Interconnected Bedrooms<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.80rem; color:#111; white-space:nowrap;'>(2 King Beds + 1 Single Bed)</span>",
     price: "2,750,000",
@@ -312,6 +321,7 @@ window.ROOMS_DETAILS_DATA = {
     if (currentLang === 'vi') {
       roomTitle = room.nameVi;
       roomDesc = room.descVi;
+      roomGuests = room.guestsVi || room.guests;
 
       priceSubText = '/ đêm (bao gồm buffet sáng)';
       labelSize = 'Diện tích';
@@ -330,7 +340,7 @@ window.ROOMS_DETAILS_DATA = {
       pillDryer = 'Máy sấy tóc & Đồ vệ sinh cá nhân';
       pillClean = 'Dịch vụ dọn phòng hàng ngày 24/7';
 
-      btnBookText = 'Gửi Yêu Cầu Đặt Phòng';
+      btnBookText = 'Đặt phòng';
       btnPhoneText = 'Hotline: 0942 060 533';
     } else if (currentLang === 'fr') {
       roomTitle = room.nameFr || room.nameEn;
@@ -355,7 +365,7 @@ window.ROOMS_DETAILS_DATA = {
       pillDryer = 'Sèche-cheveux & Produits de toilette';
       pillClean = 'Service de ménage quotidien';
 
-      btnBookText = 'Demande de Réservation';
+      btnBookText = 'Réservation';
       btnPhoneText = 'Réservation : +84 3 37 40 84 84';
     }
 
@@ -537,6 +547,14 @@ window.ROOMS_DETAILS_DATA = {
         const nextBtn = document.getElementById('roomNextPhotoBtn');
         nextBtn?.click();
       }
+    }
+  });
+
+  // Re-render active room modal on language change
+  document.addEventListener('salaLanguageChange', function() {
+    const roomModalEl = document.getElementById('roomDetailModal');
+    if (roomModalEl && (roomModalEl.classList.contains('active') || roomModalEl.style.display === 'flex') && currentOpenRoomKey) {
+      window.openRoomDetailModal(currentOpenRoomKey);
     }
   });
 

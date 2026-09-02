@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const titleItinerary = isVi ? 'Lịch Trình Chi Tiết' : (isFr ? 'Itinéraire Détaillé' : 'Detailed Itinerary');
     const titleInclusions = isVi ? 'Dịch Vụ Bao Gồm' : (isFr ? 'Services Inclus' : 'Inclusions');
     const titleChildPolicy = isVi ? 'Chính Sách Trẻ Em' : (isFr ? 'Politique Enfants' : 'Child Policy');
-    const btnBookText = isVi ? 'Đặt Tour: 0942 060 533' : (isFr ? 'Réserver le Tour : +84 3 37 40 84 84' : 'Book Tour: +84 942 060 533');
+    const btnBookText = isVi ? 'Đặt Tour: 0942 060 533' : (isFr ? 'Réservation : +84 3 37 40 84 84' : 'Book Tour: +84 942 060 533');
     const btnConsultText = isVi ? 'Tư Vấn Zalo / WhatsApp' : (isFr ? 'Consultation WhatsApp / Zalo' : 'WhatsApp / Zalo Consultation');
 
     let itineraryHTML = (itineraryList || []).map(item => `
