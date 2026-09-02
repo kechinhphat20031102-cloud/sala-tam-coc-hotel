@@ -54,7 +54,7 @@ const translations = {
     "qb_checkout": "Expected Check-out Date",
     "qb_room": "Room Category",
     "qb_guests": "Number of Guests",
-    "qb_submit": "Booking Inquiries",
+    "qb_submit": "Book Room",
     "guest_1": "1 Adult",
     "guest_2": "2 Adults",
     "guest_3": "3 Adults",
@@ -63,6 +63,8 @@ const translations = {
     // About Section
     "about_sub": "A New Boutique Hotel",
     "about_title": "A Luxurious Haven Amid Legendary Landscapes",
+    "about_badge_num": "A NEW",
+    "about_badge_text": "Boutique Hotel",
     "about_desc_1": "Located in the heart of Tam Coc, just steps from the famous Tam Coc Boat Wharf, <strong>Sala Tam Coc Hotel & Spa</strong> is a charming boutique hotel where the timeless beauty of Ninh Binh meets contemporary comfort and thoughtful hospitality.",
     "about_desc_2": "Our elegantly designed rooms feature private balconies with refreshing mountain or city views, offering a peaceful retreat after a day of exploring. At Sala Tam Coc Hotel & Spa, every detail is thoughtfully designed to provide a warm, comfortable, and memorable stay — making it the perfect choice for discovering the natural beauty and cultural heritage of Ninh Binh.",
     "feat_pool": "Rooftop Infinity Swimming Pool with Mountain View",
@@ -86,6 +88,13 @@ const translations = {
     "label_max_guests": "Max Guests:",
     "label_bed_type": "Bed Type:",
     "label_ref_price": "Reference Price:",
+
+    "guests_2": "02 Guests",
+    "guests_3": "03 Guests",
+    "guests_4": "04 Guests",
+    "guests_24": "02 – 04 Guests",
+    "guests_46": "04 – 06 Guests",
+    "guests_57": "05 – 07 Guests",
 
     "room1_desc": "Cozy and bright with large city-view windows, comfortable 1 King bed, refined wooden furnishings, and complete upscale amenities for a relaxing stay in Tam Coc.",
     "room2_desc": "Spacious room designed for 3 guests with 3 Single beds (or 1 King + 1 Single), offering street and mountain views.",
@@ -134,6 +143,7 @@ const translations = {
     "buffet_time": "Buffet Breakfast:",
     "buffet_val": "07:00 - 09:30 Daily",
     "table_res": "Table Reservation:",
+    "hotline_res_label": "Hotline:",
     "dining_sec_sub": "Gastronomy Showcase",
     "dining_sec_title": "Buffet Breakfast & Sala Restaurant",
     "dining_sec_desc": "Every dish at Sala Tam Coc is crafted from the freshest local ingredients, honoring the culinary soul of the ancient capital.",
@@ -168,6 +178,10 @@ const translations = {
     "spa_opening_hours_header": "Spa Opening Hours",
     "spa_opening_hours_detail": "09:00 - 22:00 Daily (Prior reservation recommended)",
     "spa_direct_consult": "Direct Consultation",
+
+    "min_30": "30 Mins",
+    "min_60_90": "60 / 90 Mins",
+    "min_60": "60 Mins",
 
     "spat_body": "Full Body Massage",
     "spat_foot": "Foot Massage",
@@ -362,7 +376,7 @@ const translations = {
     "nav_contact": "Đặt ngay",
     "btn_book_now": "Đặt ngay",
     "btn_view_details": "Xem Chi Tiết",
-    "btn_book_room": "Đặt Phòng",
+    "btn_book_room": "Đặt phòng",
     "btn_book_table": "Đặt Bàn Ngay",
     "btn_book_package": "Đặt Gói Này Ngay",
     "btn_book_tour": "Đặt Tour",
@@ -402,6 +416,8 @@ const translations = {
     // About Section
     "about_sub": "Khách Sạn Boutique Mới",
     "about_title": "Thiên Đường Nghỉ Dưỡng Sang Trọng Giữa Miền Di Sản",
+    "about_badge_num": "Khách Sạn",
+    "about_badge_text": "Boutique Mới",
     "about_desc_1": "Tọa lạc ngay trung tâm Tam Cốc, cách bến thuyền Tam Cốc chỉ vài bước chân, <strong>Sala Tam Cốc Hotel & Spa</strong> là điểm dừng chân boutique lý tưởng kết hợp hoàn hảo giữa vẻ đẹp thơ mộng của Ninh Bình và tiện nghi hiện đại.",
     "about_desc_2": "Mỗi phòng nghỉ đều sở hữu ban công thoáng đãng view núi non hoặc phố xá. Tại Sala Tam Cốc, từng chi tiết nhỏ đều được chăm chút tỉ mỉ nhằm đem lại trải nghiệm thư thái và ấn tượng nhất cho kỳ nghỉ của quý khách.",
     "feat_pool": "Hồ Bơi Vô Cực Sân Thượng View Núi Non",
@@ -422,9 +438,16 @@ const translations = {
     "per_night": "/ đêm",
 
     "label_room_size": "Diện tích:",
-    "label_max_guests": "Số khách tối đa:",
+    "label_max_guests": "Số khách:",
     "label_bed_type": "Loại giường:",
     "label_ref_price": "Giá tham khảo:",
+
+    "guests_2": "02 Khách",
+    "guests_3": "03 Khách",
+    "guests_4": "04 Khách",
+    "guests_24": "02 – 04 Khách",
+    "guests_46": "04 – 06 Khách",
+    "guests_57": "05 – 07 Khách",
 
     "room1_desc": "Phòng ấm cúng và ngập tràn ánh sáng với cửa sổ lớn hướng phố, 1 giường King 1m8x2m êm ái, nội thất gỗ sang trọng và đầy đủ tiện nghi hiện đại cho kỳ nghỉ thư thái tại Tam Cốc.",
     "room2_desc": "Phòng rộng rãi thiết kế cho 3 khách với 3 giường đơn (hoặc 1 King + 1 Đơn), ban công thoáng đãng ngắm cảnh phố phường và núi non.",
@@ -473,6 +496,7 @@ const translations = {
     "buffet_time": "Buffet Sáng:",
     "buffet_val": "07:00 - 09:30 Hàng ngày",
     "table_res": "Đặt Bàn:",
+    "hotline_res_label": "Hotline:",
     "dining_sec_sub": "Không Gian Ẩm Thực",
     "dining_sec_title": "Buffet Sáng & Nhà Hàng Sala",
     "dining_sec_desc": "Mỗi món ăn tại Sala Tam Cốc được chế biến tỉ mỉ từ nguyên liệu tươi ngon bản địa, tôn vinh hương vị đặc sắc vùng Cố đô.",
@@ -507,6 +531,10 @@ const translations = {
     "spa_opening_hours_header": "Giờ Mở Cửa Spa",
     "spa_opening_hours_detail": "09:00 - 22:00 Hàng ngày (Khuyên nên đặt lịch trước)",
     "spa_direct_consult": "Tư Vấn Trực Tiếp",
+
+    "min_30": "30 phút",
+    "min_60_90": "60 / 90 phút",
+    "min_60": "60 phút",
 
     "spat_body": "Massage Toàn Thân",
     "spat_foot": "Massage Chân",
@@ -701,7 +729,7 @@ const translations = {
     "nav_contact": "Réserver",
     "btn_book_now": "Réserver",
     "btn_view_details": "Voir détails",
-    "btn_book_room": "Réserver chambre",
+    "btn_book_room": "Réservation",
     "btn_book_table": "Réserver table",
     "btn_book_package": "Réserver offre",
     "btn_book_tour": "Réservation : +84 3 37 40 84 84",
@@ -741,6 +769,8 @@ const translations = {
     // About Section
     "about_sub": "Un Nouvel Hôtel Boutique",
     "about_title": "Un refuge élégant au cœur des paysages légendaires",
+    "about_badge_num": "Un Nouvel",
+    "about_badge_text": "Hôtel Boutique",
     "about_desc_1": "Situé au cœur de Tam Coc, à quelques pas de l'embarcadère de Tam Coc, <strong>Sala Tam Coc Hotel & Spa</strong> est un hôtel boutique de charme alliant beauté naturelle et confort moderne.",
     "about_desc_2": "Chaque chambre offre un balcon privé avec vue apaisante sur les montagnes. Au Sala Tam Coc, chaque détail est pensé pour vous offrir un séjour inoubliable.",
     "feat_pool": "Piscine infinie sur le toit avec vue montagne",
@@ -764,6 +794,13 @@ const translations = {
     "label_max_guests": "Capacité max :",
     "label_bed_type": "Type de lit :",
     "label_ref_price": "Prix de référence :",
+
+    "guests_2": "02 Personnes",
+    "guests_3": "03 Personnes",
+    "guests_4": "04 Personnes",
+    "guests_24": "02 – 04 Personnes",
+    "guests_46": "04 – 06 Personnes",
+    "guests_57": "05 – 07 Personnes",
 
     "room1_desc": "Chambre chaleureuse et lumineuse avec de grandes fenêtres vue ville, 1 lit King confortable, mobilier en bois raffiné et équipements modernes pour un séjour relaxant à Tam Coc.",
     "room2_desc": "Chambre spacieuse conçue pour 3 personnes avec 3 lits simples (ou 1 King + 1 Simple), balcon et vue sur la rue et les montagnes.",
@@ -812,6 +849,7 @@ const translations = {
     "buffet_time": "Petit-déjeuner buffet :",
     "buffet_val": "07:00 - 09:30 Tous les jours",
     "table_res": "Réservation :",
+    "hotline_res_label": "Hotline :",
     "dining_sec_sub": "Vitrine gastronomique",
     "dining_sec_title": "Petit-déjeuner buffet & Restaurant Sala",
     "dining_sec_desc": "Chaque plat du Sala Tam Coc est préparé avec des ingrédients locaux frais, honorant l'âme culinaire de la capitale antique.",
@@ -846,6 +884,10 @@ const translations = {
     "spa_opening_hours_header": "Horaires d'ouverture du spa",
     "spa_opening_hours_detail": "Tous les jours de 9 h à 22 h (réservation préalable recommandée).",
     "spa_direct_consult": "Consultation directe",
+
+    "min_30": "30 min",
+    "min_60_90": "60 / 90 min",
+    "min_60": "60 min",
 
     "spat_body": "Massage du corps",
     "spat_foot": "Massage des pieds",

@@ -325,7 +325,7 @@ window.ROOMS_DETAILS_DATA = {
 
       priceSubText = '/ đêm (bao gồm buffet sáng)';
       labelSize = 'Diện tích';
-      labelGuests = 'Sức chứa';
+      labelGuests = 'Số khách';
       labelBeds = 'Loại giường';
       labelView = 'Tầm nhìn';
       amenitiesTitle = 'Tiện Nghi Phòng Cao Cấp (In-Room Luxury Amenities)';
