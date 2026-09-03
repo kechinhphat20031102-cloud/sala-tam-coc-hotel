@@ -298,6 +298,7 @@ window.ROOMS_DETAILS_DATA = {
     let roomBeds = room.beds;
     let roomView = room.view;
 
+    let priceFromPrefix = 'From ';
     let priceSubText = '/ night (includes breakfast)';
     let labelSize = 'Room Size';
     let labelGuests = 'Occupancy';
@@ -323,6 +324,7 @@ window.ROOMS_DETAILS_DATA = {
       roomDesc = room.descVi;
       roomGuests = room.guestsVi || room.guests;
 
+      priceFromPrefix = 'Từ ';
       priceSubText = '/ đêm (bao gồm buffet sáng)';
       labelSize = 'Diện tích';
       labelGuests = 'Số khách';
@@ -348,6 +350,7 @@ window.ROOMS_DETAILS_DATA = {
       roomGuests = room.guestsFr || room.guests;
       roomView = room.viewFr || room.view;
 
+      priceFromPrefix = 'À partir de ';
       priceSubText = '/ nuit (petit-déjeuner inclus)';
       labelSize = 'Superficie';
       labelGuests = 'Capacité';
@@ -399,7 +402,7 @@ window.ROOMS_DETAILS_DATA = {
             </div>
           </div>
           <div class="room-modal-price-badge">
-            <div class="room-modal-price-val">${room.price}₫</div>
+            <div class="room-modal-price-val"><span style="font-size: 0.72em; font-weight: 500; opacity: 0.92; margin-right: 4px;">${priceFromPrefix}</span>${room.price}₫</div>
             <div class="room-modal-price-sub">${priceSubText}</div>
           </div>
         </div>
