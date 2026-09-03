@@ -1294,6 +1294,10 @@ input[type="date"]::-webkit-date-and-time-value {
   flex-grow: 1;
 }
 
+.offer-content .btn {
+  margin-top: auto;
+}
+
 .offer-title {
   font-size: 1.35rem;
   color: #ffffff;
