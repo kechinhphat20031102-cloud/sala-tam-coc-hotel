@@ -48,31 +48,29 @@
   <!-- Force nav hidden immediately before any other JS can run -->
   <script>
     (function() {
-      // Chặn overflow ngay khi script chạy, trước khi render
       document.documentElement.style.overflowX = 'hidden';
       document.documentElement.style.maxWidth = '100vw';
-      // Khi DOM sẵn sàng, ép ẩn nav-menu hoàn toàn
-      document.addEventListener('DOMContentLoaded', function() {
-        document.body.style.overflowX = 'hidden';
-        document.body.style.maxWidth = '100vw';
+      function protectNav() {
         var navMenu = document.querySelector('.nav-menu');
-        if (navMenu && window.innerWidth <= 992) {
-          navMenu.style.setProperty('display', 'none', 'important');
-          navMenu.style.setProperty('visibility', 'hidden', 'important');
-          navMenu.style.setProperty('opacity', '0', 'important');
-          navMenu.style.setProperty('pointer-events', 'none', 'important');
+        if (navMenu) {
+          if (window.innerWidth <= 992) {
+            if (!navMenu.classList.contains('open')) {
+              navMenu.style.setProperty('display', 'none', 'important');
+              navMenu.style.setProperty('visibility', 'hidden', 'important');
+              navMenu.style.setProperty('opacity', '0', 'important');
+              navMenu.style.setProperty('pointer-events', 'none', 'important');
+            }
+          } else {
+            navMenu.style.removeProperty('display');
+            navMenu.style.removeProperty('visibility');
+            navMenu.style.removeProperty('opacity');
+            navMenu.style.removeProperty('pointer-events');
+          }
         }
-      });
-      // Theo dõi khi thêm class 'open' vào nav-menu
-      window.addEventListener('resize', function() {
-        var navMenu = document.querySelector('.nav-menu');
-        if (navMenu && window.innerWidth > 992) {
-          navMenu.style.removeProperty('display');
-          navMenu.style.removeProperty('visibility');
-          navMenu.style.removeProperty('opacity');
-          navMenu.style.removeProperty('pointer-events');
-        }
-      });
+      }
+      document.addEventListener('DOMContentLoaded', protectNav);
+      window.addEventListener('resize', protectNav);
+      window.addEventListener('scroll', protectNav);
     })();
   </script>
 </head>

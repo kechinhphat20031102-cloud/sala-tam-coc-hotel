@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const backToTopBtn = document.querySelector('.float-top');
 
   window.addEventListener('scroll', () => {
+    if (window.innerWidth > 992 && navMenu) {
+      navMenu.style.removeProperty('display');
+      navMenu.style.removeProperty('visibility');
+      navMenu.style.removeProperty('opacity');
+      navMenu.style.removeProperty('pointer-events');
+    }
     if (window.scrollY > 80) {
       header?.classList.add('scrolled');
       backToTopBtn?.classList.add('visible');
@@ -28,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Helper: open the nav drawer
   function openNavMenu() {
-    if (!navMenu) return;
+    if (!navMenu || window.innerWidth > 992) return;
     navMenu.style.setProperty('display', 'flex', 'important');
     navMenu.style.setProperty('visibility', 'visible', 'important');
     navMenu.style.setProperty('opacity', '1', 'important');
@@ -42,14 +48,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // Helper: close the nav drawer
   function closeNavMenu() {
     if (!navMenu) return;
-    navMenu.style.setProperty('display', 'none', 'important');
-    navMenu.style.setProperty('visibility', 'hidden', 'important');
-    navMenu.style.setProperty('opacity', '0', 'important');
-    navMenu.style.setProperty('pointer-events', 'none', 'important');
     navMenu.classList.remove('open');
     const icon = mobileToggle?.querySelector('i');
     if (icon) { icon.classList.remove('fa-times'); icon.classList.add('fa-bars'); }
     document.body.style.overflow = '';
+
+    if (window.innerWidth <= 992) {
+      navMenu.style.setProperty('display', 'none', 'important');
+      navMenu.style.setProperty('visibility', 'hidden', 'important');
+      navMenu.style.setProperty('opacity', '0', 'important');
+      navMenu.style.setProperty('pointer-events', 'none', 'important');
+    } else {
+      navMenu.style.removeProperty('display');
+      navMenu.style.removeProperty('visibility');
+      navMenu.style.removeProperty('opacity');
+      navMenu.style.removeProperty('pointer-events');
+    }
   }
 
   mobileToggle?.addEventListener('click', () => {
