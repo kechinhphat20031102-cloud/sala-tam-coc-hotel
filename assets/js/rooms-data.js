@@ -14,9 +14,12 @@ window.ROOMS_DETAILS_DATA = {
     guests: "02 Guests",
     guestsVi: "02 Khách",
     guestsFr: "02 Personnes",
-    beds: "01 King Bed<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.85rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m)</span>",
+    beds: "01 King Bed<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
+    bedsVi: "01 Giường King<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
+    bedsFr: "01 Lit King<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
     price: "1,300,000",
     view: "City & Street View Window",
+    viewVi: "Cửa sổ hướng phố",
     viewFr: "Fenêtre vue ville et rue",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4807.jpg",
@@ -40,9 +43,12 @@ window.ROOMS_DETAILS_DATA = {
     guests: "03 Guests",
     guestsVi: "03 Khách",
     guestsFr: "03 Personnes",
-    beds: "3 Single Beds<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.82rem; color:#111; white-space:nowrap;'>(or 1 King + 1 Single)</span>",
+    beds: "3 Single Beds<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(or 1 King + 1 Single)</span>",
+    bedsVi: "3 Giường đơn<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(hoặc 1 King + 1 Đơn)</span>",
+    bedsFr: "3 Lits simples<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(ou 1 King + 1 Simple)</span>",
     price: "1,800,000",
     view: "City & Street View Window",
+    viewVi: "Cửa sổ hướng phố",
     viewFr: "Fenêtre vue ville et rue",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Superior Triple city view/ANT_4672.jpg",
@@ -66,9 +72,12 @@ window.ROOMS_DETAILS_DATA = {
     guests: "02 Guests",
     guestsVi: "02 Khách",
     guestsFr: "02 Personnes",
-    beds: "01 King Bed<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.85rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m)</span>",
+    beds: "01 King Bed<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
+    bedsVi: "01 Giường King<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
+    bedsFr: "01 Lit King<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
     price: "1,500,000",
-    view: "Private City/Mountain View Balcony",
+    view: "City & Mountain View Balcony",
+    viewVi: "Ban công view phố & núi",
     viewFr: "Balcon privé vue ville & montagne",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Double room balcony/ANT_4561.jpg",
@@ -94,9 +103,12 @@ window.ROOMS_DETAILS_DATA = {
     guests: "02 – 04 Guests",
     guestsVi: "02 – 04 Khách",
     guestsFr: "02 – 04 Personnes",
-    beds: "2 King Beds<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.85rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m)</span>",
+    beds: "2 King Beds<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
+    bedsVi: "2 Giường King<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
+    bedsFr: "2 Lits King<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
     price: "1,600,000",
-    view: "Private City/Street View Balcony",
+    view: "Private City & Street Balcony",
+    viewVi: "Ban công riêng view phố",
     viewFr: "Balcon privé vue ville",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4411.jpg",
@@ -123,10 +135,13 @@ window.ROOMS_DETAILS_DATA = {
     guests: "02 Guests",
     guestsVi: "02 Khách",
     guestsFr: "02 Personnes",
-    beds: "01 King Bed<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.81rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m) + Bathtub</span>",
+    beds: "01 King Bed<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
+    bedsVi: "01 Giường King<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
+    bedsFr: "01 Lit King<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
     price: "1,650,000",
-    view: "City/Mountain View Balcony & Bathtub",
-    viewFr: "Balcon privé vue montagne & Baignoire",
+    view: "City & Mountain View Balcony",
+    viewVi: "Ban công view phố & núi",
+    viewFr: "Balcon privé vue montagne & ville",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Luxury Double with Balcony & Bath tub/ANT_4542.jpg",
       "Ảnh Sala Tam Coc Hotel & Spa/Luxury Double with Balcony & Bath tub/ANT_4550.jpg",
@@ -151,10 +166,13 @@ window.ROOMS_DETAILS_DATA = {
     guests: "02 – 04 Guests",
     guestsVi: "02 – 04 Khách",
     guestsFr: "02 – 04 Personnes",
-    beds: "01 King Bed<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.81rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m) + Bathtub</span>",
+    beds: "2 King Beds<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
+    bedsVi: "2 Giường King<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
+    bedsFr: "2 Lits King<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
     price: "1,750,000",
-    view: "City/Mountain View Balcony & Bathtub",
-    viewFr: "Balcon privé vue montagne & Baignoire",
+    view: "City & Mountain View Balcony",
+    viewVi: "Ban công view phố & núi",
+    viewFr: "Balcon privé vue montagne & ville",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4359.jpg",
       "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4379.jpg",
@@ -181,9 +199,12 @@ window.ROOMS_DETAILS_DATA = {
     guests: "04 Guests",
     guestsVi: "04 Khách",
     guestsFr: "04 Personnes",
-    beds: "2 King Beds<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.85rem; color:#111; white-space:nowrap;'>(1.8m x 2.0m)</span>",
+    beds: "2 King Beds<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
+    bedsVi: "2 Giường King<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
+    bedsFr: "2 Lits King<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(1.8m x 2.0m)</span>",
     price: "2,100,000",
-    view: "Private City/Street View Balcony",
+    view: "Private City & Street Balcony",
+    viewVi: "Ban công riêng view phố",
     viewFr: "Balcon privé vue montagne & ville",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4359.jpg",
@@ -210,9 +231,12 @@ window.ROOMS_DETAILS_DATA = {
     guests: "04 – 06 Guests",
     guestsVi: "04 – 06 Khách",
     guestsFr: "04 – 06 Personnes",
-    beds: "2 Interconnected Bedrooms<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.82rem; color:#111; white-space:nowrap;'>(2 King Beds)</span>",
+    beds: "2 Interconnected Bedrooms<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(2 King Beds)</span>",
+    bedsVi: "2 Phòng ngủ thông nhau<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(2 Giường King)</span>",
+    bedsFr: "2 Chambres communicantes<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.82rem; color:#444;'>(2 Lits King)</span>",
     price: "2,600,000",
-    view: "Private City/Street View Balcony",
+    view: "Private City & Street Balcony",
+    viewVi: "Ban công riêng view phố",
     viewFr: "Balcon privé vue montagne",
     photos: [
       "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4606.jpg",
@@ -238,9 +262,12 @@ window.ROOMS_DETAILS_DATA = {
     guests: "05 – 07 Guests",
     guestsVi: "05 – 07 Khách",
     guestsFr: "05 – 07 Personnes",
-    beds: "2 Interconnected Bedrooms<br><span style='display:block; margin-top:3px; font-weight:700; font-size:0.80rem; color:#111; white-space:nowrap;'>(2 King Beds + 1 Single Bed)</span>",
+    beds: "2 Interconnected Bedrooms<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.80rem; color:#444;'>(2 King Beds + 1 Single Bed)</span>",
+    bedsVi: "2 Phòng ngủ thông nhau<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.80rem; color:#444;'>(2 King + 1 Đơn)</span>",
+    bedsFr: "2 Chambres communicantes<br><span style='display:inline-block; margin-top:2px; font-weight:600; font-size:0.80rem; color:#444;'>(2 Kings + 1 Simple)</span>",
     price: "2,750,000",
-    view: "Private City/Street View Balcony",
+    view: "Private City & Street Balcony",
+    viewVi: "Ban công riêng view phố",
     viewFr: "Balcon privé vue montagne",
     cover: "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4502.jpg",
     photos: [
@@ -323,14 +350,16 @@ window.ROOMS_DETAILS_DATA = {
       roomTitle = room.nameVi;
       roomDesc = room.descVi;
       roomGuests = room.guestsVi || room.guests;
+      roomBeds = room.bedsVi || room.beds;
+      roomView = room.viewVi || room.view;
 
       priceFromPrefix = 'Từ ';
       priceSubText = '/ đêm (bao gồm buffet sáng)';
       labelSize = 'Diện tích';
       labelGuests = 'Số khách';
       labelBeds = 'Loại giường';
-      labelView = 'Tầm nhìn';
-      amenitiesTitle = 'Tiện Nghi Phòng Cao Cấp (In-Room Luxury Amenities)';
+      labelView = 'Ban công & Tầm nhìn';
+      amenitiesTitle = 'Tiện Nghi Phòng Cao Cấp';
 
       pillBreakfast = 'Buffet sáng miễn phí (07:00 - 09:30)';
       pillWifi = 'Wi-Fi cáp quang tốc độ cao';
@@ -348,6 +377,7 @@ window.ROOMS_DETAILS_DATA = {
       roomTitle = room.nameFr || room.nameEn;
       roomDesc = room.descFr || room.descEn;
       roomGuests = room.guestsFr || room.guests;
+      roomBeds = room.bedsFr || room.beds;
       roomView = room.viewFr || room.view;
 
       priceFromPrefix = 'À partir de ';
@@ -451,8 +481,8 @@ window.ROOMS_DETAILS_DATA = {
           <div class="room-amenity-pill"><i class="fa-solid fa-bell-concierge"></i> ${pillClean}</div>
         </div>
 
-        <div style="display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap;">
-          <button class="btn btn-gold btn-lg" style="flex: 1; min-width: 220px;" id="roomModalBookBtn">
+        <div class="room-modal-actions" style="margin-top: 30px;">
+          <button class="btn btn-gold btn-lg" id="roomModalBookBtn">
             <i class="fa-solid fa-paper-plane"></i> ${btnBookText}
           </button>
           <a href="tel:${currentLang === 'fr' ? '0337408484' : '0942060533'}" class="btn btn-outline-gold btn-lg">

@@ -14,6 +14,7 @@ const translations = {
     "ta_reviews": "TripAdvisor Reviews",
     "ta_rec_on": "RECOMMENDED ON",
     "nav_home": "Home",
+    "nav_back": "Back",
     "nav_rooms": "Rooms & Suites",
     "nav_offers": "Special Offers",
     "nav_dining": "Restaurant",
@@ -66,7 +67,7 @@ const translations = {
     "about_title": "A Luxurious Haven Amid Legendary Landscapes",
     "about_badge_num": "A NEW",
     "about_badge_text": "Boutique Hotel",
-    "about_desc_1": "Located in the heart of Tam Coc, just steps from the famous Tam Coc Boat Wharf, <strong>Sala Tam Coc Hotel & Spa</strong> is a charming boutique hotel where the timeless beauty of Ninh Binh meets contemporary comfort and thoughtful hospitality.",
+    "about_desc_1": "Located in the heart of Tam Coc, just steps from the famous Tam Coc Boat Station, <strong>Sala Tam Coc Hotel & Spa</strong> is a charming boutique hotel where the timeless beauty of Ninh Binh meets contemporary comfort and thoughtful hospitality.",
     "about_desc_2": "Our elegantly designed rooms feature private balconies with refreshing mountain or city views, offering a peaceful retreat after a day of exploring. At Sala Tam Coc Hotel & Spa, every detail is thoughtfully designed to provide a warm, comfortable, and memorable stay — making it the perfect choice for discovering the natural beauty and cultural heritage of Ninh Binh.",
     "feat_pool": "Rooftop Infinity Swimming Pool with Mountain View",
     "feat_dining": "Restaurant & Daily Buffet Breakfast",
@@ -76,7 +77,7 @@ const translations = {
     // Rooms Section
     "rooms_sub": "ACCOMMODATION",
     "rooms_title": "Rooms & Suites Collection",
-    "rooms_desc": "All rooms feature Free Wi-Fi, Smart TV, Air Conditioning, Hot Rain Shower, Tea & Coffee Set,<br>Bottled Mineral Water, Umbrella, In-room Safety Box, Slippers, Soft Bathrobes.",
+    "rooms_desc": "All rooms feature Free Wi-Fi, Smart TV, Air Conditioning, Hot Rain Shower, Tea & Coffee Set, Bottled Mineral Water, Umbrella, In-room Safety Box, Slippers, Soft Bathrobes.",
     "filter_all": "All Rooms",
     "filter_double": "Couples / Double",
     "filter_triple": "Triple (3 Guests)",
@@ -227,7 +228,7 @@ const translations = {
     "tours_banner_sub": "Discover UNESCO World Heritage",
     "tours_banner_title": "Excursions & Limousine Services",
     "tours_banner_desc": "Immerse yourself in limestone karsts, emerald rivers, and thousand-year heritage with curated private tours and door-to-door VIP Limousine transport.",
-    "btn_view_all_tours": "View All 7 Ninh Binh Daily Tours & Limousine",
+    "btn_view_all_tours": "View All 7 Daily Tours",
     "tour_duration_label": "Duration:",
     "tour_inclusions_label": "Inclusions:",
     "tour_highlights_label": "Highlights:",
@@ -370,7 +371,7 @@ const translations = {
     "label_note": "Special Requests (airport pickup, dietary, anniversary...)",
     "est_total": "Estimated Total:",
     "est_price_ref": "Estimated for 1 night • Reference price: 1,300,000 VND (includes buffet breakfast)",
-    "btn_confirm_booking": "Submit Booking Request",
+    "btn_confirm_booking": "Submit",
     "btn_cancel": "Cancel"
   },
 
@@ -384,6 +385,7 @@ const translations = {
     "ta_reviews": "Đánh Giá TripAdvisor",
     "ta_rec_on": "Được đề xuất trên",
     "nav_home": "Trang Chủ",
+    "nav_back": "Quay lại",
     "nav_rooms": "Hạng Phòng",
     "nav_offers": "Ưu Đãi",
     "nav_dining": "Nhà Hàng",
@@ -446,7 +448,7 @@ const translations = {
     // Rooms Section
     "rooms_sub": "HỆ THỐNG PHÒNG NGHỈ",
     "rooms_title": "Hệ Thống Phòng Nghỉ Đẳng Cấp",
-    "rooms_desc": "Mỗi căn phòng trang bị Wifi, Tivi, Điều hòa, Vòi sen, Trà cà phê, Nước lọc,<br>Ô che mưa, Két sắt an toàn, Dép đi trong nhà và Áo choàng tắm.",
+    "rooms_desc": "Mỗi căn phòng trang bị Wifi, Tivi, Điều hòa, Vòi sen, Trà cà phê, Nước lọc, Ô che mưa, Két sắt an toàn, Dép đi trong nhà và Áo choàng tắm.",
     "filter_all": "Tất Cả Hạng Phòng",
     "filter_double": "Phòng Đôi (Couples)",
     "filter_triple": "Phòng 3 Khách (Triple)",
@@ -597,7 +599,7 @@ const translations = {
     "tours_banner_sub": "Khám Phá Di Sản Thế Giới UNESCO",
     "tours_banner_title": "Tour Du Lịch & Dịch Vụ Xe Đưa Đón",
     "tours_banner_desc": "Hành trình khám phá danh thắng Ninh Bình với các tour du lịch 1 ngày trọn gói và xe Limousine VIP đón tận nơi.",
-    "btn_view_all_tours": "Xem Tất Cả 7 Tour Du Lịch Ninh Bình & Xe Limousine",
+    "btn_view_all_tours": "Xem Tất Cả 7 Tour Hàng Ngày",
     "tour_duration_label": "Thời gian:",
     "tour_inclusions_label": "Bao gồm:",
     "tour_highlights_label": "Điểm nổi bật:",
@@ -740,7 +742,7 @@ const translations = {
     "label_note": "Yêu Cầu Đặc Biệt (đón sân bay, ăn chay, kỷ niệm ngày cưới...)",
     "est_total": "Tổng Giá Tạm Tính:",
     "est_price_ref": "Tạm tính cho 1 đêm • Giá tham khảo: 1.300.000 VNĐ (đã bao gồm ăn sáng buffet)",
-    "btn_confirm_booking": "Đặt phòng",
+    "btn_confirm_booking": "Submit",
     "btn_cancel": "Hủy Bỏ"
   },
 
@@ -754,6 +756,7 @@ const translations = {
     "ta_reviews": "Avis TripAdvisor",
     "ta_rec_on": "Recommandé sur",
     "nav_home": "Accueil",
+    "nav_back": "Retour",
     "nav_rooms": "Chambres & Suites",
     "nav_offers": "Offres spéciales",
     "nav_dining": "Restaurant",
@@ -815,8 +818,8 @@ const translations = {
 
     // Rooms Section
     "rooms_sub": "HÉBERGEMENT",
-    "rooms_title": "Collection de Chambres & Suites",
-    "rooms_desc": "Toutes les chambres disposent du Wi-Fi gratuit, Smart TV, Climatisation, Douche Pluie,<br>Service à Thé & Café, Eau Minérale, Coffre-fort, Chaussons et Peignoirs.",
+    "rooms_title": "Chambres & Suites",
+    "rooms_desc": "Toutes les chambres disposent du Wi-Fi gratuit, Smart TV, Climatisation, Douche Pluie, Service à Thé & Café, Eau Minérale, Coffre-fort, Chaussons et Peignoirs.",
     "filter_all": "Toutes les chambres",
     "filter_double": "Couples / Double",
     "filter_triple": "Triple (3 personnes)",
@@ -967,7 +970,7 @@ const translations = {
     "tours_banner_sub": "Découverte du patrimoine UNESCO",
     "tours_banner_title": "Excursions & service Limousine",
     "tours_banner_desc": "Explorez les rivières émeraudes et pitons rocheux de Ninh Binh avec nos excursions privées sur mesure.",
-    "btn_view_all_tours": "Voir les 7 Excursions Ninh Binh & Limousine",
+    "btn_view_all_tours": "Voir les 7 Circuits Quotidiens",
     "tour_duration_label": "Durée :",
     "tour_inclusions_label": "Inclus :",
     "tour_highlights_label": "Points forts :",
@@ -1110,7 +1113,7 @@ const translations = {
     "label_note": "Demandes particulières (transfert aéroport, régimes alimentaires...)",
     "est_total": "Total estimé :",
     "est_price_ref": "Estimation pour 1 nuit • Prix de référence : 1 300 000 VND (petit-déjeuner buffet inclus)",
-    "btn_confirm_booking": "Réservation",
+    "btn_confirm_booking": "Submit",
     "btn_cancel": "Annuler"
   }
 };

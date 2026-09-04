@@ -8,11 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const backToTopBtn = document.querySelector('.float-top');
 
   window.addEventListener('scroll', () => {
-    if (window.innerWidth > 992 && navMenu) {
-      navMenu.style.removeProperty('display');
-      navMenu.style.removeProperty('visibility');
-      navMenu.style.removeProperty('opacity');
-      navMenu.style.removeProperty('pointer-events');
+    if (window.innerWidth > 992) {
+      closeNavMenu();
     }
     if (window.scrollY > 80) {
       header?.classList.add('scrolled');
@@ -23,23 +20,65 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 992) {
+      closeNavMenu();
+    }
+  });
+
   backToTopBtn?.addEventListener('click', (e) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // 2. MOBILE MENU TOGGLE
+  // 2. MOBILE MENU TOGGLE & BACKDROP OVERLAY
   const mobileToggle = document.querySelector('.mobile-toggle');
   const navMenu = document.querySelector('.nav-menu');
+  const headerMain = document.querySelector('.header-main');
+
+  // Create backdrop overlay inside headerMain dynamically if missing
+  let navOverlay = document.querySelector('.nav-overlay');
+  if (!navOverlay) {
+    navOverlay = document.createElement('div');
+    navOverlay.className = 'nav-overlay';
+    if (headerMain) {
+      headerMain.insertBefore(navOverlay, headerMain.firstChild);
+    } else {
+      document.body.appendChild(navOverlay);
+    }
+  }
+
+  // Inject top bar with Back/Close button into navMenu if missing
+  if (navMenu && !navMenu.querySelector('.nav-drawer-top-bar')) {
+    const topBar = document.createElement('div');
+    topBar.className = 'nav-drawer-top-bar';
+    topBar.innerHTML = `
+      <button type="button" class="nav-drawer-close-btn" aria-label="Close Menu">
+        <i class="fa-solid fa-arrow-left"></i> <span data-i18n="nav_back">Quay lại</span>
+      </button>
+    `;
+    navMenu.insertBefore(topBar, navMenu.firstChild);
+
+    topBar.querySelector('.nav-drawer-close-btn')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeNavMenu();
+    });
+  }
 
   // Helper: open the nav drawer
   function openNavMenu() {
     if (!navMenu || window.innerWidth > 992) return;
+    if (headerMain) headerMain.classList.add('nav-open');
     navMenu.style.setProperty('display', 'flex', 'important');
     navMenu.style.setProperty('visibility', 'visible', 'important');
     navMenu.style.setProperty('opacity', '1', 'important');
     navMenu.style.setProperty('pointer-events', 'auto', 'important');
     navMenu.classList.add('open');
+
+    if (navOverlay) {
+      navOverlay.classList.add('active');
+    }
+
     const icon = mobileToggle?.querySelector('i');
     if (icon) { icon.classList.remove('fa-bars'); icon.classList.add('fa-times'); }
     document.body.style.overflow = 'hidden';
@@ -48,7 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Helper: close the nav drawer
   function closeNavMenu() {
     if (!navMenu) return;
+    if (headerMain) headerMain.classList.remove('nav-open');
     navMenu.classList.remove('open');
+
+    if (navOverlay) {
+      navOverlay.classList.remove('active');
+    }
+
     const icon = mobileToggle?.querySelector('i');
     if (icon) { icon.classList.remove('fa-times'); icon.classList.add('fa-bars'); }
     document.body.style.overflow = '';
@@ -66,6 +111,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Clicking on the left side of the screen (the backdrop overlay) closes the mobile menu
+  navOverlay?.addEventListener('click', () => {
+    closeNavMenu();
+  });
+
   mobileToggle?.addEventListener('click', () => {
     // Nếu đang mở booking modal thì đóng booking modal lại trước
     if (window.closeBookingModal) window.closeBookingModal();
@@ -74,6 +124,13 @@ document.addEventListener('DOMContentLoaded', () => {
       closeNavMenu();
     } else {
       openNavMenu();
+    }
+  });
+
+  // ESC key listener to close mobile menu
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navMenu?.classList.contains('open')) {
+      closeNavMenu();
     }
   });
 
