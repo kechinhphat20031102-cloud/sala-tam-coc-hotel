@@ -1018,6 +1018,49 @@ input[type="date"]::-webkit-date-and-time-value {
   align-items: start;
 }
 
+.policy-hotline-li {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+}
+
+.policy-hotline-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.policy-hotline-numbers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+
+.policy-hotline-numbers a {
+  color: var(--primary-gold-dark);
+  font-weight: 700;
+  font-size: clamp(0.8rem, 1vw, 0.88rem);
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.section-dark .policy-hotline-numbers a {
+  color: var(--primary-gold);
+}
+
+.policy-hotline-numbers a:hover {
+  color: #ffffff;
+}
+
+.policy-hotline-numbers .dot {
+  opacity: 0.5;
+  color: var(--primary-gold);
+  font-size: 0.85rem;
+  flex: none !important;
+}
+
 .about-images {
   position: relative;
   padding-right: 0;
@@ -3408,11 +3451,19 @@ input[type="date"]::-webkit-date-and-time-value {
     font-size: clamp(1.45rem, 6.2vw, 2.5rem) !important;
     line-height: 1.25 !important;
   }
-}
 
   .policies-grid {
-    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
     gap: 30px !important;
+  }
+
+  .policy-card-amenities {
+    order: 1 !important;
+  }
+
+  .policy-card-checkin {
+    order: 2 !important;
   }
 
   .rooms-filter, .gallery-filter {
