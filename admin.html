@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -267,496 +267,121 @@
         <button class="admin-tab-btn active" data-tab="tab-rooms"><i class="fa-solid fa-bed"></i> Quản Lý Phòng & Giá</button>
         <button class="admin-tab-btn" data-tab="tab-tours"><i class="fa-solid fa-route"></i> Tour & Bảng Giá Xe</button>
         <button class="admin-tab-btn" data-tab="tab-info"><i class="fa-solid fa-hotel"></i> Thông Tin Khách Sạn & Hotline</button>
-        <button class="admin-tab-btn" data-tab="tab-backup"><i class="fa-solid fa-database"></i> Sao Lưu & Phục Hồi</button>
-      </div>
-
-      <!-- ================= TAB 1: ROOMS ================= -->
+        <button class="admin      <!-- ================= TAB 1: ROOMS & PRICING ================= -->
       <div class="admin-tab-content active" id="tab-rooms">
-        <h3 style="margin-bottom: 20px; font-family: var(--font-serif); color: var(--primary-gold);"><i class="fa-solid fa-sliders"></i> Danh Sách 9 Hạng Phòng & Bảng Giá</h3>
-
-        <!-- Superior Double -->
-        <div class="admin-card">
-          <div class="admin-card-title">
-            <span>1. Superior Double City View – 28m²</span>
-            <span class="badge-gold">Key: superior-double</span>
-          </div>
-          <div class="admin-grid-2">
-            <div class="form-group">
-              <label>Giá Phòng (VND / Đêm):</label>
-              <input type="text" id="room_price_superior-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Tên Tiếng Anh:</label>
-              <input type="text" id="room_nameEn_superior-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Tên Tiếng Việt:</label>
-              <input type="text" id="room_nameVi_superior-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Diện Tích (m²):</label>
-              <input type="text" id="room_size_superior-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Số Lượng Khách:</label>
-              <input type="text" id="room_guests_superior-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Loại Giường:</label>
-              <input type="text" id="room_beds_superior-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Hướng Nhìn (View):</label>
-              <input type="text" id="room_view_superior-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
-              <input type="text" id="room_cover_superior-double" class="form-control">
-            </div>
-          </div>
-          <div class="form-group">
-            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
-            <textarea id="room_photos_superior-double" class="form-control" style="min-height: 80px;"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Anh:</label>
-            <textarea id="room_descEn_superior-double" class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Việt:</label>
-            <textarea id="room_descVi_superior-double" class="form-control"></textarea>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px;">
+          <div>
+            <h3 style="margin-bottom: 6px; font-family: var(--font-serif); color: var(--primary-gold);"><i class="fa-solid fa-sliders"></i> Quản Lý Hạng Phòng & Bảng Giá Phân Theo Ngôn Ngữ</h3>
+            <p style="font-size: 0.88rem; color: #a0a0a0; margin: 0;">Chọn Hạng Phòng và Ngôn Ngữ cần chỉnh sửa. Dữ liệu sẽ tự động đồng bộ lên trang chủ và bảng thông tin chi tiết.</p>
           </div>
         </div>
 
-        <!-- Superior Triple -->
-        <div class="admin-card">
-          <div class="admin-card-title">
-            <span>2. Superior Triple City View – 30m²</span>
-            <span class="badge-gold">Key: superior-triple</span>
-          </div>
-          <div class="admin-grid-2">
-            <div class="form-group">
-              <label>Giá Phòng (VND / Đêm):</label>
-              <input type="text" id="room_price_superior-triple" class="form-control">
+        <!-- CONTROL PANEL FOR ROOM & LANGUAGE SELECTION -->
+        <div class="admin-card" style="background: linear-gradient(135deg, #1c1e22 0%, #151619 100%); border: 1px solid rgba(197, 168, 128, 0.4); margin-bottom: 20px;">
+          <div class="admin-grid-2" style="align-items: center; gap: 20px;">
+            <!-- SELECT ROOM -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <label style="font-size: 0.95rem; font-weight: 600; color: var(--primary-gold);"><i class="fa-solid fa-bed"></i> 1. Chọn Hạng Phòng Cần Sửa:</label>
+              <select id="adminRoomKeySelect" class="form-control" style="font-size: 1rem; font-weight: 600; color: var(--primary-gold); background: #24262c; border: 1px solid rgba(197, 168, 128, 0.5); padding: 12px 16px; cursor: pointer;">
+                <option value="superior-double">1. Superior Double City View – 28m²</option>
+                <option value="superior-triple">2. Superior Triple City View – 30m²</option>
+                <option value="deluxe-double">3. Deluxe Double Balcony – 28m²</option>
+                <option value="deluxe-twin">4. Deluxe Twin Balcony – 35m²</option>
+                <option value="luxury-double">5. Luxury Double with Balcony & Bath tub – 28m²</option>
+                <option value="luxury-twin">6. Luxury Twin with Balcony & Bath tub – 35m²</option>
+                <option value="deluxe-family">7. Deluxe Family Balcony – 35m²</option>
+                <option value="family-connecting">8. Family Connecting room 1 – 55m²</option>
+                <option value="family-connecting-2">9. Family Connecting room 2 – 60m²</option>
+              </select>
             </div>
-            <div class="form-group">
-              <label>Tên Tiếng Anh:</label>
-              <input type="text" id="room_nameEn_superior-triple" class="form-control">
+
+            <!-- SELECT LANGUAGE -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <label style="font-size: 0.95rem; font-weight: 600; color: var(--primary-gold);"><i class="fa-solid fa-language"></i> 2. Chọn Phiên Bản Ngôn Ngữ (3 Ngôn Ngữ):</label>
+              <div class="admin-lang-tabs" style="display: flex; gap: 8px;">
+                <button type="button" class="admin-lang-btn active" data-lang="vi" style="flex: 1; padding: 11px 10px; background: var(--primary-gold); color: #111; border: 1px solid var(--primary-gold); border-radius: 6px; font-weight: 700; cursor: pointer; transition: all 0.3s ease;">🇻🇳 Tiếng Việt</button>
+                <button type="button" class="admin-lang-btn" data-lang="en" style="flex: 1; padding: 11px 10px; background: #24262c; color: #e0e0e0; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">🇬🇧 English</button>
+                <button type="button" class="admin-lang-btn" data-lang="fr" style="flex: 1; padding: 11px 10px; background: #24262c; color: #e0e0e0; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">🇫🇷 Français</button>
+              </div>
             </div>
-            <div class="form-group">
-              <label>Tên Tiếng Việt:</label>
-              <input type="text" id="room_nameVi_superior-triple" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Diện Tích (m²):</label>
-              <input type="text" id="room_size_superior-triple" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Số Lượng Khách:</label>
-              <input type="text" id="room_guests_superior-triple" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Loại Giường:</label>
-              <input type="text" id="room_beds_superior-triple" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Hướng Nhìn (View):</label>
-              <input type="text" id="room_view_superior-triple" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
-              <input type="text" id="room_cover_superior-triple" class="form-control">
-            </div>
-          </div>
-          <div class="form-group">
-            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
-            <textarea id="room_photos_superior-triple" class="form-control" style="min-height: 80px;"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Anh:</label>
-            <textarea id="room_descEn_superior-triple" class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Việt:</label>
-            <textarea id="room_descVi_superior-triple" class="form-control"></textarea>
           </div>
         </div>
 
-        <!-- Deluxe Double -->
-        <div class="admin-card">
-          <div class="admin-card-title">
-            <span>3. Deluxe Double Balcony – 28m²</span>
-            <span class="badge-gold">Key: deluxe-double</span>
+        <!-- DYNAMIC EDITING FORM CARD MATCHING IMAGE 3 -->
+        <div class="admin-card" id="adminRoomEditCard" style="background: #18191c; border: 1px solid rgba(197, 168, 128, 0.3); border-radius: 10px;">
+          <div class="admin-card-title" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span id="adminActiveRoomTitle" style="font-size: 1.3rem; font-weight: 700; color: var(--primary-gold);">Superior Double City View – 28m²</span>
+              <span id="adminActiveLangBadge" class="badge-gold" style="margin-left: 10px; font-size: 0.8rem; background: rgba(197,168,128,0.2); padding: 4px 10px; border-radius: 4px; color: #fff;">[ Đang chỉnh sửa: Tiếng Việt ]</span>
+            </div>
+            <span class="badge-gold" id="adminActiveRoomKey" style="font-family: monospace;">Key: superior-double</span>
           </div>
-          <div class="admin-grid-2">
-            <div class="form-group">
-              <label>Giá Phòng (VND / Đêm):</label>
-              <input type="text" id="room_price_deluxe-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Tên Tiếng Anh:</label>
-              <input type="text" id="room_nameEn_deluxe-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Tên Tiếng Việt:</label>
-              <input type="text" id="room_nameVi_deluxe-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Diện Tích (m²):</label>
-              <input type="text" id="room_size_deluxe-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Số Lượng Khách:</label>
-              <input type="text" id="room_guests_deluxe-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Loại Giường:</label>
-              <input type="text" id="room_beds_deluxe-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Hướng Nhìn (View):</label>
-              <input type="text" id="room_view_deluxe-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
-              <input type="text" id="room_cover_deluxe-double" class="form-control">
-            </div>
-          </div>
-          <div class="form-group">
-            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
-            <textarea id="room_photos_deluxe-double" class="form-control" style="min-height: 80px;"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Anh:</label>
-            <textarea id="room_descEn_deluxe-double" class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Việt:</label>
-            <textarea id="room_descVi_deluxe-double" class="form-control"></textarea>
-          </div>
-        </div>
 
-        <!-- Deluxe Twin -->
-        <div class="admin-card">
-          <div class="admin-card-title">
-            <span>4. Deluxe Twin Balcony – 35m²</span>
-            <span class="badge-gold">Key: deluxe-twin</span>
-          </div>
-          <div class="admin-grid-2">
+          <!-- GROUP 1: ROOM TITLE & INTRO DESCRIPTION -->
+          <div style="margin-bottom: 25px;">
             <div class="form-group">
-              <label>Giá Phòng (VND / Đêm):</label>
-              <input type="text" id="room_price_deluxe-twin" class="form-control">
+              <label style="font-weight: 600; color: #fff;"><i class="fa-solid fa-heading"></i> Tên Hạng Phòng (<span class="current-lang-text">Tiếng Việt</span>):</label>
+              <input type="text" id="admin_field_room_name" class="form-control" placeholder="Nhập tên phòng...">
             </div>
-            <div class="form-group">
-              <label>Tên Tiếng Anh:</label>
-              <input type="text" id="room_nameEn_deluxe-twin" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Tên Tiếng Việt:</label>
-              <input type="text" id="room_nameVi_deluxe-twin" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Diện Tích (m²):</label>
-              <input type="text" id="room_size_deluxe-twin" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Số Lượng Khách:</label>
-              <input type="text" id="room_guests_deluxe-twin" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Loại Giường:</label>
-              <input type="text" id="room_beds_deluxe-twin" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Hướng Nhìn (View):</label>
-              <input type="text" id="room_view_deluxe-twin" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
-              <input type="text" id="room_cover_deluxe-twin" class="form-control">
-            </div>
-          </div>
-          <div class="form-group">
-            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
-            <textarea id="room_photos_deluxe-twin" class="form-control" style="min-height: 80px;"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Anh:</label>
-            <textarea id="room_descEn_deluxe-twin" class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Việt:</label>
-            <textarea id="room_descVi_deluxe-twin" class="form-control"></textarea>
-          </div>
-        </div>
 
-        <!-- Luxury Double -->
-        <div class="admin-card">
-          <div class="admin-card-title">
-            <span>5. Luxury Double with Balcony & Bath tub – 28m²</span>
-            <span class="badge-gold">Key: luxury-double</span>
-          </div>
-          <div class="admin-grid-2">
             <div class="form-group">
-              <label>Giá Phòng (VND / Đêm):</label>
-              <input type="text" id="room_price_luxury-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Tên Tiếng Anh:</label>
-              <input type="text" id="room_nameEn_luxury-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Tên Tiếng Việt:</label>
-              <input type="text" id="room_nameVi_luxury-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Diện Tích (m²):</label>
-              <input type="text" id="room_size_luxury-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Số Lượng Khách:</label>
-              <input type="text" id="room_guests_luxury-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Loại Giường:</label>
-              <input type="text" id="room_beds_luxury-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Hướng Nhìn (View):</label>
-              <input type="text" id="room_view_luxury-double" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
-              <input type="text" id="room_cover_luxury-double" class="form-control">
+              <label style="font-weight: 600; color: #fff;"><i class="fa-solid fa-align-left"></i> Thông Tin Giới Thiệu / Mô Tả (<span class="current-lang-text">Tiếng Việt</span>):</label>
+              <textarea id="admin_field_room_desc" class="form-control" style="min-height: 90px;" placeholder="Nhập thông tin giới thiệu ngắn..."></textarea>
             </div>
           </div>
-          <div class="form-group">
-            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
-            <textarea id="room_photos_luxury-double" class="form-control" style="min-height: 80px;"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Anh:</label>
-            <textarea id="room_descEn_luxury-double" class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Việt:</label>
-            <textarea id="room_descVi_luxury-double" class="form-control"></textarea>
-          </div>
-        </div>
 
-        <!-- Luxury Twin -->
-        <div class="admin-card">
-          <div class="admin-card-title">
-            <span>6. Luxury Twin with Balcony & Bath tub – 35m²</span>
-            <span class="badge-gold">Key: luxury-twin</span>
-          </div>
-          <div class="admin-grid-2">
-            <div class="form-group">
-              <label>Giá Phòng (VND / Đêm):</label>
-              <input type="text" id="room_price_luxury-twin" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Tên Tiếng Anh:</label>
-              <input type="text" id="room_nameEn_luxury-twin" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Tên Tiếng Việt:</label>
-              <input type="text" id="room_nameVi_luxury-twin" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Diện Tích (m²):</label>
-              <input type="text" id="room_size_luxury-twin" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Số Lượng Khách:</label>
-              <input type="text" id="room_guests_luxury-twin" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Loại Giường:</label>
-              <input type="text" id="room_beds_luxury-twin" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Hướng Nhìn (View):</label>
-              <input type="text" id="room_view_luxury-twin" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
-              <input type="text" id="room_cover_luxury-twin" class="form-control">
-            </div>
-          </div>
-          <div class="form-group">
-            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
-            <textarea id="room_photos_luxury-twin" class="form-control" style="min-height: 80px;"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Anh:</label>
-            <textarea id="room_descEn_luxury-twin" class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Việt:</label>
-            <textarea id="room_descVi_luxury-twin" class="form-control"></textarea>
-          </div>
-        </div>
+          <!-- GROUP 2: METADATA SPECIFICATION GRID (MATCHING IMAGE 3 TABLE) -->
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(197,168,128,0.2); border-radius: 8px; padding: 20px; margin-bottom: 25px;">
+            <h4 style="color: var(--primary-gold); font-size: 1.05rem; margin-bottom: 15px; border-bottom: 1px dashed rgba(197,168,128,0.25); padding-bottom: 8px;">
+              <i class="fa-solid fa-table-list"></i> Bảng Thông Số Kỹ Thuật & Giá (Đồng bộ với Bảng ở Trang Chi Tiết)
+            </h4>
 
-        <!-- Deluxe Family -->
-        <div class="admin-card">
-          <div class="admin-card-title">
-            <span>7. Deluxe Family Balcony – 35m²</span>
-            <span class="badge-gold">Key: deluxe-family</span>
-          </div>
-          <div class="admin-grid-2">
-            <div class="form-group">
-              <label>Giá Phòng (VND / Đêm):</label>
-              <input type="text" id="room_price_deluxe-family" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Tên Tiếng Anh:</label>
-              <input type="text" id="room_nameEn_deluxe-family" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Tên Tiếng Việt:</label>
-              <input type="text" id="room_nameVi_deluxe-family" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Diện Tích (m²):</label>
-              <input type="text" id="room_size_deluxe-family" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Số Lượng Khách:</label>
-              <input type="text" id="room_guests_deluxe-family" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Loại Giường:</label>
-              <input type="text" id="room_beds_deluxe-family" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Hướng Nhìn (View):</label>
-              <input type="text" id="room_view_deluxe-family" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
-              <input type="text" id="room_cover_deluxe-family" class="form-control">
-            </div>
-          </div>
-          <div class="form-group">
-            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
-            <textarea id="room_photos_deluxe-family" class="form-control" style="min-height: 80px;"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Anh:</label>
-            <textarea id="room_descEn_deluxe-family" class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Việt:</label>
-            <textarea id="room_descVi_deluxe-family" class="form-control"></textarea>
-          </div>
-        </div>
+            <div class="admin-grid-2">
+              <div class="form-group">
+                <label style="color: var(--primary-gold-light);"><i class="fa-solid fa-maximize"></i> ROOM SIZE (Diện Tích):</label>
+                <input type="text" id="admin_field_room_size" class="form-control" placeholder="vd: 28 m²">
+              </div>
 
-        <!-- Family Connecting 1 -->
-        <div class="admin-card">
-          <div class="admin-card-title">
-            <span>8. Family Connecting Room 1 (No Balcony) – 55m²</span>
-            <span class="badge-gold">Key: family-connecting</span>
-          </div>
-          <div class="admin-grid-2">
-            <div class="form-group">
-              <label>Giá Phòng (VND / Đêm):</label>
-              <input type="text" id="room_price_family-connecting" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Tên Tiếng Anh:</label>
-              <input type="text" id="room_nameEn_family-connecting" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Tên Tiếng Việt:</label>
-              <input type="text" id="room_nameVi_family-connecting" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Diện Tích (m²):</label>
-              <input type="text" id="room_size_family-connecting" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Số Lượng Khách:</label>
-              <input type="text" id="room_guests_family-connecting" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Loại Giường:</label>
-              <input type="text" id="room_beds_family-connecting" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Hướng Nhìn (View):</label>
-              <input type="text" id="room_view_family-connecting" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
-              <input type="text" id="room_cover_family-connecting" class="form-control">
-            </div>
-          </div>
-          <div class="form-group">
-            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
-            <textarea id="room_photos_family-connecting" class="form-control" style="min-height: 80px;"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Anh:</label>
-            <textarea id="room_descEn_family-connecting" class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Việt:</label>
-            <textarea id="room_descVi_family-connecting" class="form-control"></textarea>
-          </div>
-        </div>
+              <div class="form-group">
+                <label style="color: var(--primary-gold-light);"><i class="fa-solid fa-user-group"></i> MAX GUESTS (Số Lượng Khách - <span class="current-lang-text">Tiếng Việt</span>):</label>
+                <input type="text" id="admin_field_room_guests" class="form-control" placeholder="vd: 02 Khách">
+              </div>
 
-        <!-- Family Connecting 2 -->
-        <div class="admin-card">
-          <div class="admin-card-title">
-            <span>9. Family Connecting Room 2 (With Balcony) – 55m²</span>
-            <span class="badge-gold">Key: family-connecting-2</span>
-          </div>
-          <div class="admin-grid-2">
-            <div class="form-group">
-              <label>Giá Phòng (VND / Đêm):</label>
-              <input type="text" id="room_price_family-connecting-2" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Tên Tiếng Anh:</label>
-              <input type="text" id="room_nameEn_family-connecting-2" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Tên Tiếng Việt:</label>
-              <input type="text" id="room_nameVi_family-connecting-2" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Diện Tích (m²):</label>
-              <input type="text" id="room_size_family-connecting-2" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Số Lượng Khách:</label>
-              <input type="text" id="room_guests_family-connecting-2" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Loại Giường:</label>
-              <input type="text" id="room_beds_family-connecting-2" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Hướng Nhìn (View):</label>
-              <input type="text" id="room_view_family-connecting-2" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Đường Dẫn Ảnh Đại Diện (Cover):</label>
-              <input type="text" id="room_cover_family-connecting-2" class="form-control">
+              <div class="form-group">
+                <label style="color: var(--primary-gold-light);"><i class="fa-solid fa-bed"></i> BED TYPE (Loại Giường - <span class="current-lang-text">Tiếng Việt</span>):</label>
+                <input type="text" id="admin_field_room_beds" class="form-control" placeholder="vd: 01 Giường King">
+              </div>
+
+              <div class="form-group">
+                <label style="color: var(--primary-gold-light);"><i class="fa-solid fa-tag"></i> REFERENCE PRICE (Giá Đêm Tham Khảo - VND):</label>
+                <input type="text" id="admin_field_room_price" class="form-control" placeholder="vd: 1,300,000">
+              </div>
+
+              <div class="form-group" style="grid-column: span 2;">
+                <label style="color: var(--primary-gold-light);"><i class="fa-solid fa-mountain-sun"></i> HƯỚNG NHÌN / VIEW (<span class="current-lang-text">Tiếng Việt</span>):</label>
+                <input type="text" id="admin_field_room_view" class="form-control" placeholder="vd: Cửa sổ hướng phố">
+              </div>
             </div>
           </div>
-          <div class="form-group">
-            <label><i class="fa-solid fa-images"></i> Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
-            <textarea id="room_photos_family-connecting-2" class="form-control" style="min-height: 80px;"></textarea>
+
+          <!-- GROUP 3: IMAGES & MEDIA -->
+          <div style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 20px; margin-bottom: 25px;">
+            <h4 style="color: #fff; font-size: 1rem; margin-bottom: 15px;"><i class="fa-solid fa-images"></i> Hình Ảnh & Thư Viện</h4>
+            
+            <div class="form-group">
+              <label>Đường Dẫn Ảnh Đại Diện (Cover Image):</label>
+              <input type="text" id="admin_field_room_cover" class="form-control" placeholder="Đường dẫn file ảnh...">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+              <label>Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
+              <textarea id="admin_field_room_photos" class="form-control" style="min-height: 100px;" placeholder="Dán các đường dẫn ảnh vào đây..."></textarea>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Anh:</label>
-            <textarea id="room_descEn_family-connecting-2" class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Mô Tả Tiếng Việt:</label>
-            <textarea id="room_descVi_family-connecting-2" class="form-control"></textarea>
+
+          <!-- ACTION BUTTONS -->
+          <div style="display: flex; justify-content: flex-end; gap: 12px;">
+            <button type="button" class="btn btn-gold" id="adminSaveSingleRoomBtn"><i class="fa-solid fa-floppy-disk"></i> Lưu Thay Đổi Hạng Phòng Này</button>
           </div>
         </div>
 

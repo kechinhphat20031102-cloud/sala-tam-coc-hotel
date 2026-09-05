@@ -193,11 +193,11 @@ function sanitizeSalaData(inputData) {
       if (!data.rooms[key]) {
         data.rooms[key] = { ...DEFAULT_SALA_DATA.rooms[key] };
       } else {
-        // Enforce official base prices, bed layout formatting & view titles
-        data.rooms[key].price = DEFAULT_SALA_DATA.rooms[key].price;
-        data.rooms[key].beds = DEFAULT_SALA_DATA.rooms[key].beds;
-        data.rooms[key].view = DEFAULT_SALA_DATA.rooms[key].view;
-        data.rooms[key].descEn = DEFAULT_SALA_DATA.rooms[key].descEn;
+        // Merge missing properties from default if any
+        data.rooms[key] = {
+          ...DEFAULT_SALA_DATA.rooms[key],
+          ...data.rooms[key]
+        };
       }
     });
   }

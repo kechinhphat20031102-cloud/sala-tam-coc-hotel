@@ -304,9 +304,55 @@ window.ROOMS_DETAILS_DATA = {
     document.body.style.overflow = '';
   };
 
+  function syncCustomRoomsData() {
+    try {
+      const customStr = localStorage.getItem('sala_custom_data');
+      if (customStr) {
+        const parsed = JSON.parse(customStr);
+        if (parsed && parsed.rooms) {
+          Object.keys(parsed.rooms).forEach(key => {
+            if (window.ROOMS_DETAILS_DATA[key]) {
+              const c = parsed.rooms[key];
+              window.ROOMS_DETAILS_DATA[key] = {
+                ...window.ROOMS_DETAILS_DATA[key],
+                ...c,
+                nameEn: c.nameEn || window.ROOMS_DETAILS_DATA[key].nameEn,
+                nameVi: c.nameVi || window.ROOMS_DETAILS_DATA[key].nameVi,
+                nameFr: c.nameFr || window.ROOMS_DETAILS_DATA[key].nameFr || c.nameEn,
+                descEn: c.descEn || window.ROOMS_DETAILS_DATA[key].descEn,
+                descVi: c.descVi || window.ROOMS_DETAILS_DATA[key].descVi,
+                descFr: c.descFr || window.ROOMS_DETAILS_DATA[key].descFr || c.descEn,
+                guests: c.guests || window.ROOMS_DETAILS_DATA[key].guests,
+                guestsVi: c.guestsVi || window.ROOMS_DETAILS_DATA[key].guestsVi || c.guests,
+                guestsFr: c.guestsFr || window.ROOMS_DETAILS_DATA[key].guestsFr || c.guests,
+                beds: c.beds || window.ROOMS_DETAILS_DATA[key].beds,
+                bedsVi: c.bedsVi || window.ROOMS_DETAILS_DATA[key].bedsVi || c.beds,
+                bedsFr: c.bedsFr || window.ROOMS_DETAILS_DATA[key].bedsFr || c.beds,
+                view: c.view || window.ROOMS_DETAILS_DATA[key].view,
+                viewVi: c.viewVi || window.ROOMS_DETAILS_DATA[key].viewVi || c.view,
+                viewFr: c.viewFr || window.ROOMS_DETAILS_DATA[key].viewFr || c.view,
+                size: c.size || window.ROOMS_DETAILS_DATA[key].size,
+                price: c.price || window.ROOMS_DETAILS_DATA[key].price,
+                cover: c.cover || window.ROOMS_DETAILS_DATA[key].cover,
+                photos: (Array.isArray(c.photos) && c.photos.length > 0) ? c.photos : window.ROOMS_DETAILS_DATA[key].photos
+              };
+            }
+          });
+        }
+      }
+    } catch(e) {
+      console.error("Error syncing custom room data:", e);
+    }
+  }
+
+  // Initial sync on load
+  syncCustomRoomsData();
+
   window.openRoomDetailModal = function(roomKey) {
     const roomModalEl = document.getElementById('roomDetailModal');
     const roomModalBodyEl = document.getElementById('roomModalBody');
+
+    syncCustomRoomsData();
 
     if (!window.ROOMS_DETAILS_DATA || !window.ROOMS_DETAILS_DATA[roomKey] || !roomModalEl || !roomModalBodyEl) {
       console.warn('Modal target or room data missing for key:', roomKey);
@@ -583,8 +629,17 @@ window.ROOMS_DETAILS_DATA = {
     }
   });
 
-  // Re-render active room modal on language change
+  // Re-render active room modal on language change or admin data update
   document.addEventListener('salaLanguageChange', function() {
+    syncCustomRoomsData();
+    const roomModalEl = document.getElementById('roomDetailModal');
+    if (roomModalEl && (roomModalEl.classList.contains('active') || roomModalEl.style.display === 'flex') && currentOpenRoomKey) {
+      window.openRoomDetailModal(currentOpenRoomKey);
+    }
+  });
+
+  document.addEventListener('salaDataUpdated', function() {
+    syncCustomRoomsData();
     const roomModalEl = document.getElementById('roomDetailModal');
     if (roomModalEl && (roomModalEl.classList.contains('active') || roomModalEl.style.display === 'flex') && currentOpenRoomKey) {
       window.openRoomDetailModal(currentOpenRoomKey);

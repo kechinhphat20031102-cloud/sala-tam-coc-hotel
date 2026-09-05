@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const CORRECT_PASSWORD = 'sala2026';
 
+  let activeRoomKey = 'superior-double';
+  let activeLang = 'vi';
+  let roomDataState = {};
+
   // Check login session
   if (sessionStorage.getItem('sala_admin_authed') === 'true') {
     showDashboard();
@@ -65,46 +69,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // LOAD DATA INTO FORMS
   function loadDataIntoForms() {
     const data = window.getSalaData();
+    roomDataState = JSON.parse(JSON.stringify(data.rooms || {}));
 
     // 1. Hotel Info
     if (data.hotelInfo) {
-      document.getElementById('info_hotline1').value = data.hotelInfo.hotline1 || '';
-      document.getElementById('info_hotline2').value = data.hotelInfo.hotline2 || '';
-      document.getElementById('info_hotline3').value = data.hotelInfo.hotline3 || '';
-      document.getElementById('info_email').value = data.hotelInfo.email || '';
-      document.getElementById('info_whatsapp').value = data.hotelInfo.whatsapp || '';
-      document.getElementById('info_address').value = data.hotelInfo.address || '';
-      document.getElementById('info_hero_sub').value = data.hotelInfo.heroSubtitle || '';
-      document.getElementById('info_hero_desc').value = data.hotelInfo.heroDesc || '';
+      document.getElementById('info_hotline1') && (document.getElementById('info_hotline1').value = data.hotelInfo.hotline1 || '');
+      document.getElementById('info_hotline2') && (document.getElementById('info_hotline2').value = data.hotelInfo.hotline2 || '');
+      document.getElementById('info_hotline3') && (document.getElementById('info_hotline3').value = data.hotelInfo.hotline3 || '');
+      document.getElementById('info_email') && (document.getElementById('info_email').value = data.hotelInfo.email || '');
+      document.getElementById('info_whatsapp') && (document.getElementById('info_whatsapp').value = data.hotelInfo.whatsapp || '');
+      document.getElementById('info_address') && (document.getElementById('info_address').value = data.hotelInfo.address || '');
+      document.getElementById('info_hero_sub') && (document.getElementById('info_hero_sub').value = data.hotelInfo.heroSubtitle || '');
+      document.getElementById('info_hero_desc') && (document.getElementById('info_hero_desc').value = data.hotelInfo.heroDesc || '');
     }
 
-    // 2. Rooms
-    if (data.rooms) {
-      Object.keys(data.rooms).forEach(roomKey => {
-        const room = data.rooms[roomKey];
-        const priceInput = document.getElementById(`room_price_${roomKey}`);
-        const nameEnInput = document.getElementById(`room_nameEn_${roomKey}`);
-        const nameViInput = document.getElementById(`room_nameVi_${roomKey}`);
-        const sizeInput = document.getElementById(`room_size_${roomKey}`);
-        const guestsInput = document.getElementById(`room_guests_${roomKey}`);
-        const bedsInput = document.getElementById(`room_beds_${roomKey}`);
-        const viewInput = document.getElementById(`room_view_${roomKey}`);
-        const coverInput = document.getElementById(`room_cover_${roomKey}`);
-        const photosInput = document.getElementById(`room_photos_${roomKey}`);
-
-        if (priceInput) priceInput.value = room.price || '';
-        if (nameEnInput) nameEnInput.value = room.nameEn || '';
-        if (nameViInput) nameViInput.value = room.nameVi || '';
-        if (sizeInput) sizeInput.value = room.size || '';
-        if (guestsInput) guestsInput.value = room.guests || '';
-        if (bedsInput) bedsInput.value = room.beds || '';
-        if (viewInput) viewInput.value = room.view || '';
-        if (coverInput) coverInput.value = room.cover || '';
-        if (photosInput) photosInput.value = Array.isArray(room.photos) ? room.photos.join('\n') : (room.photos || '');
-        if (descEnInput) descEnInput.value = room.descEn || '';
-        if (descViInput) descViInput.value = room.descVi || '';
-      });
-    }
+    // 2. Load Rooms Form
+    renderRoomEditForm();
 
     // 3. Tours
     const tourKeys = [
@@ -130,96 +110,195 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (data.tours && data.tours['limousine']) {
-      document.getElementById('limo_oneway').value = data.tours['limousine'].priceOneWay || '';
-      document.getElementById('limo_roundtrip').value = data.tours['limousine'].priceRoundTrip || '';
-      document.getElementById('limo_schedule').value = data.tours['limousine'].schedule || '';
+      document.getElementById('limo_oneway') && (document.getElementById('limo_oneway').value = data.tours['limousine'].priceOneWay || '');
+      document.getElementById('limo_roundtrip') && (document.getElementById('limo_roundtrip').value = data.tours['limousine'].priceRoundTrip || '');
+      document.getElementById('limo_schedule') && (document.getElementById('limo_schedule').value = data.tours['limousine'].schedule || '');
     }
   }
 
-  // SAVE ALL DATA
-  const saveAllBtn = document.getElementById('saveAllBtn');
-  saveAllBtn?.addEventListener('click', () => {
-    const currentData = window.getSalaData();
+  function saveCurrentRoomFormToState() {
+    if (!roomDataState[activeRoomKey]) {
+      roomDataState[activeRoomKey] = {};
+    }
+    const room = roomDataState[activeRoomKey];
 
-    // 1. Gather Hotel Info
-    currentData.hotelInfo = {
-      ...currentData.hotelInfo,
-      hotline1: document.getElementById('info_hotline1').value.trim(),
-      hotline2: document.getElementById('info_hotline2').value.trim(),
-      hotline3: document.getElementById('info_hotline3').value.trim(),
-      email: document.getElementById('info_email').value.trim(),
-      whatsapp: document.getElementById('info_whatsapp').value.trim(),
-      address: document.getElementById('info_address').value.trim(),
-      heroSubtitle: document.getElementById('info_hero_sub').value.trim(),
-      heroDesc: document.getElementById('info_hero_desc').value.trim()
-    };
+    const nameVal = document.getElementById('admin_field_room_name')?.value.trim();
+    const descVal = document.getElementById('admin_field_room_desc')?.value.trim();
+    const sizeVal = document.getElementById('admin_field_room_size')?.value.trim();
+    const guestsVal = document.getElementById('admin_field_room_guests')?.value.trim();
+    const bedsVal = document.getElementById('admin_field_room_beds')?.value.trim();
+    const priceVal = document.getElementById('admin_field_room_price')?.value.trim();
+    const viewVal = document.getElementById('admin_field_room_view')?.value.trim();
+    const coverVal = document.getElementById('admin_field_room_cover')?.value.trim();
+    const photosVal = document.getElementById('admin_field_room_photos')?.value.trim();
 
-    // 2. Gather Rooms
-    Object.keys(currentData.rooms).forEach(roomKey => {
-      const priceVal = document.getElementById(`room_price_${roomKey}`)?.value.trim();
-      const nameEnVal = document.getElementById(`room_nameEn_${roomKey}`)?.value.trim();
-      const nameViVal = document.getElementById(`room_nameVi_${roomKey}`)?.value.trim();
-      const sizeVal = document.getElementById(`room_size_${roomKey}`)?.value.trim();
-      const guestsVal = document.getElementById(`room_guests_${roomKey}`)?.value.trim();
-      const bedsVal = document.getElementById(`room_beds_${roomKey}`)?.value.trim();
-      const viewVal = document.getElementById(`room_view_${roomKey}`)?.value.trim();
-      const coverVal = document.getElementById(`room_cover_${roomKey}`)?.value.trim();
-      const photosVal = document.getElementById(`room_photos_${roomKey}`)?.value.trim();
-      const descEnVal = document.getElementById(`room_descEn_${roomKey}`)?.value.trim();
-      const descViVal = document.getElementById(`room_descVi_${roomKey}`)?.value.trim();
-
-      const photosArr = photosVal ? photosVal.split('\n').map(s => s.trim()).filter(Boolean) : (currentData.rooms[roomKey]?.photos || []);
-
-      currentData.rooms[roomKey] = {
-        ...currentData.rooms[roomKey],
-        price: priceVal || currentData.rooms[roomKey].price,
-        nameEn: nameEnVal || currentData.rooms[roomKey].nameEn,
-        nameVi: nameViVal || currentData.rooms[roomKey].nameVi,
-        size: sizeVal || currentData.rooms[roomKey].size,
-        guests: guestsVal || currentData.rooms[roomKey].guests,
-        beds: bedsVal || currentData.rooms[roomKey].beds,
-        view: viewVal || currentData.rooms[roomKey].view,
-        cover: coverVal || currentData.rooms[roomKey].cover,
-        photos: photosArr.length > 0 ? photosArr : currentData.rooms[roomKey].photos,
-        descEn: descEnVal || currentData.rooms[roomKey].descEn,
-        descVi: descViVal || currentData.rooms[roomKey].descVi
-      };
-    });
-
-    // 3. Gather Tours
-    if (!currentData.tours) currentData.tours = {};
-
-    tourKeys.forEach(item => {
-      const titleVal = document.getElementById(`tour${item.id}_title`)?.value.trim();
-      const priceVal = document.getElementById(`tour${item.id}_price`)?.value.trim();
-      const descVal = document.getElementById(`tour${item.id}_desc`)?.value.trim();
-
-      currentData.tours[item.key] = {
-        ...currentData.tours[item.key],
-        title: titleVal || currentData.tours[item.key]?.title,
-        price: priceVal || currentData.tours[item.key]?.price,
-        desc: descVal || currentData.tours[item.key]?.desc
-      };
-    });
-
-    if (currentData.tours['limousine']) {
-      currentData.tours['limousine'].priceOneWay = document.getElementById('limo_oneway').value.trim();
-      currentData.tours['limousine'].priceRoundTrip = document.getElementById('limo_roundtrip').value.trim();
-      currentData.tours['limousine'].schedule = document.getElementById('limo_schedule').value.trim();
+    if (sizeVal !== undefined) room.size = sizeVal;
+    if (priceVal !== undefined) room.price = priceVal;
+    if (coverVal !== undefined) room.cover = coverVal;
+    if (photosVal !== undefined) {
+      room.photos = photosVal.split('\n').map(s => s.trim()).filter(Boolean);
     }
 
-    // Save to localStorage
-    if (window.saveSalaData(currentData)) {
-      showToast('Đã lưu tất cả thay đổi thành công!', 'success');
-    } else {
-      showToast('Có lỗi xảy ra khi lưu dữ liệu!', 'error');
+    if (activeLang === 'vi') {
+      if (nameVal !== undefined) room.nameVi = nameVal;
+      if (descVal !== undefined) room.descVi = descVal;
+      if (guestsVal !== undefined) room.guestsVi = guestsVal;
+      if (bedsVal !== undefined) room.bedsVi = bedsVal;
+      if (viewVal !== undefined) room.viewVi = viewVal;
+    } else if (activeLang === 'en') {
+      if (nameVal !== undefined) room.nameEn = nameVal;
+      if (descVal !== undefined) room.descEn = descVal;
+      if (guestsVal !== undefined) room.guests = guestsVal;
+      if (bedsVal !== undefined) room.beds = bedsVal;
+      if (viewVal !== undefined) room.view = viewVal;
+    } else if (activeLang === 'fr') {
+      if (nameVal !== undefined) room.nameFr = nameVal;
+      if (descVal !== undefined) room.descFr = descVal;
+      if (guestsVal !== undefined) room.guestsFr = guestsVal;
+      if (bedsVal !== undefined) room.bedsFr = bedsVal;
+      if (viewVal !== undefined) room.viewFr = viewVal;
     }
+  }
+
+  function renderRoomEditForm() {
+    const room = roomDataState[activeRoomKey] || {};
+
+    const selectEl = document.getElementById('adminRoomKeySelect');
+    if (selectEl && selectEl.value !== activeRoomKey) {
+      selectEl.value = activeRoomKey;
+    }
+
+    const roomTitleText = room.nameVi || room.nameEn || (selectEl?.options[selectEl?.selectedIndex]?.text) || activeRoomKey;
+    const titleEl = document.getElementById('adminActiveRoomTitle');
+    if (titleEl) titleEl.innerText = roomTitleText;
+
+    const keyBadge = document.getElementById('adminActiveRoomKey');
+    if (keyBadge) keyBadge.innerText = `Key: ${activeRoomKey}`;
+
+    const langNames = { vi: 'Tiếng Việt', en: 'English', fr: 'Français' };
+    const langBadge = document.getElementById('adminActiveLangBadge');
+    if (langBadge) langBadge.innerText = `[ Đang chỉnh sửa: ${langNames[activeLang]} ]`;
+
+    document.querySelectorAll('.current-lang-text').forEach(el => {
+      el.innerText = langNames[activeLang];
+    });
+
+    let nameVal = '';
+    let descVal = '';
+    let guestsVal = '';
+    let bedsVal = '';
+    let viewVal = '';
+
+    if (activeLang === 'vi') {
+      nameVal = room.nameVi || room.nameEn || '';
+      descVal = room.descVi || room.descEn || '';
+      guestsVal = room.guestsVi || room.guests || '';
+      bedsVal = room.bedsVi || room.beds || '';
+      viewVal = room.viewVi || room.view || '';
+    } else if (activeLang === 'en') {
+      nameVal = room.nameEn || '';
+      descVal = room.descEn || '';
+      guestsVal = room.guests || room.guestsEn || '';
+      bedsVal = room.beds || room.bedsEn || '';
+      viewVal = room.view || room.viewEn || '';
+    } else if (activeLang === 'fr') {
+      nameVal = room.nameFr || room.nameEn || '';
+      descVal = room.descFr || room.descEn || '';
+      guestsVal = room.guestsFr || room.guests || '';
+      bedsVal = room.bedsFr || room.beds || '';
+      viewVal = room.viewFr || room.view || '';
+    }
+
+    const fieldName = document.getElementById('admin_field_room_name');
+    const fieldDesc = document.getElementById('admin_field_room_desc');
+    const fieldSize = document.getElementById('admin_field_room_size');
+    const fieldGuests = document.getElementById('admin_field_room_guests');
+    const fieldBeds = document.getElementById('admin_field_room_beds');
+    const fieldPrice = document.getElementById('admin_field_room_price');
+    const fieldView = document.getElementById('admin_field_room_view');
+    const fieldCover = document.getElementById('admin_field_room_cover');
+    const fieldPhotos = document.getElementById('admin_field_room_photos');
+
+    if (fieldName) fieldName.value = nameVal;
+    if (fieldDesc) fieldDesc.value = descVal;
+    if (fieldSize) fieldSize.value = room.size || '';
+    if (fieldGuests) fieldGuests.value = guestsVal;
+    if (fieldBeds) fieldBeds.value = bedsVal;
+    if (fieldPrice) fieldPrice.value = room.price || '';
+    if (fieldView) fieldView.value = viewVal;
+    if (fieldCover) fieldCover.value = room.cover || '';
+    if (fieldPhotos) fieldPhotos.value = Array.isArray(room.photos) ? room.photos.join('\n') : (room.photos || '');
+  }
+
+  // LISTENERS FOR ROOM SELECT & LANG BUTTONS
+  const roomSelectEl = document.getElementById('adminRoomKeySelect');
+  roomSelectEl?.addEventListener('change', (e) => {
+    saveCurrentRoomFormToState();
+    activeRoomKey = e.target.value;
+    renderRoomEditForm();
   });
 
-  // EXPORT JSON FILE
-  const exportJsonBtn = document.getElementById('exportJsonBtn');
-  exportJsonBtn?.addEventListener('click', () => {
+  const langBtns = document.querySelectorAll('.admin-lang-btn');
+  langBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      saveCurrentRoomFormToState();
+      langBtns.forEach(b => {
+        b.classList.remove('active');
+        b.style.background = '#24262c';
+        b.style.color = '#e0e0e0';
+        b.style.borderColor = 'rgba(255,255,255,0.15)';
+        b.style.fontWeight = '600';
+      });
+
+      btn.classList.add('active');
+      btn.style.background = 'var(--primary-gold)';
+      btn.style.color = '#111';
+      btn.style.borderColor = 'var(--primary-gold)';
+      btn.style.fontWeight = '700';
+
+      activeLang = btn.getAttribute('data-lang') || 'vi';
+      renderRoomEditForm();
+    });
+  });
+
+  // SAVE ALL DATA FUNCTION
+  function saveAllDataToStorage() {
+    saveCurrentRoomFormToState();
+
+    const fullData = window.getSalaData();
+    fullData.rooms = roomDataState;
+
+    if (document.getElementById('info_hotline1')) {
+      fullData.hotelInfo = {
+        ...fullData.hotelInfo,
+        hotline1: document.getElementById('info_hotline1')?.value.trim() || fullData.hotelInfo.hotline1,
+        hotline2: document.getElementById('info_hotline2')?.value.trim() || fullData.hotelInfo.hotline2,
+        hotline3: document.getElementById('info_hotline3')?.value.trim() || fullData.hotelInfo.hotline3,
+        email: document.getElementById('info_email')?.value.trim() || fullData.hotelInfo.email,
+        whatsapp: document.getElementById('info_whatsapp')?.value.trim() || fullData.hotelInfo.whatsapp,
+        address: document.getElementById('info_address')?.value.trim() || fullData.hotelInfo.address,
+        heroSubtitle: document.getElementById('info_hero_sub')?.value.trim() || fullData.hotelInfo.heroSubtitle,
+        heroDesc: document.getElementById('info_hero_desc')?.value.trim() || fullData.hotelInfo.heroDesc
+      };
+    }
+
+    window.saveSalaData(fullData);
+
+    // Trigger custom event for real-time sync across tabs/modals
+    window.dispatchEvent(new CustomEvent('salaDataUpdated'));
+
+    showToast('Đã lưu và đồng bộ dữ liệu phòng thành công!', 'success');
+  }
+
+  document.getElementById('adminSaveSingleRoomBtn')?.addEventListener('click', saveAllDataToStorage);
+  document.getElementById('saveAllBtn')?.addEventListener('click', saveAllDataToStorage);
+
+  // EXPORT JSON
+  document.getElementById('exportJsonBtn')?.addEventListener('click', () => {
+    saveCurrentRoomFormToState();
     const data = window.getSalaData();
+    data.rooms = roomDataState;
+
     const jsonStr = JSON.stringify(data, null, 2);
     const blob = new Blob([jsonStr], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -233,13 +312,11 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast('Đã tải xuống file cấu hình JSON thành công!', 'success');
   });
 
-  // IMPORT JSON FILE
+  // IMPORT JSON
   const importJsonBtn = document.getElementById('importJsonBtn');
   const importFileInput = document.getElementById('importFileInput');
 
-  importJsonBtn?.addEventListener('click', () => {
-    importFileInput.click();
-  });
+  importJsonBtn?.addEventListener('click', () => importFileInput?.click());
 
   importFileInput?.addEventListener('change', (e) => {
     const file = e.target.files[0];
@@ -249,12 +326,9 @@ document.addEventListener('DOMContentLoaded', () => {
     reader.onload = (event) => {
       try {
         const importedData = JSON.parse(event.target.result);
-        if (window.saveSalaData(importedData)) {
-          loadDataIntoForms();
-          showToast('Tải dữ liệu từ file JSON lên thành công!', 'success');
-        } else {
-          showToast('File JSON không hợp lệ!', 'error');
-        }
+        window.saveSalaData(importedData);
+        loadDataIntoForms();
+        showToast('Tải dữ liệu từ file JSON lên thành công!', 'success');
       } catch(err) {
         showToast('Lỗi đọc file JSON: ' + err.message, 'error');
       }
@@ -264,8 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // RESET DEFAULTS
-  const resetDefaultsBtn = document.getElementById('resetDefaultsBtn');
-  resetDefaultsBtn?.addEventListener('click', () => {
+  document.getElementById('resetDefaultsBtn')?.addEventListener('click', () => {
     if (confirm('Bạn có chắc chắn muốn khôi phục dữ liệu về mặc định ban đầu không? Tất cả chỉnh sửa chưa xuất file sẽ bị xóa.')) {
       window.resetSalaData();
       loadDataIntoForms();
@@ -273,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // TOAST ALERT HELPER
+  // TOAST NOTIFICATIONS
   function showToast(message, type = 'info') {
     let toastContainer = document.getElementById('adminToastContainer');
     if (!toastContainer) {
