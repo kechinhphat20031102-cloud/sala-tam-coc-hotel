@@ -262,13 +262,19 @@ function sanitizeSalaData(inputData) {
 
   if (data.rooms) {
     Object.keys(DEFAULT_SALA_DATA.rooms).forEach(key => {
+      const def = DEFAULT_SALA_DATA.rooms[key];
       if (!data.rooms[key]) {
-        data.rooms[key] = { ...DEFAULT_SALA_DATA.rooms[key] };
+        data.rooms[key] = { ...def };
       } else {
         // Merge missing properties from default if any
         data.rooms[key] = {
-          ...DEFAULT_SALA_DATA.rooms[key],
-          ...data.rooms[key]
+          ...def,
+          ...data.rooms[key],
+          nameFr: data.rooms[key].nameFr || def.nameFr,
+          descFr: data.rooms[key].descFr || def.descFr,
+          guestsFr: data.rooms[key].guestsFr || def.guestsFr,
+          bedsFr: data.rooms[key].bedsFr || def.bedsFr,
+          viewFr: data.rooms[key].viewFr || def.viewFr
         };
       }
     });

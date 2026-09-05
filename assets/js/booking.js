@@ -142,6 +142,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // TÍNH ƯỚC TÍNH SỐ ĐÊM
   // ==========================================
+  function getDynamicRoomRate(roomKey) {
+    if (window.ROOMS_DETAILS_DATA && window.ROOMS_DETAILS_DATA[roomKey] && window.ROOMS_DETAILS_DATA[roomKey].price) {
+      const parsed = parseInt(String(window.ROOMS_DETAILS_DATA[roomKey].price).replace(/[^0-9]/g, ''), 10);
+      if (!isNaN(parsed) && parsed > 0) return parsed;
+    }
+    if (window.getSalaData) {
+      const data = window.getSalaData();
+      if (data && data.rooms && data.rooms[roomKey] && data.rooms[roomKey].price) {
+        const parsed = parseInt(String(data.rooms[roomKey].price).replace(/[^0-9]/g, ''), 10);
+        if (!isNaN(parsed) && parsed > 0) return parsed;
+      }
+    }
+    return roomRates[roomKey] || 1300000;
+  }
+
   function updateEstimate() {
     const roomKey     = document.getElementById('modal-room-type')?.value;
     const cinVal      = document.getElementById('modal-checkin')?.value;
@@ -150,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!priceBox) return;
 
     const currentLang = localStorage.getItem('sala_lang') || 'en';
-    const rate        = roomRates[roomKey] || 1300000;
+    const rate        = getDynamicRoomRate(roomKey);
     const fmtRate     = new Intl.NumberFormat('en-US').format(rate);
 
     if (!cinVal || !coutVal) {

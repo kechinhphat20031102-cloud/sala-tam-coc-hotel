@@ -219,13 +219,7 @@
   <div class="login-gate-wrap" id="loginGate">
     <div class="login-card">
       <div class="login-logo">
-        <svg class="logo-emblem" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 54px; margin: 0 auto 10px auto;">
-          <path d="M50 78 L46 22 L50 14 L54 22 Z" fill="#D4AF37" />
-          <path d="M50 78 L37 28 L43 20 L47 26 Z" fill="#C5A880" />
-          <path d="M50 78 L53 26 L57 20 L63 28 Z" fill="#C5A880" />
-          <path d="M50 78 L26 38 L34 30 L38 37 Z" fill="#D4AF37" />
-          <path d="M50 78 L62 37 L66 30 L74 38 Z" fill="#D4AF37" />
-        </svg>
+        <img src="assets/images/logo.png" alt="Sala Tam Coc Hotel & Spa Logo" style="height: 65px; width: auto; margin: 0 auto 14px auto; display: block; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));">
         <div class="login-title">SALA TAM COC HOTEL</div>
         <p style="font-size: 0.8rem; color: #a0a0a0; letter-spacing: 2px;">ADMIN CONTROL PANEL</p>
       </div>
@@ -377,18 +371,36 @@
             </div>
           </div>
 
-          <!-- GROUP 3: IMAGES & MEDIA -->
-          <div style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 20px; margin-bottom: 25px;">
-            <h4 style="color: #fff; font-size: 1rem; margin-bottom: 15px;"><i class="fa-solid fa-images"></i> Hình Ảnh & Thư Viện</h4>
-            
-            <div class="form-group">
-              <label>Đường Dẫn Ảnh Đại Diện (Cover Image):</label>
-              <input type="text" id="admin_field_room_cover" class="form-control" placeholder="Đường dẫn file ảnh...">
+          <!-- GROUP 3: IMAGES & MEDIA GALLERY -->
+          <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 10px; padding: 22px; margin-bottom: 25px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
+              <div>
+                <h4 style="color: var(--primary-gold); font-size: 1.1rem; margin: 0;"><i class="fa-solid fa-images"></i> Hình Ảnh & Thư Viện Phòng</h4>
+                <p style="font-size: 0.82rem; color: #a0a0a0; margin: 4px 0 0 0;">
+                  <i class="fa-solid fa-circle-info" style="color: var(--primary-gold);"></i> 
+                  <strong>Ảnh đầu tiên (Vị trí #1)</strong> sẽ tự động được chọn làm <strong>Ảnh Đại Diện (Cover Image)</strong> của phòng trên toàn bộ website.
+                </p>
+              </div>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button type="button" class="btn btn-gold btn-sm" id="admin_btn_upload_photos" style="font-weight: 700;">
+                  <i class="fa-solid fa-cloud-arrow-up"></i> + Thêm Ảnh Từ Máy Tính
+                </button>
+                <button type="button" class="btn btn-outline-gold btn-sm" id="admin_btn_add_url_photo">
+                  <i class="fa-solid fa-link"></i> + Thêm Đường Dẫn URL
+                </button>
+                <input type="file" id="admin_upload_photos_input" multiple accept="image/*" style="display: none;">
+              </div>
             </div>
 
-            <div class="form-group" style="margin-bottom: 0;">
-              <label>Danh Sách Thư Viện Ảnh (Mỗi đường dẫn 1 dòng):</label>
-              <textarea id="admin_field_room_photos" class="form-control" style="min-height: 100px;" placeholder="Dán các đường dẫn ảnh vào đây..."></textarea>
+            <!-- VISUAL PHOTO GRID -->
+            <div id="admin_photos_gallery_grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px; margin-bottom: 15px;">
+              <!-- Photo items dynamically rendered here -->
+            </div>
+
+            <!-- HIDDEN INPUTS FOR BACKWARDS COMPATIBILITY -->
+            <div style="display: none;">
+              <input type="text" id="admin_field_room_cover">
+              <textarea id="admin_field_room_photos"></textarea>
             </div>
           </div>
 

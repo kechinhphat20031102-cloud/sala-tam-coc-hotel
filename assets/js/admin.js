@@ -202,11 +202,12 @@ document.addEventListener('DOMContentLoaded', () => {
       bedsVal = room.beds || room.bedsEn || '';
       viewVal = room.view || room.viewEn || '';
     } else if (activeLang === 'fr') {
-      nameVal = room.nameFr || room.nameEn || '';
-      descVal = room.descFr || room.descEn || '';
-      guestsVal = room.guestsFr || room.guests || '';
-      bedsVal = room.bedsFr || room.beds || '';
-      viewVal = room.viewFr || room.view || '';
+      const defRoom = (window.DEFAULT_SALA_DATA && window.DEFAULT_SALA_DATA.rooms && window.DEFAULT_SALA_DATA.rooms[activeRoomKey]) || {};
+      nameVal = room.nameFr || defRoom.nameFr || room.nameEn || '';
+      descVal = room.descFr || defRoom.descFr || room.descEn || '';
+      guestsVal = room.guestsFr || defRoom.guestsFr || room.guests || '';
+      bedsVal = room.bedsFr || defRoom.bedsFr || room.beds || '';
+      viewVal = room.viewFr || defRoom.viewFr || room.view || '';
     }
 
     const fieldName = document.getElementById('admin_field_room_name');
@@ -228,7 +229,183 @@ document.addEventListener('DOMContentLoaded', () => {
     if (fieldView) fieldView.value = viewVal;
     if (fieldCover) fieldCover.value = room.cover || '';
     if (fieldPhotos) fieldPhotos.value = Array.isArray(room.photos) ? room.photos.join('\n') : (room.photos || '');
+
+    renderPhotoGalleryGrid();
   }
+
+  // RENDER VISUAL PHOTO GALLERY GRID
+  function renderPhotoGalleryGrid() {
+    const gridContainer = document.getElementById('admin_photos_gallery_grid');
+    if (!gridContainer) return;
+
+    const room = roomDataState[activeRoomKey] || {};
+    let photos = Array.isArray(room.photos) ? [...room.photos] : [];
+
+    // Ensure cover image is photo #0 if photos exists
+    if (photos.length > 0) {
+      room.cover = photos[0];
+    } else {
+      room.cover = '';
+    }
+
+    if (photos.length === 0) {
+      gridContainer.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 30px; background: rgba(255,255,255,0.02); border: 2px dashed rgba(255,255,255,0.15); border-radius: 8px; color: #888;">
+          <i class="fa-regular fa-image" style="font-size: 2.2rem; margin-bottom: 8px; opacity: 0.5;"></i>
+          <p style="margin: 0; font-size: 0.9rem;">Chưa có hình ảnh nào cho phòng này. Nhấn <strong>"+ Thêm Ảnh Từ Máy Tính"</strong> để tải ảnh lên.</p>
+        </div>
+      `;
+      syncPhotoFormFields(photos);
+      return;
+    }
+
+    gridContainer.innerHTML = photos.map((photoUrl, idx) => {
+      const isCover = (idx === 0);
+      return `
+        <div class="admin-photo-card" data-idx="${idx}" style="position: relative; background: #222428; border: ${isCover ? '2px solid var(--primary-gold)' : '1px solid rgba(255,255,255,0.15)'}; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.25s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+          ${isCover ? `<div style="position: absolute; top: 6px; left: 6px; background: var(--primary-gold); color: #111; font-weight: 700; font-size: 0.7rem; padding: 2px 7px; border-radius: 4px; z-index: 2; box-shadow: 0 2px 6px rgba(0,0,0,0.4);"><i class="fa-solid fa-star"></i> ÁNH ĐẠI DIỆN</div>` : `<div style="position: absolute; top: 6px; left: 6px; background: rgba(0,0,0,0.6); color: #ccc; font-weight: 600; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; z-index: 2;">#${idx + 1}</div>`}
+          
+          <div style="height: 105px; width: 100%; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+            <img src="${photoUrl}" alt="Photo ${idx + 1}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='https://placehold.co/300x200/222/d4af37?text=Image+Error';">
+          </div>
+
+          <div style="padding: 6px; background: #1a1b1e; display: flex; justify-content: space-between; align-items: center; gap: 4px;">
+            <div style="display: flex; gap: 3px;">
+              ${idx > 0 ? `<button type="button" class="photo-move-left-btn" data-idx="${idx}" title="Chuyển lên trước" style="background: #333; color: #fff; border: none; padding: 3px 7px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;"><i class="fa-solid fa-chevron-left"></i></button>` : ''}
+              ${idx < photos.length - 1 ? `<button type="button" class="photo-move-right-btn" data-idx="${idx}" title="Chuyển xuống sau" style="background: #333; color: #fff; border: none; padding: 3px 7px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;"><i class="fa-solid fa-chevron-right"></i></button>` : ''}
+              ${!isCover ? `<button type="button" class="photo-set-cover-btn" data-idx="${idx}" title="Đặt làm ảnh đại diện" style="background: rgba(197,168,128,0.2); color: var(--primary-gold); border: 1px solid var(--primary-gold); padding: 3px 7px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;"><i class="fa-solid fa-star"></i></button>` : ''}
+            </div>
+            <button type="button" class="photo-delete-btn" data-idx="${idx}" title="Xóa ảnh này" style="background: #c62828; color: #fff; border: none; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    syncPhotoFormFields(photos);
+    attachPhotoCardListeners();
+  }
+
+  function syncPhotoFormFields(photos) {
+    const fieldCover = document.getElementById('admin_field_room_cover');
+    const fieldPhotos = document.getElementById('admin_field_room_photos');
+
+    if (fieldCover) fieldCover.value = photos.length > 0 ? photos[0] : '';
+    if (fieldPhotos) fieldPhotos.value = photos.join('\n');
+    
+    if (roomDataState[activeRoomKey]) {
+      roomDataState[activeRoomKey].photos = photos;
+      roomDataState[activeRoomKey].cover = photos.length > 0 ? photos[0] : '';
+    }
+  }
+
+  function attachPhotoCardListeners() {
+    const gridContainer = document.getElementById('admin_photos_gallery_grid');
+    if (!gridContainer) return;
+
+    // Delete photo
+    gridContainer.querySelectorAll('.photo-delete-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const idx = parseInt(btn.getAttribute('data-idx'), 10);
+        const room = roomDataState[activeRoomKey];
+        if (room && Array.isArray(room.photos)) {
+          room.photos.splice(idx, 1);
+          renderPhotoGalleryGrid();
+          showToast('Đã xóa 1 ảnh khỏi danh sách!', 'info');
+        }
+      });
+    });
+
+    // Set cover photo (move to index 0)
+    gridContainer.querySelectorAll('.photo-set-cover-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const idx = parseInt(btn.getAttribute('data-idx'), 10);
+        const room = roomDataState[activeRoomKey];
+        if (room && Array.isArray(room.photos) && idx > 0) {
+          const target = room.photos.splice(idx, 1)[0];
+          room.photos.unshift(target);
+          renderPhotoGalleryGrid();
+          showToast('Đã đặt làm Ảnh Đại Diện (Vị trí #1)!', 'success');
+        }
+      });
+    });
+
+    // Move Left
+    gridContainer.querySelectorAll('.photo-move-left-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const idx = parseInt(btn.getAttribute('data-idx'), 10);
+        const room = roomDataState[activeRoomKey];
+        if (room && Array.isArray(room.photos) && idx > 0) {
+          const temp = room.photos[idx];
+          room.photos[idx] = room.photos[idx - 1];
+          room.photos[idx - 1] = temp;
+          renderPhotoGalleryGrid();
+        }
+      });
+    });
+
+    // Move Right
+    gridContainer.querySelectorAll('.photo-move-right-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const idx = parseInt(btn.getAttribute('data-idx'), 10);
+        const room = roomDataState[activeRoomKey];
+        if (room && Array.isArray(room.photos) && idx < room.photos.length - 1) {
+          const temp = room.photos[idx];
+          room.photos[idx] = room.photos[idx + 1];
+          room.photos[idx + 1] = temp;
+          renderPhotoGalleryGrid();
+        }
+      });
+    });
+  }
+
+  // Handle File Upload from Computer
+  const uploadBtn = document.getElementById('admin_btn_upload_photos');
+  const uploadInput = document.getElementById('admin_upload_photos_input');
+
+  uploadBtn?.addEventListener('click', () => uploadInput?.click());
+
+  uploadInput?.addEventListener('change', (e) => {
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
+
+    let processedCount = 0;
+    const room = roomDataState[activeRoomKey] || {};
+    if (!Array.isArray(room.photos)) room.photos = [];
+
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const dataUrl = event.target.result;
+        room.photos.push(dataUrl);
+        processedCount++;
+
+        if (processedCount === files.length) {
+          renderPhotoGalleryGrid();
+          showToast(`Đã thêm thành công ${files.length} ảnh từ máy tính!`, 'success');
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+
+    uploadInput.value = '';
+  });
+
+  // Handle Manual URL / Path addition
+  const addUrlBtn = document.getElementById('admin_btn_add_url_photo');
+  addUrlBtn?.addEventListener('click', () => {
+    const inputPath = prompt('Nhập đường dẫn file ảnh hoặc URL (vd: Ảnh Sala Tam Coc Hotel & Spa/.../ANT_4807.jpg):');
+    if (inputPath && inputPath.trim()) {
+      const room = roomDataState[activeRoomKey] || {};
+      if (!Array.isArray(room.photos)) room.photos = [];
+      room.photos.push(inputPath.trim());
+      renderPhotoGalleryGrid();
+      showToast('Đã thêm 1 ảnh mới vào danh sách!', 'success');
+    }
+  });
 
   // LISTENERS FOR ROOM SELECT & LANG BUTTONS
   const roomSelectEl = document.getElementById('adminRoomKeySelect');

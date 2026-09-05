@@ -629,21 +629,130 @@ window.ROOMS_DETAILS_DATA = {
     }
   });
 
-  // Re-render active room modal on language change or admin data update
-  document.addEventListener('salaLanguageChange', function() {
+  window.updateFrontendRoomCards = function() {
     syncCustomRoomsData();
-    const roomModalEl = document.getElementById('roomDetailModal');
-    if (roomModalEl && (roomModalEl.classList.contains('active') || roomModalEl.style.display === 'flex') && currentOpenRoomKey) {
-      window.openRoomDetailModal(currentOpenRoomKey);
-    }
+    const currentLang = localStorage.getItem('sala_lang') || 'vi';
+
+    if (!window.ROOMS_DETAILS_DATA) return;
+
+    Object.keys(window.ROOMS_DETAILS_DATA).forEach(key => {
+      const room = window.ROOMS_DETAILS_DATA[key];
+      if (!room) return;
+
+      let title = room.nameEn;
+      let desc = room.descEn;
+      let guests = room.guests;
+      let beds = room.beds;
+      let view = room.view;
+
+      if (currentLang === 'vi') {
+        title = room.nameVi || room.nameEn;
+        desc = room.descVi || room.descEn;
+        guests = room.guestsVi || room.guests;
+        beds = room.bedsVi || room.beds;
+        view = room.viewVi || room.view;
+      } else if (currentLang === 'fr') {
+        title = room.nameFr || room.nameEn;
+        desc = room.descFr || room.descEn;
+        guests = room.guestsFr || room.guests;
+        beds = room.bedsFr || room.beds;
+        view = room.viewFr || room.view;
+      }
+
+      const priceVal = room.price || '';
+      const formattedPrice = priceVal ? `${priceVal}₫` : '';
+      const coverImgSrc = (Array.isArray(room.photos) && room.photos.length > 0) ? room.photos[0] : (room.cover || '');
+
+      // 1. UPDATE ROOM CARDS ON INDEX.HTML
+      const cardEl = document.getElementById(key);
+      if (cardEl && cardEl.classList.contains('room-card')) {
+        // Thumbnail Cover Image
+        if (coverImgSrc) {
+          const thumbImg = cardEl.querySelector('.room-thumb');
+          if (thumbImg) thumbImg.src = coverImgSrc;
+        }
+
+        // Title
+        const titleLink = cardEl.querySelector('.room-title a');
+        if (titleLink) titleLink.textContent = title;
+
+        // Price Tag Amount
+        const priceTagSpans = cardEl.querySelectorAll('.room-price-tag span');
+        if (priceTagSpans.length >= 2) {
+          priceTagSpans[1].textContent = formattedPrice;
+        }
+
+        // Desc
+        const descEl = cardEl.querySelector('.room-desc');
+        if (descEl) descEl.textContent = desc;
+
+        // Size
+        const sizeEl = cardEl.querySelector('.room-meta-row1 span:first-child');
+        if (sizeEl) sizeEl.innerHTML = `<i class="fa-solid fa-maximize"></i> ${room.size}`;
+
+        // Guests
+        const guestsEl = cardEl.querySelector('.room-meta-row1 span:last-child');
+        if (guestsEl) guestsEl.innerHTML = `<i class="fa-solid fa-user-group"></i> ${guests}`;
+
+        // Beds
+        const bedsEl = cardEl.querySelector('.room-meta-row2 span');
+        if (bedsEl) bedsEl.innerHTML = `<i class="fa-solid fa-bed"></i> ${beds}`;
+      }
+
+      // 2. UPDATE ROOM BANNERS ON ROOMS.HTML
+      if (cardEl && cardEl.classList.contains('dining-banner')) {
+        // Banner Image
+        if (coverImgSrc) {
+          const bannerImg = cardEl.querySelector('.dining-img');
+          if (bannerImg) bannerImg.src = coverImgSrc;
+        }
+
+        // Title
+        const titleEl = cardEl.querySelector('.section-title');
+        if (titleEl) titleEl.textContent = title;
+
+        // Desc
+        const descEl = cardEl.querySelector('.dining-info > p');
+        if (descEl) descEl.textContent = desc;
+
+        // Meta items
+        const metaItems = cardEl.querySelectorAll('.dining-meta-item');
+        if (metaItems.length >= 4) {
+          const valSize = metaItems[0].querySelector('.value');
+          if (valSize) valSize.textContent = room.size;
+
+          const valGuests = metaItems[1].querySelector('.value');
+          if (valGuests) valGuests.textContent = guests;
+
+          const valBeds = metaItems[2].querySelector('.value');
+          if (valBeds) valBeds.innerHTML = beds;
+
+          const valPrice = metaItems[3].querySelector('.value');
+          if (valPrice) {
+            const prefix = currentLang === 'vi' ? 'Từ ' : (currentLang === 'fr' ? 'À partir de ' : 'From ');
+            const suffix = currentLang === 'vi' ? ' / đêm' : (currentLang === 'fr' ? ' / nuit' : ' / night');
+            valPrice.innerHTML = `<span>${prefix}</span>${formattedPrice}<span>${suffix}</span>`;
+          }
+        }
+      }
+    });
+  };
+
+  // Initial sync & update on load
+  syncCustomRoomsData();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', window.updateFrontendRoomCards);
+  } else {
+    window.updateFrontendRoomCards();
+  }
+
+  // Re-render active room modal & cards on language change or admin data update
+  document.addEventListener('salaLanguageChange', function() {
+    window.updateFrontendRoomCards();
   });
 
   document.addEventListener('salaDataUpdated', function() {
-    syncCustomRoomsData();
-    const roomModalEl = document.getElementById('roomDetailModal');
-    if (roomModalEl && (roomModalEl.classList.contains('active') || roomModalEl.style.display === 'flex') && currentOpenRoomKey) {
-      window.openRoomDetailModal(currentOpenRoomKey);
-    }
+    window.updateFrontendRoomCards();
   });
 
 })();
