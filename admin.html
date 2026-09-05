@@ -135,29 +135,40 @@
     }
     .admin-tabs-nav {
       display: flex;
-      gap: 10px;
-      margin: 30px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      padding-bottom: 10px;
-      overflow-x: auto;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 30px 0 25px 0;
+      border-bottom: 1px solid rgba(197, 168, 128, 0.25);
+      padding-bottom: 15px;
     }
     .admin-tab-btn {
-      padding: 10px 20px;
-      background: #1e2024;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 6px;
-      color: #e0e0e0;
+      padding: 12px 24px;
+      background: #18191c;
+      border: 1px solid rgba(197, 168, 128, 0.25);
+      border-radius: 8px;
+      color: #d5d5d5;
       cursor: pointer;
-      font-weight: 500;
-      font-size: 0.9rem;
+      font-weight: 600;
+      font-size: 0.95rem;
       white-space: nowrap;
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .admin-tab-btn i {
+      color: var(--primary-gold);
     }
     .admin-tab-btn.active, .admin-tab-btn:hover {
-      background: var(--primary-gold);
-      color: #121315;
+      background: linear-gradient(135deg, #c5a880 0%, #a88b60 100%);
+      color: #111111;
       border-color: var(--primary-gold);
-      font-weight: 600;
+      box-shadow: 0 6px 20px rgba(197,168,128,0.35);
+      transform: translateY(-2px);
+    }
+    .admin-tab-btn.active i, .admin-tab-btn:hover i {
+      color: #111111;
     }
     .admin-tab-content {
       display: none;
@@ -261,13 +272,15 @@
       <div class="shortcut-tip" style="margin-top: 25px;">
         <i class="fa-solid fa-circle-info" style="color: var(--primary-gold);"></i> <strong>Mẹo Quản Trị:</strong> Mọi thay đổi bạn bấm <strong>"Lưu Thay Đổi"</strong> sẽ cập nhật ngay lập tức lên website. Bạn cũng có thể xuất file <code>sala-data.json</code> để sao lưu hoặc khôi phục lại bất kỳ lúc nào.
       </div>
-
       <!-- TABS NAVIGATION -->
       <div class="admin-tabs-nav">
         <button class="admin-tab-btn active" data-tab="tab-rooms"><i class="fa-solid fa-bed"></i> Quản Lý Phòng & Giá</button>
         <button class="admin-tab-btn" data-tab="tab-tours"><i class="fa-solid fa-route"></i> Tour & Bảng Giá Xe</button>
         <button class="admin-tab-btn" data-tab="tab-info"><i class="fa-solid fa-hotel"></i> Thông Tin Khách Sạn & Hotline</button>
-        <button class="admin      <!-- ================= TAB 1: ROOMS & PRICING ================= -->
+        <button class="admin-tab-btn" data-tab="tab-backup"><i class="fa-solid fa-database"></i> Sao Lưu & Phục Hồi</button>
+      </div>
+
+      <!-- ================= TAB 1: ROOMS & PRICING ================= -->
       <div class="admin-tab-content active" id="tab-rooms">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px;">
           <div>
