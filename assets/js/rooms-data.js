@@ -445,7 +445,7 @@ window.ROOMS_DETAILS_DATA = {
       pillClean = 'Service de ménage quotidien';
 
       btnBookText = 'Réservation';
-      btnPhoneText = 'Réservation : +84 3 37 40 84 84';
+      btnPhoneText = 'Réservation : 0337 408 484';
     }
 
     // Render Thumbnails HTML

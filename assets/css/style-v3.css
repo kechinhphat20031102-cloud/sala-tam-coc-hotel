@@ -3226,16 +3226,24 @@ input[type="date"]::-webkit-date-and-time-value {
 
 .room-modal-actions {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   margin-top: 30px;
   flex-wrap: wrap;
   width: 100%;
 }
 
 .room-modal-actions .btn {
-  flex: 1;
-  min-width: 180px;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 12px 10px;
+  font-size: clamp(0.76rem, 1vw, 0.82rem);
+  letter-spacing: 0.4px;
+  white-space: nowrap;
   box-sizing: border-box;
+}
+
+.room-modal-actions .btn:nth-child(2) {
+  flex: 1.25 1 0;
 }
 
 .room-modal-title-row {
