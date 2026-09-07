@@ -32,13 +32,13 @@ const DEFAULT_SALA_DATA = {
       "view": "City & Street View Window",
       "viewVi": "Cửa sổ hướng phố",
       "viewFr": "Fenêtre vue ville et rue",
-      "cover": "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4807.jpg",
+      "cover": "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4832.jpg",
       "photos": [
+        "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4832.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4807.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4818.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4825.jpg",
-        "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4829.jpg",
-        "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4832.jpg"
+        "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4829.jpg"
       ],
       "descEn": "Cozy and bright room featuring large city & street view windows, comfortable 1 King bed, refined wooden furnishings, and complete upscale amenities.",
       "descVi": "Phòng Superior Double sở hữu thiết kế trang nhã, ấm cúng với cửa sổ lớn đón ánh sáng tự nhiên hướng phố. Trang bị giường đôi King êm ái cùng hệ thống tiện nghi đầy đủ.",
