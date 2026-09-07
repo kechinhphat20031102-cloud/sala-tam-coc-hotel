@@ -130,13 +130,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const priceVal = document.getElementById('admin_field_room_price')?.value.trim();
     const viewVal = document.getElementById('admin_field_room_view')?.value.trim();
     const coverVal = document.getElementById('admin_field_room_cover')?.value.trim();
-    const photosVal = document.getElementById('admin_field_room_photos')?.value.trim();
 
     if (sizeVal !== undefined) room.size = sizeVal;
     if (priceVal !== undefined) room.price = priceVal;
-    if (coverVal !== undefined) room.cover = coverVal;
-    if (photosVal !== undefined) {
-      room.photos = photosVal.split('\n').map(s => s.trim()).filter(Boolean);
+
+    // Preserve photos array and enforce cover as photo #0
+    if (Array.isArray(room.photos) && room.photos.length > 0) {
+      room.cover = room.photos[0];
+    } else if (coverVal) {
+      room.cover = coverVal;
     }
 
     if (activeLang === 'vi') {
@@ -261,9 +263,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     gridContainer.innerHTML = photos.map((photoUrl, idx) => {
       const isCover = (idx === 0);
+      const isPendingUpload = typeof photoUrl === 'string' && photoUrl.startsWith('data:image/');
       return `
-        <div class="admin-photo-card" data-idx="${idx}" style="position: relative; background: #222428; border: ${isCover ? '2px solid var(--primary-gold)' : '1px solid rgba(255,255,255,0.15)'}; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.25s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
-          ${isCover ? `<div style="position: absolute; top: 6px; left: 6px; background: var(--primary-gold); color: #111; font-weight: 700; font-size: 0.7rem; padding: 2px 7px; border-radius: 4px; z-index: 2; box-shadow: 0 2px 6px rgba(0,0,0,0.4);"><i class="fa-solid fa-star"></i> ÁNH ĐẠI DIỆN</div>` : `<div style="position: absolute; top: 6px; left: 6px; background: rgba(0,0,0,0.6); color: #ccc; font-weight: 600; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; z-index: 2;">#${idx + 1}</div>`}
+        <div class="admin-photo-card" data-idx="${idx}" style="position: relative; background: #222428; border: ${isCover ? '2px solid var(--primary-gold)' : (isPendingUpload ? '2px dashed #42a5f5' : '1px solid rgba(255,255,255,0.15)')}; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.25s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+          ${isCover ? `<div style="position: absolute; top: 6px; left: 6px; background: var(--primary-gold); color: #111; font-weight: 700; font-size: 0.7rem; padding: 2px 7px; border-radius: 4px; z-index: 2; box-shadow: 0 2px 6px rgba(0,0,0,0.4);"><i class="fa-solid fa-star"></i> ẢNH ĐẠI DIỆN</div>` : `<div style="position: absolute; top: 6px; left: 6px; background: rgba(0,0,0,0.6); color: #ccc; font-weight: 600; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; z-index: 2;">#${idx + 1}</div>`}
+          ${isPendingUpload ? `<div style="position: absolute; top: 6px; right: 6px; background: #1976d2; color: #fff; font-weight: 700; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; z-index: 2;"><i class="fa-solid fa-cloud-arrow-up"></i> Chưa đẩy GitHub</div>` : ''}
           
           <div style="height: 105px; width: 100%; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
             <img src="${photoUrl}" alt="Photo ${idx + 1}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='https://placehold.co/300x200/222/d4af37?text=Image+Error';">
@@ -310,6 +314,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const room = roomDataState[activeRoomKey];
         if (room && Array.isArray(room.photos)) {
           room.photos.splice(idx, 1);
+          if (room.photos.length > 0) {
+            room.cover = room.photos[0];
+          } else {
+            room.cover = '';
+          }
           renderPhotoGalleryGrid();
           showToast('Đã xóa 1 ảnh khỏi danh sách!', 'info');
         }
@@ -325,6 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (room && Array.isArray(room.photos) && idx > 0) {
           const target = room.photos.splice(idx, 1)[0];
           room.photos.unshift(target);
+          room.cover = room.photos[0];
           renderPhotoGalleryGrid();
           showToast('Đã đặt làm Ảnh Đại Diện (Vị trí #1)!', 'success');
         }
@@ -341,6 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const temp = room.photos[idx];
           room.photos[idx] = room.photos[idx - 1];
           room.photos[idx - 1] = temp;
+          room.cover = room.photos[0];
           renderPhotoGalleryGrid();
         }
       });
@@ -356,9 +367,50 @@ document.addEventListener('DOMContentLoaded', () => {
           const temp = room.photos[idx];
           room.photos[idx] = room.photos[idx + 1];
           room.photos[idx + 1] = temp;
+          room.cover = room.photos[0];
           renderPhotoGalleryGrid();
         }
       });
+    });
+  }
+
+  // Compress image file using HTML5 Canvas to keep fast, sharp & within quota
+  function compressImageFile(file, maxWidth = 1600, maxHeight = 1200, quality = 0.82) {
+    return new Promise((resolve, reject) => {
+      if (!file || !file.type.startsWith('image/')) {
+        return reject(new Error('Tệp tải lên không phải hình ảnh'));
+      }
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          let width = img.width;
+          let height = img.height;
+
+          if (width > maxWidth || height > maxHeight) {
+            if (width / height > maxWidth / maxHeight) {
+              height = Math.round((height * maxWidth) / width);
+              width = maxWidth;
+            } else {
+              width = Math.round((width * maxHeight) / height);
+              height = maxHeight;
+            }
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+          resolve(compressedDataUrl);
+        };
+        img.onerror = () => resolve(e.target.result);
+        img.src = e.target.result;
+      };
+      reader.onerror = (err) => reject(err);
+      reader.readAsDataURL(file);
     });
   }
 
@@ -368,29 +420,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   uploadBtn?.addEventListener('click', () => uploadInput?.click());
 
-  uploadInput?.addEventListener('change', (e) => {
+  uploadInput?.addEventListener('change', async (e) => {
     const files = Array.from(e.target.files || []);
     if (files.length === 0) return;
 
-    let processedCount = 0;
+    showToast(`Đang xử lý tối ưu ${files.length} tệp ảnh...`, 'info');
     const room = roomDataState[activeRoomKey] || {};
     if (!Array.isArray(room.photos)) room.photos = [];
 
-    files.forEach(file => {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const dataUrl = event.target.result;
-        room.photos.push(dataUrl);
-        processedCount++;
+    let count = 0;
+    for (let i = 0; i < files.length; i++) {
+      try {
+        const compressed = await compressImageFile(files[i], 1600, 1200, 0.82);
+        room.photos.push(compressed);
+        count++;
+      } catch(err) {
+        console.error("Compression error:", err);
+      }
+    }
 
-        if (processedCount === files.length) {
-          renderPhotoGalleryGrid();
-          showToast(`Đã thêm thành công ${files.length} ảnh từ máy tính!`, 'success');
-        }
-      };
-      reader.readAsDataURL(file);
-    });
+    if (room.photos.length > 0 && !room.cover) {
+      room.cover = room.photos[0];
+    }
 
+    renderPhotoGalleryGrid();
+    showToast(`Đã thêm ${count} ảnh mới! Nhấn "Lưu & Đẩy Lên GitHub" để đẩy ảnh trực tiếp vào kho lưu trữ GitHub.`, 'success');
     uploadInput.value = '';
   });
 
@@ -580,7 +634,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   async function pushDataToGithub() {
-    saveAllDataToStorage();
+    saveCurrentRoomFormToState();
 
     let token = localStorage.getItem('sala_gh_token') || ghTokenInput?.value.trim();
     if (!token) {
@@ -595,8 +649,75 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    const fullData = window.getSalaData();
-    const jsContent = `/**
+    try {
+      // 1. Scan for any base64 images that need to be uploaded as real files to GitHub
+      const pendingUploads = [];
+      Object.keys(roomDataState).forEach(rKey => {
+        const r = roomDataState[rKey];
+        if (r && Array.isArray(r.photos)) {
+          r.photos.forEach((photo, pIdx) => {
+            if (typeof photo === 'string' && photo.startsWith('data:image/')) {
+              pendingUploads.push({ roomKey: rKey, pIdx, dataUrl: photo });
+            }
+          });
+        }
+      });
+
+      if (pendingUploads.length > 0) {
+        showToast(`Đang tải lên ${pendingUploads.length} ảnh mới vào thư mục assets/images/rooms trên GitHub...`, 'info');
+        for (let i = 0; i < pendingUploads.length; i++) {
+          const item = pendingUploads[i];
+          const match = item.dataUrl.match(/^data:image\/([a-zA-Z0-9+]+);base64,(.+)$/);
+          if (!match) continue;
+
+          let ext = match[1].toLowerCase();
+          if (ext === 'jpeg') ext = 'jpg';
+          const base64Data = match[2];
+          const safeKey = item.roomKey.replace(/[^a-zA-Z0-9_-]/g, '_');
+          const filename = `${safeKey}_${Date.now()}_${i + 1}.${ext}`;
+          const uploadPath = `assets/images/rooms/${filename}`;
+
+          showToast(`Đang tải ảnh ${i + 1}/${pendingUploads.length} lên GitHub (${filename})...`, 'info');
+
+          const uploadRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${uploadPath}`, {
+            method: 'PUT',
+            headers: {
+              ...getGhAuthHeader(token),
+              'Accept': 'application/vnd.github.v3+json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              message: `Upload room image ${filename} from Admin`,
+              content: base64Data
+            })
+          });
+
+          if (!uploadRes.ok) {
+            const errData = await uploadRes.json().catch(() => ({}));
+            throw new Error(`Lỗi tải tệp ảnh ${filename} lên GitHub (${uploadRes.status}): ${errData.message || 'Không có quyền ghi'}`);
+          }
+
+          // Successfully uploaded: update path in roomDataState
+          roomDataState[item.roomKey].photos[item.pIdx] = uploadPath;
+          if (item.pIdx === 0) {
+            roomDataState[item.roomKey].cover = uploadPath;
+          }
+        }
+
+        showToast('Đã tải toàn bộ tệp ảnh mới vào kho lưu trữ GitHub thành công!', 'success');
+        renderPhotoGalleryGrid();
+      }
+
+      // 2. Save clean data to localStorage (now contains only clean string paths)
+      saveAllDataToStorage();
+
+      showToast('🚀 Đang cập nhật dữ liệu cấu hình phòng lên GitHub...', 'info');
+
+      // 3. Build admin-data.js content
+      const fullData = window.getSalaData();
+      fullData.rooms = roomDataState;
+
+      const jsContent = `/**
  * SALA TAM COC HOTEL & SPA - ADMIN DATA CONTROLLER & SYNC MODULE
  * Auto-synced from Admin Dashboard
  */
@@ -615,6 +736,7 @@ function sanitizeSalaData(inputData) {
         data.rooms[key] = {
           ...def,
           ...data.rooms[key],
+          cover: (Array.isArray(data.rooms[key].photos) && data.rooms[key].photos.length > 0) ? data.rooms[key].photos[0] : (data.rooms[key].cover || def.cover),
           nameFr: data.rooms[key].nameFr || def.nameFr,
           descFr: data.rooms[key].descFr || def.descFr,
           guestsFr: data.rooms[key].guestsFr || def.guestsFr,
@@ -660,9 +782,6 @@ window.resetSalaData = function() {
 };
 `;
 
-    try {
-      showToast('🚀 Đang tải dữ liệu mới lên GitHub...', 'info');
-
       const filePath = 'assets/js/admin-data.js';
       const getFileRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}`, {
         headers: {
@@ -683,10 +802,13 @@ window.resetSalaData = function() {
       const fileData = await getFileRes.json();
       const currentSha = fileData.sha;
 
-      // UTF-8 to Base64
+      // Safe chunked UTF-8 to Base64
       const utf8Bytes = new TextEncoder().encode(jsContent);
       let binaryStr = '';
-      utf8Bytes.forEach(b => binaryStr += String.fromCharCode(b));
+      const chunkSize = 8192;
+      for (let i = 0; i < utf8Bytes.length; i += chunkSize) {
+        binaryStr += String.fromCharCode.apply(null, utf8Bytes.subarray(i, i + chunkSize));
+      }
       const base64Content = btoa(binaryStr);
 
       const updateRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}`, {
@@ -704,7 +826,8 @@ window.resetSalaData = function() {
       });
 
       if (updateRes.ok) {
-        showToast('🎉 ĐÃ ĐẨY DỮ LIỆU LÊN GITHUB THÀNH CÔNG! Tất cả thiết bị của khách hàng sẽ tự động thấy thông tin & ảnh mới sau 20-30 giây.', 'success');
+        renderPhotoGalleryGrid();
+        showToast('🎉 ĐÃ ĐẨY DỮ LIỆU & HÌNH ẢNH LÊN GITHUB THÀNH CÔNG! Tất cả máy tính và điện thoại sẽ tự động hiển thị thông tin & ảnh mới sau khoảng 20-30 giây.', 'success');
       } else {
         const errJson = await updateRes.json().catch(() => ({}));
         throw new Error(errJson.message || 'Lỗi cập nhật file lên GitHub');
@@ -715,6 +838,7 @@ window.resetSalaData = function() {
   }
 
   adminSyncGithubBtn?.addEventListener('click', pushDataToGithub);
+  document.getElementById('adminSaveRoomAndPushGithubBtn')?.addEventListener('click', pushDataToGithub);
 
   // TOAST NOTIFICATIONS
   function showToast(message, type = 'info') {
