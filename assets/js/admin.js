@@ -523,6 +523,188 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // GITHUB PAT TOKEN MANAGEMENT & AUTOMATIC REST API PUSH
+  const ghTokenInput = document.getElementById('admin_gh_token_input');
+  const saveGhTokenBtn = document.getElementById('saveGhTokenBtn');
+  const testGhTokenBtn = document.getElementById('testGhTokenBtn');
+  const adminSyncGithubBtn = document.getElementById('adminSyncGithubBtn');
+
+  const REPO_OWNER = 'kechinhphat20031102-cloud';
+  const REPO_NAME = 'sala-tam-coc-hotel';
+
+  if (ghTokenInput) {
+    ghTokenInput.value = localStorage.getItem('sala_gh_token') || '';
+  }
+
+  saveGhTokenBtn?.addEventListener('click', () => {
+    const token = ghTokenInput?.value.trim();
+    if (token) {
+      localStorage.setItem('sala_gh_token', token);
+      showToast('Đã lưu GitHub Personal Access Token thành công!', 'success');
+    } else {
+      localStorage.removeItem('sala_gh_token');
+      showToast('Đã xóa Token GitHub khỏi trình duyệt', 'info');
+    }
+  });
+
+  testGhTokenBtn?.addEventListener('click', async () => {
+    const token = ghTokenInput?.value.trim() || localStorage.getItem('sala_gh_token');
+    if (!token) {
+      showToast('Vui lòng nhập GitHub Token (PAT) để thử kết nối!', 'error');
+      return;
+    }
+
+    try {
+      showToast('Đang kiểm tra kết nối với GitHub API...', 'info');
+      const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+
+      if (res.ok) {
+        showToast('✅ Kết nối GitHub Repository thành công!', 'success');
+      } else {
+        showToast('❌ Lỗi kết nối GitHub (Token không hợp lệ hoặc thiếu quyền repo)', 'error');
+      }
+    } catch(err) {
+      showToast('Lỗi mạng khi gọi GitHub API: ' + err.message, 'error');
+    }
+  });
+
+  async function pushDataToGithub() {
+    saveAllDataToStorage();
+
+    let token = localStorage.getItem('sala_gh_token') || ghTokenInput?.value.trim();
+    if (!token) {
+      token = prompt('Vui lòng nhập GitHub Personal Access Token (PAT) để đẩy trực tiếp dữ liệu mới lên GitHub cho tất cả thiết bị khách hàng:');
+      if (token && token.trim()) {
+        token = token.trim();
+        localStorage.setItem('sala_gh_token', token);
+        if (ghTokenInput) ghTokenInput.value = token;
+      } else {
+        showToast('Chưa nhập Token GitHub. Không thể đẩy dữ liệu tự động.', 'error');
+        return;
+      }
+    }
+
+    const fullData = window.getSalaData();
+    const jsContent = `/**
+ * SALA TAM COC HOTEL & SPA - ADMIN DATA CONTROLLER & SYNC MODULE
+ * Auto-synced from Admin Dashboard
+ */
+
+const DEFAULT_SALA_DATA = ${JSON.stringify(fullData, null, 2)};
+
+function sanitizeSalaData(inputData) {
+  if (!inputData || typeof inputData !== 'object') return DEFAULT_SALA_DATA;
+  const data = JSON.parse(JSON.stringify(inputData));
+  if (data.rooms) {
+    Object.keys(DEFAULT_SALA_DATA.rooms).forEach(key => {
+      const def = DEFAULT_SALA_DATA.rooms[key];
+      if (!data.rooms[key]) {
+        data.rooms[key] = { ...def };
+      } else {
+        data.rooms[key] = {
+          ...def,
+          ...data.rooms[key],
+          nameFr: data.rooms[key].nameFr || def.nameFr,
+          descFr: data.rooms[key].descFr || def.descFr,
+          guestsFr: data.rooms[key].guestsFr || def.guestsFr,
+          bedsFr: data.rooms[key].bedsFr || def.bedsFr,
+          viewFr: data.rooms[key].viewFr || def.viewFr
+        };
+      }
+    });
+  }
+  return data;
+}
+
+window.getSalaData = function() {
+  try {
+    const custom = localStorage.getItem('sala_custom_data');
+    if (custom) {
+      const parsed = JSON.parse(custom);
+      const sanitized = sanitizeSalaData(parsed);
+      return {
+        hotelInfo: { ...DEFAULT_SALA_DATA.hotelInfo, ...(sanitized.hotelInfo || {}) },
+        rooms: { ...DEFAULT_SALA_DATA.rooms, ...(sanitized.rooms || {}) },
+        tours: { ...DEFAULT_SALA_DATA.tours, ...(sanitized.tours || {}) }
+      };
+    }
+  } catch(e) {
+    console.error("Error reading custom sala data:", e);
+  }
+  return DEFAULT_SALA_DATA;
+};
+
+window.saveSalaData = function(data) {
+  try {
+    const sanitized = sanitizeSalaData(data);
+    localStorage.setItem('sala_custom_data', JSON.stringify(sanitized));
+  } catch(e) {
+    console.error("Error saving custom sala data:", e);
+  }
+};
+
+window.resetSalaData = function() {
+  localStorage.removeItem('sala_custom_data');
+  return DEFAULT_SALA_DATA;
+};
+`;
+
+    try {
+      showToast('🚀 Đang tải dữ liệu mới lên GitHub...', 'info');
+
+      const filePath = 'assets/js/admin-data.js';
+      const getFileRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+
+      if (!getFileRes.ok) {
+        throw new Error('Khóa truy cập Token GitHub không chính xác hoặc không có quyền ghi vào repository!');
+      }
+
+      const fileData = await getFileRes.json();
+      const currentSha = fileData.sha;
+
+      // UTF-8 to Base64
+      const utf8Bytes = new TextEncoder().encode(jsContent);
+      let binaryStr = '';
+      utf8Bytes.forEach(b => binaryStr += String.fromCharCode(b));
+      const base64Content = btoa(binaryStr);
+
+      const updateRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: 'Auto-sync room data & photo gallery from Admin Dashboard',
+          content: base64Content,
+          sha: currentSha
+        })
+      });
+
+      if (updateRes.ok) {
+        showToast('🎉 ĐÃ ĐẨY DỮ LIỆU LÊN GITHUB THÀNH CÔNG! Tất cả thiết bị của khách hàng sẽ tự động thấy thông tin & ảnh mới sau 20-30 giây.', 'success');
+      } else {
+        const errJson = await updateRes.json();
+        throw new Error(errJson.message || 'Lỗi cập nhật file lên GitHub');
+      }
+    } catch(err) {
+      showToast('❌ Lỗi đẩy dữ liệu lên GitHub: ' + err.message, 'error');
+    }
+  }
+
+  adminSyncGithubBtn?.addEventListener('click', pushDataToGithub);
+
   // TOAST NOTIFICATIONS
   function showToast(message, type = 'info') {
     let toastContainer = document.getElementById('adminToastContainer');

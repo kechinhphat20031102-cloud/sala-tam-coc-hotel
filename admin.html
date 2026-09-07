@@ -250,7 +250,8 @@
         </a>
 
         <div class="admin-actions">
-          <button class="btn btn-gold btn-sm" id="saveAllBtn"><i class="fa-solid fa-floppy-disk"></i> Lưu Thay Đổi</button>
+          <button class="btn btn-gold btn-sm" id="saveAllBtn"><i class="fa-solid fa-floppy-disk"></i> Lưu Bộ Nhớ Local</button>
+          <button class="btn btn-gold btn-sm" id="adminSyncGithubBtn" style="background: linear-gradient(135deg, #2e7d32, #1b5e20); color: #fff; border: 1px solid #4caf50; font-weight: 700; box-shadow: 0 4px 14px rgba(46,125,50,0.4);"><i class="fa-solid fa-cloud-arrow-up"></i> Lưu & Đẩy Trực Tiếp Lên GitHub</button>
           <button class="btn btn-outline-gold btn-sm" id="exportJsonBtn"><i class="fa-solid fa-download"></i> Xuất File JSON</button>
           <button class="btn btn-outline-white btn-sm" id="importJsonBtn"><i class="fa-solid fa-file-import"></i> Nhập File JSON</button>
           <input type="file" id="importFileInput" accept=".json" style="display: none;">
@@ -618,7 +619,27 @@
 
       <!-- ================= TAB 4: BACKUP & DATA ================= -->
       <div class="admin-tab-content" id="tab-backup">
-        <h3 style="margin-bottom: 20px; font-family: var(--font-serif); color: var(--primary-gold);"><i class="fa-solid fa-floppy-disk"></i> Sao Lưu & Phục Hồi Cấu Hình</h3>
+        <h3 style="margin-bottom: 20px; font-family: var(--font-serif); color: var(--primary-gold);"><i class="fa-solid fa-floppy-disk"></i> Sao Lưu, Phục Hồi & Đồng Bộ GitHub</h3>
+
+        <!-- GITHUB SYNC CARD -->
+        <div class="admin-card" style="background: linear-gradient(135deg, rgba(46,125,50,0.15) 0%, rgba(24,25,28,0.95) 100%); border: 1px solid #4caf50; margin-bottom: 25px;">
+          <div class="admin-card-title" style="color: #81c784;">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Cấu Hình Đồng Bộ Tự Động Lên GitHub (Tất Cả Khách Hàng & Thiết Bị)
+          </div>
+          <p style="font-size: 0.9rem; color: #e0e0e0; margin-bottom: 15px;">
+            Để mọi chỉnh sửa (giá phòng, thông tin, ảnh) tự động đồng bộ sang máy tính và điện thoại của <strong>100% khách hàng</strong>, hãy nhập GitHub Personal Access Token (PAT) bên dưới:
+          </p>
+
+          <div class="form-group">
+            <label style="color: #a5d6a7;"><i class="fa-solid fa-key"></i> GitHub Personal Access Token (PAT):</label>
+            <input type="password" id="admin_gh_token_input" class="form-control" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" style="border-color: rgba(76,175,80,0.4);">
+          </div>
+
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 15px;">
+            <button type="button" class="btn btn-gold" id="saveGhTokenBtn" style="background: #2e7d32; border-color: #4caf50; color: #fff;"><i class="fa-solid fa-floppy-disk"></i> Lưu Token GitHub</button>
+            <button type="button" class="btn btn-outline-white" id="testGhTokenBtn"><i class="fa-solid fa-plug-circle-check"></i> Kiểm Tra Kết Nối GitHub</button>
+          </div>
+        </div>
 
         <div class="admin-card">
           <div class="admin-card-title">1. Xuất Dữ Liệu Thành File JSON</div>
