@@ -547,6 +547,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  function getGhAuthHeader(token) {
+    if (!token) return {};
+    return { 'Authorization': token.startsWith('github_pat_') ? `Bearer ${token}` : `token ${token}` };
+  }
+
   testGhTokenBtn?.addEventListener('click', async () => {
     const token = ghTokenInput?.value.trim() || localStorage.getItem('sala_gh_token');
     if (!token) {
@@ -558,7 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showToast('Đang kiểm tra kết nối với GitHub API...', 'info');
       const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`, {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          ...getGhAuthHeader(token),
           'Accept': 'application/vnd.github.v3+json'
         }
       });
@@ -566,7 +571,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (res.ok) {
         showToast('✅ Kết nối GitHub Repository thành công!', 'success');
       } else {
-        showToast('❌ Lỗi kết nối GitHub (Token không hợp lệ hoặc thiếu quyền repo)', 'error');
+        const errData = await res.json().catch(() => ({}));
+        showToast(`❌ Lỗi kết nối GitHub (${res.status}): ${errData.message || 'Token không hợp lệ hoặc thiếu quyền repo'}`, 'error');
       }
     } catch(err) {
       showToast('Lỗi mạng khi gọi GitHub API: ' + err.message, 'error');
@@ -578,7 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let token = localStorage.getItem('sala_gh_token') || ghTokenInput?.value.trim();
     if (!token) {
-      token = prompt('Vui lòng nhập GitHub Personal Access Token (PAT) để đẩy trực tiếp dữ liệu mới lên GitHub cho tất cả thiết bị khách hàng:');
+      token = prompt('Vui lòng nhập GitHub Personal Access Token (PAT) để đẩy trực tiếp dữ liệu mới lên GitHub:');
       if (token && token.trim()) {
         token = token.trim();
         localStorage.setItem('sala_gh_token', token);
@@ -660,13 +666,18 @@ window.resetSalaData = function() {
       const filePath = 'assets/js/admin-data.js';
       const getFileRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}`, {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          ...getGhAuthHeader(token),
           'Accept': 'application/vnd.github.v3+json'
         }
       });
 
       if (!getFileRes.ok) {
-        throw new Error('Khóa truy cập Token GitHub không chính xác hoặc không có quyền ghi vào repository!');
+        if (getFileRes.status === 401 || getFileRes.status === 403) {
+          localStorage.removeItem('sala_gh_token');
+          if (ghTokenInput) ghTokenInput.value = '';
+          alert('❌ GitHub Token của bạn không chính xác hoặc đã hết hạn!\n\nVui lòng tạo Token mới trên GitHub có tích chọn quyền "repo" (Full control of repositories).');
+        }
+        throw new Error(`Mã lỗi ${getFileRes.status}: Khóa Token GitHub không chính xác hoặc không có quyền ghi!`);
       }
 
       const fileData = await getFileRes.json();
@@ -681,7 +692,7 @@ window.resetSalaData = function() {
       const updateRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}`, {
         method: 'PUT',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          ...getGhAuthHeader(token),
           'Accept': 'application/vnd.github.v3+json',
           'Content-Type': 'application/json'
         },
@@ -695,7 +706,7 @@ window.resetSalaData = function() {
       if (updateRes.ok) {
         showToast('🎉 ĐÃ ĐẨY DỮ LIỆU LÊN GITHUB THÀNH CÔNG! Tất cả thiết bị của khách hàng sẽ tự động thấy thông tin & ảnh mới sau 20-30 giây.', 'success');
       } else {
-        const errJson = await updateRes.json();
+        const errJson = await updateRes.json().catch(() => ({}));
         throw new Error(errJson.message || 'Lỗi cập nhật file lên GitHub');
       }
     } catch(err) {
