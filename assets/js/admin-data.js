@@ -22,7 +22,7 @@ const DEFAULT_SALA_DATA = {
       "nameVi": "Phòng Superior Double City View – 28m²",
       "nameFr": "Chambre Superior Double City View – 28m²",
       "price": "1,300,000",
-      "size": "28 m²",
+      "size": "2800 m²",
       "guests": "02 Guests",
       "guestsVi": "02 Khách",
       "guestsFr": "02 Personnes",
