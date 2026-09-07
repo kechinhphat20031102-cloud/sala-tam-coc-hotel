@@ -38,7 +38,8 @@ const DEFAULT_SALA_DATA = {
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4807.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4818.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4825.jpg",
-        "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4829.jpg"
+        "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4829.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4430.jpg"
       ],
       "descEn": "Cozy and bright room featuring large city & street view windows, comfortable 1 King bed, refined wooden furnishings, and complete upscale amenities.",
       "descVi": "Phòng Superior Double sở hữu thiết kế trang nhã, ấm cúng với cửa sổ lớn đón ánh sáng tự nhiên hướng phố. Trang bị giường đôi King êm ái cùng hệ thống tiện nghi đầy đủ.",
@@ -64,7 +65,9 @@ const DEFAULT_SALA_DATA = {
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Triple city view/ANT_4672.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Triple city view/ANT_4622.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Triple city view/ANT_4659.jpg",
-        "Ảnh Sala Tam Coc Hotel & Spa/Superior Triple city view/ANT_4691.jpg"
+        "Ảnh Sala Tam Coc Hotel & Spa/Superior Triple city view/ANT_4691.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Superior Triple city view/ANT_4693.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Superior Triple city view/ANT_4430.jpg"
       ],
       "descEn": "Spacious room designed for 3 guests with 3 Single beds (or 1 King + 1 Single), offering street view & balcony.",
       "descVi": "Lựa chọn hoàn hảo cho nhóm bạn hoặc gia đình 3 người. Căn phòng được bố trí 3 giường đơn cao cấp, không gian rộng rãi và thoáng mát.",
@@ -90,7 +93,11 @@ const DEFAULT_SALA_DATA = {
         "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Double room balcony/ANT_4561.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Double room balcony/ANT_4576.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Double room balcony/ANT_4579.jpg",
-        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Double room balcony/ANT_4581.jpg"
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Double room balcony/ANT_4581.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Double room balcony/ANT_4423.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Double room balcony/ANT_4430.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Double room balcony/ANT_4530.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Double room balcony/đồ nhà tắm.jpg"
       ],
       "descEn": "Private open balcony overlooking city view/Tam Coc limestone hills, refined wooden interior, high-end bedding, and quiet atmosphere.",
       "descVi": "Sở hữu ban công riêng ngắm trọn cảnh phố xá & non nước Tam Cốc hữu tình. Phòng trang bị nội thất gỗ ấm áp, giường King êm ái.",
@@ -116,7 +123,12 @@ const DEFAULT_SALA_DATA = {
         "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4411.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4359.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4379.jpg",
-        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4423.jpg"
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4419.jpeg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4423.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4430.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4530.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/tủ quần áo.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/đồ nhà tắm.jpg"
       ],
       "descEn": "Spacious 35m² twin room with 2 King Beds, private balcony bathed in natural sunlight, and breathtaking city/street views.",
       "descVi": "Phòng Twin 35m² rộng rãi trang bị 2 giường King lớn, ban công riêng đón trọn ánh nắng tự nhiên và không khí trong lành.",
@@ -142,7 +154,11 @@ const DEFAULT_SALA_DATA = {
         "Ảnh Sala Tam Coc Hotel & Spa/Luxury Double with Balcony & Bath tub/ANT_4542.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Luxury Double with Balcony & Bath tub/ANT_4550.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Luxury Double with Balcony & Bath tub/ANT_4593_1.jpg",
-        "Ảnh Sala Tam Coc Hotel & Spa/Luxury Double with Balcony & Bath tub/ANT_4616.jpg"
+        "Ảnh Sala Tam Coc Hotel & Spa/Luxury Double with Balcony & Bath tub/ANT_4616.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Luxury Double with Balcony & Bath tub/ANT_4618.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Luxury Double with Balcony & Bath tub/ANT_4622.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Luxury Double with Balcony & Bath tub/ANT_4659.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Luxury Double with Balcony & Bath tub/ANT_4832.jpg"
       ],
       "descEn": "Our most requested luxury room featuring a romantic glass-wall deep soaking tub, private balcony with city/mountain view.",
       "descVi": "Hạng phòng sang trọng được yêu thích nhất với bồn tắm nằm thư giãn view kính trong suốt tinh tế, ban công riêng ngắm thành phố & núi non.",
@@ -168,7 +184,13 @@ const DEFAULT_SALA_DATA = {
         "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4359.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4379.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4411.jpg",
-        "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4423.jpg"
+        "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4423.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4428.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4430.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4432.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4655.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4832.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Luxury Twin with Balcony & Bath tub/ANT_4393.jpg"
       ],
       "descEn": "Our most requested luxury room featuring a romantic glass-wall deep soaking tub, private balcony with city/mountain view.",
       "descVi": "Mang đến trải nghiệm nghỉ dưỡng tiện nghi đỉnh cao với không gian 35m² rộng rãi, bồn tắm nằm hiện đại view thoáng mát.",
@@ -194,7 +216,12 @@ const DEFAULT_SALA_DATA = {
         "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4359.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4379.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4411.jpg",
-        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4419.jpeg"
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4419.jpeg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4423.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4430.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/ANT_4530.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/tủ quần áo.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Deluxe Family room balcony/đồ nhà tắm.jpg"
       ],
       "descEn": "Ideal for families of 4, featuring 2 King Beds, airy city/street balcony, and ample living space for quality family bonding.",
       "descVi": "Được thiết kế dành riêng cho gia đình 4 người với 2 giường King lớn êm ái, ban công rộng rãi đón gió trong lành.",
@@ -220,7 +247,11 @@ const DEFAULT_SALA_DATA = {
         "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4606.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4502 phòng thông.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4609.jpg",
-        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4526.jpg"
+        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4526.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4530.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4659.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4481 nhà tắm.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/đồ nhà tắm.jpg"
       ],
       "descEn": "Two interconnected bedrooms with private connecting door, 2 King beds, and 2 separate ensuite bathrooms.",
       "descVi": "Căn hộ 55m² gồm 2 phòng ngủ thông nhau có cửa nối liền, 2 phòng tắm riêng biệt mang lại sự riêng tư tối đa.",
@@ -246,7 +277,13 @@ const DEFAULT_SALA_DATA = {
         "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4502.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4523.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4526.jpg",
-        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4530.jpg"
+        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4530.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4579.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4655.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4659.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/trà nước lọc.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/tủ quần áo.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/đồ nhà tắm.jpg"
       ],
       "descEn": "Spacious 60m² grand family suite featuring 2 interconnected bedrooms (2 King Beds + 1 Single Bed) and 2 private bathrooms.",
       "descVi": "Căn hộ gia đình thượng hạng 60m² với 2 phòng ngủ thông nhau (2 giường King + 1 giường đơn) và 2 phòng tắm riêng biệt.",
