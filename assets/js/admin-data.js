@@ -4,6 +4,7 @@
  */
 
 const DEFAULT_SALA_DATA = {
+  "lastUpdated": 1725704500000,
   "hotelInfo": {
     "name": "Sala Tam Coc Hotel & Spa",
     "address": "Tam Coc Area, Ninh Binh Province, Vietnam",
@@ -324,6 +325,21 @@ window.getSalaData = function() {
     const custom = localStorage.getItem('sala_custom_data');
     if (custom) {
       const parsed = JSON.parse(custom);
+      const defTime = (DEFAULT_SALA_DATA && DEFAULT_SALA_DATA.lastUpdated) || 0;
+      const customTime = (parsed && parsed.lastUpdated) || 0;
+      const isAdminPage = window.location.pathname.endsWith('admin.html') || window.location.href.includes('admin.html');
+
+      // If GitHub data is newer or local storage has no valid timestamp, purge stale local data!
+      if (defTime > customTime || !customTime) {
+        localStorage.removeItem('sala_custom_data');
+        return DEFAULT_SALA_DATA;
+      }
+
+      // On non-admin pages, unless local is explicitly newer (admin previewing draft), prioritize DEFAULT_SALA_DATA
+      if (!isAdminPage && customTime <= defTime) {
+        return DEFAULT_SALA_DATA;
+      }
+
       const sanitized = sanitizeSalaData(parsed);
       return {
         hotelInfo: { ...DEFAULT_SALA_DATA.hotelInfo, ...(sanitized.hotelInfo || {}) },

@@ -737,8 +737,13 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="assets/js/i18n.js"></script>
-  <script src="assets/js/admin-data.js"></script>
-  <script src="assets/js/rooms-data.js"></script>
+  <script>
+    (function() {
+      var ts = Date.now();
+      document.write('<script src="assets/js/admin-data.js?v=' + ts + '"><\/script>');
+      document.write('<script src="assets/js/rooms-data.js?v=' + ts + '"><\/script>');
+    })();
+  </script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/booking.js"></script>
 </body>

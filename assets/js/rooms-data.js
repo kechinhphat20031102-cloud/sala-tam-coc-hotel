@@ -778,4 +778,35 @@ window.ROOMS_DETAILS_DATA = {
     }
   });
 
+  // Live auto-update check from GitHub when user returns to the tab or periodically
+  function checkForRemoteUpdates() {
+    fetch('assets/js/admin-data.js?_check=' + Date.now(), { cache: 'no-store' })
+      .then(function(res) { return res.text(); })
+      .then(function(text) {
+        var match = text.match(/"lastUpdated":\s*(\d+)/);
+        if (match) {
+          var remoteTime = parseInt(match[1], 10);
+          var localTime = (window.DEFAULT_SALA_DATA && window.DEFAULT_SALA_DATA.lastUpdated) || 0;
+          if (remoteTime > localTime) {
+            try {
+              new Function(text)();
+              syncCustomRoomsData();
+              window.updateFrontendRoomCards();
+            } catch(err) {
+              console.error("Error applying remote update:", err);
+            }
+          }
+        }
+      })
+      .catch(function() {});
+  }
+
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'visible') {
+      checkForRemoteUpdates();
+    }
+  });
+
+  setInterval(checkForRemoteUpdates, 45000);
+
 })();

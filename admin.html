@@ -658,8 +658,13 @@
     </div>
   </div>
 
-  <script src="assets/js/admin-data.js"></script>
-  <script src="assets/js/admin.js"></script>
+  <script>
+    (function() {
+      var ts = Date.now();
+      document.write('<script src="assets/js/admin-data.js?v=' + ts + '"><\/script>');
+      document.write('<script src="assets/js/admin.js?v=' + ts + '"><\/script>');
+    })();
+  </script>
 </body>
 </html>
 
