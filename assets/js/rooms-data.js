@@ -306,39 +306,54 @@ window.ROOMS_DETAILS_DATA = {
 
   function syncCustomRoomsData() {
     try {
-      const customStr = localStorage.getItem('sala_custom_data');
-      if (customStr) {
-        const parsed = JSON.parse(customStr);
-        if (parsed && parsed.rooms) {
-          Object.keys(parsed.rooms).forEach(key => {
-            if (window.ROOMS_DETAILS_DATA[key]) {
-              const c = parsed.rooms[key];
-              window.ROOMS_DETAILS_DATA[key] = {
-                ...window.ROOMS_DETAILS_DATA[key],
-                ...c,
-                nameEn: c.nameEn || window.ROOMS_DETAILS_DATA[key].nameEn,
-                nameVi: c.nameVi || window.ROOMS_DETAILS_DATA[key].nameVi,
-                nameFr: c.nameFr || window.ROOMS_DETAILS_DATA[key].nameFr || c.nameEn,
-                descEn: c.descEn || window.ROOMS_DETAILS_DATA[key].descEn,
-                descVi: c.descVi || window.ROOMS_DETAILS_DATA[key].descVi,
-                descFr: c.descFr || window.ROOMS_DETAILS_DATA[key].descFr || c.descEn,
-                guests: c.guests || window.ROOMS_DETAILS_DATA[key].guests,
-                guestsVi: c.guestsVi || window.ROOMS_DETAILS_DATA[key].guestsVi || c.guests,
-                guestsFr: c.guestsFr || window.ROOMS_DETAILS_DATA[key].guestsFr || c.guests,
-                beds: c.beds || window.ROOMS_DETAILS_DATA[key].beds,
-                bedsVi: c.bedsVi || window.ROOMS_DETAILS_DATA[key].bedsVi || c.beds,
-                bedsFr: c.bedsFr || window.ROOMS_DETAILS_DATA[key].bedsFr || c.beds,
-                view: c.view || window.ROOMS_DETAILS_DATA[key].view,
-                viewVi: c.viewVi || window.ROOMS_DETAILS_DATA[key].viewVi || c.view,
-                viewFr: c.viewFr || window.ROOMS_DETAILS_DATA[key].viewFr || c.view,
-                size: c.size || window.ROOMS_DETAILS_DATA[key].size,
-                price: c.price || window.ROOMS_DETAILS_DATA[key].price,
-                cover: c.cover || window.ROOMS_DETAILS_DATA[key].cover,
-                photos: (Array.isArray(c.photos) && c.photos.length > 0) ? c.photos : window.ROOMS_DETAILS_DATA[key].photos
-              };
-            }
-          });
+      let sourceRooms = null;
+      if (typeof window.getSalaData === 'function') {
+        const full = window.getSalaData();
+        if (full && full.rooms) sourceRooms = full.rooms;
+      }
+      if (!sourceRooms && typeof DEFAULT_SALA_DATA !== 'undefined' && DEFAULT_SALA_DATA.rooms) {
+        sourceRooms = DEFAULT_SALA_DATA.rooms;
+      }
+      if (!sourceRooms) {
+        const customStr = localStorage.getItem('sala_custom_data');
+        if (customStr) {
+          const parsed = JSON.parse(customStr);
+          if (parsed && parsed.rooms) sourceRooms = parsed.rooms;
         }
+      }
+
+      if (sourceRooms && window.ROOMS_DETAILS_DATA) {
+        Object.keys(sourceRooms).forEach(key => {
+          if (window.ROOMS_DETAILS_DATA[key]) {
+            const c = sourceRooms[key];
+            const photosList = (Array.isArray(c.photos) && c.photos.length > 0) ? c.photos : window.ROOMS_DETAILS_DATA[key].photos;
+            const coverPhoto = (photosList && photosList.length > 0) ? photosList[0] : (c.cover || window.ROOMS_DETAILS_DATA[key].cover);
+
+            window.ROOMS_DETAILS_DATA[key] = {
+              ...window.ROOMS_DETAILS_DATA[key],
+              ...c,
+              nameEn: c.nameEn || window.ROOMS_DETAILS_DATA[key].nameEn,
+              nameVi: c.nameVi || window.ROOMS_DETAILS_DATA[key].nameVi,
+              nameFr: c.nameFr || window.ROOMS_DETAILS_DATA[key].nameFr || c.nameEn,
+              descEn: c.descEn || window.ROOMS_DETAILS_DATA[key].descEn,
+              descVi: c.descVi || window.ROOMS_DETAILS_DATA[key].descVi,
+              descFr: c.descFr || window.ROOMS_DETAILS_DATA[key].descFr || c.descEn,
+              guests: c.guests || window.ROOMS_DETAILS_DATA[key].guests,
+              guestsVi: c.guestsVi || window.ROOMS_DETAILS_DATA[key].guestsVi || c.guests,
+              guestsFr: c.guestsFr || window.ROOMS_DETAILS_DATA[key].guestsFr || c.guests,
+              beds: c.beds || window.ROOMS_DETAILS_DATA[key].beds,
+              bedsVi: c.bedsVi || window.ROOMS_DETAILS_DATA[key].bedsVi || c.beds,
+              bedsFr: c.bedsFr || window.ROOMS_DETAILS_DATA[key].bedsFr || c.beds,
+              view: c.view || window.ROOMS_DETAILS_DATA[key].view,
+              viewVi: c.viewVi || window.ROOMS_DETAILS_DATA[key].viewVi || c.view,
+              viewFr: c.viewFr || window.ROOMS_DETAILS_DATA[key].viewFr || c.view,
+              size: c.size || window.ROOMS_DETAILS_DATA[key].size,
+              price: c.price || window.ROOMS_DETAILS_DATA[key].price,
+              cover: coverPhoto,
+              photos: photosList
+            };
+          }
+        });
       }
     } catch(e) {
       console.error("Error syncing custom room data:", e);
@@ -631,7 +646,7 @@ window.ROOMS_DETAILS_DATA = {
 
   window.updateFrontendRoomCards = function() {
     syncCustomRoomsData();
-    const currentLang = localStorage.getItem('sala_lang') || 'vi';
+    const currentLang = localStorage.getItem('sala_lang') || document.documentElement.lang || 'vi';
 
     if (!window.ROOMS_DETAILS_DATA) return;
 
@@ -660,7 +675,7 @@ window.ROOMS_DETAILS_DATA = {
       }
 
       const priceVal = room.price || '';
-      const formattedPrice = priceVal ? `${priceVal}₫` : '';
+      const formattedPrice = priceVal ? (String(priceVal).includes('₫') ? priceVal : `${priceVal}₫`) : '';
       const coverImgSrc = (Array.isArray(room.photos) && room.photos.length > 0) ? room.photos[0] : (room.cover || '');
 
       // 1. UPDATE ROOM CARDS ON INDEX.HTML
@@ -752,7 +767,16 @@ window.ROOMS_DETAILS_DATA = {
   });
 
   document.addEventListener('salaDataUpdated', function() {
+    syncCustomRoomsData();
     window.updateFrontendRoomCards();
+  });
+
+  // Cross-tab storage event for real-time synchronization between Admin and Client tabs
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'sala_custom_data' || e.key === 'sala_lang') {
+      syncCustomRoomsData();
+      window.updateFrontendRoomCards();
+    }
   });
 
 })();
