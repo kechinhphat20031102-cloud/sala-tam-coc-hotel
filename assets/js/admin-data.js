@@ -19,10 +19,10 @@ const DEFAULT_SALA_DATA = {
   "rooms": {
     "superior-double": {
       "nameEn": "Superior Double City View – 28m²",
-      "nameVi": "hải Phòng Superior Double City View – 28m²",
+      "nameVi": "Phòng Superior Double City View – 28m²",
       "nameFr": "Chambre Superior Double City View – 28m²",
       "price": "1,300,000",
-      "size": "2800 m²",
+      "size": "28 m²",
       "guests": "02 Guests",
       "guestsVi": "02 Khách",
       "guestsFr": "02 Personnes",
@@ -32,18 +32,17 @@ const DEFAULT_SALA_DATA = {
       "view": "City & Street View Window",
       "viewVi": "Cửa sổ hướng phố",
       "viewFr": "Fenêtre vue ville et rue",
-      "cover": "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4829.jpg",
+      "cover": "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4807.jpg",
       "photos": [
-        "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4829.jpg",
-        "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4832.jpg",
-        "assets/images/rooms/superior-double_1788774879632_1.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4807.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4818.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4825.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4829.jpg",
+        "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4832.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4430.jpg"
       ],
       "descEn": "Cozy and bright room featuring large city & street view windows, comfortable 1 King bed, refined wooden furnishings, and complete upscale amenities.",
-      "descVi": "hải Phòng Superior Double sở hữu thiết kế trang nhã, ấm cúng với cửa sổ lớn đón ánh sáng tự nhiên hướng phố. Trang bị giường đôi King êm ái cùng hệ thống tiện nghi đầy đủ.",
+      "descVi": "Phòng Superior Double sở hữu thiết kế trang nhã, ấm cúng với cửa sổ lớn đón ánh sáng tự nhiên hướng phố. Trang bị giường đôi King êm ái cùng hệ thống tiện nghi đầy đủ.",
       "descFr": "Chambre chaleureuse et lumineuse avec de grandes fenêtres vue ville, 1 lit King confortable, mobilier en bois raffiné et équipements modernes pour un séjour relaxant à Tam Coc."
     },
     "superior-triple": {
@@ -292,7 +291,7 @@ const DEFAULT_SALA_DATA = {
     }
   },
   "tours": {},
-  "lastUpdated": 1788776489597
+  "lastUpdated": 1788776606147
 };
 
 function sanitizeSalaData(inputData) {
