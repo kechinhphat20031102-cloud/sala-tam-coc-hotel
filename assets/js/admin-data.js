@@ -4,7 +4,6 @@
  */
 
 const DEFAULT_SALA_DATA = {
-  "lastUpdated": 1725704500000,
   "hotelInfo": {
     "name": "Sala Tam Coc Hotel & Spa",
     "address": "Tam Coc Area, Ninh Binh Province, Vietnam",
@@ -23,7 +22,7 @@ const DEFAULT_SALA_DATA = {
       "nameVi": "Phòng Superior Double City View – 28m²",
       "nameFr": "Chambre Superior Double City View – 28m²",
       "price": "1,300,000",
-      "size": "2800 m²",
+      "size": "28 m²",
       "guests": "02 Guests",
       "guestsVi": "02 Khách",
       "guestsFr": "02 Personnes",
@@ -33,10 +32,10 @@ const DEFAULT_SALA_DATA = {
       "view": "City & Street View Window",
       "viewVi": "Cửa sổ hướng phố",
       "viewFr": "Fenêtre vue ville et rue",
-      "cover": "assets/images/rooms/superior-double_1788774879632_1.jpg",
+      "cover": "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4832.jpg",
       "photos": [
-        "assets/images/rooms/superior-double_1788774879632_1.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4832.jpg",
+        "assets/images/rooms/superior-double_1788774879632_1.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4807.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4818.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4825.jpg",
@@ -292,7 +291,8 @@ const DEFAULT_SALA_DATA = {
       "descFr": "Suite familiale communicante spacieuse de 60m² avec 2 lits King + 1 lit simple, 2 salles de bain privées et balcon vue montagne."
     }
   },
-  "tours": {}
+  "tours": {},
+  "lastUpdated": 1788776365270
 };
 
 function sanitizeSalaData(inputData) {
