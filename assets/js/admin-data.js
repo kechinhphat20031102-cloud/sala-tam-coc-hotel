@@ -242,11 +242,10 @@ const DEFAULT_SALA_DATA = {
       "view": "Private City & Street Balcony",
       "viewVi": "Ban công riêng view phố",
       "viewFr": "Balcon privé vue montagne",
-      "cover": "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4606.jpg",
+      "cover": "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4502 phòng thông.jpg",
       "photos": [
-        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4606.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4502 phòng thông.jpg",
-        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4609.jpg",
+        "assets/images/rooms/family-connecting_1788778780156_1.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4526.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4530.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 1/ANT_4659.jpg",
@@ -272,10 +271,11 @@ const DEFAULT_SALA_DATA = {
       "view": "Private City & Street Balcony",
       "viewVi": "Ban công riêng view phố",
       "viewFr": "Balcon privé vue montagne",
-      "cover": "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4502.jpg",
+      "cover": "assets/images/rooms/family-connecting-2_1788778782852_2.jpg",
       "photos": [
-        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4502.jpg",
-        "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4523.jpg",
+        "assets/images/rooms/family-connecting-2_1788778782852_2.jpg",
+        "assets/images/rooms/family-connecting-2_1788778785205_3.jpg",
+        "assets/images/rooms/family-connecting-2_1788778787519_4.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4526.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4530.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Family Connecting room 2/ANT_4579.jpg",
@@ -291,7 +291,7 @@ const DEFAULT_SALA_DATA = {
     }
   },
   "tours": {},
-  "lastUpdated": 1788776837313
+  "lastUpdated": 1788778789749
 };
 
 function sanitizeSalaData(inputData) {
