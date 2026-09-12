@@ -292,7 +292,7 @@ const DEFAULT_SALA_DATA = {
     }
   },
   "tours": {},
-  "lastUpdated": 1789198128867
+  "lastUpdated": 1789198476749
 };
 
 function sanitizeSalaData(inputData) {
