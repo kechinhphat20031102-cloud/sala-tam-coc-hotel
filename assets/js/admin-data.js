@@ -32,8 +32,9 @@ const DEFAULT_SALA_DATA = {
       "view": "City & Street View Window",
       "viewVi": "Cửa sổ hướng phố",
       "viewFr": "Fenêtre vue ville et rue",
-      "cover": "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4807.jpg",
+      "cover": "assets/images/rooms/superior-double_1789198125519_1.jpg",
       "photos": [
+        "assets/images/rooms/superior-double_1789198125519_1.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4807.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4818.jpg",
         "Ảnh Sala Tam Coc Hotel & Spa/Superior Double city view/ANT_4825.jpg",
@@ -291,7 +292,7 @@ const DEFAULT_SALA_DATA = {
     }
   },
   "tours": {},
-  "lastUpdated": 1788778789749
+  "lastUpdated": 1789198128867
 };
 
 function sanitizeSalaData(inputData) {
