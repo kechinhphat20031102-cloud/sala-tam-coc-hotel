@@ -32,10 +32,10 @@ const DEFAULT_SALA_DATA = {
       "view": "City & Street View Window",
       "viewVi": "Cửa sổ hướng phố",
       "viewFr": "Fenêtre vue ville et rue",
-      "cover": "https://res.cloudinary.com/n7my6tye/image/upload/v1789287178/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/jpptrhyyaefojznim8pr.jpg",
+      "cover": "https://res.cloudinary.com/n7my6tye/image/upload/v1789287180/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/tm8nxe6w7sgt3pueknp1.jpg",
       "photos": [
-        "https://res.cloudinary.com/n7my6tye/image/upload/v1789287178/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/jpptrhyyaefojznim8pr.jpg",
         "https://res.cloudinary.com/n7my6tye/image/upload/v1789287180/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/tm8nxe6w7sgt3pueknp1.jpg",
+        "https://res.cloudinary.com/n7my6tye/image/upload/v1789287178/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/jpptrhyyaefojznim8pr.jpg",
         "https://res.cloudinary.com/n7my6tye/image/upload/v1789287181/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/xy47kb2qhc70amgfys2s.jpg",
         "https://res.cloudinary.com/n7my6tye/image/upload/v1789287182/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/vpzhprzddhjkrhqs1rlp.jpg",
         "https://res.cloudinary.com/n7my6tye/image/upload/v1789287183/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/upjonpijkbbzup5fm08n.jpg",
@@ -296,7 +296,7 @@ const DEFAULT_SALA_DATA = {
       "id": "tam-coc-travel-guide",
       "category": "guide",
       "date": "2026-09-11",
-      "readTime": 8,
+      "readTime": "8",
       "image": "https://res.cloudinary.com/n7my6tye/image/upload/v1789287195/sala_tam_coc/assets/images/articles/jg5vnzvgkenjtefo6tcx.jpg",
       "cover": "https://res.cloudinary.com/n7my6tye/image/upload/v1789287195/sala_tam_coc/assets/images/articles/jg5vnzvgkenjtefo6tcx.jpg",
       "titleVi": "Cẩm Nang Du Lịch Tam Cốc – Bích Động Tự Túc 2026 Từ A-Z",
@@ -422,7 +422,7 @@ const DEFAULT_SALA_DATA = {
       "status": "visible"
     }
   },
-  "lastUpdated": 1789221801304
+  "lastUpdated": 1789289600107
 };
 
 function sanitizeSalaData(inputData) {
