@@ -695,6 +695,125 @@ document.addEventListener('DOMContentLoaded', () => {
     articleCoverFileInput.value = '';
   });
 
+  // ==========================================
+  // ARTICLE CONTENT TOOLBAR & CURSOR IMAGE INSERTION
+  // ==========================================
+  const btnInsertContentImage = document.getElementById('btn_insert_content_image');
+  const contentImageFileInput = document.getElementById('content_image_file_input');
+  const btnInsertH3 = document.getElementById('btn_insert_h3');
+  const btnInsertP = document.getElementById('btn_insert_p');
+  const btnInsertTip = document.getElementById('btn_insert_tip');
+  const btnTogglePreview = document.getElementById('btn_toggle_preview_content');
+  const previewBtnText = document.getElementById('preview_content_btn_text');
+  const articleContentLivePreview = document.getElementById('article_content_live_preview');
+
+  let savedCursorPos = null;
+
+  function insertTextAtCursor(textarea, textToInsert) {
+    if (!textarea) return;
+    const start = textarea.selectionStart !== undefined ? textarea.selectionStart : textarea.value.length;
+    const end = textarea.selectionEnd !== undefined ? textarea.selectionEnd : textarea.value.length;
+    const original = textarea.value;
+
+    const before = original.substring(0, start);
+    const after = original.substring(end);
+
+    const prefix = (before.length > 0 && !before.endsWith('\n\n') && !before.endsWith('\n')) ? '\n\n' : '';
+    const suffix = (!after.startsWith('\n\n') && !after.startsWith('\n')) ? '\n\n' : '';
+
+    const fullSnippet = prefix + textToInsert + suffix;
+    textarea.value = before + fullSnippet + after;
+
+    const newPos = start + fullSnippet.length;
+    textarea.selectionStart = textarea.selectionEnd = newPos;
+    textarea.focus();
+
+    saveCurrentArticleFormToState();
+  }
+
+  btnInsertContentImage?.addEventListener('click', () => {
+    if (articleContentInput) {
+      savedCursorPos = {
+        start: articleContentInput.selectionStart,
+        end: articleContentInput.selectionEnd
+      };
+    }
+    contentImageFileInput?.click();
+  });
+
+  contentImageFileInput?.addEventListener('change', async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const defaultCaption = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+    const caption = prompt('Nhập chú thích hiển thị dưới bức ảnh (hoặc để trống):', defaultCaption);
+
+    try {
+      showToast(`Đang tải ảnh "${file.name}" lên Cloudinary CDN...`, 'info');
+      let uploadPayload = file;
+      if (file.size > 9 * 1024 * 1024) {
+        uploadPayload = await compressImageFile(file, 1920, 1440, 0.85);
+      }
+      const secureUrl = await uploadImageToCloudinary(uploadPayload, 'articles');
+
+      const cleanCaption = caption && caption.trim() ? caption.trim() : '';
+      const figureHtml = `<figure class="article-image-block" style="margin: 24px 0; text-align: center;">\n  <img src="${secureUrl}" alt="${cleanCaption || 'Hình ảnh bài viết'}" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.25);">\n${cleanCaption ? `  <figcaption style="font-size: 0.88rem; color: #a0a0a0; margin-top: 8px; font-style: italic;">${cleanCaption}</figcaption>\n` : ''}</figure>`;
+
+      if (articleContentInput) {
+        if (savedCursorPos) {
+          articleContentInput.selectionStart = savedCursorPos.start;
+          articleContentInput.selectionEnd = savedCursorPos.end;
+        }
+        insertTextAtCursor(articleContentInput, figureHtml);
+      }
+
+      showToast('Đã chèn ảnh vào đúng vị trí đang trỏ thành công!', 'success');
+
+      if (articleContentLivePreview && articleContentLivePreview.style.display !== 'none') {
+        articleContentLivePreview.innerHTML = articleContentInput.value;
+      }
+    } catch (err) {
+      console.error("Insert content image error:", err);
+      showToast(`Lỗi khi tải ảnh chèn bài viết: ${err.message}`, 'error');
+    }
+    contentImageFileInput.value = '';
+  });
+
+  btnInsertH3?.addEventListener('click', () => {
+    const title = prompt('Nhập tiêu đề mục con (H3):', '1. Khám phá địa điểm...');
+    if (title && title.trim()) {
+      insertTextAtCursor(articleContentInput, `<h3>${title.trim()}</h3>`);
+    }
+  });
+
+  btnInsertP?.addEventListener('click', () => {
+    insertTextAtCursor(articleContentInput, `<p>Nhập nội dung đoạn văn chi tiết tại đây...</p>`);
+  });
+
+  btnInsertTip?.addEventListener('click', () => {
+    const tip = prompt('Nhập nội dung lưu ý / mẹo hữu ích:', 'Du khách nên mang giày thể thao và áo khoác mỏng...');
+    if (tip && tip.trim()) {
+      insertTextAtCursor(articleContentInput, `<div class="article-tip" style="background: rgba(197,168,128,0.1); border-left: 3px solid var(--primary-gold); padding: 12px 16px; margin: 16px 0; border-radius: 4px;"><strong>Lưu ý quan trọng:</strong> ${tip.trim()}</div>`);
+    }
+  });
+
+  btnTogglePreview?.addEventListener('click', () => {
+    if (!articleContentInput || !articleContentLivePreview) return;
+    const isShowingPreview = articleContentLivePreview.style.display !== 'none';
+    if (isShowingPreview) {
+      articleContentLivePreview.style.display = 'none';
+      articleContentInput.style.display = 'block';
+      if (previewBtnText) previewBtnText.textContent = 'Xem Trước Trực Quan';
+      btnTogglePreview.classList.remove('active');
+    } else {
+      articleContentLivePreview.innerHTML = articleContentInput.value || '<p style="color:#888;">(Chưa có nội dung để xem trước)</p>';
+      articleContentLivePreview.style.display = 'block';
+      articleContentInput.style.display = 'none';
+      if (previewBtnText) previewBtnText.textContent = 'Quay Lại Soạn Thảo';
+      btnTogglePreview.classList.add('active');
+    }
+  });
+
   function renderArticleSelect() {
     if (!articleKeySelect) return;
     articleKeySelect.innerHTML = '';
@@ -723,6 +842,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderArticleEditForm() {
     const art = articlesDataState[activeArticleKey] || {};
     
+    if (articleContentLivePreview) articleContentLivePreview.style.display = 'none';
+    if (articleContentInput) articleContentInput.style.display = 'block';
+    if (previewBtnText) previewBtnText.textContent = 'Xem Trước Trực Quan';
+
     if (articleIdInput) {
       articleIdInput.value = activeArticleKey || '';
       articleIdInput.disabled = !!articlesDataState[activeArticleKey];

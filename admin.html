@@ -221,6 +221,57 @@
       font-size: 0.88rem;
       margin-bottom: 25px;
     }
+    /* ARTICLE CONTENT LIVE PREVIEW STYLES */
+    .article-live-preview-box {
+      min-height: 320px;
+      background: #ffffff;
+      border: 1px solid rgba(197,168,128,0.4);
+      border-radius: 8px;
+      padding: 30px 35px;
+      color: #2d3748;
+      line-height: 1.85;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .article-live-preview-box h3 {
+      color: #1a202c;
+      font-size: 1.35rem;
+      margin: 28px 0 14px 0;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #edf2f7;
+      font-weight: 700;
+    }
+    .article-live-preview-box h3:first-child {
+      margin-top: 0;
+    }
+    .article-live-preview-box p {
+      color: #4a5568;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+    .article-live-preview-box img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .article-live-preview-box figure {
+      margin: 24px 0;
+      text-align: center;
+    }
+    .article-live-preview-box figcaption {
+      font-size: 0.88rem;
+      color: #718096;
+      margin-top: 8px;
+      font-style: italic;
+    }
+    .article-live-preview-box ul, .article-live-preview-box ol {
+      margin-bottom: 16px;
+      padding-left: 24px;
+      color: #4a5568;
+    }
+    .article-live-preview-box li {
+      margin-bottom: 6px;
+    }
     /* ANALYTICS & LEADS DASHBOARD STYLES */
     .leads-pending-badge {
       background: #ef5350;
@@ -1166,9 +1217,38 @@
 
           <!-- FULL CONTENT -->
           <div class="form-group">
-            <label id="article_content_label"><i class="fa-solid fa-file-lines"></i> Nội Dung Bài Viết Chi Tiết (HTML Chuẩn SEO):</label>
-            <p style="font-size: 0.8rem; color: #a0a0a0; margin-bottom: 6px;">Hỗ trợ các thẻ HTML định dạng: <code>&lt;h3&gt;Tiêu đề mục&lt;/h3&gt;</code>, <code>&lt;p&gt;Đoạn văn&lt;/p&gt;</code>, <code>&lt;ul&gt;&lt;li&gt;Danh sách&lt;/li&gt;&lt;/ul&gt;</code>, <code>&lt;strong&gt;Chữ đậm&lt;/strong&gt;</code></p>
-            <textarea id="article_content" class="form-control" style="min-height: 250px; font-family: monospace; font-size: 0.9rem;" placeholder="<h3>1. Giới thiệu...</h3><p>Nội dung...</p>"></textarea>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+              <label id="article_content_label" style="margin-bottom: 0;"><i class="fa-solid fa-file-lines"></i> Nội Dung Bài Viết Chi Tiết (HTML Chuẩn SEO):</label>
+              <div style="display: flex; gap: 8px;">
+                <button type="button" id="btn_toggle_preview_content" class="btn btn-outline-gold btn-sm" style="font-size: 0.8rem; padding: 4px 12px; font-weight: 600;">
+                  <i class="fa-solid fa-eye"></i> <span id="preview_content_btn_text">Xem Trước Trực Quan</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- SMART TOOLBAR FOR INSERTING MEDIA & FORMATTING AT CURSOR -->
+            <div class="content-toolbar" style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; background: rgba(255,255,255,0.04); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(197,168,128,0.2); align-items: center;">
+              <span style="font-size: 0.8rem; color: var(--primary-gold); font-weight: 600; margin-right: 4px;"><i class="fa-solid fa-wand-magic-sparkles"></i> Chèn nhanh:</span>
+              <button type="button" id="btn_insert_content_image" class="btn btn-gold btn-sm" style="font-size: 0.8rem; padding: 5px 12px; font-weight: 700;">
+                <i class="fa-solid fa-cloud-arrow-up"></i> + Chèn Ảnh Tại Chỗ Đang Trỏ (Cloudinary)
+              </button>
+              <button type="button" id="btn_insert_h3" class="btn btn-outline-white btn-sm" style="font-size: 0.8rem; padding: 4px 8px;" title="Thêm tiêu đề mục con">
+                <strong>&lt;h3&gt;</strong> Tiêu đề mục
+              </button>
+              <button type="button" id="btn_insert_p" class="btn btn-outline-white btn-sm" style="font-size: 0.8rem; padding: 4px 8px;" title="Thêm đoạn văn bản">
+                <strong>&lt;p&gt;</strong> Đoạn văn
+              </button>
+              <button type="button" id="btn_insert_tip" class="btn btn-outline-white btn-sm" style="font-size: 0.8rem; padding: 4px 8px;" title="Thêm khung mẹo / lưu ý nổi bật">
+                💡 Khung Lưu ý
+              </button>
+            </div>
+            <input type="file" id="content_image_file_input" accept="image/*" style="display: none;">
+
+            <textarea id="article_content" class="form-control" style="min-height: 280px; font-family: 'Consolas', monospace; font-size: 0.9rem; line-height: 1.6;" placeholder="<h3>1. Giới thiệu...</h3><p>Nội dung...</p>"></textarea>
+            
+            <!-- LIVE PREVIEW BOX -->
+            <div id="article_content_live_preview" class="article-live-preview-box" style="display: none;">
+            </div>
           </div>
 
           <!-- BUTTONS -->
