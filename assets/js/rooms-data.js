@@ -316,8 +316,12 @@ window.ROOMS_DETAILS_DATA = {
       if (!sourceRooms) {
         const customStr = localStorage.getItem('sala_custom_data');
         if (customStr) {
-          const parsed = JSON.parse(customStr);
-          if (parsed && parsed.rooms) sourceRooms = parsed.rooms;
+          if (customStr.includes('/sala_tam_coc/')) {
+            localStorage.removeItem('sala_custom_data');
+          } else {
+            const parsed = JSON.parse(customStr);
+            if (parsed && parsed.rooms) sourceRooms = parsed.rooms;
+          }
         }
       }
 
@@ -325,8 +329,15 @@ window.ROOMS_DETAILS_DATA = {
         Object.keys(sourceRooms).forEach(key => {
           if (window.ROOMS_DETAILS_DATA[key]) {
             const c = sourceRooms[key];
-            const photosList = (Array.isArray(c.photos) && c.photos.length > 0) ? c.photos : window.ROOMS_DETAILS_DATA[key].photos;
-            const coverPhoto = (photosList && photosList.length > 0) ? photosList[0] : (c.cover || window.ROOMS_DETAILS_DATA[key].cover);
+            let photosList = (Array.isArray(c.photos) && c.photos.length > 0) ? c.photos : window.ROOMS_DETAILS_DATA[key].photos;
+            if (photosList) {
+              photosList = photosList.filter(p => !p || !p.includes('/sala_tam_coc/'));
+              if (photosList.length === 0) photosList = window.ROOMS_DETAILS_DATA[key].photos;
+            }
+            let coverPhoto = (photosList && photosList.length > 0) ? photosList[0] : (c.cover || window.ROOMS_DETAILS_DATA[key].cover);
+            if (coverPhoto && coverPhoto.includes('/sala_tam_coc/')) {
+              coverPhoto = window.ROOMS_DETAILS_DATA[key].photos ? window.ROOMS_DETAILS_DATA[key].photos[0] : '';
+            }
 
             window.ROOMS_DETAILS_DATA[key] = {
               ...window.ROOMS_DETAILS_DATA[key],
@@ -683,7 +694,15 @@ window.ROOMS_DETAILS_DATA = {
         // Thumbnail Cover Image
         if (coverImgSrc) {
           const thumbImg = cardEl.querySelector('.room-thumb');
-          if (thumbImg) thumbImg.src = coverImgSrc;
+          if (thumbImg) {
+            thumbImg.onerror = function() {
+              if (window.ROOMS_DETAILS_DATA[key] && window.ROOMS_DETAILS_DATA[key].photos && window.ROOMS_DETAILS_DATA[key].photos[0]) {
+                this.onerror = null;
+                this.src = window.ROOMS_DETAILS_DATA[key].photos[0];
+              }
+            };
+            thumbImg.src = coverImgSrc;
+          }
         }
 
         // Title
@@ -718,7 +737,15 @@ window.ROOMS_DETAILS_DATA = {
         // Banner Image
         if (coverImgSrc) {
           const bannerImg = cardEl.querySelector('.dining-img');
-          if (bannerImg) bannerImg.src = coverImgSrc;
+          if (bannerImg) {
+            bannerImg.onerror = function() {
+              if (window.ROOMS_DETAILS_DATA[key] && window.ROOMS_DETAILS_DATA[key].photos && window.ROOMS_DETAILS_DATA[key].photos[0]) {
+                this.onerror = null;
+                this.src = window.ROOMS_DETAILS_DATA[key].photos[0];
+              }
+            };
+            bannerImg.src = coverImgSrc;
+          }
         }
 
         // Title

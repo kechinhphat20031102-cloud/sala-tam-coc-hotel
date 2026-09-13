@@ -422,7 +422,7 @@ const DEFAULT_SALA_DATA = {
       "status": "visible"
     }
   },
-  "lastUpdated": 1789289838845
+  "lastUpdated": 1789304000000
 };
 
 function sanitizeSalaData(inputData) {
@@ -457,6 +457,11 @@ window.getSalaData = function() {
   try {
     const custom = localStorage.getItem('sala_custom_data');
     if (custom) {
+      // Auto-purge stale cache containing deleted /sala_tam_coc/ URLs
+      if (custom.includes('/sala_tam_coc/')) {
+        localStorage.removeItem('sala_custom_data');
+        return DEFAULT_SALA_DATA;
+      }
       const parsed = JSON.parse(custom);
       const defTime = (DEFAULT_SALA_DATA && DEFAULT_SALA_DATA.lastUpdated) || 0;
       const customTime = (parsed && parsed.lastUpdated) || 0;
