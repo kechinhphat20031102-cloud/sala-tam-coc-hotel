@@ -28,13 +28,27 @@ document.addEventListener('DOMContentLoaded', () => {
     folder: 'sala_tam_coc'
   };
 
-  async function uploadImageToCloudinary(fileOrDataUrl, subfolder = '') {
+  async function uploadImageToCloudinary(fileOrDataUrl, subfolder = '', customFileName = '') {
     const url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CONFIG.cloudName}/image/upload`;
     const formData = new FormData();
     formData.append('file', fileOrDataUrl);
     formData.append('upload_preset', CLOUDINARY_CONFIG.uploadPreset);
     const targetFolder = subfolder ? `${CLOUDINARY_CONFIG.folder}/${subfolder}` : CLOUDINARY_CONFIG.folder;
     formData.append('folder', targetFolder);
+
+    // Use clean readable public_id based on original filename
+    let fileNameToUse = customFileName;
+    if (!fileNameToUse && fileOrDataUrl instanceof File) {
+      fileNameToUse = fileOrDataUrl.name;
+    }
+    if (fileNameToUse) {
+      const cleanBase = fileNameToUse.replace(/\.[^/.]+$/, "")
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/[đĐ]/g, "d")
+        .replace(/[^a-zA-Z0-9_\-]/g, "_")
+        .replace(/_+/g, "_");
+      formData.append('public_id', `${cleanBase}_${Date.now()}`);
+    }
 
     const res = await fetch(url, {
       method: 'POST',
@@ -480,7 +494,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (files[i].size > 9 * 1024 * 1024) {
           uploadPayload = await compressImageFile(files[i], 1920, 1440, 0.85);
         }
-        const secureUrl = await uploadImageToCloudinary(uploadPayload, 'rooms');
+        const secureUrl = await uploadImageToCloudinary(uploadPayload, 'Phong_Nghi', files[i].name);
         room.photos.push(secureUrl);
         count++;
       } catch(err) {
@@ -682,7 +696,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (file.size > 9 * 1024 * 1024) {
         uploadPayload = await compressImageFile(file, 1920, 1440, 0.85);
       }
-      const secureUrl = await uploadImageToCloudinary(uploadPayload, 'articles');
+      const secureUrl = await uploadImageToCloudinary(uploadPayload, 'Kham_Pha_SEO', file.name);
       if (articleCoverInput) {
         articleCoverInput.value = secureUrl;
       }
@@ -754,7 +768,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (file.size > 9 * 1024 * 1024) {
         uploadPayload = await compressImageFile(file, 1920, 1440, 0.85);
       }
-      const secureUrl = await uploadImageToCloudinary(uploadPayload, 'articles');
+      const secureUrl = await uploadImageToCloudinary(uploadPayload, 'Kham_Pha_SEO', file.name);
 
       const cleanCaption = caption && caption.trim() ? caption.trim() : '';
       const figureHtml = `<figure class="article-image-block" style="margin: 24px 0; text-align: center;">\n  <img src="${secureUrl}" alt="${cleanCaption || 'Hình ảnh bài viết'}" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.25);">\n${cleanCaption ? `  <figcaption style="font-size: 0.88rem; color: #a0a0a0; margin-top: 8px; font-style: italic;">${cleanCaption}</figcaption>\n` : ''}</figure>`;
@@ -946,7 +960,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tr.style.background = 'rgba(255, 152, 0, 0.04)';
       }
 
-      const coverSrc = art.cover || art.image || 'https://res.cloudinary.com/n7my6tye/image/upload/v1789287139/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/B%E1%BB%83_B%C6%A1i_S%C3%A2n_Th%C6%B0%E1%BB%A3ng___T%C3%B2a_Nh%C3%A0/wdsbvbpgapecc8kasvtp.jpg';
+      const coverSrc = art.cover || art.image || 'https://res.cloudinary.com/n7my6tye/image/upload/v1789295636/sala_tam_coc/Khach_San_Tien_Ich/Be_Boi_San_Thuong_Toa_Nha/DJI_20260423182252_0228_D_ANTS.jpg';
       const titleVi = art.titleVi || '(Chưa có tiêu đề tiếng Việt)';
       const titleEn = art.titleEn || '(No English title)';
 
@@ -1087,7 +1101,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'guide',
       date: new Date().toISOString().slice(0, 10),
       readTime: '5',
-      cover: 'https://res.cloudinary.com/n7my6tye/image/upload/v1789287139/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/B%E1%BB%83_B%C6%A1i_S%C3%A2n_Th%C6%B0%E1%BB%A3ng___T%C3%B2a_Nh%C3%A0/wdsbvbpgapecc8kasvtp.jpg',
+      cover: 'https://res.cloudinary.com/n7my6tye/image/upload/v1789295636/sala_tam_coc/Khach_San_Tien_Ich/Be_Boi_San_Thuong_Toa_Nha/DJI_20260423182252_0228_D_ANTS.jpg',
       titleVi: titlePrompt.trim(),
       descVi: titlePrompt.trim() + ' - Cẩm nang chi tiết từ Sala Tam Cốc Hotel & Spa.',
       contentVi: '<h3>1. Giới thiệu</h3><p>Nội dung bài viết mới...</p>',
@@ -1215,7 +1229,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < pendingUploads.length; i++) {
           const item = pendingUploads[i];
           showToast(`Đang tải ảnh ${i + 1}/${pendingUploads.length} lên Cloudinary...`, 'info');
-          const secureUrl = await uploadImageToCloudinary(item.dataUrl, 'rooms');
+          const secureUrl = await uploadImageToCloudinary(item.dataUrl, 'Phong_Nghi', `room_${item.roomKey}_${i + 1}.jpg`);
           roomDataState[item.roomKey].photos[item.pIdx] = secureUrl;
           if (item.pIdx === 0) {
             roomDataState[item.roomKey].cover = secureUrl;

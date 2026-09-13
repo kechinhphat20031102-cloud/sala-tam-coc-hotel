@@ -118,7 +118,7 @@
   <header class="header-main">
     <div class="container navbar">
       <a href="index.html" class="logo-brand">
-        <img src="https://res.cloudinary.com/n7my6tye/image/upload/v1789287193/sala_tam_coc/assets/images/kmp3zpcjzhxiivpvlsrl.png" alt="Sala Tam Coc Hotel & Spa Logo" class="logo-emblem-img">
+        <img src="https://res.cloudinary.com/n7my6tye/image/upload/v1789295593/sala_tam_coc/Logo_Thuong_Hieu/logo.png" alt="Sala Tam Coc Hotel & Spa Logo" class="logo-emblem-img">
         <div class="logo-text-wrap">
           <span class="logo-title" style="font-size: 1.6rem;">SALA</span>
           <span class="logo-subtitle">TAM COC HOTEL & SPA</span>
@@ -277,7 +277,7 @@
         <!-- Column 1: Brand & Socials -->
         <div class="footer-brand">
           <a href="index.html" class="logo-brand" style="margin-bottom: 15px;">
-            <img src="https://res.cloudinary.com/n7my6tye/image/upload/v1789287193/sala_tam_coc/assets/images/kmp3zpcjzhxiivpvlsrl.png" alt="Sala Tam Coc Hotel & Spa Logo" class="logo-emblem-img" style="height: 42px;">
+            <img src="https://res.cloudinary.com/n7my6tye/image/upload/v1789295593/sala_tam_coc/Logo_Thuong_Hieu/logo.png" alt="Sala Tam Coc Hotel & Spa Logo" class="logo-emblem-img" style="height: 42px;">
             <div class="logo-text-wrap">
               <span class="logo-title" style="font-size: 1.6rem; color: var(--primary-gold);">SALA</span>
               <span class="logo-subtitle" style="color: #ffffff;">TAM COC HOTEL & SPA</span>
@@ -450,7 +450,7 @@
               const catLabel = getCategoryLabel(itemCat, lang);
               const dateDisplay = getFormattedDate(item.date, lang);
               const readTime = item.readTime || '5';
-              const cover = item.cover || item.image || 'https://res.cloudinary.com/n7my6tye/image/upload/v1789287139/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/B%E1%BB%83_B%C6%A1i_S%C3%A2n_Th%C6%B0%E1%BB%A3ng___T%C3%B2a_Nh%C3%A0/wdsbvbpgapecc8kasvtp.jpg';
+              const cover = item.cover || item.image || 'https://res.cloudinary.com/n7my6tye/image/upload/v1789295636/sala_tam_coc/Khach_San_Tien_Ich/Be_Boi_San_Thuong_Toa_Nha/DJI_20260423182252_0228_D_ANTS.jpg';
 
               const isVisible = (currentCategory === 'all' || currentCategory === itemCat);
 
@@ -556,7 +556,7 @@
         const hotlinePhone = isFr ? '0337408484' : '0942060533';
         const waLink = isFr ? 'https://wa.me/84337408484' : 'https://wa.me/84942060533';
 
-        const cover = item.cover || item.image || 'https://res.cloudinary.com/n7my6tye/image/upload/v1789287139/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/B%E1%BB%83_B%C6%A1i_S%C3%A2n_Th%C6%B0%E1%BB%A3ng___T%C3%B2a_Nh%C3%A0/wdsbvbpgapecc8kasvtp.jpg';
+        const cover = item.cover || item.image || 'https://res.cloudinary.com/n7my6tye/image/upload/v1789295636/sala_tam_coc/Khach_San_Tien_Ich/Be_Boi_San_Thuong_Toa_Nha/DJI_20260423182252_0228_D_ANTS.jpg';
         const photoCaption = isVi ? 'Toàn cảnh vẻ đẹp kỳ vĩ và thanh bình tại Tam Cốc, Ninh Bình - Bản quyền: Sala Tam Cốc Hotel & Spa' : (isFr ? 'Vue panoramique sur la beauté de Tam Coc, Ninh Binh - Droits réservés : Sala Tam Coc Hotel & Spa' : 'Scenic and peaceful landscape in Tam Coc, Ninh Binh - Courtesy of Sala Tam Coc Hotel & Spa');
 
         const shareUrl = window.location.origin + window.location.pathname + '?article=' + id;
@@ -567,7 +567,7 @@
         otherKeys.forEach(otherId => {
           const oItem = articles[otherId];
           const oTitle = isVi ? (oItem.titleVi || oItem.titleEn) : (isFr ? (oItem.titleFr || oItem.titleEn) : (oItem.titleEn || oItem.titleVi));
-          const oCover = oItem.cover || oItem.image || 'https://res.cloudinary.com/n7my6tye/image/upload/v1789287139/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/B%E1%BB%83_B%C6%A1i_S%C3%A2n_Th%C6%B0%E1%BB%A3ng___T%C3%B2a_Nh%C3%A0/wdsbvbpgapecc8kasvtp.jpg';
+          const oCover = oItem.cover || oItem.image || 'https://res.cloudinary.com/n7my6tye/image/upload/v1789295636/sala_tam_coc/Khach_San_Tien_Ich/Be_Boi_San_Thuong_Toa_Nha/DJI_20260423182252_0228_D_ANTS.jpg';
 
           nextArticlesHtml += `
             <div class="news-next-item" data-id="${otherId}">
