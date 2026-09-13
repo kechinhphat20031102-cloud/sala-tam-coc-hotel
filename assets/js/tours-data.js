@@ -19,7 +19,7 @@ const tourDetailsData = {
     highlightsVi: ["Cố đô Hoa Lư ngàn năm", "Chùa Bái Đính lớn nhất ĐNÁ", "Thuyền Tràng An Di sản UNESCO", "Chinh phục 500 bậc đá Hang Múa"],
     highlightsEn: ["Thousand-year Hoa Lu Ancient Capital", "SE Asia's Largest Bai Dinh Pagoda", "UNESCO Heritage Trang An Sampan Boat", "Conquer 500 Stone Steps at Mua Cave"],
     highlightsFr: ["Capitale antique de Hoa Lu", "Pagode Bai Dinh d'Asie du Sud-Est", "Barque à Trang An (UNESCO)", "Pic Mua & 500 marches"],
-    image: "https://res.cloudinary.com/n7my6tye/image/upload/v1789295611/sala_tam_coc/Daily_Tours/Tour_1/hinh-anh_2026-01-16_145357091-1024x560.png",
+    image: "https://res.cloudinary.com/n7my6tye/image/upload/v1789298411/DAILY_TOURS/Anh_tour_1/hinh-anh_2026-01-16_145357091-1024x560.png",
     itinerary: [
       { time: "08:00 - 08:30", desc: "Pick-up by tour guide & driver from Sala Tam Coc Hotel or homestays in Ninh Binh area." },
       { time: "08:30 - 09:45", desc: "Visit Hoa Lu Ancient Capital - first feudal capital of Vietnam (King Dinh & King Le Temples)." },
@@ -124,7 +124,7 @@ const tourDetailsData = {
     highlightsVi: ["Chùa Bích Động cổ kính (xây dựng năm 1428)", "Đỉnh Ngọa Long Hang Múa view thung lũng Tam Cốc", "Cố đô Hoa Lư", "Thuyền Tràng An UNESCO"],
     highlightsEn: ["Ancient Bich Dong Pagoda (built in 1428)", "Ngoa Long Peak Mua Cave Tam Coc Valley View", "Hoa Lu Ancient Capital", "UNESCO Trang An Sampan Boat"],
     highlightsFr: ["Pagode antique Bich Dong (1428)", "Pic Mua vue panoramique Tam Coc", "Cité antique Hoa Lu", "Barque Trang An UNESCO"],
-    image: "https://res.cloudinary.com/n7my6tye/image/upload/v1789295612/sala_tam_coc/Daily_Tours/Tour_2/trang_an.jpg",
+    image: "https://res.cloudinary.com/n7my6tye/image/upload/v1789298411/DAILY_TOURS/Anh_tour_2/trang_an.jpg",
     itinerary: [
       { time: "08:30 - 09:00", desc: "Tour guide & driver pick you up at Sala Tam Coc Hotel." },
       { time: "09:10 - 10:15", desc: "Visit ancient Bich Dong Pagoda - built in 1428 leaning against limestone mountain cliffs." },
@@ -225,7 +225,7 @@ const tourDetailsData = {
     highlightsVi: ["Quần thể tâm linh Chùa Bái Đính", "Đi thuyền Di sản Tràng An", "Leo núi Hang Múa ngắm hoàng hôn"],
     highlightsEn: ["Bai Dinh Spiritual Complex", "Trang An UNESCO Boat Trip", "Mua Cave Peak Sunset Trekking"],
     highlightsFr: ["Complexe spirituel Bai Dinh", "Barque Trang An UNESCO", "Coucher de soleil au pic Mua"],
-    image: "https://res.cloudinary.com/n7my6tye/image/upload/v1789295612/sala_tam_coc/Daily_Tours/Tour_3/co-mot-hang-mua-dep-nao-long-nguoi-giua-may-troi-ninh-binh-6-1640608283.jpg",
+    image: "https://res.cloudinary.com/n7my6tye/image/upload/v1789298412/DAILY_TOURS/Anh_tour_3/co-mot-hang-mua-dep-nao-long-nguoi-giua-may-troi-ninh-binh-6-1640608283.jpg",
     itinerary: [
       { time: "08:00 - 08:30", desc: "Pick-up from Sala Tam Coc Hotel." },
       { time: "09:30 - 11:45", desc: "Visit Bai Dinh Pagoda - massive bronze Buddha statues, 500 Arhat corridor, and Vietnam's largest bell tower." },
@@ -322,7 +322,7 @@ const tourDetailsData = {
     highlightsVi: ["Trung tâm Cứu hộ Linh trưởng Quý hiếm", "Động Người Xưa (7.500 năm)", "Ăn trưa giữa rừng nguyên sinh", "Trekking Cây Trò Ngàn Năm"],
     highlightsEn: ["Endangered Primate Rescue Center", "Cave of Prehistoric Man (7,500 yrs)", "Jungle lunch at Bong Center", "Thousand-Year-Old Tree Trekking"],
     highlightsFr: ["Centre de Sauvetage des Primates", "Grotte de l'Homme Préhistorique", "Randonnée Arbre Millénaire", "Déjeuner en jungle"],
-    image: "https://res.cloudinary.com/n7my6tye/image/upload/v1789295613/sala_tam_coc/Daily_Tours/Tour_4/CP1-3614-1724252015.webp",
+    image: "https://res.cloudinary.com/n7my6tye/image/upload/v1789298412/DAILY_TOURS/Anh_tour_4/CP1-3614-1724252015.webp",
     itinerary: [
       { time: "08:00 - 09:00", desc: "Depart from Ninh Binh to Cuc Phuong National Park passing peaceful countryside roads." },
       { time: "10:30 - 11:30", desc: "Visit Endangered Primate Rescue Center (Langurs, Gibbons...) and learn about wildlife conservation." },
@@ -419,7 +419,7 @@ const tourDetailsData = {
     highlightsVi: ["Khám phá Rừng Cúc Phương & Động Người Xưa", "Hành trình đi thuyền Đầm Vân Long", "Ngắm Voọc mông trắng & đàn chim hoang dã"],
     highlightsEn: ["Cuc Phuong Forest & Prehistoric Cave", "Van Long Wetland Bamboo Boat Journey", "Spot Delacour's Langurs & Wild Birds"],
     highlightsFr: ["Forêt de Cuc Phuong & Grotte", "Barque à la réserve de Van Long", "Observation des Langurs & oiseaux"],
-    image: "https://res.cloudinary.com/n7my6tye/image/upload/v1789295613/sala_tam_coc/Daily_Tours/Tour_5/kinh-nghiem-du-lich-cong-dong-van-long-vinh-khong-song-binh-yen-01-1641043645.jpg",
+    image: "https://res.cloudinary.com/n7my6tye/image/upload/v1789298413/DAILY_TOURS/Anh_tour_5/kinh-nghiem-du-lich-cong-dong-van-long-vinh-khong-song-binh-yen-01-1641043645.jpg",
     itinerary: [
       { time: "08:30 - 09:00", desc: "Guide and driver pick you up to depart for Cuc Phuong National Park." },
       { time: "10:30 - 12:00", desc: "Visit Primate Rescue Center & Prehistoric Cave." },
@@ -520,7 +520,7 @@ const tourDetailsData = {
     highlightsVi: ["Đạp xe/đi Jeep qua làng quê", "Chùa Bích Động & Đền Voi", "Trải nghiệm Buffalo Caves (bắt cá bằng nơm, cưỡi trâu, cấy lúa)", "Đền Thái Vi"],
     highlightsEn: ["Cycling/Jeep ride through local villages", "Bich Dong Pagoda & Elephant Temple", "Buffalo Caves experience (basket fishing, rice planting, buffalo riding)", "Thai Vy Temple"],
     highlightsFr: ["Balade vélo/Jeep dans les villages", "Pagode Bich Dong & Temple de l'Éléphant", "Expérience agricole Buffalo Caves", "Temple Thai Vy"],
-    image: "https://res.cloudinary.com/n7my6tye/image/upload/v1789295613/sala_tam_coc/Daily_Tours/Tour_6/ninh-binh-jeep-tour-8.webp",
+    image: "https://res.cloudinary.com/n7my6tye/image/upload/v1789298413/DAILY_TOURS/Anh_tour_6/ninh-binh-jeep-tour-8.webp",
     itinerary: [
       { time: "08:30", desc: "Meet local guide, select bicycle / motorbike / Jeep to start the journey." },
       { time: "09:00 - 10:15", desc: "Cycle through winding village roads to ancient Bich Dong Pagoda." },
@@ -621,7 +621,7 @@ const tourDetailsData = {
     highlightsVi: ["Đạp xe qua đồng lúa Tam Cốc", "Chùa Bích Động & Đền Thái Vi", "Thuyền khám phá Vườn chim Thung Nham ngắm hàng ngàn chim trời"],
     highlightsEn: ["Cycling through Tam Coc rice fields", "Bich Dong Pagoda & Thai Vy Temple", "Thung Nham Bird Valley boat trip watching thousands of wild birds"],
     highlightsFr: ["Vélo dans les rizières de Tam Coc", "Pagode Bich Dong & Temple Thai Vy", "Barque à Thung Nham (sanctuaire d'oiseaux)"],
-    image: "https://res.cloudinary.com/n7my6tye/image/upload/v1789295614/sala_tam_coc/Daily_Tours/Tour_7/chua-bich-dong-1.jpg",
+    image: "https://res.cloudinary.com/n7my6tye/image/upload/v1789298413/DAILY_TOURS/Anh_tour_7/chua-bich-dong-1.jpg",
     itinerary: [
       { time: "08:30", desc: "Guide meets you at hotel, get mountain bikes and depart." },
       { time: "09:00 - 10:15", desc: "Cycle past lush rice fields to ancient Bich Dong Pagoda." },

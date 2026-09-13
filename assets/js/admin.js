@@ -960,7 +960,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tr.style.background = 'rgba(255, 152, 0, 0.04)';
       }
 
-      const coverSrc = art.cover || art.image || 'https://res.cloudinary.com/n7my6tye/image/upload/v1789295636/sala_tam_coc/Khach_San_Tien_Ich/Be_Boi_San_Thuong_Toa_Nha/DJI_20260423182252_0228_D_ANTS.jpg';
+      const coverSrc = art.cover || art.image || 'https://res.cloudinary.com/n7my6tye/image/upload/v1789298353/Anh_Sala_Tam_Coc_Hotel_va_Spa/Be_Boi_San_Thuong_va_Toa_Nha/DJI_20260423182252_0228_D_ANTS.jpg';
       const titleVi = art.titleVi || '(Chưa có tiêu đề tiếng Việt)';
       const titleEn = art.titleEn || '(No English title)';
 
@@ -1101,7 +1101,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'guide',
       date: new Date().toISOString().slice(0, 10),
       readTime: '5',
-      cover: 'https://res.cloudinary.com/n7my6tye/image/upload/v1789295636/sala_tam_coc/Khach_San_Tien_Ich/Be_Boi_San_Thuong_Toa_Nha/DJI_20260423182252_0228_D_ANTS.jpg',
+      cover: 'https://res.cloudinary.com/n7my6tye/image/upload/v1789298353/Anh_Sala_Tam_Coc_Hotel_va_Spa/Be_Boi_San_Thuong_va_Toa_Nha/DJI_20260423182252_0228_D_ANTS.jpg',
       titleVi: titlePrompt.trim(),
       descVi: titlePrompt.trim() + ' - Cẩm nang chi tiết từ Sala Tam Cốc Hotel & Spa.',
       contentVi: '<h3>1. Giới thiệu</h3><p>Nội dung bài viết mới...</p>',
