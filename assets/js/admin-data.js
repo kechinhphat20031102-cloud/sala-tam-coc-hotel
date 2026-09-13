@@ -354,8 +354,8 @@ const DEFAULT_SALA_DATA = {
       "category": "destination",
       "date": "2026-09-13",
       "readTime": 7,
-      "image": "https://res.cloudinary.com/n7my6tye/image/upload/v1789307953/Kham_Pha/Anh_Bai_Viet/check-in-song-ao-ninh-binh-hero.jpg",
-      "cover": "https://res.cloudinary.com/n7my6tye/image/upload/v1789307953/Kham_Pha/Anh_Bai_Viet/check-in-song-ao-ninh-binh-hero.jpg",
+      "image": "https://res.cloudinary.com/n7my6tye/image/upload/v1789311011/Kham_Pha/Anh_Bai_Viet/check-in-song-ao-ninh-binh-hero.jpg",
+      "cover": "https://res.cloudinary.com/n7my6tye/image/upload/v1789311011/Kham_Pha/Anh_Bai_Viet/check-in-song-ao-ninh-binh-hero.jpg",
       "titleVi": "Top 5 Địa Điểm Check-In Sống Ảo Đẹp Như Tranh Tại Ninh Bình 2026",
       "titleEn": "Top 5 Most Scenic Instagram & Photo Spots in Ninh Binh (2026 Guide)",
       "titleFr": "Top 5 des Plus Beaux Spots Photo et Instagram à Ninh Binh (2026)",
@@ -423,7 +423,7 @@ const DEFAULT_SALA_DATA = {
       "status": "visible"
     }
   },
-  "lastUpdated": 1789308129762
+  "lastUpdated": 1789311012668
 };
 
 function sanitizeSalaData(inputData) {
