@@ -32,13 +32,13 @@ const DEFAULT_SALA_DATA = {
       "view": "City & Street View Window",
       "viewVi": "Cửa sổ hướng phố",
       "viewFr": "Fenêtre vue ville et rue",
-      "cover": "https://res.cloudinary.com/n7my6tye/image/upload/v1789287180/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/tm8nxe6w7sgt3pueknp1.jpg",
+      "cover": "https://res.cloudinary.com/n7my6tye/image/upload/v1789287183/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/upjonpijkbbzup5fm08n.jpg",
       "photos": [
-        "https://res.cloudinary.com/n7my6tye/image/upload/v1789287180/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/tm8nxe6w7sgt3pueknp1.jpg",
+        "https://res.cloudinary.com/n7my6tye/image/upload/v1789287183/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/upjonpijkbbzup5fm08n.jpg",
         "https://res.cloudinary.com/n7my6tye/image/upload/v1789287178/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/jpptrhyyaefojznim8pr.jpg",
+        "https://res.cloudinary.com/n7my6tye/image/upload/v1789287180/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/tm8nxe6w7sgt3pueknp1.jpg",
         "https://res.cloudinary.com/n7my6tye/image/upload/v1789287181/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/xy47kb2qhc70amgfys2s.jpg",
         "https://res.cloudinary.com/n7my6tye/image/upload/v1789287182/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/vpzhprzddhjkrhqs1rlp.jpg",
-        "https://res.cloudinary.com/n7my6tye/image/upload/v1789287183/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/upjonpijkbbzup5fm08n.jpg",
         "https://res.cloudinary.com/n7my6tye/image/upload/v1789287185/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/Superior_Double_city_view/c8k9pkqn50jln6s1y6v4.jpg"
       ],
       "descEn": "Cozy and bright room featuring large city & street view windows, comfortable 1 King bed, refined wooden furnishings, and complete upscale amenities.",
@@ -422,7 +422,7 @@ const DEFAULT_SALA_DATA = {
       "status": "visible"
     }
   },
-  "lastUpdated": 1789289600107
+  "lastUpdated": 1789289796381
 };
 
 function sanitizeSalaData(inputData) {
