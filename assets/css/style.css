@@ -52,7 +52,7 @@
 }
 
 html, body {
-  overflow-x: hidden !important;
+  overflow-x: clip !important;
   max-width: 100vw !important;
   width: 100% !important;
 }
@@ -4003,14 +4003,15 @@ input[type="date"]::-webkit-date-and-time-value {
   display: grid;
   grid-template-columns: 56px minmax(0, 1fr) 340px;
   gap: 36px;
-  align-items: start;
+  align-items: stretch;
   position: relative;
 }
 
 /* A. Left Floating Toolbar */
 .news-left-toolbar-wrap {
   position: sticky;
-  top: 100px;
+  top: 145px;
+  align-self: start;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -4275,7 +4276,8 @@ input[type="date"]::-webkit-date-and-time-value {
   border-left: 1px solid #f1f3f5;
   padding-left: 28px;
   position: sticky;
-  top: 100px;
+  top: 145px;
+  align-self: start;
 }
 
 .news-next-header {
