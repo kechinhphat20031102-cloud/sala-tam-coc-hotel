@@ -1,0 +1,14 @@
+﻿# Exclude temporary, draft and documentation folders from Vercel build
+Sửa web 1/
+Sửa web 1 (2)/
+Sửa web 1 (3)/
+Khám Phá/
+*.docx
+*.doc
+*.psd
+*.log
+*.tmp
+
+# Exclude local test and scratch files
+scratch/
+test_*.py

@@ -15,10 +15,39 @@ document.addEventListener('DOMContentLoaded', () => {
   let activeRoomKey = 'superior-double';
   let activeLang = 'vi';
   let roomDataState = {};
+  let activeArticleKey = 'tam-coc-travel-guide-2026';
+  let activeArticleLang = 'vi';
+  let articlesDataState = {};
 
-  // Check login session
-  if (sessionStorage.getItem('sala_admin_authed') === 'true') {
-    showDashboard();
+  // ==========================================
+  // CLOUDINARY CDN CONFIGURATION & UPLOADER
+  // ==========================================
+  const CLOUDINARY_CONFIG = {
+    cloudName: 'n7my6tye',
+    uploadPreset: 'sala_upload',
+    folder: 'sala_tam_coc'
+  };
+
+  async function uploadImageToCloudinary(fileOrDataUrl, subfolder = '') {
+    const url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CONFIG.cloudName}/image/upload`;
+    const formData = new FormData();
+    formData.append('file', fileOrDataUrl);
+    formData.append('upload_preset', CLOUDINARY_CONFIG.uploadPreset);
+    const targetFolder = subfolder ? `${CLOUDINARY_CONFIG.folder}/${subfolder}` : CLOUDINARY_CONFIG.folder;
+    formData.append('folder', targetFolder);
+
+    const res = await fetch(url, {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.error?.message || `Lỗi tải ảnh lên Cloudinary (${res.status})`);
+    }
+
+    const data = await res.json();
+    return data.secure_url;
   }
 
   // Handle Login
@@ -63,6 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       const targetId = btn.getAttribute('data-tab');
       document.getElementById(targetId)?.classList.add('active');
+
+      if (targetId === 'tab-analytics' && typeof renderAnalyticsTab === 'function') {
+        renderAnalyticsTab();
+      }
     });
   });
 
@@ -114,6 +147,17 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('limo_roundtrip') && (document.getElementById('limo_roundtrip').value = data.tours['limousine'].priceRoundTrip || '');
       document.getElementById('limo_schedule') && (document.getElementById('limo_schedule').value = data.tours['limousine'].schedule || '');
     }
+
+    // 4. Articles (Discover SEO Content)
+    articlesDataState = JSON.parse(JSON.stringify(data.articles || {}));
+    const artKeys = Object.keys(articlesDataState);
+    if (artKeys.length > 0 && !articlesDataState[activeArticleKey]) {
+      activeArticleKey = artKeys[0];
+    }
+    if (typeof renderArticleSelect === 'function') renderArticleSelect();
+    if (typeof renderArticleEditForm === 'function') renderArticleEditForm();
+    if (typeof renderArticlesTable === 'function') renderArticlesTable();
+    if (typeof renderAnalyticsTab === 'function') renderAnalyticsTab();
   }
 
   function saveCurrentRoomFormToState() {
@@ -424,18 +468,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const files = Array.from(e.target.files || []);
     if (files.length === 0) return;
 
-    showToast(`Đang xử lý tối ưu ${files.length} tệp ảnh...`, 'info');
+    showToast(`Đang tải ${files.length} ảnh trực tiếp lên Cloudinary CDN...`, 'info');
     const room = roomDataState[activeRoomKey] || {};
     if (!Array.isArray(room.photos)) room.photos = [];
 
     let count = 0;
     for (let i = 0; i < files.length; i++) {
       try {
-        const compressed = await compressImageFile(files[i], 1600, 1200, 0.82);
-        room.photos.push(compressed);
+        showToast(`Đang tải ảnh ${i + 1}/${files.length} (${files[i].name}) lên Cloudinary...`, 'info');
+        let uploadPayload = files[i];
+        if (files[i].size > 9 * 1024 * 1024) {
+          uploadPayload = await compressImageFile(files[i], 1920, 1440, 0.85);
+        }
+        const secureUrl = await uploadImageToCloudinary(uploadPayload, 'rooms');
+        room.photos.push(secureUrl);
         count++;
       } catch(err) {
-        console.error("Compression error:", err);
+        console.error("Cloudinary upload error:", err);
+        showToast(`Lỗi khi tải ảnh ${files[i].name}: ${err.message}`, 'error');
       }
     }
 
@@ -444,7 +494,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     renderPhotoGalleryGrid();
-    showToast(`Đã thêm ${count} ảnh mới! Nhấn "Lưu & Đẩy Lên GitHub" để đẩy ảnh trực tiếp vào kho lưu trữ GitHub.`, 'success');
+    showToast(`Đã tải thành công ${count} ảnh lên Cloudinary CDN! Không tốn dung lượng GitHub/Vercel.`, 'success');
     uploadInput.value = '';
   });
 
@@ -495,9 +545,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // SAVE ALL DATA FUNCTION
   function saveAllDataToStorage() {
     saveCurrentRoomFormToState();
+    if (typeof saveCurrentArticleFormToState === 'function') saveCurrentArticleFormToState();
 
     const fullData = window.getSalaData();
     fullData.rooms = roomDataState;
+    fullData.articles = articlesDataState;
     fullData.lastUpdated = Date.now();
 
     if (document.getElementById('info_hotline1')) {
@@ -519,7 +571,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Trigger custom event for real-time sync across tabs/modals
     window.dispatchEvent(new CustomEvent('salaDataUpdated'));
 
-    showToast('Đã lưu và đồng bộ dữ liệu phòng thành công!', 'success');
+    showToast('Đã lưu và đồng bộ dữ liệu thành công!', 'success');
   }
 
   document.getElementById('adminSaveSingleRoomBtn')?.addEventListener('click', saveAllDataToStorage);
@@ -528,8 +580,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // EXPORT JSON
   document.getElementById('exportJsonBtn')?.addEventListener('click', () => {
     saveCurrentRoomFormToState();
+    if (typeof saveCurrentArticleFormToState === 'function') saveCurrentArticleFormToState();
     const data = window.getSalaData();
     data.rooms = roomDataState;
+    data.articles = articlesDataState;
 
     const jsonStr = JSON.stringify(data, null, 2);
     const blob = new Blob([jsonStr], { type: 'application/json' });
@@ -576,6 +630,374 @@ document.addEventListener('DOMContentLoaded', () => {
       loadDataIntoForms();
       showToast('Đã khôi phục dữ liệu mặc định thành công!', 'info');
     }
+  });
+
+  // ==========================================
+  // DISCOVER & SEO ARTICLES CONTROLLER
+  // ==========================================
+
+  const articleKeySelect = document.getElementById('adminArticleKeySelect');
+  const articleIdInput = document.getElementById('article_id');
+  const articleCategorySelect = document.getElementById('article_category');
+  const articleDateInput = document.getElementById('article_date');
+  const articleReadTimeInput = document.getElementById('article_read_time');
+  const articleStatusSelect = document.getElementById('article_status');
+  const articleCoverInput = document.getElementById('article_cover');
+  const articleCoverPreview = document.getElementById('article_cover_preview');
+  const articleCoverPreviewWrap = document.getElementById('article_cover_preview_wrap');
+  const articleTitleInput = document.getElementById('article_title');
+  const articleDescInput = document.getElementById('article_desc');
+  const articleContentInput = document.getElementById('article_content');
+  const articleTitleLabel = document.getElementById('article_title_label');
+  const articleDescLabel = document.getElementById('article_desc_label');
+  const articleContentLabel = document.getElementById('article_content_label');
+  const articleActiveLangBadge = document.getElementById('adminArticleActiveLangBadge');
+  const adminArticlesTableBody = document.getElementById('adminArticlesTableBody');
+
+  function updateCoverPreview(url) {
+    if (url && url.trim()) {
+      if (articleCoverPreview) articleCoverPreview.src = url.trim();
+      if (articleCoverPreviewWrap) articleCoverPreviewWrap.style.display = 'block';
+    } else {
+      if (articleCoverPreviewWrap) articleCoverPreviewWrap.style.display = 'none';
+    }
+  }
+
+  articleCoverInput?.addEventListener('input', (e) => {
+    updateCoverPreview(e.target.value);
+  });
+
+  const uploadArticleCoverBtn = document.getElementById('admin_btn_upload_article_cover');
+  const articleCoverFileInput = document.getElementById('admin_article_cover_file_input');
+
+  uploadArticleCoverBtn?.addEventListener('click', () => articleCoverFileInput?.click());
+
+  articleCoverFileInput?.addEventListener('change', async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      showToast(`Đang tải ảnh bìa "${file.name}" lên Cloudinary CDN...`, 'info');
+      let uploadPayload = file;
+      if (file.size > 9 * 1024 * 1024) {
+        uploadPayload = await compressImageFile(file, 1920, 1440, 0.85);
+      }
+      const secureUrl = await uploadImageToCloudinary(uploadPayload, 'articles');
+      if (articleCoverInput) {
+        articleCoverInput.value = secureUrl;
+      }
+      updateCoverPreview(secureUrl);
+      showToast('Đã tải ảnh bìa lên Cloudinary CDN thành công!', 'success');
+    } catch (err) {
+      console.error("Cloudinary article cover upload error:", err);
+      showToast(`Lỗi tải ảnh bìa lên Cloudinary: ${err.message}`, 'error');
+    }
+    articleCoverFileInput.value = '';
+  });
+
+  function renderArticleSelect() {
+    if (!articleKeySelect) return;
+    articleKeySelect.innerHTML = '';
+    const keys = Object.keys(articlesDataState);
+    if (keys.length === 0) {
+      const opt = document.createElement('option');
+      opt.value = '';
+      opt.textContent = '(Chưa có bài viết nào)';
+      articleKeySelect.appendChild(opt);
+      return;
+    }
+
+    keys.forEach((k, idx) => {
+      const art = articlesDataState[k] || {};
+      const opt = document.createElement('option');
+      opt.value = k;
+      const isHidden = art.hidden === true || art.status === 'hidden';
+      const statusPrefix = isHidden ? ' [ĐÃ ẨN]' : '';
+      const title = art.titleVi || art.titleEn || art.titleFr || k;
+      opt.textContent = `${idx + 1}. [${art.category || 'guide'}]${statusPrefix} ${title}`;
+      if (k === activeArticleKey) opt.selected = true;
+      articleKeySelect.appendChild(opt);
+    });
+  }
+
+  function renderArticleEditForm() {
+    const art = articlesDataState[activeArticleKey] || {};
+    
+    if (articleIdInput) {
+      articleIdInput.value = activeArticleKey || '';
+      articleIdInput.disabled = !!articlesDataState[activeArticleKey];
+    }
+    if (articleCategorySelect) articleCategorySelect.value = art.category || 'guide';
+    if (articleDateInput) articleDateInput.value = art.date || new Date().toISOString().slice(0, 10);
+    if (articleReadTimeInput) articleReadTimeInput.value = art.readTime || '5';
+    if (articleStatusSelect) {
+      const isHidden = art.hidden === true || art.status === 'hidden';
+      articleStatusSelect.value = isHidden ? 'hidden' : 'visible';
+    }
+    if (articleCoverInput) {
+      const c = art.cover || art.image || '';
+      articleCoverInput.value = c;
+      updateCoverPreview(c);
+    }
+
+    const langName = activeArticleLang === 'vi' ? 'Tiếng Việt' : (activeArticleLang === 'en' ? 'English' : 'Français');
+    if (articleActiveLangBadge) {
+      articleActiveLangBadge.textContent = `Đang soạn: ${langName}`;
+    }
+    if (articleTitleLabel) {
+      articleTitleLabel.innerHTML = `<i class="fa-solid fa-heading"></i> Tiêu Đề Bài Viết (${langName}):`;
+    }
+    if (articleDescLabel) {
+      articleDescLabel.innerHTML = `<i class="fa-solid fa-align-left"></i> Tóm Tắt Ngắn / Excerpt (${langName}):`;
+    }
+    if (articleContentLabel) {
+      articleContentLabel.innerHTML = `<i class="fa-solid fa-file-lines"></i> Nội Dung Chi Tiết HTML (${langName}):`;
+    }
+
+    if (activeArticleLang === 'vi') {
+      if (articleTitleInput) articleTitleInput.value = art.titleVi || '';
+      if (articleDescInput) articleDescInput.value = art.descVi || '';
+      if (articleContentInput) articleContentInput.value = art.contentVi || '';
+    } else if (activeArticleLang === 'en') {
+      if (articleTitleInput) articleTitleInput.value = art.titleEn || '';
+      if (articleDescInput) articleDescInput.value = art.descEn || '';
+      if (articleContentInput) articleContentInput.value = art.contentEn || '';
+    } else if (activeArticleLang === 'fr') {
+      if (articleTitleInput) articleTitleInput.value = art.titleFr || '';
+      if (articleDescInput) articleDescInput.value = art.descFr || '';
+      if (articleContentInput) articleContentInput.value = art.contentFr || '';
+    }
+  }
+
+  function saveCurrentArticleFormToState() {
+    if (!activeArticleKey) return;
+    if (!articlesDataState[activeArticleKey]) {
+      articlesDataState[activeArticleKey] = {};
+    }
+
+    const art = articlesDataState[activeArticleKey];
+    art.id = activeArticleKey;
+    if (articleCategorySelect) art.category = articleCategorySelect.value;
+    if (articleDateInput) art.date = articleDateInput.value.trim();
+    if (articleReadTimeInput) art.readTime = articleReadTimeInput.value.trim();
+    if (articleStatusSelect) {
+      const isHidden = articleStatusSelect.value === 'hidden';
+      art.hidden = isHidden;
+      art.status = isHidden ? 'hidden' : 'visible';
+    }
+    if (articleCoverInput) art.cover = articleCoverInput.value.trim();
+
+    if (activeArticleLang === 'vi') {
+      if (articleTitleInput) art.titleVi = articleTitleInput.value.trim();
+      if (articleDescInput) art.descVi = articleDescInput.value.trim();
+      if (articleContentInput) art.contentVi = articleContentInput.value.trim();
+    } else if (activeArticleLang === 'en') {
+      if (articleTitleInput) art.titleEn = articleTitleInput.value.trim();
+      if (articleDescInput) art.descEn = articleDescInput.value.trim();
+      if (articleContentInput) art.contentEn = articleContentInput.value.trim();
+    } else if (activeArticleLang === 'fr') {
+      if (articleTitleInput) art.titleFr = articleTitleInput.value.trim();
+      if (articleDescInput) art.descFr = articleDescInput.value.trim();
+      if (articleContentInput) art.contentFr = articleContentInput.value.trim();
+    }
+  }
+
+  function renderArticlesTable() {
+    if (!adminArticlesTableBody) return;
+    adminArticlesTableBody.innerHTML = '';
+    const keys = Object.keys(articlesDataState);
+    if (keys.length === 0) {
+      adminArticlesTableBody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 20px; color: #999;">Chưa có bài viết nào</td></tr>';
+      return;
+    }
+
+    keys.forEach(k => {
+      const art = articlesDataState[k] || {};
+      const tr = document.createElement('tr');
+      tr.style.borderBottom = '1px solid rgba(255,255,255,0.06)';
+      tr.style.transition = 'all 0.25s ease';
+
+      const isHidden = art.hidden === true || art.status === 'hidden';
+      if (isHidden) {
+        tr.style.opacity = '0.65';
+        tr.style.background = 'rgba(255, 152, 0, 0.04)';
+      }
+
+      const coverSrc = art.cover || art.image || 'https://res.cloudinary.com/n7my6tye/image/upload/v1789287139/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/B%E1%BB%83_B%C6%A1i_S%C3%A2n_Th%C6%B0%E1%BB%A3ng___T%C3%B2a_Nh%C3%A0/wdsbvbpgapecc8kasvtp.jpg';
+      const titleVi = art.titleVi || '(Chưa có tiêu đề tiếng Việt)';
+      const titleEn = art.titleEn || '(No English title)';
+
+      tr.innerHTML = `
+        <td style="padding: 10px;">
+          <img src="${coverSrc}" alt="${k}" style="width: 60px; height: 42px; object-fit: cover; border-radius: 4px; ${isHidden ? 'filter: grayscale(40%);' : ''}">
+        </td>
+        <td style="padding: 10px;">
+          <strong style="color: #fff;">${titleVi}</strong><br>
+          <small style="color: #aaa;">${titleEn}</small>
+        </td>
+        <td style="padding: 10px;">
+          <span style="background: rgba(197,168,128,0.2); color: var(--primary-gold); padding: 3px 8px; border-radius: 12px; font-size: 0.75rem; text-transform: uppercase;">${art.category || 'guide'}</span>
+        </td>
+        <td style="padding: 10px; text-align: center; white-space: nowrap;">
+          ${isHidden
+            ? '<span style="background: rgba(255,152,0,0.18); color: #ffa726; border: 1px solid rgba(255,152,0,0.4); padding: 4px 10px; border-radius: 12px; font-size: 0.78rem; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;"><i class="fa-solid fa-eye-slash"></i> Đã Ẩn</span>'
+            : '<span style="background: rgba(76,175,80,0.18); color: #81c784; border: 1px solid rgba(76,175,80,0.4); padding: 4px 10px; border-radius: 12px; font-size: 0.78rem; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;"><i class="fa-solid fa-eye"></i> Đang Hiện</span>'
+          }
+        </td>
+        <td style="padding: 10px; color: #aaa; white-space: nowrap;">${art.date || ''}</td>
+        <td style="padding: 10px; text-align: center; white-space: nowrap;">
+          <button type="button" class="btn btn-outline-gold btn-sm edit-art-btn" data-key="${k}" style="margin-right: 6px;"><i class="fa-solid fa-pen"></i> Sửa</button>
+          <button type="button" class="btn btn-sm toggle-art-btn" data-key="${k}" title="${isHidden ? 'Hiện bài viết này lên website' : 'Tạm ẩn bài viết khỏi độc giả'}" style="margin-right: 6px; ${isHidden ? 'background: rgba(76,175,80,0.18); color: #81c784; border: 1px solid rgba(76,175,80,0.45);' : 'background: rgba(255,152,0,0.18); color: #ffa726; border: 1px solid rgba(255,152,0,0.45);'}; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+            <i class="fa-solid ${isHidden ? 'fa-eye' : 'fa-eye-slash'}"></i> ${isHidden ? 'Hiện' : 'Ẩn'}
+          </button>
+          <button type="button" class="btn btn-outline-white btn-sm del-art-btn" data-key="${k}" style="color: #ff8a80; border-color: #ff8a80;" title="Xóa bài viết"><i class="fa-solid fa-trash"></i></button>
+        </td>
+      `;
+      adminArticlesTableBody.appendChild(tr);
+    });
+
+    adminArticlesTableBody.querySelectorAll('.edit-art-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        saveCurrentArticleFormToState();
+        activeArticleKey = btn.getAttribute('data-key');
+        renderArticleSelect();
+        renderArticleEditForm();
+        window.scrollTo({ top: document.getElementById('adminArticleKeySelect').offsetTop - 100, behavior: 'smooth' });
+      });
+    });
+
+    adminArticlesTableBody.querySelectorAll('.toggle-art-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const k = btn.getAttribute('data-key');
+        if (!k || !articlesDataState[k]) return;
+        saveCurrentArticleFormToState();
+        const currentlyHidden = articlesDataState[k].hidden === true || articlesDataState[k].status === 'hidden';
+        articlesDataState[k].hidden = !currentlyHidden;
+        articlesDataState[k].status = articlesDataState[k].hidden ? 'hidden' : 'visible';
+        
+        if (k === activeArticleKey && articleStatusSelect) {
+          articleStatusSelect.value = articlesDataState[k].hidden ? 'hidden' : 'visible';
+        }
+
+        renderArticleSelect();
+        renderArticlesTable();
+        saveAllDataToStorage();
+
+        const artTitle = articlesDataState[k].titleVi || k;
+        if (articlesDataState[k].hidden) {
+          showToast(`Đã ẩn bài viết "${artTitle}" khỏi người xem!`, 'info');
+        } else {
+          showToast(`Đã kích hoạt hiển thị công khai bài viết "${artTitle}"!`, 'success');
+        }
+      });
+    });
+
+    adminArticlesTableBody.querySelectorAll('.del-art-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const k = btn.getAttribute('data-key');
+        deleteArticleByKey(k);
+      });
+    });
+  }
+
+  function deleteArticleByKey(k) {
+    if (!k || !articlesDataState[k]) return;
+    if (confirm(`Bạn có chắc chắn muốn xóa bài viết "${articlesDataState[k].titleVi || k}" không?`)) {
+      delete articlesDataState[k];
+      const remaining = Object.keys(articlesDataState);
+      activeArticleKey = remaining.length > 0 ? remaining[0] : '';
+      renderArticleSelect();
+      renderArticleEditForm();
+      renderArticlesTable();
+      saveAllDataToStorage();
+      showToast('Đã xóa bài viết thành công!', 'info');
+    }
+  }
+
+  // Article Lang Switch
+  const articleLangBtns = document.querySelectorAll('.admin-article-lang-btn');
+  articleLangBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      saveCurrentArticleFormToState();
+      articleLangBtns.forEach(b => {
+        b.classList.remove('active');
+        b.style.background = '#24262c';
+        b.style.color = '#e0e0e0';
+        b.style.borderColor = 'rgba(255,255,255,0.15)';
+        b.style.fontWeight = '600';
+      });
+
+      btn.classList.add('active');
+      btn.style.background = 'var(--primary-gold)';
+      btn.style.color = '#111';
+      btn.style.borderColor = 'var(--primary-gold)';
+      btn.style.fontWeight = '700';
+
+      activeArticleLang = btn.getAttribute('data-lang') || 'vi';
+      renderArticleEditForm();
+    });
+  });
+
+  // Article Key Select
+  articleKeySelect?.addEventListener('change', () => {
+    saveCurrentArticleFormToState();
+    activeArticleKey = articleKeySelect.value;
+    renderArticleEditForm();
+  });
+
+  // Add new article button
+  document.getElementById('adminAddNewArticleBtn')?.addEventListener('click', () => {
+    saveCurrentArticleFormToState();
+    const titlePrompt = prompt('Nhập tiêu đề bài viết mới (Tiếng Việt):');
+    if (!titlePrompt || !titlePrompt.trim()) return;
+
+    // Generate slug from title
+    const slug = titlePrompt.toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[đĐ]/g, 'd')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') + '-' + Date.now().toString().slice(-4);
+
+    articlesDataState[slug] = {
+      id: slug,
+      category: 'guide',
+      date: new Date().toISOString().slice(0, 10),
+      readTime: '5',
+      cover: 'https://res.cloudinary.com/n7my6tye/image/upload/v1789287139/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/B%E1%BB%83_B%C6%A1i_S%C3%A2n_Th%C6%B0%E1%BB%A3ng___T%C3%B2a_Nh%C3%A0/wdsbvbpgapecc8kasvtp.jpg',
+      titleVi: titlePrompt.trim(),
+      descVi: titlePrompt.trim() + ' - Cẩm nang chi tiết từ Sala Tam Cốc Hotel & Spa.',
+      contentVi: '<h3>1. Giới thiệu</h3><p>Nội dung bài viết mới...</p>',
+      titleEn: titlePrompt.trim(),
+      descEn: 'Travel guide by Sala Tam Coc Hotel & Spa.',
+      contentEn: '<h3>1. Overview</h3><p>Article content in English...</p>',
+      titleFr: titlePrompt.trim(),
+      descFr: 'Guide de voyage par Sala Tam Coc Hotel & Spa.',
+      contentFr: '<h3>1. Introduction</h3><p>Contenu en français...</p>',
+      hidden: false,
+      status: 'visible'
+    };
+
+    activeArticleKey = slug;
+    renderArticleSelect();
+    renderArticleEditForm();
+    renderArticlesTable();
+    saveAllDataToStorage();
+    showToast('Đã tạo bài viết mới! Vui lòng hoàn thiện nội dung và lưu lại.', 'success');
+  });
+
+  // Save single article button
+  document.getElementById('saveArticleBtn')?.addEventListener('click', () => {
+    saveCurrentArticleFormToState();
+    renderArticleSelect();
+    renderArticlesTable();
+    saveAllDataToStorage();
+    showToast('Đã cập nhật bài viết vào bộ nhớ!', 'success');
+  });
+
+  // Delete article button
+  document.getElementById('deleteArticleBtn')?.addEventListener('click', () => {
+    deleteArticleByKey(activeArticleKey);
   });
 
   // GITHUB PAT TOKEN MANAGEMENT & AUTOMATIC REST API PUSH
@@ -636,6 +1058,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function pushDataToGithub() {
     saveCurrentRoomFormToState();
+    if (typeof saveCurrentArticleFormToState === 'function') saveCurrentArticleFormToState();
 
     let token = localStorage.getItem('sala_gh_token') || ghTokenInput?.value.trim();
     if (!token) {
@@ -651,7 +1074,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      // 1. Scan for any base64 images that need to be uploaded as real files to GitHub
+      // 1. Scan for any base64 images that need to be uploaded to Cloudinary CDN
       const pendingUploads = [];
       Object.keys(roomDataState).forEach(rKey => {
         const r = roomDataState[rKey];
@@ -665,47 +1088,17 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (pendingUploads.length > 0) {
-        showToast(`Đang tải lên ${pendingUploads.length} ảnh mới vào thư mục assets/images/rooms trên GitHub...`, 'info');
+        showToast(`Đang tải lên ${pendingUploads.length} ảnh mới lên Cloudinary CDN...`, 'info');
         for (let i = 0; i < pendingUploads.length; i++) {
           const item = pendingUploads[i];
-          const match = item.dataUrl.match(/^data:image\/([a-zA-Z0-9+]+);base64,(.+)$/);
-          if (!match) continue;
-
-          let ext = match[1].toLowerCase();
-          if (ext === 'jpeg') ext = 'jpg';
-          const base64Data = match[2];
-          const safeKey = item.roomKey.replace(/[^a-zA-Z0-9_-]/g, '_');
-          const filename = `${safeKey}_${Date.now()}_${i + 1}.${ext}`;
-          const uploadPath = `assets/images/rooms/${filename}`;
-
-          showToast(`Đang tải ảnh ${i + 1}/${pendingUploads.length} lên GitHub (${filename})...`, 'info');
-
-          const uploadRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${uploadPath}`, {
-            method: 'PUT',
-            headers: {
-              ...getGhAuthHeader(token),
-              'Accept': 'application/vnd.github.v3+json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              message: `Upload room image ${filename} from Admin`,
-              content: base64Data
-            })
-          });
-
-          if (!uploadRes.ok) {
-            const errData = await uploadRes.json().catch(() => ({}));
-            throw new Error(`Lỗi tải tệp ảnh ${filename} lên GitHub (${uploadRes.status}): ${errData.message || 'Không có quyền ghi'}`);
-          }
-
-          // Successfully uploaded: update path in roomDataState
-          roomDataState[item.roomKey].photos[item.pIdx] = uploadPath;
+          showToast(`Đang tải ảnh ${i + 1}/${pendingUploads.length} lên Cloudinary...`, 'info');
+          const secureUrl = await uploadImageToCloudinary(item.dataUrl, 'rooms');
+          roomDataState[item.roomKey].photos[item.pIdx] = secureUrl;
           if (item.pIdx === 0) {
-            roomDataState[item.roomKey].cover = uploadPath;
+            roomDataState[item.roomKey].cover = secureUrl;
           }
         }
-
-        showToast('Đã tải toàn bộ tệp ảnh mới vào kho lưu trữ GitHub thành công!', 'success');
+        showToast('Đã tải toàn bộ ảnh mới lên Cloudinary CDN thành công!', 'success');
         renderPhotoGalleryGrid();
       }
 
@@ -717,6 +1110,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // 3. Build admin-data.js content
       const fullData = window.getSalaData();
       fullData.rooms = roomDataState;
+      fullData.articles = articlesDataState;
       fullData.lastUpdated = Date.now();
 
       const jsContent = `/**
@@ -729,6 +1123,9 @@ const DEFAULT_SALA_DATA = ${JSON.stringify(fullData, null, 2)};
 function sanitizeSalaData(inputData) {
   if (!inputData || typeof inputData !== 'object') return DEFAULT_SALA_DATA;
   const data = JSON.parse(JSON.stringify(inputData));
+  if (!data.articles && DEFAULT_SALA_DATA.articles) {
+    data.articles = { ...DEFAULT_SALA_DATA.articles };
+  }
   if (data.rooms) {
     Object.keys(DEFAULT_SALA_DATA.rooms).forEach(key => {
       const def = DEFAULT_SALA_DATA.rooms[key];
@@ -775,7 +1172,8 @@ window.getSalaData = function() {
       return {
         hotelInfo: { ...DEFAULT_SALA_DATA.hotelInfo, ...(sanitized.hotelInfo || {}) },
         rooms: { ...DEFAULT_SALA_DATA.rooms, ...(sanitized.rooms || {}) },
-        tours: { ...DEFAULT_SALA_DATA.tours, ...(sanitized.tours || {}) }
+        tours: { ...DEFAULT_SALA_DATA.tours, ...(sanitized.tours || {}) },
+        articles: { ...DEFAULT_SALA_DATA.articles, ...(sanitized.articles || {}) }
       };
     }
   } catch(e) {
@@ -856,6 +1254,646 @@ window.resetSalaData = function() {
 
   adminSyncGithubBtn?.addEventListener('click', pushDataToGithub);
   document.getElementById('adminSaveRoomAndPushGithubBtn')?.addEventListener('click', pushDataToGithub);
+  document.getElementById('adminSaveArticleAndPushGithubBtn')?.addEventListener('click', pushDataToGithub);
+
+  // =========================================================================
+  // PHÂN HỆ THỐNG KÊ TRUY CẬP & QUẢN LÝ YÊU CẦU TƯ VẤN (ANALYTICS & LEADS)
+  // =========================================================================
+  
+  function renderAnalyticsTab() {
+    if (!window.SalaTracker) return;
+    const analytics = window.SalaTracker.getAnalytics();
+    const inquiries = window.SalaTracker.getInquiries();
+
+    // 1. Cập nhật thẻ KPI
+    const totalViewsEl = document.getElementById('kpiTotalViews');
+    const totalVisitorsEl = document.getElementById('kpiTotalVisitors');
+    const todayViewsEl = document.getElementById('kpiTodayViews');
+    const todayVisitorsEl = document.getElementById('kpiTodayVisitors');
+    const pendingLeadsEl = document.getElementById('kpiPendingLeads');
+    const badgeEl = document.getElementById('leadsPendingBadge');
+
+    const fmt = num => new Intl.NumberFormat('vi-VN').format(num || 0);
+
+    if (totalViewsEl) totalViewsEl.textContent = fmt(analytics.totalPageviews);
+    if (totalVisitorsEl) totalVisitorsEl.textContent = fmt(analytics.totalVisitors);
+
+    const todayObj = (analytics.daily && analytics.daily.length > 0) ? analytics.daily[analytics.daily.length - 1] : { pageviews: 0, visitors: 0 };
+    if (todayViewsEl) todayViewsEl.textContent = fmt(todayObj.pageviews);
+    if (todayVisitorsEl) {
+      todayVisitorsEl.innerHTML = `<i class="fa-solid fa-clock"></i> Từ ${fmt(todayObj.visitors)} khách ghé thăm`;
+    }
+
+    // Đơn chờ tư vấn
+    const pendingCount = inquiries.filter(x => x.status === 'pending').length;
+    if (pendingLeadsEl) pendingLeadsEl.textContent = `${pendingCount} đơn mới`;
+    if (badgeEl) {
+      badgeEl.textContent = pendingCount;
+      if (pendingCount > 0) {
+        badgeEl.classList.remove('empty');
+      } else {
+        badgeEl.classList.add('empty');
+      }
+    }
+
+    // 2. Vẽ Biểu đồ xu hướng
+    const rangeSelect = document.getElementById('chartTimeRangeSelect');
+    const selectedRange = rangeSelect ? rangeSelect.value : '7d';
+    renderTrendChart(selectedRange, analytics);
+
+    // 3. Render Top URLs
+    renderTopUrls(analytics.urls || {});
+
+    // 4. Render Bảng danh sách đơn tư vấn
+    renderInquiriesTable();
+  }
+
+  // Vẽ biểu đồ xu hướng truy cập theo các lựa chọn:
+  // 'today' (Hôm nay), '7d' (7 ngày gần nhất), '30d' (30 ngày gần nhất), '3m' (3 tháng gần nhất), '9m' (9 tháng gần nhất)
+  function renderTrendChart(range, analytics) {
+    const chartBox = document.getElementById('trendChartContainer');
+    const avgInfoEl = document.getElementById('chartAverageInfo');
+    const subTitleEl = document.getElementById('chartSubTitle');
+    if (!chartBox) return;
+
+    if (!analytics) {
+      if (window.SalaTracker) analytics = window.SalaTracker.getAnalytics();
+      else return;
+    }
+
+    const dailyData = analytics.daily || [];
+    const monthlyData = analytics.monthly || {};
+    const today = new Date();
+    const fmt = num => new Intl.NumberFormat('vi-VN').format(num || 0);
+
+    let items = [];
+    let subTitleText = '(Lượt xem theo ngày)';
+    let avgSummaryText = '';
+    let boxGap = '14px';
+    let barMaxWidth = '42px';
+    let isCompact = false;
+
+    const getFormatDate = d => {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    };
+
+    const todayStr = getFormatDate(today);
+
+    if (range === 'today') {
+      subTitleText = `(Lượt xem theo khung giờ hôm nay – ${today.toLocaleDateString('vi-VN')})`;
+      boxGap = '14px';
+      barMaxWidth = '48px';
+
+      const todayEntry = dailyData.find(d => d.date === todayStr) || { pageviews: 0, visitors: 0, hourly: {} };
+      const hourly = todayEntry.hourly || {};
+      const curHour = today.getHours();
+
+      const slots = [
+        { label: '0h - 4h', sub: 'Đêm', hours: [0, 1, 2, 3] },
+        { label: '4h - 8h', sub: 'Sáng sớm', hours: [4, 5, 6, 7] },
+        { label: '8h - 12h', sub: 'Buổi sáng', hours: [8, 9, 10, 11] },
+        { label: '12h - 16h', sub: 'Buổi chiều', hours: [12, 13, 14, 15] },
+        { label: '16h - 20h', sub: 'Chiều tối', hours: [16, 17, 18, 19] },
+        { label: '20h - 24h', sub: 'Đêm tối', hours: [20, 21, 22, 23] }
+      ];
+
+      slots.forEach(slot => {
+        const slotViews = slot.hours.reduce((sum, h) => sum + (hourly[h] || 0), 0);
+        const isCurrentSlot = slot.hours.includes(curHour);
+        items.push({
+          label: slot.label,
+          subLabel: isCurrentSlot ? `${slot.sub} (Nay)` : slot.sub,
+          views: slotViews,
+          visitors: isCurrentSlot ? todayEntry.visitors || 0 : 0,
+          isHighlight: isCurrentSlot,
+          tooltip: `<strong>${fmt(slotViews)}</strong> lượt xem<br><span style="color:#aaa;">Khung ${slot.label} (${slot.sub})</span>`
+        });
+      });
+
+      avgSummaryText = `Tổng hôm nay: ${fmt(todayEntry.pageviews)} lượt xem • ${fmt(todayEntry.visitors)} khách ghé thăm`;
+
+    } else if (range === '30d') {
+      subTitleText = '(Lượt xem theo ngày – 30 ngày gần nhất)';
+      boxGap = '4px';
+      barMaxWidth = '16px';
+      isCompact = true;
+
+      for (let i = 29; i >= 0; i--) {
+        const d = new Date(today);
+        d.setDate(d.getDate() - i);
+        const dStr = getFormatDate(d);
+        const isToday = (i === 0);
+        const entry = dailyData.find(x => x.date === dStr) || { pageviews: 0, visitors: 0 };
+        const dayViews = entry.pageviews || 0;
+        const dayVisitors = entry.visitors || 0;
+
+        const showLabel = (i === 29 || i === 22 || i === 15 || i === 8 || i === 0);
+        const dateLabel = `${d.getDate()}/${d.getMonth() + 1}`;
+
+        items.push({
+          label: showLabel ? (isToday ? 'Nay' : dateLabel) : '•',
+          subLabel: '',
+          views: dayViews,
+          visitors: dayVisitors,
+          isHighlight: isToday,
+          tooltip: `<strong>${fmt(dayViews)}</strong> lượt xem<br><span style="color:#aaa;">${fmt(dayVisitors)} khách (${d.toLocaleDateString('vi-VN')})</span>`
+        });
+      }
+
+      const totalViews = items.reduce((sum, it) => sum + it.views, 0);
+      const avgViews = Math.round(totalViews / 30);
+      avgSummaryText = `Trung bình: ~${fmt(avgViews)} lượt/ngày • Tổng 30 ngày: ${fmt(totalViews)} lượt`;
+
+    } else if (range === '3m') {
+      subTitleText = '(Lượt xem theo tháng – 3 tháng gần nhất)';
+      boxGap = '26px';
+      barMaxWidth = '68px';
+
+      for (let i = 2; i >= 0; i--) {
+        const d = new Date(today.getFullYear(), today.getMonth() - i, 1);
+        const y = d.getFullYear();
+        const m = d.getMonth() + 1;
+        const mKey = `${y}-${String(m).padStart(2, '0')}`;
+        const isCurrentMonth = (i === 0);
+
+        const mDailies = dailyData.filter(x => x.date && x.date.startsWith(mKey));
+        const dailyViews = mDailies.reduce((s, x) => s + (x.pageviews || 0), 0);
+        const dailyVisitors = mDailies.reduce((s, x) => s + (x.visitors || 0), 0);
+        const storedM = monthlyData[mKey] || { pageviews: 0, visitors: 0 };
+        const views = Math.max(dailyViews, storedM.pageviews || 0);
+        const visitors = Math.max(dailyVisitors, storedM.visitors || 0);
+
+        items.push({
+          label: `Tháng ${m}`,
+          subLabel: isCurrentMonth ? `${y} (Nay)` : `${y}`,
+          views: views,
+          visitors: visitors,
+          isHighlight: isCurrentMonth,
+          tooltip: `<strong>${fmt(views)}</strong> lượt xem<br><span style="color:#aaa;">${fmt(visitors)} khách (Tháng ${m}/${y})</span>`
+        });
+      }
+
+      const totalViews = items.reduce((sum, it) => sum + it.views, 0);
+      const avgViews = Math.round(totalViews / 3);
+      avgSummaryText = `Trung bình: ~${fmt(avgViews)} lượt/tháng • Tổng 3 tháng: ${fmt(totalViews)} lượt`;
+
+    } else if (range === '9m') {
+      subTitleText = '(Lượt xem theo tháng – 9 tháng gần nhất)';
+      boxGap = '10px';
+      barMaxWidth = '38px';
+
+      for (let i = 8; i >= 0; i--) {
+        const d = new Date(today.getFullYear(), today.getMonth() - i, 1);
+        const y = d.getFullYear();
+        const m = d.getMonth() + 1;
+        const mKey = `${y}-${String(m).padStart(2, '0')}`;
+        const isCurrentMonth = (i === 0);
+
+        const mDailies = dailyData.filter(x => x.date && x.date.startsWith(mKey));
+        const dailyViews = mDailies.reduce((s, x) => s + (x.pageviews || 0), 0);
+        const dailyVisitors = mDailies.reduce((s, x) => s + (x.visitors || 0), 0);
+        const storedM = monthlyData[mKey] || { pageviews: 0, visitors: 0 };
+        const views = Math.max(dailyViews, storedM.pageviews || 0);
+        const visitors = Math.max(dailyVisitors, storedM.visitors || 0);
+
+        items.push({
+          label: `Thg ${m}`,
+          subLabel: isCurrentMonth ? `${y} (Nay)` : `${y}`,
+          views: views,
+          visitors: visitors,
+          isHighlight: isCurrentMonth,
+          tooltip: `<strong>${fmt(views)}</strong> lượt xem<br><span style="color:#aaa;">${fmt(visitors)} khách (Tháng ${m}/${y})</span>`
+        });
+      }
+
+      const totalViews = items.reduce((sum, it) => sum + it.views, 0);
+      const avgViews = Math.round(totalViews / 9);
+      avgSummaryText = `Trung bình: ~${fmt(avgViews)} lượt/tháng • Tổng 9 tháng: ${fmt(totalViews)} lượt`;
+
+    } else {
+      // Mặc định: '7d' (7 ngày gần nhất)
+      subTitleText = '(Lượt xem theo ngày – 7 ngày gần nhất)';
+      boxGap = '14px';
+      barMaxWidth = '42px';
+
+      const dayLabels = ['CN', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
+
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date(today);
+        d.setDate(d.getDate() - i);
+        const dStr = getFormatDate(d);
+        const isToday = (i === 0);
+        const dayName = isToday ? 'Hôm nay' : (dayLabels[d.getDay()] || dStr);
+        const shortDate = `${d.getDate()}/${d.getMonth() + 1}`;
+        const entry = dailyData.find(x => x.date === dStr) || { pageviews: 0, visitors: 0 };
+        const dayViews = entry.pageviews || 0;
+        const dayVisitors = entry.visitors || 0;
+
+        items.push({
+          label: dayName,
+          subLabel: shortDate,
+          views: dayViews,
+          visitors: dayVisitors,
+          isHighlight: isToday,
+          tooltip: `<strong>${fmt(dayViews)}</strong> lượt xem<br><span style="color:#aaa;">${fmt(dayVisitors)} khách (${shortDate})</span>`
+        });
+      }
+
+      const totalViews = items.reduce((sum, it) => sum + it.views, 0);
+      const avgViews = Math.round(totalViews / 7);
+      avgSummaryText = `Trung bình: ~${fmt(avgViews)} lượt/ngày • Tổng 7 ngày: ${fmt(totalViews)} lượt`;
+    }
+
+    if (subTitleEl) subTitleEl.textContent = subTitleText;
+    if (avgInfoEl) avgInfoEl.textContent = avgSummaryText;
+
+    chartBox.style.gap = boxGap;
+
+    const maxViews = Math.max(...items.map(it => it.views), 10);
+
+    let html = '';
+    items.forEach(item => {
+      const heightPercent = item.views > 0 ? Math.max(14, Math.round((item.views / maxViews) * 100)) : 3;
+      const isZero = item.views === 0;
+      const fillStyle = isZero
+        ? 'background: rgba(197, 168, 128, 0.15);'
+        : (item.isHighlight ? 'background: linear-gradient(180deg, #ffd54f 0%, #d4af37 100%); box-shadow: 0 0 10px rgba(212,175,55,0.4);' : '');
+
+      html += `
+        <div class="chart-col" style="${isCompact ? 'padding: 0 1px;' : ''}">
+          <div class="bar-container" style="max-width: ${barMaxWidth};">
+            <div class="bar-fill" style="height: ${heightPercent}%; ${fillStyle}">
+              <div class="bar-tooltip">
+                ${item.tooltip}
+              </div>
+            </div>
+          </div>
+          <div class="bar-label" style="${item.isHighlight ? 'color: var(--primary-gold); font-weight: 700;' : ''}; ${isCompact ? 'font-size: 0.7rem; margin-top: 4px;' : ''}">
+            ${item.label}
+            ${item.subLabel ? `<div class="bar-date">${item.subLabel}</div>` : ''}
+          </div>
+        </div>
+      `;
+    });
+
+    chartBox.innerHTML = html;
+  }
+
+  // Render danh sách Top URLs
+  function renderTopUrls(urlsMap) {
+    const container = document.getElementById('topUrlsContainer');
+    if (!container) return;
+
+    const list = Object.entries(urlsMap).map(([url, val]) => ({
+      url: url,
+      title: val.title || url,
+      count: val.count || 0
+    })).filter(x => x.count > 0);
+
+    list.sort((a, b) => b.count - a.count);
+
+    if (list.length === 0) {
+      container.innerHTML = `
+        <div style="color: #888; padding: 40px 20px; text-align: center;">
+          <i class="fa-solid fa-chart-simple" style="font-size: 2.2rem; margin-bottom: 12px; display: block; color: rgba(197,168,128,0.25);"></i>
+          Chưa có trang nào được xem.<br><span style="font-size: 0.8rem; color: #666;">Khi có khách ghé thăm các trang trên web, bảng xếp hạng Top URL sẽ tự động xuất hiện tại đây.</span>
+        </div>
+      `;
+      return;
+    }
+
+    const maxCount = Math.max(...list.map(x => x.count), 1);
+    const totalViews = list.reduce((sum, x) => sum + x.count, 0) || 1;
+
+    let html = '';
+    list.slice(0, 10).forEach((item, index) => {
+      const rank = index + 1;
+      const rankClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : '';
+      const percent = Math.round((item.count / maxCount) * 100);
+      const trafficShare = Math.round((item.count / totalViews) * 100);
+
+      html += `
+        <div class="url-item">
+          <div class="url-header">
+            <span class="url-rank-badge ${rankClass}">#${rank}</span>
+            <a href="${item.url}" target="_blank" class="url-title-link" title="${item.title}">
+              ${item.title}
+            </a>
+            <span class="url-count-tag">${item.count} lượt <span style="font-size: 0.72rem; color: #888; font-weight: normal;">(${trafficShare}%)</span></span>
+          </div>
+          <div style="font-size: 0.75rem; color: #777; margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            <i class="fa-solid fa-link" style="font-size: 0.68rem;"></i> ${item.url}
+          </div>
+          <div class="url-bar-track">
+            <div class="url-bar-fill" style="width: ${percent}%;"></div>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  // Render bảng danh sách đơn tư vấn phòng
+  function renderInquiriesTable() {
+    const tableBody = document.getElementById('leadsTableBody');
+    const countEl = document.getElementById('leadsCountText');
+    if (!tableBody || !window.SalaTracker) return;
+
+    let inquiries = window.SalaTracker.getInquiries() || [];
+
+    const searchKeyword = (document.getElementById('leadSearchInput')?.value || '').trim().toLowerCase();
+    const statusFilter = document.getElementById('leadStatusFilter')?.value || 'all';
+    const roomFilter = document.getElementById('leadRoomFilter')?.value || 'all';
+
+    // Lọc theo từ khóa
+    if (searchKeyword) {
+      inquiries = inquiries.filter(item => {
+        return (
+          (item.customer_name && item.customer_name.toLowerCase().includes(searchKeyword)) ||
+          (item.customer_phone && item.customer_phone.includes(searchKeyword)) ||
+          (item.id && item.id.toLowerCase().includes(searchKeyword)) ||
+          (item.room_name && item.room_name.toLowerCase().includes(searchKeyword)) ||
+          (item.note && item.note.toLowerCase().includes(searchKeyword))
+        );
+      });
+    }
+
+    // Lọc theo trạng thái
+    if (statusFilter !== 'all') {
+      inquiries = inquiries.filter(item => item.status === statusFilter);
+    }
+
+    // Lọc theo hạng phòng
+    if (roomFilter !== 'all') {
+      inquiries = inquiries.filter(item => item.room_key === roomFilter);
+    }
+
+    const totalRaw = (window.SalaTracker.getInquiries() || []).length;
+    if (countEl) {
+      countEl.textContent = `(Hiển thị ${inquiries.length} / ${totalRaw} yêu cầu)`;
+    }
+
+    if (inquiries.length === 0) {
+      const msg = totalRaw === 0
+        ? 'Chưa có yêu cầu tư vấn nào.<br><span style="font-size: 0.8rem; color: #777;">Khi khách hàng gửi form đặt phòng hoặc liên hệ trên website, danh sách sẽ tự động hiển thị tại đây.</span>'
+        : 'Không có yêu cầu tư vấn nào phù hợp với bộ lọc hiện tại.';
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="8" style="text-align: center; padding: 45px 20px; color: #888;">
+            <i class="fa-solid fa-inbox" style="font-size: 2.2rem; margin-bottom: 10px; display: block; color: rgba(197,168,128,0.25);"></i>
+            ${msg}
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    let html = '';
+    inquiries.forEach(lead => {
+      const cleanPhone = (lead.customer_phone || '').replace(/[^0-9+]/g, '');
+      const status = lead.status || 'pending';
+
+      html += `
+        <tr data-lead-id="${lead.id}">
+          <td>
+            <div style="font-weight: 700; color: #fff;">${lead.id}</div>
+            <div style="font-size: 0.76rem; color: #888; margin-top: 2px;">
+              <i class="fa-regular fa-clock"></i> ${lead.formatted_time || lead.created_at ? lead.formatted_time || new Date(lead.created_at).toLocaleString('vi-VN') : ''}
+            </div>
+          </td>
+          <td>
+            <div style="font-weight: 600; color: #ffffff;">${lead.customer_name || 'Khách Vãng Lai'}</div>
+            ${lead.customer_email && lead.customer_email !== '(không cung cấp)' ? `<div style="font-size: 0.76rem; color: #aaa;"><i class="fa-regular fa-envelope"></i> ${lead.customer_email}</div>` : ''}
+          </td>
+          <td>
+            <div style="font-weight: 600; margin-bottom: 6px;">
+              <a href="tel:${cleanPhone}" style="color: var(--primary-gold); text-decoration: none;" title="Bấm để gọi hotline">
+                <i class="fa-solid fa-phone"></i> ${lead.customer_phone || '-'}
+              </a>
+            </div>
+            ${cleanPhone ? `
+              <a href="https://zalo.me/${cleanPhone}" target="_blank" class="btn-zalo-lead" title="Nhắn tin Zalo trực tiếp cho khách">
+                <i class="fa-solid fa-comment-dots"></i> Nhắn Zalo
+              </a>
+            ` : ''}
+          </td>
+          <td>
+            <div style="font-weight: 600; color: var(--primary-gold-light);">${lead.room_name || 'Tư vấn phòng'}</div>
+            <div style="font-size: 0.76rem; color: #888; margin-top: 3px;">
+              <i class="fa-solid fa-users"></i> ${lead.num_adults || '2'} người lớn ${lead.num_children && lead.num_children !== '0' ? `, ${lead.num_children} trẻ em` : ''}
+            </div>
+          </td>
+          <td>
+            <div style="font-size: 0.85rem; color: #fff;">${lead.checkin_date || '-'} ➔ ${lead.checkout_date || '-'}</div>
+            ${lead.num_nights ? `<div style="font-size: 0.76rem; color: #a0a0a0;">(${lead.num_nights} đêm)</div>` : ''}
+          </td>
+          <td>
+            <div style="max-width: 220px; font-size: 0.83rem; color: #d0d0d0; word-break: break-word;">
+              ${lead.note ? lead.note : '<span style="color:#666;">Không có</span>'}
+            </div>
+            ${lead.admin_notes ? `
+              <div style="margin-top: 5px; font-size: 0.76rem; color: #81c784; background: rgba(76,175,80,0.1); padding: 3px 6px; border-radius: 4px; border-left: 2px solid #4caf50;">
+                <i class="fa-solid fa-clipboard-check"></i> <strong>Lễ tân:</strong> ${lead.admin_notes}
+              </div>
+            ` : ''}
+          </td>
+          <td>
+            <select class="status-select ${status}" data-lead-id="${lead.id}">
+              <option value="pending" ${status === 'pending' ? 'selected' : ''}>Chờ tư vấn</option>
+              <option value="in_progress" ${status === 'in_progress' ? 'selected' : ''}>Đang tư vấn</option>
+              <option value="confirmed" ${status === 'confirmed' ? 'selected' : ''}>Đã chốt phòng</option>
+              <option value="cancelled" ${status === 'cancelled' ? 'selected' : ''}>Đã hủy</option>
+            </select>
+          </td>
+          <td style="text-align: right;">
+            <div style="display: flex; justify-content: flex-end; gap: 6px;">
+              <button type="button" class="btn btn-outline-white btn-sm edit-lead-note-btn" data-lead-id="${lead.id}" title="Ghi chú lễ tân" style="padding: 6px 9px;">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button type="button" class="btn btn-outline-white btn-sm delete-lead-btn" data-lead-id="${lead.id}" title="Xóa yêu cầu" style="padding: 6px 9px; color: #ef5350; border-color: rgba(239,83,80,0.4);">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+    });
+
+    tableBody.innerHTML = html;
+
+    // Gắn sự kiện đổi trạng thái
+    tableBody.querySelectorAll('.status-select').forEach(sel => {
+      sel.addEventListener('change', () => {
+        const id = sel.getAttribute('data-lead-id');
+        const newStatus = sel.value;
+        sel.className = `status-select ${newStatus}`;
+
+        if (window.SalaTracker.updateInquiryStatus(id, newStatus)) {
+          const statusNames = {
+            pending: 'Chờ tư vấn',
+            in_progress: 'Đang tư vấn',
+            confirmed: 'Đã chốt phòng',
+            cancelled: 'Đã hủy'
+          };
+          showToast(`Đã cập nhật trạng thái đơn ${id} thành: "${statusNames[newStatus]}"`, 'success');
+          
+          // Cập nhật lại số lượng KPI và Badge
+          const allInqs = window.SalaTracker.getInquiries();
+          const pendingCount = allInqs.filter(x => x.status === 'pending').length;
+          const kpiPending = document.getElementById('kpiPendingLeads');
+          const badge = document.getElementById('leadsPendingBadge');
+          if (kpiPending) kpiPending.textContent = `${pendingCount} đơn mới`;
+          if (badge) {
+            badge.textContent = pendingCount;
+            if (pendingCount > 0) badge.classList.remove('empty');
+            else badge.classList.add('empty');
+          }
+        }
+      });
+    });
+
+    // Gắn sự kiện sửa ghi chú lễ tân
+    tableBody.querySelectorAll('.edit-lead-note-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-lead-id');
+        const lead = (window.SalaTracker.getInquiries() || []).find(x => x.id === id);
+        const currentNote = lead ? (lead.admin_notes || '') : '';
+        const newNote = prompt(`Nhập ghi chú lễ tân cho đơn tư vấn [${id}]:`, currentNote);
+        if (newNote !== null) {
+          window.SalaTracker.updateInquiryNotes(id, newNote.trim());
+          showToast(`Đã lưu ghi chú cho đơn ${id}`, 'success');
+          renderInquiriesTable();
+        }
+      });
+    });
+
+    // Gắn sự kiện xóa đơn
+    tableBody.querySelectorAll('.delete-lead-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-lead-id');
+        if (confirm(`Bạn có chắc chắn muốn xóa yêu cầu tư vấn [${id}] không? Thao tác này không thể hoàn tác.`)) {
+          window.SalaTracker.deleteInquiry(id);
+          showToast(`Đã xóa yêu cầu tư vấn ${id}`, 'info');
+          renderAnalyticsTab();
+        }
+      });
+    });
+  }
+
+  // Khởi tạo các sự kiện cho phân hệ Analytics & Leads
+  function initAnalyticsEventListeners() {
+    // 1. Tìm kiếm và lọc
+    document.getElementById('leadSearchInput')?.addEventListener('input', renderInquiriesTable);
+    document.getElementById('leadStatusFilter')?.addEventListener('change', renderInquiriesTable);
+    document.getElementById('leadRoomFilter')?.addEventListener('change', renderInquiriesTable);
+
+    // 2. Làm mới dữ liệu
+    document.getElementById('refreshAnalyticsBtn')?.addEventListener('click', () => {
+      renderAnalyticsTab();
+      showToast('Đã làm mới dữ liệu thống kê & danh sách tư vấn!', 'success');
+    });
+
+    // 3. Xuất file Excel / CSV
+    document.getElementById('exportLeadsCsvBtn')?.addEventListener('click', () => {
+      if (window.SalaTracker) {
+        window.SalaTracker.exportLeadsCsv();
+        showToast('Đang xuất file Excel danh sách khách hàng...', 'info');
+      }
+    });
+
+    // 4. Lựa chọn phạm vi thời gian biểu đồ xu hướng (Hôm nay, 7 ngày, 30 ngày, 3 tháng, 9 tháng)
+    document.getElementById('chartTimeRangeSelect')?.addEventListener('change', (e) => {
+      if (window.SalaTracker) {
+        renderTrendChart(e.target.value, window.SalaTracker.getAnalytics());
+      }
+    });
+
+    // 5. Modal nhập đơn tư vấn thủ công
+    const modal = document.getElementById('manualLeadModal');
+    const openBtn = document.getElementById('openAddLeadModalBtn');
+    const closeBtn = document.getElementById('closeManualLeadModal');
+    const cancelBtn = document.getElementById('cancelManualLeadBtn');
+    const form = document.getElementById('manualLeadForm');
+
+    openBtn?.addEventListener('click', () => {
+      if (modal) {
+        modal.style.display = 'flex';
+        form?.reset();
+        const todayStr = new Date().toISOString().split('T')[0];
+        const cin = document.getElementById('manual_checkin');
+        if (cin) cin.value = todayStr;
+      }
+    });
+
+    const closeModal = () => {
+      if (modal) modal.style.display = 'none';
+    };
+
+    closeBtn?.addEventListener('click', closeModal);
+    cancelBtn?.addEventListener('click', closeModal);
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('manual_customer_name')?.value.trim();
+      const phone = document.getElementById('manual_customer_phone')?.value.trim();
+      const email = document.getElementById('manual_customer_email')?.value.trim();
+      const roomKey = document.getElementById('manual_room_key')?.value;
+      const roomSelect = document.getElementById('manual_room_key');
+      const roomName = roomSelect?.options[roomSelect.selectedIndex]?.text || roomKey;
+      const cin = document.getElementById('manual_checkin')?.value;
+      const cout = document.getElementById('manual_checkout')?.value;
+      const guests = document.getElementById('manual_guests')?.value.trim() || '2 người lớn';
+      const status = document.getElementById('manual_status')?.value || 'pending';
+      const note = document.getElementById('manual_note')?.value.trim();
+
+      if (!name || !phone) {
+        alert('Vui lòng nhập tên và số điện thoại khách hàng!');
+        return;
+      }
+
+      let nights = 1;
+      if (cin && cout) {
+        const cinD = new Date(cin);
+        const coutD = new Date(cout);
+        if (coutD > cinD) {
+          nights = Math.ceil((coutD - cinD) / 86400000);
+        }
+      }
+
+      const newLead = {
+        customer_name: name,
+        customer_phone: phone,
+        customer_email: email,
+        room_key: roomKey,
+        room_name: roomName,
+        checkin_date: cin || '-',
+        checkout_date: cout || '-',
+        num_nights: nights,
+        num_adults: guests,
+        num_children: '0',
+        note: note,
+        status: status,
+        admin_notes: 'Nhập trực tiếp từ Admin Dashboard'
+      };
+
+      if (window.SalaTracker) {
+        const saved = window.SalaTracker.recordInquiry(newLead);
+        closeModal();
+        renderAnalyticsTab();
+        showToast(`Đã thêm yêu cầu tư vấn mới [${saved.id}] cho khách ${name}!`, 'success');
+      }
+    });
+  }
+
+  // Khởi động listeners phân hệ Analytics
+  initAnalyticsEventListeners();
 
   // TOAST NOTIFICATIONS
   function showToast(message, type = 'info') {
@@ -898,5 +1936,10 @@ window.resetSalaData = function() {
       toast.style.transition = 'opacity 0.3s ease';
       setTimeout(() => toast.remove(), 300);
     }, 3500);
+  }
+
+  // Check login session (must run after all functions and listeners are defined)
+  if (sessionStorage.getItem('sala_admin_authed') === 'true') {
+    showDashboard();
   }
 });

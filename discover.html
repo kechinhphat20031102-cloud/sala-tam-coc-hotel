@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khám Phá Ninh Bình | Tạp Chí Du Lịch Sala Tam Cốc</title>
+  <meta name="description" content="Chuyên trang tin tức, cẩm nang du lịch, ẩm thực đặc sản và trải nghiệm khám phá non nước Ninh Bình cùng Sala Tam Cốc Hotel & Spa.">
+  
+  <!-- Favicon / Site Icons -->
+  <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Lora & Montserrat (Synchronized with Homepage) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  
+  <!-- Critical Mobile Navigation Protection -->
+  <style>
+    html, body {
+      overflow-x: hidden !important;
+      max-width: 100vw !important;
+      width: 100% !important;
+    }
+    @media (max-width: 992px) {
+      .nav-menu {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+      }
+      .nav-menu.open {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    (function() {
+      document.documentElement.style.overflowX = 'hidden';
+      document.documentElement.style.maxWidth = '100vw';
+      function protectNav() {
+        var navMenu = document.querySelector('.nav-menu');
+        if (navMenu) {
+          if (window.innerWidth <= 992) {
+            if (!navMenu.classList.contains('open')) {
+              navMenu.style.setProperty('display', 'none', 'important');
+              navMenu.style.setProperty('visibility', 'hidden', 'important');
+              navMenu.style.setProperty('opacity', '0', 'important');
+              navMenu.style.setProperty('pointer-events', 'none', 'important');
+            }
+          } else {
+            navMenu.style.removeProperty('display');
+            navMenu.style.removeProperty('visibility');
+            navMenu.style.removeProperty('opacity');
+            navMenu.style.removeProperty('pointer-events');
+          }
+        }
+      }
+      document.addEventListener('DOMContentLoaded', protectNav);
+      window.addEventListener('resize', protectNav);
+      window.addEventListener('scroll', protectNav);
+    })();
+  </script>
+  <!-- Vercel Web Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body style="background-color: #f8f9fa;">
+
+  <!-- ================= TOPBAR ================= -->
+  <div class="topbar">
+    <div class="container topbar-content">
+      <div class="topbar-info">
+        <span><i class="fa-solid fa-location-dot"></i> <span data-i18n="address">Tam Coc Area, Ninh Binh Province, Vietnam</span></span>
+        <a href="tel:0942060533"><i class="fa-solid fa-phone"></i> <span data-i18n="hotline_1">+84 9 42 06 05 33</span></a>
+        <a href="tel:0986969898"><i class="fa-solid fa-phone"></i> <span data-i18n="hotline_2">+84 9 86 96 98 98</span></a>
+        <a href="tel:0337408484"><i class="fa-solid fa-phone"></i> <span data-i18n="hotline_3">+84 3 37 40 84 84 (Français)</span></a>
+        <a href="mailto:salatamcochotel@gmail.com"><i class="fa-solid fa-envelope"></i> salatamcochotel@gmail.com</a>
+      </div>
+      <div class="topbar-actions">
+        <div class="lang-switch">
+          <button class="lang-btn" type="button" aria-label="Select Language">
+            <span class="current-lang-display"><span class="lang-flag">🇬🇧</span> GB English</span>
+            <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem;"></i>
+          </button>
+          <div class="lang-dropdown">
+            <a href="#" data-lang="en" class="active"><span class="lang-flag">🇬🇧</span> GB English</a>
+            <a href="#" data-lang="vi"><span class="lang-flag">🇻🇳</span> Tiếng Việt</a>
+            <a href="#" data-lang="fr"><span class="lang-flag">🇫🇷</span> Français</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header-main">
+    <div class="container navbar">
+      <a href="index.html" class="logo-brand">
+        <img src="https://res.cloudinary.com/n7my6tye/image/upload/v1789287193/sala_tam_coc/assets/images/kmp3zpcjzhxiivpvlsrl.png" alt="Sala Tam Coc Hotel & Spa Logo" class="logo-emblem-img">
+        <div class="logo-text-wrap">
+          <span class="logo-title" style="font-size: 1.6rem;">SALA</span>
+          <span class="logo-subtitle">TAM COC HOTEL & SPA</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu">
+        <div class="nav-item"><a href="index.html" class="nav-link" data-i18n="nav_home">Home</a></div>
+        <div class="nav-item">
+          <a href="rooms.html" class="nav-link"><span data-i18n="nav_rooms">Rooms & Suites</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem;"></i></a>
+          <div class="nav-dropdown">
+            <a href="rooms.html#superior-double">Superior Double City View</a>
+            <a href="rooms.html#superior-triple">Superior Triple City View</a>
+            <a href="rooms.html#deluxe-double">Deluxe Double Balcony</a>
+            <a href="rooms.html#deluxe-twin">Deluxe Twin Balcony</a>
+            <a href="rooms.html#luxury-double">Luxury Double Balcony & Bath tub</a>
+            <a href="rooms.html#luxury-twin">Luxury Twin Balcony & Bath tub</a>
+            <a href="rooms.html#deluxe-family">Deluxe Family Balcony</a>
+            <a href="rooms.html#family-connecting">Family Connecting room 1</a>
+            <a href="rooms.html#family-connecting-2">Family Connecting room 2</a>
+          </div>
+        </div>
+        <div class="nav-item"><a href="index.html#offers" class="nav-link" data-i18n="nav_offers">Special Offers</a></div>
+        <div class="nav-item"><a href="dining.html" class="nav-link" data-i18n="nav_dining">Restaurant</a></div>
+        <div class="nav-item"><a href="spa.html" class="nav-link" data-i18n="nav_spa">Spa & Wellness</a></div>
+        <div class="nav-item">
+          <a href="tours.html" class="nav-link"><span data-i18n="nav_tours">Daily Tours</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem;"></i></a>
+          <div class="nav-dropdown">
+            <a href="tours.html#hoa-lu-bai-dinh-trang-an-mua-cave">Hoa Lu - Bai Dinh - Trang An - Mua Cave</a>
+            <a href="tours.html#hoa-lu-trang-an-mua-cave-bich-dong">Hoa Lu - Trang An - Mua Cave - Bich Dong</a>
+            <a href="tours.html#bai-dinh-trang-an-mua-cave">Bai Dinh - Trang An - Mua Cave</a>
+            <a href="tours.html#cuc-phuong-national-park">Cuc Phuong National Park Tour</a>
+            <a href="tours.html#cuc-phuong-van-long">Cuc Phuong & Van Long Wetland</a>
+            <a href="tours.html#countryside-adventure">Ninh Binh Countryside Adventure</a>
+            <a href="tours.html#bich-dong-thai-vy-thung-nham">Bich Dong - Thai Vy - Thung Nham</a>
+            <a href="tours.html#limousine">VIP Limousine Transfer</a>
+          </div>
+        </div>
+        <div class="nav-item"><a href="gallery.html" class="nav-link" data-i18n="nav_gallery">Photo Gallery</a></div>
+        <div class="nav-item"><a href="discover.html" class="nav-link active" data-i18n="nav_discover">Khám Phá</a></div>
+
+        <div class="mobile-drawer-extra">
+          <div class="mobile-drawer-lang">
+            <span class="mobile-drawer-title"><i class="fa-solid fa-globe"></i> <span data-i18n="select_language">Language</span></span>
+            <div class="mobile-lang-pills">
+              <button class="mobile-lang-pill active" data-lang="en"><span class="lang-flag">🇬🇧</span> English</button>
+              <button class="mobile-lang-pill" data-lang="vi"><span class="lang-flag">🇻🇳</span> Tiếng Việt</button>
+              <button class="mobile-lang-pill" data-lang="fr"><span class="lang-flag">🇫🇷</span> Français</button>
+            </div>
+          </div>
+
+          <div class="mobile-drawer-ta">
+            <span class="mobile-drawer-title"><i class="fa-brands fa-tripadvisor" style="color: #00af87;"></i> <span data-i18n="ta_reviews">TripAdvisor</span></span>
+            <a href="https://www.tripadvisor.com.sg/Hotel_Review-g303945-d34432325-Reviews-Sala_Tam_Coc_Hotel_Spa-Ninh_Binh_Ninh_Binh_Province.html" target="_blank" rel="noopener noreferrer" class="mobile-ta-badge" title="Recommended on TripAdvisor">
+              <i class="fa-brands fa-tripadvisor ta-icon"></i>
+              <div class="ta-text-group">
+                <span class="ta-sub" data-i18n="ta_rec_on">RECOMMENDED ON</span>
+                <span class="ta-title">Tripadvisor</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="https://www.tripadvisor.com.sg/Hotel_Review-g303945-d34432325-Reviews-Sala_Tam_Coc_Hotel_Spa-Ninh_Binh_Ninh_Binh_Province.html" target="_blank" rel="noopener noreferrer" class="nav-tripadvisor-badge" title="Recommended on TripAdvisor - Sala Tam Coc Hotel & Spa">
+          <div class="ta-badge-inner">
+            <i class="fa-brands fa-tripadvisor ta-icon"></i>
+            <div class="ta-text-group">
+              <span class="ta-sub" data-i18n="ta_rec_on">RECOMMENDED ON</span>
+              <span class="ta-title">Tripadvisor</span>
+            </div>
+          </div>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle Navigation"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= NEWSPAPER SUB-NAVIGATION BAR ================= -->
+  <div class="news-subnav-bar">
+    <div class="news-subnav-container">
+      <button class="news-cat-item active" data-cat="all" data-i18n="news_all">TẤT CẢ</button>
+      <button class="news-cat-item" data-cat="guide" data-i18n="news_guide">CẨM NANG DU LỊCH</button>
+      <button class="news-cat-item" data-cat="destination" data-i18n="news_destination">ĐIỂM ĐẾN & CHECK-IN</button>
+      <button class="news-cat-item" data-cat="food" data-i18n="news_food">ẨM THỰC NINH BÌNH</button>
+      <button class="news-cat-item" data-cat="culture" data-i18n="news_culture">VĂN HÓA & LỄ HỘI</button>
+    </div>
+  </div>
+
+  <!-- ================= MAIN NEWSPAPER PORTAL BODY ================= -->
+  <main class="news-portal-wrap">
+    <!-- 1. FEED VIEW (LATEST + SIDEBAR) -->
+    <div id="newsFeedView" class="news-main-container">
+      <div class="news-grid-layout">
+        
+        <!-- LEFT COLUMN: RECENT ARTICLES (BÀI VIẾT GẦN ĐÂY) -->
+        <section class="news-main-feed">
+          <div class="news-sec-heading-wrap">
+            <span class="news-sec-heading" data-i18n="news_latest">BÀI VIẾT GẦN ĐÂY</span>
+          </div>
+
+          <!-- Dynamic Horizontal News Rows -->
+          <div id="newsFeedList" class="news-feed-list">
+            <!-- Rendered dynamically via JavaScript -->
+          </div>
+        </section>
+
+        <!-- RIGHT COLUMN: SIDEBAR (XU HƯỚNG & TIỆN ÍCH) -->
+        <aside class="news-sidebar">
+          
+          <!-- "🔥 XU HƯỚNG" RANKING SECTION -->
+          <div class="news-sec-heading-wrap">
+            <span class="news-sec-heading">
+              <i class="fa-solid fa-fire" style="color: #c92a2a; margin-right: 6px;"></i>
+              <span data-i18n="news_most_read">XU HƯỚNG</span>
+            </span>
+          </div>
+
+          <div id="newsRankingList" class="ranking-list">
+            <!-- Top 3 Trending Articles Rendered dynamically with big hollow numbers -->
+          </div>
+
+          <!-- WEATHER WIDGET -->
+          <div class="news-sidebar-weather">
+            <strong><i class="fa-solid fa-cloud-sun"></i> <span data-i18n="news_weather_title">Thời Tiết Tam Cốc Hôm Nay</span></strong>
+            <span data-i18n="news_weather_desc">Nắng nhẹ, 28°C - Thời tiết lý tưởng đi thuyền & tham quan</span>
+          </div>
+
+          <!-- HOTEL PROMOTION BOX -->
+          <div class="news-sidebar-banner">
+            <h4><i class="fa-solid fa-hotel"></i> <span data-i18n="news_hotel_promo_title">Nghỉ Dưỡng Tại Sala Tam Cốc</span></h4>
+            <p data-i18n="news_hotel_promo_desc">Đặt phòng trực tiếp giảm ngay 15% kèm miễn phí ăn sáng buffet và hồ bơi vô cực ngắm hoàng hôn.</p>
+            <a href="rooms.html" class="btn btn-gold btn-sm" style="width: 100%; text-align: center;" data-i18n="news_hotel_promo_btn">Đặt Phòng Nghỉ Dưỡng</a>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+
+    <!-- 2. AUTHENTIC NEWSPAPER ARTICLE READER VIEW (MATCHING USER SCREENSHOT) -->
+    <section id="newsDetailView" class="news-detail-view">
+      <div class="news-detail-container" id="newsDetailContent">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </section>
+  </main>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Column 1: Brand & Socials -->
+        <div class="footer-brand">
+          <a href="index.html" class="logo-brand" style="margin-bottom: 15px;">
+            <img src="https://res.cloudinary.com/n7my6tye/image/upload/v1789287193/sala_tam_coc/assets/images/kmp3zpcjzhxiivpvlsrl.png" alt="Sala Tam Coc Hotel & Spa Logo" class="logo-emblem-img" style="height: 42px;">
+            <div class="logo-text-wrap">
+              <span class="logo-title" style="font-size: 1.6rem; color: var(--primary-gold);">SALA</span>
+              <span class="logo-subtitle" style="color: #ffffff;">TAM COC HOTEL & SPA</span>
+            </div>
+          </a>
+          <p style="margin-bottom: 6px; color: #d0d0d0;" data-i18n="footer_tagline">Tam Coc Area, Ninh Binh Province, Vietnam.</p>
+          <p style="color: var(--text-light-muted); margin-bottom: 18px; font-size: 0.88rem; line-height: 1.6;" data-i18n="footer_desc">Delivering an unforgettable boutique vacation in the heart of UNESCO heritage.</p>
+          <div class="footer-socials">
+            <a href="https://facebook.com" class="social-icon" target="_blank" aria-label="Facebook" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.tripadvisor.com.sg/Hotel_Review-g303945-d34432325-Reviews-Sala_Tam_Coc_Hotel_Spa-Ninh_Binh_Ninh_Binh_Province.html" class="social-icon" target="_blank" aria-label="TripAdvisor" title="TripAdvisor"><svg viewBox="0 0 32 32" width="20" height="20" fill="currentColor" style="display:block;"><path d="M16 4C10.5 4 6 7.5 4.5 12L1 10.5L3 16C1.8 18 1.8 20.5 3 22.5C5.5 27 10.5 30 16 30C21.5 30 26.5 27 29 22.5C30.2 20.5 30.2 18 29 16L31 10.5L27.5 12C26 7.5 21.5 4 16 4ZM10 12A5 5 0 1 1 10 22A5 5 0 0 1 10 12ZM22 12A5 5 0 1 1 22 22A5 5 0 0 1 22 12ZM10 14.5A2.5 2.5 0 1 0 10 19.5A2.5 2.5 0 0 0 10 14.5ZM22 14.5A2.5 2.5 0 1 0 22 19.5A2.5 2.5 0 0 0 22 14.5ZM16 16.5A1.5 1.5 0 1 1 16 19.5A1.5 1.5 0 0 1 16 16.5Z"/></svg></a>
+            <a href="https://www.booking.com/hotel/vn/sala-tam-coc-amp-spa.vi.html?msockid=11c9ac000a60677d3a8cbcb60b06660f#tab-reviews" class="social-icon" target="_blank" aria-label="Booking.com" title="Booking.com"><i class="fa-solid fa-hotel"></i></a>
+            <a href="https://wa.me/84942060533" class="social-icon" target="_blank" aria-label="WhatsApp" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div class="footer-col">
+          <h4 data-i18n="quick_links">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+            <li><a href="rooms.html" data-i18n="nav_rooms">Rooms & Suites</a></li>
+            <li><a href="dining.html" data-i18n="nav_dining">Restaurant</a></li>
+            <li><a href="spa.html" data-i18n="nav_spa">Spa & Wellness</a></li>
+            <li><a href="tours.html" data-i18n="nav_tours">Daily Tours</a></li>
+            <li><a href="gallery.html" data-i18n="nav_gallery">Photo Gallery</a></li>
+            <li><a href="discover.html" data-i18n="nav_discover">Khám Phá</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Contact Information -->
+        <div class="footer-col">
+          <h4 data-i18n="contact_info">Contact Information</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <i class="fa-solid fa-location-dot"></i>
+              <span data-i18n="address">Tam Coc Area, Ninh Binh Province, Vietnam</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-phone"></i>
+              <div>
+                <a href="tel:0942060533"><span data-i18n="hotline_1">+84 9 42 06 05 33</span></a><br>
+                <a href="tel:0986969898"><span data-i18n="hotline_2">+84 9 86 96 98 98</span></a><br>
+                <a href="tel:0337408484"><span data-i18n="hotline_3">+84 3 37 40 84 84 (Français)</span></a>
+              </div>
+            </li>
+            <li>
+              <i class="fa-solid fa-envelope"></i>
+              <a href="mailto:salatamcochotel@gmail.com">salatamcochotel@gmail.com</a>
+            </li>
+            <li style="margin-top: 6px;">
+              <i class="fa-solid fa-clock"></i>
+              <span>24/7 Front Desk & Concierge</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Policy & Support -->
+        <div class="footer-col">
+          <h4 data-i18n="footer_policy_support">Policy & Support</h4>
+          <ul class="footer-links">
+            <li><a href="#" data-i18n="footer_checkin_policy">Check-in & Check-out Policy</a></li>
+            <li><a href="#" data-i18n="footer_cancel_terms">Cancellation & Refund Terms</a></li>
+            <li><a href="#" data-i18n="footer_privacy">Privacy & Guest Security</a></li>
+            <li><a href="#" data-i18n="footer_shuttle">Airport Shuttle Service</a></li>
+            <li><a href="https://www.google.com/maps/place/Sala+Tam+coc+Hotel+%26+Spa/@20.2161222,105.9414422,15z/data=!4m12!3m11!1s0x31367b1bfa740f0f:0xa64877311bcc2601!5m3!1s2026-08-27!4m1!1i2!8m2!3d20.2161716!4d105.9494513!9m1!1b1!16s%2Fg%2F11ythx60nn?entry=ttu&g_ep=EgoyMDI2MDgxOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" data-i18n="footer_maps_dir"><i class="fa-solid fa-map-location-dot" style="color: var(--primary-gold); margin-right: 6px;"></i> Google Maps Directions</a></li>
+          </ul>
+          <div style="margin-top: 16px;">
+            <a href="https://wa.me/84942060533" target="_blank" class="btn btn-gold btn-sm" style="width: 100%; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="label_chat_wa">WhatsApp / Zalo Support</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom">
+        <div data-i18n="copyright">Copyright © 2026 Sala Tam Coc Hotel & Spa. All rights reserved.</div>
+        <div style="color: var(--primary-gold); font-size: 0.8rem; letter-spacing: 0.5px;">Boutique Luxury Hospitality Standard • Tam Coc, Ninh Binh</div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="floating-actions">
+    <a href="tel:0942060533" class="float-btn float-call" title="Hotline: 0942 060 533"><i class="fa-solid fa-phone"></i></a>
+    <a href="https://zalo.me/0942060533" target="_blank" class="float-btn float-zalo" title="Zalo: 0942 060 533"><i class="fa-solid fa-comment-dots"></i></a>
+    <a href="https://wa.me/84942060533" target="_blank" class="float-btn float-whatsapp" title="WhatsApp: 0942 060 533"><i class="fa-brands fa-whatsapp"></i></a>
+    <a href="#" class="float-btn float-top" title="Top of page"><i class="fa-solid fa-arrow-up"></i></a>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="assets/js/i18n.js"></script>
+  <script>
+    (function() {
+      var ts = Date.now();
+      document.write('<script src="assets/js/admin-data.js?v=' + ts + '"><\/script>');
+      document.write('<script src="assets/js/rooms-data.js?v=' + ts + '"><\/script>');
+    })();
+  </script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- NEWSPAPER PORTAL CONTROLLER -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const newsFeedView = document.getElementById('newsFeedView');
+      const newsDetailView = document.getElementById('newsDetailView');
+      const newsDetailContent = document.getElementById('newsDetailContent');
+      const newsFeedList = document.getElementById('newsFeedList');
+      const newsRankingList = document.getElementById('newsRankingList');
+      const catButtons = document.querySelectorAll('.news-cat-item');
+
+      let currentCategory = 'all';
+      let currentOpenArticleId = null;
+      let currentBodyFontSize = 1.05; // rem
+
+      function getCategoryLabel(category, lang) {
+        const labels = {
+          en: { guide: 'Travel Guide', destination: 'Destinations', food: 'Cuisine', culture: 'Culture & Heritage' },
+          vi: { guide: 'Cẩm Nang Du Lịch', destination: 'Điểm Đến & Check-in', food: 'Ẩm Thực Ninh Bình', culture: 'Văn Hóa & Lễ Hội' },
+          fr: { guide: 'Guide de Voyage', destination: 'Destinations', food: 'Gastronomie', culture: 'Culture' }
+        };
+        const langMap = labels[lang] || labels.en;
+        return langMap[category] || category;
+      }
+
+      function getFormattedDate(dateStr, lang) {
+        if (!dateStr) return '';
+        try {
+          const parts = dateStr.split('-');
+          if (parts.length === 3) {
+            if (lang === 'vi') return `${parts[2]}/${parts[1]}`;
+            if (lang === 'fr') return `${parts[2]}/${parts[1]}`;
+            return `${parts[1]}/${parts[2]}`;
+          }
+        } catch(e) {}
+        return dateStr;
+      }
+
+      function getAuthorName(item, lang) {
+        if (lang === 'vi') return item.authorVi || 'Hoàng Hà - Sala Tam Cốc Journal';
+        if (lang === 'fr') return item.authorFr || 'Équipe Éditoriale Sala Tam Cốc';
+        return item.authorEn || 'Sala Tam Coc Journal Team';
+      }
+
+      function renderNewspaperPortal() {
+        const data = (window.getSalaData && window.getSalaData()) || {};
+        const articles = data.articles || {};
+        const lang = localStorage.getItem('sala_lang') || 'en';
+        const isVi = lang === 'vi';
+        const isFr = lang === 'fr';
+
+        const readTimeText = isVi ? 'phút đọc' : (isFr ? 'min' : 'min read');
+        const visibleArticleKeys = Object.keys(articles).filter(id => {
+          const item = articles[id];
+          return item && item.hidden !== true && item.status !== 'hidden';
+        });
+
+        // 1. RENDER LEFT FEED (MỚI NHẤT)
+        if (newsFeedList) {
+          if (visibleArticleKeys.length === 0) {
+            newsFeedList.innerHTML = '<p style="padding: 40px 0; color: #888; text-align: center;">Chưa có bài viết nào.</p>';
+          } else {
+            let feedHtml = '';
+            visibleArticleKeys.forEach(id => {
+              const item = articles[id];
+              const itemCat = item.category || 'guide';
+
+              const title = isVi ? (item.titleVi || item.titleEn) : (isFr ? (item.titleFr || item.titleEn) : (item.titleEn || item.titleVi));
+              const desc = isVi ? (item.descVi || item.descEn) : (isFr ? (item.descFr || item.descEn) : (item.descEn || item.descVi));
+              const catLabel = getCategoryLabel(itemCat, lang);
+              const dateDisplay = getFormattedDate(item.date, lang);
+              const readTime = item.readTime || '5';
+              const cover = item.cover || item.image || 'https://res.cloudinary.com/n7my6tye/image/upload/v1789287139/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/B%E1%BB%83_B%C6%A1i_S%C3%A2n_Th%C6%B0%E1%BB%A3ng___T%C3%B2a_Nh%C3%A0/wdsbvbpgapecc8kasvtp.jpg';
+
+              const isVisible = (currentCategory === 'all' || currentCategory === itemCat);
+
+              feedHtml += `
+                <article class="news-row-item" data-id="${id}" data-category="${itemCat}" style="display: ${isVisible ? 'flex' : 'none'}; cursor: pointer;">
+                  <div class="news-thumb-wrap">
+                    <img src="${cover}" alt="${title}" class="news-thumb-img" loading="lazy">
+                  </div>
+                  <div class="news-info">
+                    <h2 class="news-title">${title}</h2>
+                    <p class="news-excerpt">${desc}</p>
+                    <div class="news-meta">
+                      <span class="news-badge-cat">${catLabel}</span>
+                      <span><i class="fa-regular fa-clock"></i> ${dateDisplay}</span>
+                      <span>• ${readTime} ${readTimeText}</span>
+                    </div>
+                  </div>
+                </article>
+              `;
+            });
+            newsFeedList.innerHTML = feedHtml;
+
+            newsFeedList.querySelectorAll('.news-row-item').forEach(row => {
+              row.addEventListener('click', () => {
+                const artId = row.getAttribute('data-id');
+                openArticleView(artId, true);
+              });
+            });
+          }
+        }
+
+        // 2. RENDER RIGHT SIDEBAR ("🔥 XU HƯỚNG" TOP 3 RANKED ITEMS)
+        if (newsRankingList) {
+          let rankingHtml = '';
+          const top3Keys = visibleArticleKeys.slice(0, 3);
+
+          top3Keys.forEach((id, idx) => {
+            const item = articles[id];
+            const title = isVi ? (item.titleVi || item.titleEn) : (isFr ? (item.titleFr || item.titleEn) : (item.titleEn || item.titleVi));
+            const rankNumber = idx + 1;
+
+            rankingHtml += `
+              <div class="ranking-item" data-id="${id}" style="cursor: pointer;">
+                <div class="rank-num">${rankNumber}</div>
+                <div class="rank-title">${title}</div>
+              </div>
+            `;
+          });
+          newsRankingList.innerHTML = rankingHtml;
+
+          newsRankingList.querySelectorAll('.ranking-item').forEach(item => {
+            item.addEventListener('click', () => {
+              const artId = item.getAttribute('data-id');
+              openArticleView(artId, true);
+            });
+          });
+        }
+      }
+
+      // OPEN FULL AUTHENTIC NEWSPAPER ARTICLE READER VIEW
+      function openArticleView(id, shouldPushState) {
+        const data = (window.getSalaData && window.getSalaData()) || {};
+        const articles = data.articles || {};
+        const item = articles[id];
+        if (!item || !newsDetailContent || !newsDetailView || !newsFeedView) return;
+
+        const lang = localStorage.getItem('sala_lang') || 'en';
+        const isVi = lang === 'vi';
+        const isFr = lang === 'fr';
+
+        // Block viewing if article is hidden
+        if (item.hidden === true || item.status === 'hidden') {
+          alert(isVi ? 'Bài viết này hiện đang tạm ẩn bởi ban biên tập.' : (isFr ? 'Cet article est actuellement masqué par la rédaction.' : 'This article is currently hidden by the editorial team.'));
+          if (typeof closeArticleView === 'function') {
+            closeArticleView(true);
+          }
+          return;
+        }
+
+        currentOpenArticleId = id;
+        currentBodyFontSize = 1.05; // reset font size
+
+        const title = isVi ? (item.titleVi || item.titleEn) : (isFr ? (item.titleFr || item.titleEn) : (item.titleEn || item.titleVi));
+        const content = isVi ? (item.contentVi || item.contentEn) : (isFr ? (item.contentFr || item.contentEn) : (item.contentEn || item.contentVi));
+        const desc = isVi ? (item.descVi || item.descEn) : (isFr ? (item.descFr || item.descEn) : (item.descEn || item.descVi));
+        const catLabel = getCategoryLabel(item.category || 'guide', lang);
+        const dateStr = item.date || '2026-09-11';
+        const readTime = item.readTime || '5';
+        const readTimeText = isVi ? 'phút đọc' : (isFr ? 'min' : 'min read');
+        const authorName = getAuthorName(item, lang);
+        const authorSign = isVi ? 'Ban Biên Tập Tạp Chí Du Lịch Sala Tam Cốc' : (isFr ? 'Rédaction Sala Tam Coc Journal' : 'Sala Tam Coc Journal Editorial Team');
+
+        const breadcrumbHome = isVi ? 'Trang Chủ' : (isFr ? 'Accueil' : 'Home');
+        const breadcrumbJournal = isVi ? 'Khám Phá' : (isFr ? 'Découvrir' : 'Discover');
+        const backText = isVi ? 'Quay lại danh sách bài viết' : (isFr ? 'Retour aux articles' : 'Back to Articles');
+        const readNextText = isVi ? 'ĐỌC TIẾP' : (isFr ? 'À LIRE AUSSI' : 'READ NEXT');
+
+        const ctaTitle = isVi ? 'Trải Nghiệm Kỳ Nghỉ Đáng Nhớ Tại Tam Cốc' : (isFr ? 'Vivez Un Séjour Inoubliable à Tam Coc' : 'Experience an Unforgettable Stay in Tam Coc');
+        const ctaDesc = isVi ? 'Khách sạn Sala Tam Cốc hân hạnh đồng hành cùng quý khách trong mỗi hành trình khám phá vẻ đẹp kỳ vĩ của non nước Ninh Bình.' : (isFr ? 'L\'hôtel Sala Tam Coc est ravi de vous accueillir pour un séjour d\'exception au cœur du patrimoine de Ninh Binh.' : 'Sala Tam Coc Hotel is delighted to accompany your journey through the stunning wonders of Ninh Binh.');
+        const btnCallText = isVi ? 'Hotline: 0942 060 533' : (isFr ? 'Réservation : +84 3 37 40 84 84' : 'Hotline: +84 942 060 533');
+        const btnWaText = isVi ? 'Tư Vấn Zalo / WhatsApp' : (isFr ? 'Conseil WhatsApp' : 'WhatsApp Consultation');
+        const btnRoomsText = isVi ? 'Xem Hạng Phòng' : (isFr ? 'Voir les Chambres' : 'View Rooms');
+        const hotlinePhone = isFr ? '0337408484' : '0942060533';
+        const waLink = isFr ? 'https://wa.me/84337408484' : 'https://wa.me/84942060533';
+
+        const cover = item.cover || item.image || 'https://res.cloudinary.com/n7my6tye/image/upload/v1789287139/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/B%E1%BB%83_B%C6%A1i_S%C3%A2n_Th%C6%B0%E1%BB%A3ng___T%C3%B2a_Nh%C3%A0/wdsbvbpgapecc8kasvtp.jpg';
+        const photoCaption = isVi ? 'Toàn cảnh vẻ đẹp kỳ vĩ và thanh bình tại Tam Cốc, Ninh Bình - Bản quyền: Sala Tam Cốc Hotel & Spa' : (isFr ? 'Vue panoramique sur la beauté de Tam Coc, Ninh Binh - Droits réservés : Sala Tam Coc Hotel & Spa' : 'Scenic and peaceful landscape in Tam Coc, Ninh Binh - Courtesy of Sala Tam Coc Hotel & Spa');
+
+        const shareUrl = window.location.origin + window.location.pathname + '?article=' + id;
+
+        // Build "ĐỌC TIẾP" Sidebar items (only visible articles)
+        const otherKeys = Object.keys(articles).filter(k => k !== id && !articles[k]?.hidden && articles[k]?.status !== 'hidden');
+        let nextArticlesHtml = '';
+        otherKeys.forEach(otherId => {
+          const oItem = articles[otherId];
+          const oTitle = isVi ? (oItem.titleVi || oItem.titleEn) : (isFr ? (oItem.titleFr || oItem.titleEn) : (oItem.titleEn || oItem.titleVi));
+          const oCover = oItem.cover || oItem.image || 'https://res.cloudinary.com/n7my6tye/image/upload/v1789287139/sala_tam_coc/%E1%BA%A2nh_Sala_Tam_Coc_Hotel___Spa/B%E1%BB%83_B%C6%A1i_S%C3%A2n_Th%C6%B0%E1%BB%A3ng___T%C3%B2a_Nh%C3%A0/wdsbvbpgapecc8kasvtp.jpg';
+
+          nextArticlesHtml += `
+            <div class="news-next-item" data-id="${otherId}">
+              <img src="${oCover}" alt="${oTitle}" class="news-next-thumb" loading="lazy">
+              <div class="news-next-title">${oTitle}</div>
+            </div>
+          `;
+        });
+
+        // Inject Full 3-Column Newspaper Reader HTML
+        newsDetailContent.innerHTML = `
+          <!-- COLUMN 1: LEFT FLOATING TOOLBAR -->
+          <aside class="news-left-toolbar-wrap">
+            <div class="news-left-toolbar">
+              <button class="tool-btn" id="btnFontIncrease" title="Phóng to cỡ chữ" aria-label="Increase font size"><i class="fa-solid fa-plus"></i></button>
+              <span class="tool-font-indicator" title="Cỡ chữ">aA</span>
+              <button class="tool-btn" id="btnFontDecrease" title="Thu nhỏ cỡ chữ" aria-label="Decrease font size"><i class="fa-solid fa-minus"></i></button>
+              <a href="https://zalo.me/share?url=${encodeURIComponent(shareUrl)}" target="_blank" rel="noopener noreferrer" class="tool-btn btn-zalo" title="Chia sẻ bài viết qua Zalo" aria-label="Share on Zalo">Zalo</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}" target="_blank" rel="noopener noreferrer" class="tool-btn btn-fb" title="Chia sẻ bài viết qua Facebook" aria-label="Share on Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+              <button class="tool-btn" id="btnPrintArticle" title="In bài viết" aria-label="Print article"><i class="fa-solid fa-print"></i></button>
+            </div>
+          </aside>
+
+          <!-- COLUMN 2: CENTER ARTICLE BODY -->
+          <article class="news-article-main">
+            <!-- Breadcrumbs with Return Button -->
+            <div class="news-article-breadcrumbs">
+              <a href="#" id="btnBackToFeed" style="color: #c92a2a; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; margin-right: 10px;">
+                <i class="fa-solid fa-arrow-left"></i> <span>${backText}</span>
+              </a>
+              <span class="breadcrumb-sep">|</span>
+              <a href="index.html">${breadcrumbHome}</a>
+              <span class="breadcrumb-sep">/</span>
+              <a href="#" id="btnBreadcrumbJournal">${breadcrumbJournal}</a>
+              <span class="breadcrumb-sep">/</span>
+              <span style="color: #6c757d; font-weight: 600;">${catLabel}</span>
+            </div>
+
+            <!-- Big Bold Serif Headline -->
+            <h1 class="news-article-headline">${title}</h1>
+
+            <!-- Author & Publication Date Line -->
+            <div class="news-article-author-line">
+              <strong>${authorName}</strong> | <span>${dateStr}</span> • <span style="color: #868e96;"><i class="fa-regular fa-clock"></i> ${readTime} ${readTimeText}</span>
+            </div>
+
+            <!-- Sapo / Lead Paragraph -->
+            <div class="news-article-sapo">
+              ${desc}
+            </div>
+
+            <!-- Featured Photo with Caption -->
+            <figure class="news-article-figure">
+              <img src="${cover}" alt="${title}" loading="lazy">
+              <figcaption class="news-article-caption">
+                <i class="fa-solid fa-camera"></i> ${photoCaption}
+              </figcaption>
+            </figure>
+
+            <!-- Full Article Body -->
+            <div class="news-article-body" id="articleBodyContent">
+              ${content}
+            </div>
+
+            <!-- Editorial Signature -->
+            <div class="news-article-sign">
+              ${authorSign}
+            </div>
+
+            <!-- Hotel Reservation CTA Banner -->
+            <div class="news-article-cta">
+              <h4>${ctaTitle}</h4>
+              <p>${ctaDesc}</p>
+              <div>
+                <a href="tel:${hotlinePhone}" class="btn btn-gold btn-md"><i class="fa-solid fa-phone"></i> ${btnCallText}</a>
+                <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-gold btn-md"><i class="fa-brands fa-whatsapp"></i> ${btnWaText}</a>
+                <a href="rooms.html" class="btn btn-secondary btn-md"><i class="fa-solid fa-bed"></i> ${btnRoomsText}</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- COLUMN 3: RIGHT SIDEBAR ("ĐỌC TIẾP") -->
+          <aside class="news-next-sidebar">
+            <div class="news-next-header">
+              <i class="fa-solid fa-newspaper"></i>
+              <span>${readNextText}</span>
+            </div>
+            <div class="news-next-list">
+              ${nextArticlesHtml}
+            </div>
+          </aside>
+        `;
+
+        // Switch Views: Hide Feed, Show Detail
+        newsFeedView.style.display = 'none';
+        newsDetailView.style.display = 'block';
+
+        // Smooth scroll to top of subnav bar
+        const subnav = document.querySelector('.news-subnav-bar');
+        const targetTop = subnav ? (subnav.getBoundingClientRect().top + window.pageYOffset - 10) : 0;
+        window.scrollTo({ top: targetTop, behavior: 'smooth' });
+
+        // Update URL state
+        if (shouldPushState) {
+          const url = new URL(window.location);
+          url.searchParams.set('article', id);
+          history.pushState({ articleId: id }, '', url);
+        }
+
+        // Attach listeners for interactive elements in reader
+        // 1. Back button & Breadcrumbs
+        document.getElementById('btnBackToFeed')?.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeArticleView(true);
+        });
+        document.getElementById('btnBreadcrumbJournal')?.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeArticleView(true);
+        });
+
+        // 2. Font Zoom (+ / -)
+        function updateArticleFontSize(newSize) {
+          currentBodyFontSize = Math.min(1.65, Math.max(0.85, +newSize.toFixed(2)));
+          const articleMain = document.querySelector('.news-article-main');
+          if (articleMain) {
+            articleMain.style.setProperty('--article-font-size', currentBodyFontSize + 'rem');
+          }
+          const bodyContentEl = document.getElementById('articleBodyContent');
+          if (bodyContentEl) {
+            bodyContentEl.style.setProperty('--article-font-size', currentBodyFontSize + 'rem');
+            bodyContentEl.style.fontSize = currentBodyFontSize + 'rem';
+            bodyContentEl.querySelectorAll('p, li').forEach(el => {
+              el.style.fontSize = currentBodyFontSize + 'rem';
+            });
+            bodyContentEl.querySelectorAll('h3').forEach(el => {
+              el.style.fontSize = (currentBodyFontSize * 1.38).toFixed(2) + 'rem';
+            });
+            bodyContentEl.querySelectorAll('h4').forEach(el => {
+              el.style.fontSize = (currentBodyFontSize * 1.18).toFixed(2) + 'rem';
+            });
+          }
+          const sapoEl = document.querySelector('.news-article-sapo');
+          if (sapoEl) {
+            sapoEl.style.fontSize = (currentBodyFontSize * 1.1).toFixed(2) + 'rem';
+          }
+          const fontIndicator = document.querySelector('.tool-font-indicator');
+          if (fontIndicator) {
+            const percent = Math.round((currentBodyFontSize / 1.05) * 100);
+            fontIndicator.title = `Cỡ chữ: ${percent}% (bấm để đặt lại chuẩn 100%)`;
+            fontIndicator.textContent = percent === 100 ? 'aA' : `${percent}%`;
+            fontIndicator.style.cursor = 'pointer';
+          }
+        }
+
+        // Apply initial font size
+        updateArticleFontSize(currentBodyFontSize);
+
+        document.getElementById('btnFontIncrease')?.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          updateArticleFontSize(currentBodyFontSize + 0.12);
+        });
+        document.getElementById('btnFontDecrease')?.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          updateArticleFontSize(currentBodyFontSize - 0.12);
+        });
+        document.querySelector('.tool-font-indicator')?.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          updateArticleFontSize(1.05);
+        });
+
+        // 3. Print button
+        document.getElementById('btnPrintArticle')?.addEventListener('click', function() {
+          window.print();
+        });
+
+        // 4. "ĐỌC TIẾP" Sidebar items click
+        newsDetailContent.querySelectorAll('.news-next-item').forEach(nextItem => {
+          nextItem.addEventListener('click', function() {
+            const nextId = nextItem.getAttribute('data-id');
+            openArticleView(nextId, true);
+          });
+        });
+
+        // 5. Intercept in-content internal article links for smooth in-page transition
+        newsDetailContent.querySelectorAll('a[href*="article="]').forEach(link => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const href = link.getAttribute('href');
+            try {
+              const url = new URL(href, window.location.origin);
+              const targetId = url.searchParams.get('article');
+              if (targetId) {
+                openArticleView(targetId, true);
+              }
+            } catch(err) {
+              const match = href.match(/[?&]article=([^&]+)/);
+              if (match && match[1]) {
+                openArticleView(match[1], true);
+              }
+            }
+          });
+        });
+      }
+
+      // CLOSE ARTICLE VIEW & RETURN TO FEED
+      function closeArticleView(shouldPushState) {
+        if (!newsDetailView || !newsFeedView) return;
+        newsDetailView.style.display = 'none';
+        newsFeedView.style.display = 'block';
+        currentOpenArticleId = null;
+
+        if (shouldPushState) {
+          const url = new URL(window.location);
+          url.searchParams.delete('article');
+          history.pushState(null, '', url);
+        }
+
+        const subnav = document.querySelector('.news-subnav-bar');
+        const targetTop = subnav ? (subnav.getBoundingClientRect().top + window.pageYOffset - 10) : 0;
+        window.scrollTo({ top: targetTop, behavior: 'smooth' });
+      }
+
+      // SUBNAV CATEGORY FILTER CLICK
+      catButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          catButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentCategory = btn.getAttribute('data-cat') || 'all';
+
+          // If currently viewing an article, return to feed view
+          if (newsDetailView && newsDetailView.style.display === 'block') {
+            closeArticleView(true);
+          }
+
+          const rows = newsFeedList.querySelectorAll('.news-row-item');
+          rows.forEach(row => {
+            const cat = row.getAttribute('data-category');
+            if (currentCategory === 'all' || cat === currentCategory) {
+              row.style.display = 'flex';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // BROWSER POPSTATE (BACK / FORWARD NAVIGATION)
+      window.addEventListener('popstate', function(e) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleParam = urlParams.get('article');
+        if (articleParam) {
+          openArticleView(articleParam, false);
+        } else {
+          closeArticleView(false);
+        }
+      });
+
+      // DYNAMIC LANGUAGE SWITCH LISTENER
+      document.addEventListener('salaLanguageChange', function() {
+        renderNewspaperPortal();
+        if (newsDetailView && newsDetailView.style.display === 'block' && currentOpenArticleId) {
+          openArticleView(currentOpenArticleId, false);
+        }
+      });
+
+      // REAL-TIME DATA UPDATE LISTENER (FROM ADMIN TAB OR LOCAL STORAGE)
+      window.addEventListener('salaDataUpdated', function() {
+        renderNewspaperPortal();
+        if (newsDetailView && newsDetailView.style.display === 'block' && currentOpenArticleId) {
+          const data = (window.getSalaData && window.getSalaData()) || {};
+          const item = (data.articles || {})[currentOpenArticleId];
+          if (item && (item.hidden === true || item.status === 'hidden')) {
+            closeArticleView(true);
+          }
+        }
+      });
+
+      // INITIAL RENDER
+      renderNewspaperPortal();
+
+      // CHECK URL PARAMS (?article=...) ON LOAD
+      const initialParams = new URLSearchParams(window.location.search);
+      const initialArticle = initialParams.get('article');
+      if (initialArticle) {
+        setTimeout(() => {
+          openArticleView(initialArticle, false);
+        }, 120);
+      }
+    });
+  </script>
+  <script src="assets/js/tracker.js"></script>
+</body>
+</html>

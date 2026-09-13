@@ -203,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ['modal-room-type', 'modal-checkin', 'modal-checkout'].forEach(id => {
     document.getElementById(id)?.addEventListener('change', updateEstimate);
   });
+  document.addEventListener('salaLanguageChange', updateEstimate);
 
   // ==========================================
   // SUBMIT FORM → GỬI EMAIL VỀ KHÁCH SẠN
@@ -278,6 +279,37 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.innerHTML = originalBtnHtml;
     }
 
+    // Lưu vào hệ thống quản lý yêu cầu tư vấn Admin (localStorage)
+    const newInquiry = {
+      id: reqCode,
+      type: 'booking',
+      customer_name: name,
+      customer_phone: phone,
+      customer_email: email,
+      room_key: roomType,
+      room_name: roomName,
+      checkin_date: cin,
+      checkout_date: cout,
+      num_nights: nights,
+      num_adults: adults,
+      num_children: children,
+      note: note,
+      created_at: new Date().toISOString(),
+      formatted_time: new Date().toLocaleString('vi-VN'),
+      status: 'pending',
+      admin_notes: ''
+    };
+
+    if (window.SalaTracker && typeof window.SalaTracker.recordInquiry === 'function') {
+      window.SalaTracker.recordInquiry(newInquiry);
+    } else {
+      try {
+        const inqs = JSON.parse(localStorage.getItem('sala_booking_inquiries') || '[]');
+        inqs.unshift(newInquiry);
+        localStorage.setItem('sala_booking_inquiries', JSON.stringify(inqs));
+      } catch (e) {}
+    }
+
     window.closeBookingModal();
 
     // Thông báo xác nhận
@@ -351,6 +383,38 @@ document.addEventListener('DOMContentLoaded', () => {
     if (submitBtn) {
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalBtnHtml;
+    }
+
+    // Lưu vào hệ thống quản lý yêu cầu tư vấn Admin (localStorage)
+    const contactReqCode = 'SALA-MSG-' + Math.floor(10000 + Math.random() * 90000);
+    const contactInquiry = {
+      id: contactReqCode,
+      type: 'contact',
+      customer_name: name,
+      customer_phone: phone,
+      customer_email: email,
+      room_key: 'general-inquiry',
+      room_name: 'Liên Hệ Khách Sạn & Dịch Vụ',
+      checkin_date: '-',
+      checkout_date: '-',
+      num_nights: 0,
+      num_adults: '1',
+      num_children: '0',
+      note: message,
+      created_at: new Date().toISOString(),
+      formatted_time: new Date().toLocaleString('vi-VN'),
+      status: 'pending',
+      admin_notes: 'Gửi từ trang Liên hệ'
+    };
+
+    if (window.SalaTracker && typeof window.SalaTracker.recordInquiry === 'function') {
+      window.SalaTracker.recordInquiry(contactInquiry);
+    } else {
+      try {
+        const inqs = JSON.parse(localStorage.getItem('sala_booking_inquiries') || '[]');
+        inqs.unshift(contactInquiry);
+        localStorage.setItem('sala_booking_inquiries', JSON.stringify(inqs));
+      } catch (e) {}
     }
 
     alert(`✅ CẢM ƠN BẠN!\n\nYêu cầu liên hệ của ${name} đã được gửi tới Sala Tam Cốc Hotel & Spa. Chúng tôi sẽ phản hồi lại bạn sớm nhất!`);

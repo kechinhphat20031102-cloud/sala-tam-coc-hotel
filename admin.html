@@ -15,6 +15,9 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -218,7 +221,321 @@
       font-size: 0.88rem;
       margin-bottom: 25px;
     }
+    /* ANALYTICS & LEADS DASHBOARD STYLES */
+    .leads-pending-badge {
+      background: #ef5350;
+      color: #fff;
+      font-size: 0.72rem;
+      padding: 2px 7px;
+      border-radius: 12px;
+      margin-left: 6px;
+      font-weight: 700;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1.2;
+    }
+    .leads-pending-badge.empty {
+      display: none;
+    }
+    .analytics-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-bottom: 25px;
+    }
+    .kpi-card {
+      background: linear-gradient(135deg, #1d1f24 0%, #151619 100%);
+      border: 1px solid rgba(197, 168, 128, 0.25);
+      border-radius: 10px;
+      padding: 20px 22px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .kpi-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary-gold);
+    }
+    .kpi-icon {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      font-size: 2.2rem;
+      color: rgba(197, 168, 128, 0.15);
+    }
+    .kpi-title {
+      font-size: 0.85rem;
+      color: #a0a0a0;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .kpi-value {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+      font-family: var(--font-serif);
+    }
+    .kpi-sub {
+      font-size: 0.8rem;
+      color: #81c784;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .analytics-row-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      margin-bottom: 25px;
+    }
+    @media (max-width: 992px) {
+      .analytics-row-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .trend-chart-box {
+      height: 220px;
+      display: flex;
+      align-items: flex-end;
+      gap: 14px;
+      padding: 20px 10px 10px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .chart-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
+    }
+    .bar-container {
+      width: 100%;
+      max-width: 42px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 6px 6px 0 0;
+      display: flex;
+      align-items: flex-end;
+      height: 155px;
+      position: relative;
+    }
+    .bar-fill {
+      width: 100%;
+      background: linear-gradient(180deg, #d4af37 0%, #a88b60 100%);
+      border-radius: 6px 6px 0 0;
+      transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      cursor: pointer;
+    }
+    .bar-fill:hover {
+      background: linear-gradient(180deg, #f3e5ab 0%, #d4af37 100%);
+      box-shadow: 0 0 14px rgba(212,175,55,0.5);
+    }
+    .bar-tooltip {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #111;
+      border: 1px solid var(--primary-gold);
+      color: #fff;
+      font-size: 0.72rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+    .chart-col:hover .bar-tooltip {
+      opacity: 1;
+    }
+    .bar-label {
+      margin-top: 8px;
+      font-size: 0.78rem;
+      color: #b0b0b0;
+      text-align: center;
+      font-weight: 500;
+    }
+    .bar-date {
+      font-size: 0.68rem;
+      color: #666;
+    }
+    .url-list-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 420px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+    .url-item {
+      background: #202227;
+      border-radius: 8px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.2s ease;
+    }
+    .url-item:hover {
+      border-color: rgba(197, 168, 128, 0.4);
+      background: #25282e;
+    }
+    .url-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      gap: 10px;
+    }
+    .url-rank-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+      height: 24px;
+      padding: 0 4px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: #333;
+      color: #ddd;
+    }
+    .rank-1 { background: #ffd700; color: #111; }
+    .rank-2 { background: #c0c0c0; color: #111; }
+    .rank-3 { background: #cd7f32; color: #fff; }
+    .url-title-link {
+      font-size: 0.88rem;
+      color: #e0e0e0;
+      text-decoration: none;
+      font-weight: 500;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .url-title-link:hover {
+      color: var(--primary-gold);
+      text-decoration: underline;
+    }
+    .url-count-tag {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary-gold);
+      white-space: nowrap;
+    }
+    .url-bar-track {
+      height: 6px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .url-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #a88b60, #d4af37);
+      border-radius: 3px;
+      transition: width 0.6s ease;
+    }
+    .leads-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      background: #202227;
+      padding: 14px 18px;
+      border-radius: 8px;
+      border: 1px solid rgba(197, 168, 128, 0.2);
+    }
+    .leads-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+    .leads-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+    .leads-table th {
+      background: #22242a;
+      color: var(--primary-gold);
+      font-weight: 600;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(197, 168, 128, 0.3);
+      white-space: nowrap;
+    }
+    .leads-table td {
+      padding: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      vertical-align: middle;
+      color: #e0e0e0;
+    }
+    .leads-table tbody tr:hover {
+      background: rgba(197, 168, 128, 0.05);
+    }
+    .status-select {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+      border: 1px solid transparent;
+      appearance: auto;
+    }
+    .status-select.pending {
+      background: rgba(255, 179, 0, 0.2);
+      color: #ffb300;
+      border-color: rgba(255, 179, 0, 0.5);
+    }
+    .status-select.in_progress {
+      background: rgba(33, 150, 243, 0.2);
+      color: #64b5f6;
+      border-color: rgba(33, 150, 243, 0.5);
+    }
+    .status-select.confirmed {
+      background: rgba(76, 175, 80, 0.2);
+      color: #81c784;
+      border-color: rgba(76, 175, 80, 0.5);
+    }
+    .status-select.cancelled {
+      background: rgba(158, 158, 158, 0.2);
+      color: #9e9e9e;
+      border-color: rgba(158, 158, 158, 0.5);
+    }
+    .btn-zalo-lead {
+      background: #0068ff;
+      color: #ffffff !important;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-zalo-lead:hover {
+      background: #0052cc;
+      transform: scale(1.03);
+    }
   </style>
+  <!-- Vercel Web Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -226,7 +543,7 @@
   <div class="login-gate-wrap" id="loginGate">
     <div class="login-card">
       <div class="login-logo">
-        <img src="assets/images/logo.png" alt="Sala Tam Coc Hotel & Spa Logo" style="height: 65px; width: auto; margin: 0 auto 14px auto; display: block; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));">
+        <img src="https://res.cloudinary.com/n7my6tye/image/upload/v1789287193/sala_tam_coc/assets/images/kmp3zpcjzhxiivpvlsrl.png" alt="Sala Tam Coc Hotel & Spa Logo" style="height: 65px; width: auto; margin: 0 auto 14px auto; display: block; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));">
         <div class="login-title">SALA TAM COC HOTEL</div>
         <p style="font-size: 0.8rem; color: #a0a0a0; letter-spacing: 2px;">ADMIN CONTROL PANEL</p>
       </div>
@@ -249,7 +566,7 @@
     <header class="admin-header">
       <div class="container">
         <a href="index.html" class="logo-brand" style="margin-right: 0;">
-          <img src="assets/images/logo.png" alt="Sala Tam Coc Hotel & Spa Logo" class="logo-emblem-img" style="height: 38px;">
+          <img src="https://res.cloudinary.com/n7my6tye/image/upload/v1789287193/sala_tam_coc/assets/images/kmp3zpcjzhxiivpvlsrl.png" alt="Sala Tam Coc Hotel & Spa Logo" class="logo-emblem-img" style="height: 38px;">
           <div class="logo-text-wrap">
             <span class="logo-title" style="font-size: 1.4rem;">SALA</span>
             <span class="logo-subtitle" style="font-size: 0.6rem;">ADMIN PANEL</span>
@@ -277,7 +594,12 @@
       <!-- TABS NAVIGATION -->
       <div class="admin-tabs-nav">
         <button class="admin-tab-btn active" data-tab="tab-rooms"><i class="fa-solid fa-bed"></i> Quản Lý Phòng & Giá</button>
+        <button class="admin-tab-btn" data-tab="tab-analytics" id="tabAnalyticsBtn">
+          <i class="fa-solid fa-chart-line"></i> Thống Kê & Yêu Cầu Tư Vấn
+          <span class="leads-pending-badge" id="leadsPendingBadge">0</span>
+        </button>
         <button class="admin-tab-btn" data-tab="tab-tours"><i class="fa-solid fa-route"></i> Tour & Bảng Giá Xe</button>
+        <button class="admin-tab-btn" data-tab="tab-articles"><i class="fa-solid fa-newspaper"></i> Quản Lý Khám Phá (SEO)</button>
         <button class="admin-tab-btn" data-tab="tab-info"><i class="fa-solid fa-hotel"></i> Thông Tin Khách Sạn & Hotline</button>
         <button class="admin-tab-btn" data-tab="tab-backup"><i class="fa-solid fa-database"></i> Sao Lưu & Phục Hồi</button>
       </div>
@@ -391,7 +713,7 @@
               </div>
               <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                 <button type="button" class="btn btn-gold btn-sm" id="admin_btn_upload_photos" style="font-weight: 700;">
-                  <i class="fa-solid fa-cloud-arrow-up"></i> + Thêm Ảnh Từ Máy Tính
+                  <i class="fa-solid fa-cloud-arrow-up"></i> + Thêm Ảnh Lên Cloudinary CDN
                 </button>
                 <button type="button" class="btn btn-outline-gold btn-sm" id="admin_btn_add_url_photo">
                   <i class="fa-solid fa-link"></i> + Thêm Đường Dẫn URL
@@ -419,6 +741,163 @@
           </div>
         </div>
 
+      </div>
+
+      <!-- ================= TAB: ANALYTICS & LEADS ================= -->
+      <div class="admin-tab-content" id="tab-analytics">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px;">
+          <div>
+            <h3 style="margin-bottom: 6px; font-family: var(--font-serif); color: var(--primary-gold);">
+              <i class="fa-solid fa-chart-line"></i> Thống Kê Truy Cập & Quản Lý Yêu Cầu Tư Vấn Phòng
+            </h3>
+            <p style="font-size: 0.88rem; color: #a0a0a0; margin: 0;">
+              Theo dõi lưu lượng khách ghé thăm website thời gian thực, xếp hạng các URL hot nhất và xử lý danh sách khách hàng gửi yêu cầu tư vấn đặt phòng.
+            </p>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" class="btn btn-outline-white btn-sm" id="refreshAnalyticsBtn">
+              <i class="fa-solid fa-rotate-right"></i> Làm Mới Dữ Liệu
+            </button>
+            <button type="button" class="btn btn-outline-gold btn-sm" id="exportLeadsCsvBtn">
+              <i class="fa-solid fa-file-excel"></i> Xuất Excel/CSV
+            </button>
+            <button type="button" class="btn btn-gold btn-sm" id="openAddLeadModalBtn">
+              <i class="fa-solid fa-user-plus"></i> Nhập Yêu Cầu Mới
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI STATS CARDS -->
+        <div class="analytics-kpi-grid">
+          <div class="kpi-card">
+            <i class="fa-solid fa-eye kpi-icon"></i>
+            <div class="kpi-title">Tổng Lượt Xem (Pageviews)</div>
+            <div class="kpi-value" id="kpiTotalViews">0</div>
+            <div class="kpi-sub"><i class="fa-solid fa-arrow-trend-up"></i> Toàn bộ lượt xem các trang</div>
+          </div>
+          <div class="kpi-card">
+            <i class="fa-solid fa-users kpi-icon"></i>
+            <div class="kpi-title">Khách Ghé Thăm (Visitors)</div>
+            <div class="kpi-value" id="kpiTotalVisitors">0</div>
+            <div class="kpi-sub"><i class="fa-solid fa-user-check"></i> Thiết bị / Khách duy nhất</div>
+          </div>
+          <div class="kpi-card">
+            <i class="fa-solid fa-calendar-day kpi-icon"></i>
+            <div class="kpi-title">Truy Cập Hôm Nay</div>
+            <div class="kpi-value" id="kpiTodayViews">0</div>
+            <div class="kpi-sub" id="kpiTodayVisitors"><i class="fa-solid fa-clock"></i> Đang ghi nhận trực tiếp</div>
+          </div>
+          <div class="kpi-card" style="border-color: rgba(255, 179, 0, 0.45); background: linear-gradient(135deg, rgba(255,179,0,0.09) 0%, #151619 100%);">
+            <i class="fa-solid fa-bell-concierge kpi-icon" style="color: rgba(255,179,0,0.25);"></i>
+            <div class="kpi-title" style="color: #ffb300;">Đơn Chờ Tư Vấn (Mới)</div>
+            <div class="kpi-value" id="kpiPendingLeads" style="color: #ffd54f;">0</div>
+            <div class="kpi-sub" style="color: #ffca28;"><i class="fa-solid fa-phone-volume"></i> Cần lễ tân gọi lại qua Zalo</div>
+          </div>
+        </div>
+
+        <!-- 2-COLUMNS: TRAFFIC TREND CHART & TOP URLS -->
+        <div class="analytics-row-grid">
+          <!-- TRAFFIC TREND CHART -->
+          <div class="admin-card" style="margin-bottom: 0;">
+            <div class="admin-card-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span><i class="fa-solid fa-chart-column"></i> Xu Hướng Truy Cập</span>
+                <span id="chartSubTitle" style="font-size: 0.8rem; color: var(--primary-gold-light); font-weight: normal;">(Lượt xem theo ngày)</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <label for="chartTimeRangeSelect" style="font-size: 0.82rem; color: #a0a0a0; margin: 0; font-weight: normal; cursor: pointer;">
+                  <i class="fa-regular fa-calendar-days"></i> Phạm vi:
+                </label>
+                <select id="chartTimeRangeSelect" style="background: #1c1d21; color: var(--primary-gold-light); border: 1px solid rgba(197, 168, 128, 0.45); border-radius: 6px; padding: 5px 12px; font-size: 0.85rem; font-weight: 600; outline: none; cursor: pointer; transition: border-color 0.2s;">
+                  <option value="today">Hôm nay</option>
+                  <option value="7d" selected>7 ngày gần nhất</option>
+                  <option value="30d">30 ngày gần nhất</option>
+                  <option value="3m">3 tháng gần nhất</option>
+                  <option value="9m">9 tháng gần nhất</option>
+                </select>
+              </div>
+            </div>
+            <div class="trend-chart-box" id="trendChartContainer">
+              <!-- Rendered dynamically -->
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; font-size: 0.82rem; color: #a0a0a0; padding: 0 5px; flex-wrap: wrap; gap: 8px;">
+              <span><i class="fa-solid fa-square" style="color: #d4af37;"></i> Cột biểu đồ: Số lượt xem (Pageviews)</span>
+              <span id="chartAverageInfo">Trung bình: ~0 lượt/ngày</span>
+            </div>
+          </div>
+
+          <!-- TOP URLS & PAGES -->
+          <div class="admin-card" style="margin-bottom: 0;">
+            <div class="admin-card-title">
+              <span><i class="fa-solid fa-fire"></i> Top URL & Bài Viết Được Xem Nhiều Nhất</span>
+              <span style="font-size: 0.8rem; color: var(--primary-gold-light); font-weight: normal;">(Xếp hạng trang)</span>
+            </div>
+            <div class="url-list-wrap" id="topUrlsContainer">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION: CONSULTATION LEADS MANAGEMENT -->
+        <div class="admin-card" style="margin-top: 25px;">
+          <div class="admin-card-title" style="border-bottom: none; margin-bottom: 15px; padding-bottom: 0;">
+            <div>
+              <i class="fa-solid fa-address-book"></i> Danh Sách Khách Hàng Gửi Yêu Cầu Tư Vấn Phòng
+              <span style="font-size: 0.85rem; color: #888; margin-left: 10px; font-weight: normal;" id="leadsCountText">(Hiển thị 0 yêu cầu)</span>
+            </div>
+          </div>
+
+          <!-- TOOLBAR: SEARCH & FILTERS -->
+          <div class="leads-toolbar">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center; flex: 1;">
+              <div style="position: relative; min-width: 250px; flex: 1;">
+                <input type="text" id="leadSearchInput" class="form-control" placeholder="Tìm theo tên khách, SĐT Zalo, Mã YC..." style="padding-left: 36px;">
+                <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: #777;"></i>
+              </div>
+              <select id="leadStatusFilter" class="form-control" style="width: auto; min-width: 170px; cursor: pointer;">
+                <option value="all">Tất cả trạng thái</option>
+                <option value="pending">Chờ tư vấn (Mới)</option>
+                <option value="in_progress">Đang tư vấn</option>
+                <option value="confirmed">Đã chốt phòng</option>
+                <option value="cancelled">Đã hủy</option>
+              </select>
+              <select id="leadRoomFilter" class="form-control" style="width: auto; min-width: 180px; cursor: pointer;">
+                <option value="all">Tất cả hạng phòng</option>
+                <option value="superior-double">Superior Double City View</option>
+                <option value="superior-triple">Superior Triple City View</option>
+                <option value="deluxe-double">Deluxe Double Balcony</option>
+                <option value="deluxe-twin">Deluxe Twin Balcony</option>
+                <option value="luxury-double">Luxury Double with Balcony</option>
+                <option value="luxury-twin">Luxury Twin with Balcony</option>
+                <option value="deluxe-family">Deluxe Family Balcony</option>
+                <option value="family-connecting">Family Connecting room 1</option>
+                <option value="family-connecting-2">Family Connecting room 2</option>
+                <option value="general-inquiry">Liên Hệ Khác</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- DATA TABLE -->
+          <div class="leads-table-wrap">
+            <table class="leads-table">
+              <thead>
+                <tr>
+                  <th>Mã YC & Thời Gian</th>
+                  <th>Khách Hàng</th>
+                  <th>Số Điện Thoại / Zalo</th>
+                  <th>Phòng Yêu Cầu</th>
+                  <th>Lịch Trình</th>
+                  <th>Ghi Chú Khách</th>
+                  <th>Trạng Thái</th>
+                  <th style="text-align: right;">Hành Động</th>
+                </tr>
+              </thead>
+              <tbody id="leadsTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       <!-- ================= TAB 2: TOURS & TRANSFERS ================= -->
@@ -578,6 +1057,149 @@
         </div>
       </div>
 
+      <!-- ================= TAB: DISCOVER & SEO ARTICLES ================= -->
+      <div class="admin-tab-content" id="tab-articles">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px;">
+          <div>
+            <h3 style="margin-bottom: 6px; font-family: var(--font-serif); color: var(--primary-gold);"><i class="fa-solid fa-newspaper"></i> Quản Lý Bài Viết Khám Phá Ninh Bình (SEO Content)</h3>
+            <p style="font-size: 0.88rem; color: #a0a0a0; margin: 0;">Soạn thảo và đăng bài viết chuẩn SEO, đồng bộ cả 3 ngôn ngữ (Việt, Anh, Pháp) và tự động đẩy lên website.</p>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" class="btn btn-gold btn-sm" id="adminAddNewArticleBtn"><i class="fa-solid fa-plus"></i> Viết Bài Mới</button>
+            <a href="discover.html" target="_blank" class="btn btn-outline-gold btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> Xem Trang Khám Phá</a>
+          </div>
+        </div>
+
+        <!-- CONTROL PANEL: CHỌN BÀI VIẾT & NGÔN NGỮ -->
+        <div class="admin-card" style="background: linear-gradient(135deg, #1c1e22 0%, #151619 100%); border: 1px solid rgba(197, 168, 128, 0.4); margin-bottom: 20px;">
+          <div class="admin-grid-2" style="align-items: center; gap: 20px;">
+            <!-- SELECT ARTICLE -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <label style="font-size: 0.95rem; font-weight: 600; color: var(--primary-gold);"><i class="fa-solid fa-file-lines"></i> 1. Chọn Bài Viết Cần Sửa:</label>
+              <select id="adminArticleKeySelect" class="form-control" style="font-size: 1rem; font-weight: 600; color: var(--primary-gold); background: #24262c; border: 1px solid rgba(197, 168, 128, 0.5); padding: 12px 16px; cursor: pointer;">
+                <!-- Populated dynamically via JS -->
+              </select>
+            </div>
+
+            <!-- SELECT LANGUAGE -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <label style="font-size: 0.95rem; font-weight: 600; color: var(--primary-gold);"><i class="fa-solid fa-language"></i> 2. Chọn Ngôn Ngữ Soạn Thảo (3 Ngôn Ngữ):</label>
+              <div class="admin-article-lang-tabs" style="display: flex; gap: 8px;">
+                <button type="button" class="admin-article-lang-btn active" data-lang="vi" style="flex: 1; padding: 11px 10px; background: var(--primary-gold); color: #111; border: 1px solid var(--primary-gold); border-radius: 6px; font-weight: 700; cursor: pointer; transition: all 0.3s ease;">🇻🇳 Tiếng Việt</button>
+                <button type="button" class="admin-article-lang-btn" data-lang="en" style="flex: 1; padding: 11px 10px; background: #24262c; color: #e0e0e0; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">🇬🇧 English</button>
+                <button type="button" class="admin-article-lang-btn" data-lang="fr" style="flex: 1; padding: 11px 10px; background: #24262c; color: #e0e0e0; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">🇫🇷 Français</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ARTICLE FORM -->
+        <div class="admin-card">
+          <div class="admin-card-title">
+            <span id="adminArticleFormTitle"><i class="fa-solid fa-pen-to-square"></i> Chi Tiết Bài Viết</span>
+            <span id="adminArticleActiveLangBadge" style="font-size: 0.8rem; background: rgba(197,168,128,0.2); color: var(--primary-gold); padding: 4px 10px; border-radius: 12px;">Đang soạn: Tiếng Việt</span>
+          </div>
+
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label><i class="fa-solid fa-key"></i> Mã Định Danh Bài Viết (Slug / ID):</label>
+              <input type="text" id="article_id" class="form-control" placeholder="vd: cam-nang-du-lich-tam-coc-2026">
+              <small style="color: #999; font-size: 0.78rem;">Dùng chữ thường không dấu, nối nhau bằng dấu gạch ngang.</small>
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-tags"></i> Chuyên Mục / Danh Mục:</label>
+              <select id="article_category" class="form-control">
+                <option value="guide">Cẩm Nang Du Lịch (Travel Guide)</option>
+                <option value="attractions">Điểm Đến Hấp Dẫn (Destinations)</option>
+                <option value="food">Ẩm Thực Địa Phương (Cuisine)</option>
+                <option value="culture">Văn Hóa & Lịch Sử (Culture)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="admin-grid-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+            <div class="form-group">
+              <label><i class="fa-regular fa-calendar"></i> Ngày Đăng Bài (YYYY-MM-DD):</label>
+              <input type="text" id="article_date" class="form-control" placeholder="2026-09-11">
+            </div>
+            <div class="form-group">
+              <label><i class="fa-regular fa-clock"></i> Thời Gian Đọc (Số phút):</label>
+              <input type="text" id="article_read_time" class="form-control" placeholder="5">
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-eye"></i> Trạng Thái Hiển Thị:</label>
+              <select id="article_status" class="form-control" style="font-weight: 600;">
+                <option value="visible">🟢 Hiển Thị Công Khai</option>
+                <option value="hidden">🟡 Tạm Ẩn Bài Viết</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- COVER IMAGE -->
+          <div class="form-group">
+            <label><i class="fa-solid fa-image"></i> Đường Dẫn / URL Ảnh Bìa Đại Diện:</label>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <input type="text" id="article_cover" class="form-control" style="flex: 1; min-width: 260px;" placeholder="Dán URL ảnh hoặc nhấn nút bên cạnh để tải ảnh lên Cloudinary...">
+              <button type="button" id="admin_btn_upload_article_cover" class="btn btn-outline-gold" style="white-space: nowrap; font-size: 0.85rem; padding: 7px 14px; font-weight: 600;">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Tải Lên Cloudinary
+              </button>
+            </div>
+            <input type="file" id="admin_article_cover_file_input" accept="image/*" style="display: none;">
+            <div id="article_cover_preview_wrap" style="margin-top: 10px; display: none;">
+              <img id="article_cover_preview" src="" alt="Cover Preview" style="max-height: 160px; border-radius: 6px; border: 1px solid rgba(197,168,128,0.3); object-fit: cover;">
+            </div>
+          </div>
+
+          <!-- TITLE -->
+          <div class="form-group">
+            <label id="article_title_label"><i class="fa-solid fa-heading"></i> Tiêu Đề Bài Viết (Tiếng Việt):</label>
+            <input type="text" id="article_title" class="form-control" placeholder="Nhập tiêu đề bài viết cuốn hút...">
+          </div>
+
+          <!-- EXCERPT -->
+          <div class="form-group">
+            <label id="article_desc_label"><i class="fa-solid fa-align-left"></i> Tóm Tắt Ngắn / Đoạn Mở Đầu (Excerpt):</label>
+            <textarea id="article_desc" class="form-control" style="min-height: 80px;" placeholder="Đoạn mô tả ngắn hiển thị trên thẻ bài viết và meta description..."></textarea>
+          </div>
+
+          <!-- FULL CONTENT -->
+          <div class="form-group">
+            <label id="article_content_label"><i class="fa-solid fa-file-lines"></i> Nội Dung Bài Viết Chi Tiết (HTML Chuẩn SEO):</label>
+            <p style="font-size: 0.8rem; color: #a0a0a0; margin-bottom: 6px;">Hỗ trợ các thẻ HTML định dạng: <code>&lt;h3&gt;Tiêu đề mục&lt;/h3&gt;</code>, <code>&lt;p&gt;Đoạn văn&lt;/p&gt;</code>, <code>&lt;ul&gt;&lt;li&gt;Danh sách&lt;/li&gt;&lt;/ul&gt;</code>, <code>&lt;strong&gt;Chữ đậm&lt;/strong&gt;</code></p>
+            <textarea id="article_content" class="form-control" style="min-height: 250px; font-family: monospace; font-size: 0.9rem;" placeholder="<h3>1. Giới thiệu...</h3><p>Nội dung...</p>"></textarea>
+          </div>
+
+          <!-- BUTTONS -->
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(197,168,128,0.15);">
+            <button type="button" class="btn btn-gold" id="saveArticleBtn"><i class="fa-solid fa-check"></i> Cập Nhật Bài Viết Này</button>
+            <button type="button" class="btn btn-gold" id="adminSaveArticleAndPushGithubBtn" style="background: linear-gradient(135deg, #2e7d32, #1b5e20); color: #fff; border: 1px solid #4caf50;"><i class="fa-solid fa-cloud-arrow-up"></i> Lưu & Đẩy Lên GitHub</button>
+            <button type="button" class="btn btn-outline-white" id="deleteArticleBtn" style="color: #ff8a80; border-color: #ff8a80;"><i class="fa-solid fa-trash"></i> Xóa Bài Viết</button>
+          </div>
+        </div>
+
+        <!-- ARTICLES LIST OVERVIEW TABLE -->
+        <div class="admin-card">
+          <div class="admin-card-title"><i class="fa-solid fa-list-check"></i> Danh Sách Toàn Bộ Bài Viết Khám Phá</div>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">
+              <thead>
+                <tr style="border-bottom: 1px solid rgba(197,168,128,0.3); color: var(--primary-gold); text-align: left;">
+                  <th style="padding: 10px;">Ảnh</th>
+                  <th style="padding: 10px;">Tiêu Đề (VI / EN)</th>
+                  <th style="padding: 10px;">Chuyên Mục</th>
+                  <th style="padding: 10px; text-align: center;">Trạng Thái</th>
+                  <th style="padding: 10px;">Ngày Đăng</th>
+                  <th style="padding: 10px; text-align: center;">Thao Tác</th>
+                </tr>
+              </thead>
+              <tbody id="adminArticlesTableBody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
       <!-- ================= TAB 3: HOTEL INFO ================= -->
       <div class="admin-tab-content" id="tab-info">
         <h3 style="margin-bottom: 20px; font-family: var(--font-serif); color: var(--primary-gold);"><i class="fa-solid fa-phone-volume"></i> Hotline Liên Hệ & Giới Thiệu Khách Sạn</h3>
@@ -665,6 +1287,77 @@
     </div>
   </div>
 
+  <!-- ================= MODAL NHẬP ĐƠN TƯ VẤN THỦ CÔNG ================= -->
+  <div class="modal-backdrop" id="manualLeadModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 9999; align-items: center; justify-content: center;">
+    <div class="admin-card" style="width: 100%; max-width: 540px; background: #1a1c20; border: 1px solid var(--primary-gold); margin: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); max-height: 90vh; overflow-y: auto;">
+      <div class="admin-card-title" style="display: flex; justify-content: space-between; align-items: center;">
+        <span><i class="fa-solid fa-user-plus"></i> Thêm Yêu Cầu Tư Vấn Khách Hàng</span>
+        <button type="button" id="closeManualLeadModal" style="background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
+      </div>
+      <form id="manualLeadForm">
+        <div class="form-group">
+          <label>Họ Tên Khách Hàng (*):</label>
+          <input type="text" id="manual_customer_name" class="form-control" placeholder="Ví dụ: Anh Nam" required>
+        </div>
+        <div class="form-group">
+          <label>Số Điện Thoại / Zalo (*):</label>
+          <input type="text" id="manual_customer_phone" class="form-control" placeholder="Ví dụ: 0912 345 678" required>
+        </div>
+        <div class="form-group">
+          <label>Email Khách (nếu có):</label>
+          <input type="email" id="manual_customer_email" class="form-control" placeholder="email@example.com">
+        </div>
+        <div class="form-group">
+          <label>Hạng Phòng Quan Tâm:</label>
+          <select id="manual_room_key" class="form-control">
+            <option value="superior-double">Superior Double City View – 28m²</option>
+            <option value="superior-triple">Superior Triple City View – 30m²</option>
+            <option value="deluxe-double">Deluxe Double Balcony – 28m²</option>
+            <option value="deluxe-twin">Deluxe Twin Balcony – 35m²</option>
+            <option value="luxury-double">Luxury Double with Balcony & Bath tub – 28m²</option>
+            <option value="luxury-twin">Luxury Twin with Balcony & Bath tub – 35m²</option>
+            <option value="deluxe-family">Deluxe Family Balcony – 35m²</option>
+            <option value="family-connecting">Family Connecting room 1 – 55m²</option>
+            <option value="family-connecting-2">Family Connecting room 2 – 60m²</option>
+          </select>
+        </div>
+        <div class="admin-grid-2">
+          <div class="form-group">
+            <label>Ngày Check-in:</label>
+            <input type="date" id="manual_checkin" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Ngày Check-out:</label>
+            <input type="date" id="manual_checkout" class="form-control">
+          </div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="form-group">
+            <label>Số Khách:</label>
+            <input type="text" id="manual_guests" class="form-control" placeholder="Ví dụ: 2 người lớn, 1 trẻ em">
+          </div>
+          <div class="form-group">
+            <label>Trạng Thái Ban Đầu:</label>
+            <select id="manual_status" class="form-control">
+              <option value="pending">Chờ tư vấn (Mới)</option>
+              <option value="in_progress">Đang tư vấn</option>
+              <option value="confirmed">Đã chốt phòng</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Ghi Chú Nhu Cầu Của Khách:</label>
+          <textarea id="manual_note" class="form-control" placeholder="Khách gọi hotline hỏi phòng tầng cao, cần xe đón..."></textarea>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+          <button type="button" class="btn btn-outline-white btn-sm" id="cancelManualLeadBtn">Hủy Bỏ</button>
+          <button type="submit" class="btn btn-gold btn-sm"><i class="fa-solid fa-floppy-disk"></i> Lưu Yêu Cầu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/tracker.js"></script>
   <script>
     (function() {
       var ts = Date.now();
