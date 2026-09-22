@@ -557,7 +557,15 @@
         const waLink = isFr ? 'https://wa.me/84337408484' : 'https://wa.me/84942060533';
 
         const cover = item.cover || item.image || 'https://res.cloudinary.com/n7my6tye/image/upload/v1789298353/Anh_Sala_Tam_Coc_Hotel_va_Spa/Be_Boi_San_Thuong_va_Toa_Nha/DJI_20260423182252_0228_D_ANTS.jpg';
-        const photoCaption = isVi ? 'Toàn cảnh vẻ đẹp kỳ vĩ và thanh bình tại Tam Cốc, Ninh Bình - Bản quyền: Sala Tam Cốc Hotel & Spa' : (isFr ? 'Vue panoramique sur la beauté de Tam Coc, Ninh Binh - Droits réservés : Sala Tam Coc Hotel & Spa' : 'Scenic and peaceful landscape in Tam Coc, Ninh Binh - Courtesy of Sala Tam Coc Hotel & Spa');
+        const customCaption = isVi ? (item.coverCaptionVi || item.captionVi || item.imageCaptionVi) :
+                             (isFr ? (item.coverCaptionFr || item.captionFr || item.imageCaptionFr) :
+                                     (item.coverCaptionEn || item.captionEn || item.imageCaptionEn));
+
+        const fallbackCaption = isVi ? `${title} - Bản quyền: Sala Tam Cốc Hotel & Spa` :
+                                (isFr ? `${title} - Droits réservés : Sala Tam Coc Hotel & Spa` :
+                                        `${title} - Courtesy of Sala Tam Coc Hotel & Spa`);
+
+        const photoCaption = customCaption || fallbackCaption;
 
         const shareUrl = window.location.origin + window.location.pathname + '?article=' + id;
 
