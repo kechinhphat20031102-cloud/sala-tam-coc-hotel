@@ -1350,8 +1350,8 @@ input[type="date"]::-webkit-date-and-time-value {
   position: absolute;
   bottom: 15px;
   right: 15px;
-  background-color: rgba(18, 19, 21, 0.88);
-  color: #ffffff;
+  background-color: rgba(18, 19, 21, 0.85);
+  color: var(--primary-gold);
   padding: 6px 14px;
   border-radius: var(--radius-sm);
   font-size: 0.85rem;
@@ -1364,21 +1364,13 @@ input[type="date"]::-webkit-date-and-time-value {
   gap: 4px;
 }
 
-.offer-price-tag .price-from {
-  font-size: 0.82rem;
-  color: #d1d5db;
-  font-weight: 400;
-}
-
-.offer-price-tag .price-val {
-  font-size: 1.15rem;
+.offer-price-tag span,
+.offer-price-tag .price-from,
+.offer-price-tag .price-val,
+.offer-price-tag .price-unit {
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--primary-gold);
-}
-
-.offer-price-tag .price-unit {
-  font-size: 0.82rem;
-  color: #e5e7eb;
 }
 
 .offer-content {
@@ -3548,8 +3540,13 @@ input[type="date"]::-webkit-date-and-time-value {
     padding: 5px 12px !important;
   }
 
-  .offer-price-tag .price-val {
-    font-size: 1.05rem !important;
+  .offer-price-tag span,
+  .offer-price-tag .price-from,
+  .offer-price-tag .price-val,
+  .offer-price-tag .price-unit {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    color: var(--primary-gold) !important;
   }
 
   .policies-grid {
