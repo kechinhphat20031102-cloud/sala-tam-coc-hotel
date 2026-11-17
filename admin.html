@@ -765,8 +765,11 @@
                 </p>
               </div>
               <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <button type="button" class="btn btn-gold btn-sm" id="admin_btn_upload_photos" style="font-weight: 700;">
-                  <i class="fa-solid fa-cloud-arrow-up"></i> + Thêm Ảnh Lên Cloudinary CDN
+                <button type="button" class="btn btn-gold btn-sm" id="admin_btn_open_library" style="font-weight: 700;">
+                  <i class="fa-solid fa-images"></i> + Chọn Từ Thư Viện Ảnh (110 Ảnh)
+                </button>
+                <button type="button" class="btn btn-outline-gold btn-sm" id="admin_btn_upload_photos" style="font-weight: 600;">
+                  <i class="fa-solid fa-upload"></i> + Tải Ảnh Từ Máy Tính
                 </button>
                 <button type="button" class="btn btn-outline-gold btn-sm" id="admin_btn_add_url_photo">
                   <i class="fa-solid fa-link"></i> + Thêm Đường Dẫn URL
@@ -1192,9 +1195,9 @@
           <div class="form-group">
             <label><i class="fa-solid fa-image"></i> Đường Dẫn / URL Ảnh Bìa Đại Diện:</label>
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-              <input type="text" id="article_cover" class="form-control" style="flex: 1; min-width: 260px;" placeholder="Dán URL ảnh hoặc nhấn nút bên cạnh để tải ảnh lên Cloudinary...">
-              <button type="button" id="admin_btn_upload_article_cover" class="btn btn-outline-gold" style="white-space: nowrap; font-size: 0.85rem; padding: 7px 14px; font-weight: 600;">
-                <i class="fa-solid fa-cloud-arrow-up"></i> Tải Lên Cloudinary
+              <input type="text" id="article_cover" class="form-control" style="flex: 1; min-width: 260px;" placeholder="Dán URL ảnh hoặc nhấn nút bên cạnh để chọn ảnh từ thư viện...">
+              <button type="button" id="admin_btn_upload_article_cover" class="btn btn-gold" style="white-space: nowrap; font-size: 0.85rem; padding: 7px 14px; font-weight: 700;">
+                <i class="fa-solid fa-images"></i> Chọn Ảnh Bìa Từ Thư Viện
               </button>
             </div>
             <input type="file" id="admin_article_cover_file_input" accept="image/*" style="display: none;">
@@ -1230,7 +1233,7 @@
             <div class="content-toolbar" style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; background: rgba(255,255,255,0.04); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(197,168,128,0.2); align-items: center;">
               <span style="font-size: 0.8rem; color: var(--primary-gold); font-weight: 600; margin-right: 4px;"><i class="fa-solid fa-wand-magic-sparkles"></i> Chèn nhanh:</span>
               <button type="button" id="btn_insert_content_image" class="btn btn-gold btn-sm" style="font-size: 0.8rem; padding: 5px 12px; font-weight: 700;">
-                <i class="fa-solid fa-cloud-arrow-up"></i> + Chèn Ảnh Tại Chỗ Đang Trỏ (Cloudinary)
+                <i class="fa-solid fa-images"></i> + Chèn Ảnh Tại Con Trỏ
               </button>
               <button type="button" id="btn_insert_h3" class="btn btn-outline-white btn-sm" style="font-size: 0.8rem; padding: 4px 8px;" title="Thêm tiêu đề mục con">
                 <strong>&lt;h3&gt;</strong> Tiêu đề mục
@@ -1436,6 +1439,51 @@
           <button type="submit" class="btn btn-gold btn-sm"><i class="fa-solid fa-floppy-disk"></i> Lưu Yêu Cầu</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- MODAL: HOTEL PHOTO PICKER (110 PHOTOS) -->
+  <div id="hotelPhotoPickerModal" class="admin-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 99999; backdrop-filter: blur(6px); justify-content: center; align-items: center; padding: 15px;">
+    <div style="background: #1e1e1e; border: 1px solid var(--primary-gold); border-radius: 12px; width: 100%; max-width: 1050px; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.8); overflow: hidden;">
+      <!-- Modal Header -->
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); background: #181818;">
+        <div>
+          <h3 id="photoPickerModalTitle" style="margin: 0; color: var(--primary-gold); font-size: 1.25rem;">
+            <i class="fa-solid fa-images"></i> Thư Viện Ảnh Khách Sạn (110 Ảnh Sẵn Có)
+          </h3>
+          <p style="margin: 4px 0 0 0; font-size: 0.85rem; color: #a0a0a0;">
+            Nhấp chuột vào bất kỳ bức ảnh nào để chọn ngay lập tức.
+          </p>
+        </div>
+        <button type="button" id="closePhotoPickerBtn" style="background: none; border: none; color: #fff; font-size: 1.6rem; cursor: pointer; padding: 4px 10px; line-height: 1;">&times;</button>
+      </div>
+
+      <!-- Controls: Filter Pills & Search -->
+      <div style="padding: 14px 24px; background: rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center;">
+        <div id="photoPickerCategoryFilter" style="display: flex; gap: 6px; flex-wrap: wrap;">
+          <button type="button" class="btn btn-sm btn-gold picker-filter-btn active" data-cat="all">Tất Cả (110)</button>
+          <button type="button" class="btn btn-sm btn-outline-white picker-filter-btn" data-cat="Phòng nghỉ">Phòng Nghỉ (44)</button>
+          <button type="button" class="btn btn-sm btn-outline-white picker-filter-btn" data-cat="Bể bơi & Tòa nhà">Bể Bơi & Tòa Nhà (6)</button>
+          <button type="button" class="btn btn-sm btn-outline-white picker-filter-btn" data-cat="Nhà hàng & Buffet">Nhà Hàng & Buffet (12)</button>
+          <button type="button" class="btn btn-sm btn-outline-white picker-filter-btn" data-cat="Lotus Spa">Lotus Spa (4)</button>
+          <button type="button" class="btn btn-sm btn-outline-white picker-filter-btn" data-cat="Daily Tours">Daily Tours (9)</button>
+          <button type="button" class="btn btn-sm btn-outline-white picker-filter-btn" data-cat="Khám phá Ninh Bình">Khám Phá Ninh Bình (34)</button>
+        </div>
+        <div style="min-width: 220px; flex: 1; max-width: 320px;">
+          <input type="text" id="photoPickerSearchInput" class="form-control form-control-sm" placeholder="🔍 Tìm kiếm ảnh theo tên..." style="background: #111; border-color: rgba(197,168,128,0.4); color: #fff; padding: 6px 12px; font-size: 0.85rem;">
+        </div>
+      </div>
+
+      <!-- Image Grid -->
+      <div id="photoPickerGrid" style="padding: 20px 24px; overflow-y: auto; flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; background: #141414;">
+        <!-- Dynamically rendered -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div style="padding: 12px 24px; border-top: 1px solid rgba(255,255,255,0.08); background: #181818; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #888;">
+        <span id="photoPickerCounterText">Đang hiển thị 110 ảnh</span>
+        <button type="button" class="btn btn-outline-white btn-sm" id="closePhotoPickerBtn2">Đóng</button>
+      </div>
     </div>
   </div>
 

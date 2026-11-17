@@ -20,48 +20,133 @@ document.addEventListener('DOMContentLoaded', () => {
   let articlesDataState = {};
 
   // ==========================================
-  // CLOUDINARY CDN CONFIGURATION & UPLOADER
+  // NATIVE HOTEL PHOTO LIBRARY (110 OPTIMIZED LOCAL ASSETS)
   // ==========================================
-  const CLOUDINARY_CONFIG = {
-    cloudName: 'n7my6tye',
-    uploadPreset: 'sala_upload',
-    folder: 'sala_tam_coc'
-  };
+  const HOTEL_IMAGE_LIBRARY = [{"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Be_Boi_San_Thuong_va_Toa_Nha_ANT_4441.jpg", "name": "Bể Bơi & Tòa Nhà (4441)", "category": "Bể bơi & Tòa nhà"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Be_Boi_San_Thuong_va_Toa_Nha_ANT_4840.jpg", "name": "Bể Bơi & Tòa Nhà (4840)", "category": "Bể bơi & Tòa nhà"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Be_Boi_San_Thuong_va_Toa_Nha_DJI_20260422114932_0048_D_ANTS.jpg", "name": "Bể Bơi & Tòa Nhà (ANTS)", "category": "Bể bơi & Tòa nhà"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Be_Boi_San_Thuong_va_Toa_Nha_DJI_20260423182252_0228_D_ANTS.jpg", "name": "Bể Bơi & Tòa Nhà (ANTS)", "category": "Bể bơi & Tòa nhà"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Be_Boi_San_Thuong_va_Toa_Nha_DJI_20260423182822_0260_D_ANTS.jpg", "name": "Bể Bơi & Tòa Nhà (ANTS)", "category": "Bể bơi & Tòa nhà"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Be_Boi_San_Thuong_va_Toa_Nha_DJI_20260423182851_0263_D_ANTS.jpg", "name": "Bể Bơi & Tòa Nhà (ANTS)", "category": "Bể bơi & Tòa nhà"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Buffet_Sang_va_Nha_Hang_va_Sanh_Le_Tan_ANT_4705.jpg", "name": "Nhà Hàng & Buffet (4705)", "category": "Nhà hàng & Buffet"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Buffet_Sang_va_Nha_Hang_va_Sanh_Le_Tan_ANT_4707.jpg", "name": "Nhà Hàng & Buffet (4707)", "category": "Nhà hàng & Buffet"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Buffet_Sang_va_Nha_Hang_va_Sanh_Le_Tan_ANT_4709.jpg", "name": "Nhà Hàng & Buffet (4709)", "category": "Nhà hàng & Buffet"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Buffet_Sang_va_Nha_Hang_va_Sanh_Le_Tan_ANT_4714.jpg", "name": "Nhà Hàng & Buffet (4714)", "category": "Nhà hàng & Buffet"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Buffet_Sang_va_Nha_Hang_va_Sanh_Le_Tan_ANT_4722.jpg", "name": "Nhà Hàng & Buffet (4722)", "category": "Nhà hàng & Buffet"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Buffet_Sang_va_Nha_Hang_va_Sanh_Le_Tan_ANT_4742.jpg", "name": "Nhà Hàng & Buffet (4742)", "category": "Nhà hàng & Buffet"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Buffet_Sang_va_Nha_Hang_va_Sanh_Le_Tan_ANT_4767.jpg", "name": "Nhà Hàng & Buffet (4767)", "category": "Nhà hàng & Buffet"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Buffet_Sang_va_Nha_Hang_va_Sanh_Le_Tan_ANT_4771.jpg", "name": "Nhà Hàng & Buffet (4771)", "category": "Nhà hàng & Buffet"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Buffet_Sang_va_Nha_Hang_va_Sanh_Le_Tan_ANT_4779.jpg", "name": "Nhà Hàng & Buffet (4779)", "category": "Nhà hàng & Buffet"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Buffet_Sang_va_Nha_Hang_va_Sanh_Le_Tan_ANT_4788.jpg", "name": "Nhà Hàng & Buffet (4788)", "category": "Nhà hàng & Buffet"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Buffet_Sang_va_Nha_Hang_va_Sanh_Le_Tan_ANT_4796.jpg", "name": "Nhà Hàng & Buffet (4796)", "category": "Nhà hàng & Buffet"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Buffet_Sang_va_Nha_Hang_va_Sanh_Le_Tan_ANT_4798.jpg", "name": "Nhà Hàng & Buffet (4798)", "category": "Nhà hàng & Buffet"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Deluxe_Family_room_balcony_ANT_4419.jpg", "name": "Deluxe Family - 4419", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Deluxe_Twin_Balcony_ANT_4561.jpg", "name": "Deluxe Twin - 4561", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Deluxe_Twin_Balcony_ANT_4576.jpg", "name": "Deluxe Twin - 4576", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Deluxe_Twin_Balcony_ANT_4581.jpg", "name": "Deluxe Twin - 4581", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Family_Connecting_room_1_ANT_4481_nha_tam.jpg", "name": "Family Connecting room 1 - tam", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Family_Connecting_room_1_ANT_4502_phong_thong.jpg", "name": "Family Connecting room 1 - thong", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Family_Connecting_room_1_ANT_4606.jpg", "name": "Family Connecting room 1 - 4606", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Family_Connecting_room_1_ANT_4609.jpg", "name": "Family Connecting room 1 - 4609", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Family_Connecting_room_2_ANT_4502.jpg", "name": "Family Connecting room 2 - 4502", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Family_Connecting_room_2_ANT_4523.jpg", "name": "Family Connecting room 2 - 4523", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Family_Connecting_room_2_ANT_4526.jpg", "name": "Family Connecting room 2 - 4526", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Family_Connecting_room_2_ANT_4530.jpg", "name": "Family Connecting room 2 - 4530", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Family_Connecting_room_2_ANT_4579.jpg", "name": "Family Connecting room 2 - 4579", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Family_Connecting_room_2_do_nha_tam.jpg", "name": "Family Connecting room 2 - tam", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Family_Connecting_room_2_tra_nuoc_loc.jpg", "name": "Family Connecting room 2 - loc", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Family_Connecting_room_2_tu_quan_ao.jpg", "name": "Family Connecting room 2 - ao", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Luxury_Double_with_Balcony_va_Bath_tub_ANT_4542.jpg", "name": "Luxury Double - 4542", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Luxury_Double_with_Balcony_va_Bath_tub_ANT_4550.jpg", "name": "Luxury Double - 4550", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Luxury_Double_with_Balcony_va_Bath_tub_ANT_4593_1.jpg", "name": "Luxury Double - 1", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Luxury_Double_with_Balcony_va_Bath_tub_ANT_4616.jpg", "name": "Luxury Double - 4616", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Luxury_Double_with_Balcony_va_Bath_tub_ANT_4618.jpg", "name": "Luxury Double - 4618", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Luxury_Twin_with_Balcony_va_Bath_tub_ANT_4359.jpg", "name": "Luxury Twin - 4359", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Luxury_Twin_with_Balcony_va_Bath_tub_ANT_4379.jpg", "name": "Luxury Twin - 4379", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Luxury_Twin_with_Balcony_va_Bath_tub_ANT_4393.jpg", "name": "Luxury Twin - 4393", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Luxury_Twin_with_Balcony_va_Bath_tub_ANT_4411.jpg", "name": "Luxury Twin - 4411", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Luxury_Twin_with_Balcony_va_Bath_tub_ANT_4423.jpg", "name": "Luxury Twin - 4423", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Luxury_Twin_with_Balcony_va_Bath_tub_ANT_4428.jpg", "name": "Luxury Twin - 4428", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Luxury_Twin_with_Balcony_va_Bath_tub_ANT_4432.jpg", "name": "Luxury Twin - 4432", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Luxury_Twin_with_Balcony_va_Bath_tub_ANT_4655.jpg", "name": "Luxury Twin - 4655", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Superior_Double_city_view_ANT_4807.jpg", "name": "Superior Double - 4807", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Superior_Double_city_view_ANT_4818.jpg", "name": "Superior Double - 4818", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Superior_Double_city_view_ANT_4825.jpg", "name": "Superior Double - 4825", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Superior_Double_city_view_ANT_4829.jpg", "name": "Superior Double - 4829", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Superior_Double_city_view_ANT_4832.jpg", "name": "Superior Double - 4832", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Superior_Triple_city_view_ANT_4430.jpg", "name": "Superior Triple - 4430", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Superior_Triple_city_view_ANT_4622.jpg", "name": "Superior Triple - 4622", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Superior_Triple_city_view_ANT_4659.jpg", "name": "Superior Triple - 4659", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Superior_Triple_city_view_ANT_4672.jpg", "name": "Superior Triple - 4672", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Superior_Triple_city_view_ANT_4691.jpg", "name": "Superior Triple - 4691", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/Anh_Sala_Tam_Coc_Hotel_va_Spa_Superior_Triple_city_view_ANT_4693.jpg", "name": "Superior Triple - 4693", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/assets_images_articles_b1-hero.jpg", "name": "B1 Hero", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/assets_images_articles_b1-river-sunset.jpg", "name": "B1 River Sunset", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/assets_images_articles_b1-valley-scurve.jpg", "name": "B1 Valley Scurve", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/assets_images_articles_b1-water-sunset.jpg", "name": "B1 Water Sunset", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/assets_images_articles_b2-boat-cave.jpg", "name": "B2 Boat Cave", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/assets_images_articles_b2-hero-golden-rice.jpg", "name": "B2 Hero Golden Rice", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/assets_images_articles_b3-bich-dong-gate.jpg", "name": "B3 Bich Dong Gate", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/assets_images_articles_b3-hero-cave-view.jpg", "name": "B3 Hero Cave View", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/assets_images_articles_b3-valley-panorama.jpg", "name": "B3 Valley Panorama", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/assets_images_logo.webp", "name": "assets_images_logo.webp", "category": "Khác"}, {"path": "assets/images/hotel/assets_images_rooms_family-connecting-2_1788778782852_2.jpg", "name": "family-connecting - 2", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/assets_images_rooms_family-connecting-2_1788778785205_3.jpg", "name": "family-connecting - 3", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/assets_images_rooms_family-connecting-2_1788778787519_4.jpg", "name": "family-connecting - 4", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/assets_images_rooms_family-connecting_1788778780156_1.jpg", "name": "family-connecting - 1", "category": "Phòng nghỉ"}, {"path": "assets/images/hotel/assets_images_spa_nguoi-phu-nu-tre-dang-duoc-mat-xa-mat-thu-gian-trong-spa_176420-7546.jpg", "name": "Lotus Spa 176420 7546", "category": "Lotus Spa"}, {"path": "assets/images/hotel/assets_images_tours-banner.jpg", "name": "Tour tours banner", "category": "Daily Tours"}, {"path": "assets/images/hotel/DAILY_TOURS_Anh_tour_1_hinh-anh_2026-01-16_145357091-1024x560.webp", "name": "Tour 145357091 1024x560", "category": "Daily Tours"}, {"path": "assets/images/hotel/DAILY_TOURS_Anh_tour_2_trang_an.jpg", "name": "Tour an", "category": "Daily Tours"}, {"path": "assets/images/hotel/DAILY_TOURS_Anh_tour_3_co-mot-hang-mua-dep-nao-long-nguoi-giua-may-troi-ninh-binh-6-1640608283.jpg", "name": "Tour co mot hang mua dep nao long nguoi giua may troi ninh binh 6 1640608283", "category": "Daily Tours"}, {"path": "assets/images/hotel/DAILY_TOURS_Anh_tour_4_CP1-3614-1724252015.webp", "name": "Tour CP1 3614 1724252015", "category": "Daily Tours"}, {"path": "assets/images/hotel/DAILY_TOURS_Anh_tour_5_kinh-nghiem-du-lich-cong-dong-van-long-vinh-khong-song-binh-yen-01-1641043645.jpg", "name": "Tour kinh nghiem du lich cong dong van long vinh khong song binh yen 01 1641043645", "category": "Daily Tours"}, {"path": "assets/images/hotel/DAILY_TOURS_Anh_tour_6_ninh-binh-jeep-tour-8.webp", "name": "Tour ninh binh jeep tour 8", "category": "Daily Tours"}, {"path": "assets/images/hotel/DAILY_TOURS_Anh_tour_7_chua-bich-dong-1.jpg", "name": "Tour chua bich dong 1", "category": "Daily Tours"}, {"path": "assets/images/hotel/DAILY_TOURS_Ha_Noi_to_Ninh_Binh_VIP_Limousine_xe-limousine-ha-noi-ninh-binh-04-1692502787.jpg", "name": "Tour xe limousine ha noi ninh binh 04 1692502787", "category": "Daily Tours"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_anh-ben-do-trang-an-ninh-binh.jpg", "name": "Anh Ben Do Trang An Ninh Binh", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_anh-trang-an-dep-ninh-binh.jpg", "name": "Anh Trang An Dep Ninh Binh", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_cac-khu-du-lich-ninh-binh-toan-canh.webp", "name": "Cac Khu Du Lich Ninh Binh Toan Canh", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_Pha_Anh_Bai_Viet_check-in-chua-bich-dong-cong-da.jpg", "name": "Kham_Pha_Anh_Bai_Viet_Check In Chua Bich Dong Cong Da", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_Pha_Anh_Bai_Viet_check-in-song-ao-ninh-binh-hero.jpg", "name": "Kham_Pha_Anh_Bai_Viet_Check In Song Ao Ninh Binh Hero", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_Pha_Anh_Bai_Viet_check-in-thuyen-trang-an.jpg", "name": "Kham_Pha_Anh_Bai_Viet_Check In Thuyen Trang An", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_Pha_Anh_Bai_Viet_chup-anh-song-ngo-dong-tam-coc.jpg", "name": "Kham_Pha_Anh_Bai_Viet_Chup Anh Song Ngo Dong Tam Coc", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_cong-pho-co-hoa-lu-ninh-binh.jpg", "name": "Cong Pho Co Hoa Lu Ninh Binh", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_Pha_Anh_Bai_Viet_hoang-hon-dam-van-long.jpg", "name": "Kham_Pha_Anh_Bai_Viet_Hoang Hon Dam Van Long", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_khu-du-lich-sinh-thai-trang-an-ninh-binh.jpg", "name": "Khu Du Lich Sinh Thai Trang An Ninh Binh", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_khu-du-lich-tam-coc-bich-dong-ninh-binh.jpg", "name": "Khu Du Lich Tam Coc Bich Dong Ninh Binh", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_ninh-binh-dep-trang-an.jpg", "name": "Ninh Binh Dep Trang An", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_ninh-binh-hero-tong-hop.jpg", "name": "Ninh Binh Hero Tong Hop", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_pho-co-hoa-lu-ho-ky-lan.webp", "name": "Pho Co Hoa Lu Ho Ky Lan", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_pho-co-hoa-lu-ninh-binh-lung-linh-dem.jpg", "name": "Pho Co Hoa Lu Ninh Binh Lung Linh Dem", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_Pha_Anh_Bai_Viet_song-ao-dinh-hang-mua-ninh-binh.jpg", "name": "Kham_Pha_Anh_Bai_Viet_Song Ao Dinh Hang Mua Ninh Binh", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_thung-ui-ninh-binh-bac-thang-da.webp", "name": "Thung Ui Ninh Binh Bac Thang Da", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_thung-ui-ninh-binh-chua-cau.webp", "name": "Thung Ui Ninh Binh Chua Cau", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_thung-ui-ninh-binh-cong-chao.jpg", "name": "Thung Ui Ninh Binh Cong Chao", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_thung-ui-ninh-binh-thung-lung-xanh.jpg", "name": "Thung Ui Ninh Binh Thung Lung Xanh", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_tuyet-tinh-coc-dong-am-tien-1.jpg", "name": "Tuyet Tinh Coc Dong Am Tien 1", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_tuyet-tinh-coc-dong-am-tien-2.jpg", "name": "Tuyet Tinh Coc Dong Am Tien 2", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/Kham_pha_Anh_Bai_Viet_tuyet-tinh-coc-toan-canh-ninh-binh.webp", "name": "Tuyet Tinh Coc Toan Canh Ninh Binh", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/sala_tam_coc_Kham_Pha_SEO_oc-nui-dac-san-ninhbinh1_1791289842364.jpg", "name": "Oc Nui Dac San Ninhbinh1_1791289842364", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/sala_tam_coc_Kham_Pha_SEO_thit-de-dac-san-ninhbinh1_1791289910470.jpg", "name": "Thit De Dac San Ninhbinh1_1791289910470", "category": "Khám phá Ninh Bình"}, {"path": "assets/images/hotel/spa_arrangement-with-spa-stones-lit-candles.jpg", "name": "Lotus Spa arrangement with spa stones lit candles", "category": "Lotus Spa"}, {"path": "assets/images/hotel/spa_woman-enjoying-stone-massage.jpg", "name": "Lotus Spa woman enjoying stone massage", "category": "Lotus Spa"}, {"path": "assets/images/hotel/spa_woman-relaxing-spa.jpg", "name": "Lotus Spa woman relaxing spa", "category": "Lotus Spa"}];
 
-  async function uploadImageToCloudinary(fileOrDataUrl, subfolder = '', customFileName = '') {
-    const url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CONFIG.cloudName}/image/upload`;
-    const formData = new FormData();
-    formData.append('file', fileOrDataUrl);
-    formData.append('upload_preset', CLOUDINARY_CONFIG.uploadPreset);
-    const targetFolder = subfolder ? `${CLOUDINARY_CONFIG.folder}/${subfolder}` : CLOUDINARY_CONFIG.folder;
-    formData.append('folder', targetFolder);
+  let currentPhotoPickerCallback = null;
 
-    // Use clean readable public_id based on original filename
-    let fileNameToUse = customFileName;
-    if (!fileNameToUse && fileOrDataUrl instanceof File) {
-      fileNameToUse = fileOrDataUrl.name;
-    }
-    if (fileNameToUse) {
-      const cleanBase = fileNameToUse.replace(/\.[^/.]+$/, "")
-        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-        .replace(/[đĐ]/g, "d")
-        .replace(/[^a-zA-Z0-9_\-]/g, "_")
-        .replace(/_+/g, "_");
-      formData.append('public_id', `${cleanBase}_${Date.now()}`);
-    }
+  function initPhotoPickerModal() {
+    const modal = document.getElementById('hotelPhotoPickerModal');
+    const closeBtn1 = document.getElementById('closePhotoPickerBtn');
+    const closeBtn2 = document.getElementById('closePhotoPickerBtn2');
+    const searchInput = document.getElementById('photoPickerSearchInput');
+    const filterBtns = document.querySelectorAll('.picker-filter-btn');
 
-    const res = await fetch(url, {
-      method: 'POST',
-      body: formData
+    const closeModal = () => {
+      if (modal) modal.style.display = 'none';
+      currentPhotoPickerCallback = null;
+    };
+
+    closeBtn1?.addEventListener('click', closeModal);
+    closeBtn2?.addEventListener('click', closeModal);
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
     });
 
-    if (!res.ok) {
-      const errData = await res.json().catch(() => ({}));
-      throw new Error(errData.error?.message || `Lỗi tải ảnh lên Cloudinary (${res.status})`);
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    function renderPickerGrid() {
+      const grid = document.getElementById('photoPickerGrid');
+      const counter = document.getElementById('photoPickerCounterText');
+      if (!grid) return;
+
+      const filtered = HOTEL_IMAGE_LIBRARY.filter(item => {
+        const matchCat = activeCategory === 'all' || item.category === activeCategory;
+        const q = searchQuery.toLowerCase().trim();
+        const matchSearch = !q || item.name.toLowerCase().includes(q) || item.path.toLowerCase().includes(q) || item.category.toLowerCase().includes(q);
+        return matchCat && matchSearch;
+      });
+
+      if (counter) {
+        counter.textContent = `Đang hiển thị ${filtered.length} / ${HOTEL_IMAGE_LIBRARY.length} ảnh`;
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #888;">
+            <i class="fa-solid fa-magnifying-glass" style="font-size: 2rem; margin-bottom: 10px; color: var(--primary-gold);"></i>
+            <p>Không tìm thấy bức ảnh nào phù hợp với từ khóa "${searchQuery}".</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => `
+        <div class="photo-picker-item" data-path="${item.path}" style="background: #222; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column;">
+          <div style="height: 110px; position: relative; overflow: hidden; background: #000;">
+            <img src="${item.path}" alt="${item.name}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+            <span style="position: absolute; top: 6px; left: 6px; background: rgba(0,0,0,0.7); color: var(--primary-gold-light); font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(197,168,128,0.3);">${item.category}</span>
+          </div>
+          <div style="padding: 8px 10px; font-size: 0.78rem; color: #ddd; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; margin-bottom: 6px;" title="${item.name}">${item.name}</div>
+            <button type="button" class="btn btn-gold btn-sm" style="width: 100%; font-size: 0.72rem; padding: 4px 6px; font-weight: 700;">
+              <i class="fa-solid fa-check"></i> Chọn Ảnh
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      grid.querySelectorAll('.photo-picker-item').forEach(itemEl => {
+        itemEl.addEventListener('mouseenter', () => {
+          itemEl.style.borderColor = 'var(--primary-gold)';
+          itemEl.style.transform = 'translateY(-2px)';
+        });
+        itemEl.addEventListener('mouseleave', () => {
+          itemEl.style.borderColor = 'rgba(255,255,255,0.08)';
+          itemEl.style.transform = 'translateY(0)';
+        });
+        itemEl.addEventListener('click', (e) => {
+          e.preventDefault();
+          const chosenPath = itemEl.getAttribute('data-path');
+          if (chosenPath && currentPhotoPickerCallback) {
+            currentPhotoPickerCallback(chosenPath);
+            closeModal();
+          }
+        });
+      });
     }
 
-    const data = await res.json();
-    return data.secure_url;
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('btn-gold', 'active');
+          b.classList.add('btn-outline-white');
+        });
+        btn.classList.remove('btn-outline-white');
+        btn.classList.add('btn-gold', 'active');
+        activeCategory = btn.getAttribute('data-cat') || 'all';
+        renderPickerGrid();
+      });
+    });
+
+    searchInput?.addEventListener('input', (e) => {
+      searchQuery = e.target.value || '';
+      renderPickerGrid();
+    });
+
+    window.openPhotoPicker = function(callback, modalTitle = 'Thư Viện Ảnh Khách Sạn (110 Ảnh)') {
+      currentPhotoPickerCallback = callback;
+      const titleEl = document.getElementById('photoPickerModalTitle');
+      if (titleEl) {
+        titleEl.innerHTML = `<i class="fa-solid fa-images"></i> ${modalTitle}`;
+      }
+      if (searchInput) searchInput.value = '';
+      searchQuery = '';
+      activeCategory = 'all';
+      filterBtns.forEach(b => {
+        if (b.getAttribute('data-cat') === 'all') {
+          b.classList.remove('btn-outline-white');
+          b.classList.add('btn-gold', 'active');
+        } else {
+          b.classList.remove('btn-gold', 'active');
+          b.classList.add('btn-outline-white');
+        }
+      });
+      if (modal) modal.style.display = 'flex';
+      renderPickerGrid();
+    };
   }
 
   // Handle Login
@@ -92,6 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loginGate.style.display = 'none';
     adminDashboard.style.display = 'block';
     loadDataIntoForms();
+    initPhotoPickerModal();
   }
 
   // TAB SWITCHING
@@ -472,7 +558,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Handle File Upload from Computer
+    // Handle Open Native Photo Library
+  const openLibraryBtn = document.getElementById('admin_btn_open_library');
+  openLibraryBtn?.addEventListener('click', () => {
+    const room = roomDataState[activeRoomKey] || {};
+    const roomName = room.nameVi || room.name || activeRoomKey;
+    if (typeof window.openPhotoPicker === 'function') {
+      window.openPhotoPicker((chosenPath) => {
+        if (!Array.isArray(room.photos)) room.photos = [];
+        if (!room.photos.includes(chosenPath)) {
+          room.photos.push(chosenPath);
+          if (!room.cover) room.cover = chosenPath;
+          renderPhotoGalleryGrid();
+          showToast(`Đã thêm ảnh vào phòng ${roomName}!`, 'success');
+        } else {
+          showToast('Ảnh này đã có trong danh sách ảnh của phòng.', 'info');
+        }
+      }, `Chọn Ảnh Thư Viện Cho Phòng: ${roomName}`);
+    }
+  });
+
+  // Handle File Upload from Computer (Local Base64 & GitHub Sync)
   const uploadBtn = document.getElementById('admin_btn_upload_photos');
   const uploadInput = document.getElementById('admin_upload_photos_input');
 
@@ -482,24 +588,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const files = Array.from(e.target.files || []);
     if (files.length === 0) return;
 
-    showToast(`Đang tải ${files.length} ảnh trực tiếp lên Cloudinary CDN...`, 'info');
+    showToast(`Đang tối ưu & nạp ${files.length} ảnh từ máy tính...`, 'info');
     const room = roomDataState[activeRoomKey] || {};
     if (!Array.isArray(room.photos)) room.photos = [];
 
     let count = 0;
     for (let i = 0; i < files.length; i++) {
       try {
-        showToast(`Đang tải ảnh ${i + 1}/${files.length} (${files[i].name}) lên Cloudinary...`, 'info');
-        let uploadPayload = files[i];
-        if (files[i].size > 9 * 1024 * 1024) {
-          uploadPayload = await compressImageFile(files[i], 1920, 1440, 0.85);
-        }
-        const secureUrl = await uploadImageToCloudinary(uploadPayload, 'Phong_Nghi', files[i].name);
-        room.photos.push(secureUrl);
+        const compressed = await compressImageFile(files[i], 1600, 1200, 0.82);
+        room.photos.push(compressed);
         count++;
       } catch(err) {
-        console.error("Cloudinary upload error:", err);
-        showToast(`Lỗi khi tải ảnh ${files[i].name}: ${err.message}`, 'error');
+        console.error("Local file processing error:", err);
       }
     }
 
@@ -508,7 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     renderPhotoGalleryGrid();
-    showToast(`Đã tải thành công ${count} ảnh lên Cloudinary CDN! Không tốn dung lượng GitHub/Vercel.`, 'success');
+    showToast(`Đã thêm thành công ${count} ảnh từ máy tính! Nhấn "Lưu & Đẩy Lên GitHub" để đồng bộ.`, 'success');
     uploadInput.value = '';
   });
 
@@ -628,6 +728,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const importedData = JSON.parse(event.target.result);
         window.saveSalaData(importedData);
         loadDataIntoForms();
+    initPhotoPickerModal();
         showToast('Tải dữ liệu từ file JSON lên thành công!', 'success');
       } catch(err) {
         showToast('Lỗi đọc file JSON: ' + err.message, 'error');
@@ -642,6 +743,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (confirm('Bạn có chắc chắn muốn khôi phục dữ liệu về mặc định ban đầu không? Tất cả chỉnh sửa chưa xuất file sẽ bị xóa.')) {
       window.resetSalaData();
       loadDataIntoForms();
+    initPhotoPickerModal();
       showToast('Đã khôi phục dữ liệu mặc định thành công!', 'info');
     }
   });
@@ -681,32 +783,18 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCoverPreview(e.target.value);
   });
 
-  const uploadArticleCoverBtn = document.getElementById('admin_btn_upload_article_cover');
-  const articleCoverFileInput = document.getElementById('admin_article_cover_file_input');
-
-  uploadArticleCoverBtn?.addEventListener('click', () => articleCoverFileInput?.click());
-
-  articleCoverFileInput?.addEventListener('change', async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    try {
-      showToast(`Đang tải ảnh bìa "${file.name}" lên Cloudinary CDN...`, 'info');
-      let uploadPayload = file;
-      if (file.size > 9 * 1024 * 1024) {
-        uploadPayload = await compressImageFile(file, 1920, 1440, 0.85);
-      }
-      const secureUrl = await uploadImageToCloudinary(uploadPayload, 'Kham_Pha_SEO', file.name);
-      if (articleCoverInput) {
-        articleCoverInput.value = secureUrl;
-      }
-      updateCoverPreview(secureUrl);
-      showToast('Đã tải ảnh bìa lên Cloudinary CDN thành công!', 'success');
-    } catch (err) {
-      console.error("Cloudinary article cover upload error:", err);
-      showToast(`Lỗi tải ảnh bìa lên Cloudinary: ${err.message}`, 'error');
+    const uploadArticleCoverBtn = document.getElementById('admin_btn_upload_article_cover');
+  uploadArticleCoverBtn?.addEventListener('click', () => {
+    if (typeof window.openPhotoPicker === 'function') {
+      window.openPhotoPicker((chosenPath) => {
+        if (articleCoverInput) {
+          articleCoverInput.value = chosenPath;
+        }
+        updateCoverPreview(chosenPath);
+        saveCurrentArticleFormToState();
+        showToast('Đã chọn ảnh bìa bài viết!', 'success');
+      }, 'Chọn Ảnh Bìa Cho Bài Viết');
     }
-    articleCoverFileInput.value = '';
   });
 
   // ==========================================
@@ -745,52 +833,33 @@ document.addEventListener('DOMContentLoaded', () => {
     saveCurrentArticleFormToState();
   }
 
-  btnInsertContentImage?.addEventListener('click', () => {
+    btnInsertContentImage?.addEventListener('click', () => {
     if (articleContentInput) {
       savedCursorPos = {
         start: articleContentInput.selectionStart,
         end: articleContentInput.selectionEnd
       };
     }
-    contentImageFileInput?.click();
-  });
+    if (typeof window.openPhotoPicker === 'function') {
+      window.openPhotoPicker((chosenPath) => {
+        const defaultCaption = chosenPath.split('/').pop().replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+        const caption = prompt('Nhập chú thích hiển thị dưới bức ảnh (hoặc để trống):', defaultCaption);
+        const cleanCaption = caption && caption.trim() ? caption.trim() : '';
+        const figureHtml = `<figure class="article-image-block" style="margin: 24px 0; text-align: center;">
+  <img src="${chosenPath}" alt="${cleanCaption || 'Hình ảnh bài viết'}" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.25);">
+${cleanCaption ? `  <figcaption style="font-size: 0.88rem; color: #a0a0a0; margin-top: 8px; font-style: italic;">${cleanCaption}</figcaption>
+` : ''}</figure>`;
 
-  contentImageFileInput?.addEventListener('change', async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    const defaultCaption = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
-    const caption = prompt('Nhập chú thích hiển thị dưới bức ảnh (hoặc để trống):', defaultCaption);
-
-    try {
-      showToast(`Đang tải ảnh "${file.name}" lên Cloudinary CDN...`, 'info');
-      let uploadPayload = file;
-      if (file.size > 9 * 1024 * 1024) {
-        uploadPayload = await compressImageFile(file, 1920, 1440, 0.85);
-      }
-      const secureUrl = await uploadImageToCloudinary(uploadPayload, 'Kham_Pha_SEO', file.name);
-
-      const cleanCaption = caption && caption.trim() ? caption.trim() : '';
-      const figureHtml = `<figure class="article-image-block" style="margin: 24px 0; text-align: center;">\n  <img src="${secureUrl}" alt="${cleanCaption || 'Hình ảnh bài viết'}" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.25);">\n${cleanCaption ? `  <figcaption style="font-size: 0.88rem; color: #a0a0a0; margin-top: 8px; font-style: italic;">${cleanCaption}</figcaption>\n` : ''}</figure>`;
-
-      if (articleContentInput) {
-        if (savedCursorPos) {
-          articleContentInput.selectionStart = savedCursorPos.start;
-          articleContentInput.selectionEnd = savedCursorPos.end;
+        if (articleContentInput) {
+          if (savedCursorPos) {
+            articleContentInput.selectionStart = savedCursorPos.start;
+            articleContentInput.selectionEnd = savedCursorPos.end;
+          }
+          insertTextAtCursor(articleContentInput, figureHtml);
         }
-        insertTextAtCursor(articleContentInput, figureHtml);
-      }
-
-      showToast('Đã chèn ảnh vào đúng vị trí đang trỏ thành công!', 'success');
-
-      if (articleContentLivePreview && articleContentLivePreview.style.display !== 'none') {
-        articleContentLivePreview.innerHTML = articleContentInput.value;
-      }
-    } catch (err) {
-      console.error("Insert content image error:", err);
-      showToast(`Lỗi khi tải ảnh chèn bài viết: ${err.message}`, 'error');
+        showToast('Đã chèn ảnh vào nội dung bài viết!', 'success');
+      }, 'Chọn Ảnh Chèn Vào Nội Dung Bài Viết');
     }
-    contentImageFileInput.value = '';
   });
 
   btnInsertH3?.addEventListener('click', () => {
@@ -1211,7 +1280,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      // 1. Scan for any base64 images that need to be uploaded to Cloudinary CDN
+            // 1. Scan for any base64 images that need to be uploaded directly to GitHub repo
       const pendingUploads = [];
       Object.keys(roomDataState).forEach(rKey => {
         const r = roomDataState[rKey];
@@ -1225,17 +1294,40 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (pendingUploads.length > 0) {
-        showToast(`Đang tải lên ${pendingUploads.length} ảnh mới lên Cloudinary CDN...`, 'info');
+        showToast(`Đang tải trực tiếp ${pendingUploads.length} ảnh mới lên GitHub repo...`, 'info');
         for (let i = 0; i < pendingUploads.length; i++) {
           const item = pendingUploads[i];
-          showToast(`Đang tải ảnh ${i + 1}/${pendingUploads.length} lên Cloudinary...`, 'info');
-          const secureUrl = await uploadImageToCloudinary(item.dataUrl, 'Phong_Nghi', `room_${item.roomKey}_${i + 1}.jpg`);
-          roomDataState[item.roomKey].photos[item.pIdx] = secureUrl;
-          if (item.pIdx === 0) {
-            roomDataState[item.roomKey].cover = secureUrl;
+          const extMatch = item.dataUrl.match(/data:image\/([a-zA-Z0-9]+);base64,/);
+          const ext = extMatch ? (extMatch[1] === 'jpeg' ? 'jpg' : extMatch[1]) : 'jpg';
+          const cleanFileName = `room_${item.roomKey}_${Date.now()}_${i + 1}.${ext}`;
+          const targetGhPath = `assets/images/hotel/${cleanFileName}`;
+          const rawBase64 = item.dataUrl.replace(/^data:image\/[a-z]+;base64,/, '');
+
+          // Push binary file to GitHub
+          const uploadImgRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${targetGhPath}`, {
+            method: 'PUT',
+            headers: {
+              ...getGhAuthHeader(token),
+              'Accept': 'application/vnd.github.v3+json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              message: `feat(media): upload new room photo ${cleanFileName}`,
+              content: rawBase64,
+              branch: 'main'
+            })
+          });
+
+          if (!uploadImgRes.ok) {
+            console.warn(`Could not upload photo ${cleanFileName} directly to GitHub API:`, uploadImgRes.status);
+          } else {
+            roomDataState[item.roomKey].photos[item.pIdx] = targetGhPath;
+            if (item.pIdx === 0) {
+              roomDataState[item.roomKey].cover = targetGhPath;
+            }
           }
         }
-        showToast('Đã tải toàn bộ ảnh mới lên Cloudinary CDN thành công!', 'success');
+        showToast('Đã lưu trữ ảnh mới trực tiếp vào kho ảnh GitHub thành công!', 'success');
         renderPhotoGalleryGrid();
       }
 
